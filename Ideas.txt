@@ -16,6 +16,6 @@ Poorna:
 
 
 Yashwanth:
--A feature to share his/her contributions made.
+-A feature to share his/her contributions after it is successful.
 -Subcategories in Blog section, like experiences, need help, information etc.
 -An option to donate money to organisations.
