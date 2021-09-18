@@ -10,3 +10,8 @@ Vaibhav:
 Poorna:
 -A feature to sort the list of donors and receivers according to geographically nearest first, no of donations, Ratings.
 -A feature to search a donor/receiver with their name/ part of a name, location.
+-A feature to list all the donations made till now, last week, today, last month( basically list of donations in a given time frame )
+-Rating system to donors and receivers
+-A Blog for articles/Experiences about Donations, Nutrient Food.
+-A Simple game like catching falling food( like catch the fruit )
+-A Simple interactive tutorial to learn the Nutrient values of different kinds of food.
