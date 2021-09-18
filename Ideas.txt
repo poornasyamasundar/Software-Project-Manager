@@ -1,0 +1,12 @@
+This file contains the Ideas/Features we wish to incorporate in the Web-Application.
+These Ideas are exclusive to the web application i.e these ideas are the additional to the already existing features in the android app.
+
+Yashwanth:
+
+Nitesh:
+
+Vaibhav:
+
+Poorna:
+-A feature to sort the list of donors and receivers according to geographically nearest first, no of donations, Ratings.
+-A feature to search a donor/receiver with their name/ part of a name, location.
