@@ -1,21 +1,9 @@
 This file contains the Ideas/Features we wish to incorporate in the Web-Application.
-These Ideas are exclusive to the web application i.e these ideas are the additional to the already existing features in the android app.
 
 Nitesh:
 
 Vaibhav:
 
 Poorna:
--A feature to sort the list of donors and receivers according to geographically nearest first, no of donations, Ratings.
--A feature to search a donor/receiver with their name/ part of a name, location.
--A feature to list all the donations made till now, last week, today, last month( basically list of donations in a given time frame )
--Rating system to donors and receivers
--A Blog for articles/Experiences about Donations, Nutrient Food.
--A Simple game like catching falling food( like catch the fruit )
--A Simple interactive tutorial to learn the Nutrient values of different kinds of food.
-
 
 Yashwanth:
--A feature to share his/her contributions after it is successful.
--Subcategories in Blog section, like experiences, need help, information etc.
--An option to donate money to organisations.
