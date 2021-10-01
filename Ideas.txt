@@ -1,9 +1,20 @@
-This file contains the Ideas/Features we wish to incorporate in the Web-Application.
+Overview of the entire website.
 
-Nitesh:
+Home Layout:
+-User login and logout.
+	-If logined then show all the projects list.
+	-If Not logined then show information about the website, how it's useful, different features.
+-List of projects.
+-Create New Project
+-Information about each software process model
+-Help button to take a tour of all the features
+	-This feature should work in whatever page the user is.
 
-Vaibhav:
+Project:
+Each project irrespective of the process model should have below features
+	-Option so that more than 1 person can be a contributor.
+	-Option to go the corresponding github page.
+	-Feature to create and join meetings.
+	-Notifications on any updates by any contributor
 
-Poorna:
-
-Yashwanth:
+For each process model the features are as below.
