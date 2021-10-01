@@ -18,3 +18,16 @@ Each project irrespective of the process model should have below features
 	-Notifications on any updates by any contributor
 
 For each process model the features are as below.
+
+Agile Process model:
+	-Facility to have scrum meetings
+	-Gantt chart facility to plan small releases
+	-Facility to plan sprints
+	-manage daily tasks, create task, mark as completed.
+	-Feature to select and drop tasks from pile of product backlogs
+	-list the requirements, and satisfy them.
+	-the entire project will undergo changes in two days only, after two days
+	it will same as the first day, although the progress keeps increasing, 
+	the development will not differ, unlike a waterfall model where once
+	the requirement analysis is completed we don't see it again at later stages.
+	-feature to schedule pair programming, manage cusotmer feedback.
