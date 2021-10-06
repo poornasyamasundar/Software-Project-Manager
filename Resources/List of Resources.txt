@@ -1,0 +1,20 @@
+This file contains the list of reusable code snippets for different elements in a webpage.
+
+-Buttons
+-Clickable and hoverable dropdown
+-Fixed Header and foot
+-Fixed side bar
+-Collapsible left side bar
+-Form - Editable Text fields with submit and cancel
+-Image slides
+-Image Buttons/Card Buttons
+-Logo
+-Scrollable and clickable list of cards/buttons
+-List with expandable list items
+-Alerts
+-Hints
+-Search routine, with suggestion
+-Pie charts
+-Bar Graphs
+-Gantt chart
+-Timeline
