@@ -9,7 +9,7 @@ This file contains the list of reusable code snippets for different elements in 
 -Image slides
 -Image Buttons/Card Buttons
 -Logo
--Scrollable and clickable list of cards/buttons
+-Scrollable and clickable list of cards/buttons                    Y
 -List with expandable list items
 -Alerts
 -Hints
