@@ -4,7 +4,7 @@ This file contains the list of reusable code snippets for different elements in 
 -Clickable and hoverable dropdown                                 Y
 -Fixed Header and foot
 -Fixed side bar
--Collapsible left side bar
+-Collapsible left side bar                                        Y
 -Form - Editable Text fields with submit and cancel
 -Image slides
 -Image Buttons/Card Buttons
