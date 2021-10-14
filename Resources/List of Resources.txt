@@ -1,7 +1,7 @@
 This file contains the list of reusable code snippets for different elements in a webpage.
 
--Buttons
--Clickable and hoverable dropdown
+-Buttons                                                          Y 
+-Clickable and hoverable dropdown                                 Y
 -Fixed Header and foot
 -Fixed side bar
 -Collapsible left side bar
