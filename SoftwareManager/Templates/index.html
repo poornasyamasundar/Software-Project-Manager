@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>This is a index</title>
+<style>
+p{
+	color: red;
+	font-size: 20px;
+}
+div{
+	background-color: blue;
+	height: 200px;
+	width: 200px;
+}
+</style>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+	<script>
+		document.addEventListener('DOMContentLoaded', function()
+			{
+				document.querySelector('p').onmouseover = () => {
+					document.querySelector('p').style.color = 'blue';
+				}
+				document.querySelector('p').onmouseout = () => {
+					document.querySelector('p').style.color = 'red';
+				}
+				/* sample get */
+				document.querySelector('#button1').onclick = (e) =>{
+					e.preventDefault();
+					$.ajax(
+						{
+							type: "GET",
+							url: "testGET",
+							success: function(data){
+								/*on successfully getting the value do whatever you want*/
+								document.querySelector('#you').innerHTML = data;
+							}
+
+						}
+						)
+				};
+				/* sampel post */
+				document.querySelector('#button2').onclick = (e) =>{
+					e.preventDefault();
+					$.ajax(
+						{
+							type: "POST",
+							url: "testPOST",
+							data: {
+								userinput: document.querySelector('#in').value,
+								csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken').val()
+							},
+							success: function(data){
+								document.querySelector('#you').innerHTML = document.querySelector('#you').innerHTML + data;
+							}
+						}
+					)
+				};
+			});
+	</script>
+	</head>
+	<body>
+		<p>This is body</p>
+		<div>
+			<form>
+				{% csrf_token %}
+				<input type = "text", id = 'in'>
+				<button type = "submit" id = 'button2'>Post</button>
+				<button id = 'button1'>get</button>
+			</form>
+		</div>
+		<div id = 'you'>
+		</div>
+	</body>
+</html>
