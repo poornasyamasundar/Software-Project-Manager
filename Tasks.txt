@@ -53,4 +53,7 @@ Tasks:
 	-Need an check box module to select and deselect(atleast 5 different types)
 11)Toggle Switch
 	-Need an toggle switch atleast 5 types
+12)Skill bar
+	-Need a css+html code for showing a percentage in the form bars
+	-example: https://www.w3schools.com/howto/howto_css_skill_bar.asp
 
