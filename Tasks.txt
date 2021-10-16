@@ -49,4 +49,8 @@ Tasks:
 9)Button on image
 	-Need html+css+javascript for having a button on the back of a image(atleast 3 styles)
 	-example: https://www.w3schools.com/howto/howto_css_button_on_image.asp
+10)CheckBox
+	-Need an check box module to select and deselect(atleast 5 different types)
+11)Toggle Switch
+	-Need an toggle switch atleast 5 types
 
