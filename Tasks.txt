@@ -56,4 +56,7 @@ Tasks:
 12)Skill bar
 	-Need a css+html code for showing a percentage in the form bars
 	-example: https://www.w3schools.com/howto/howto_css_skill_bar.asp
+13)Collapsible
+	-Need code for a collapsible div on click
+	-example: https://www.w3schools.com/howto/howto_js_collapsible.asp
 
