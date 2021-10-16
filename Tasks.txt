@@ -18,4 +18,10 @@ Tasks:
 		-given a name return all the details of the user
 		-given all the details insert the user into the table.
 		-given a name and details, update the details for that particular user.
+3)Buttons
+	-Need css styling for atleast 5 different type of buttons.
+	-upload in resources folder one file for each type of styling
+4)Slide show
+	-Need html+css+javascript for slide show. upload in resources folder
+	-example: https://www.w3schools.com/w3css/w3css_slideshow.asp
 
