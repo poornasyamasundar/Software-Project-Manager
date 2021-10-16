@@ -22,6 +22,31 @@ Tasks:
 	-Need css styling for atleast 5 different type of buttons.
 	-upload in resources folder one file for each type of styling
 4)Slide show
-	-Need html+css+javascript for slide show. upload in resources folder
+	-Need html+css+javascript for slide show(atleast 3 different styles). upload in resources folder
 	-example: https://www.w3schools.com/w3css/w3css_slideshow.asp
+5)Meetings table
+	-given a table name,Create a Database table with the given name with fields = {id, createdby, meetingLink, createdOn, purpose}
+	-Functions: ( In the folder Databases create a python file with below functions )
+		-given a date and table name return all the meeting details on that date.
+		-given a table name return all the meetings in that table.
+		-Create a table with (name as input) with the above fields.
+		-given an id delete the meeting
+		-given an id modify the meeting with the given details
+6)Tasks Table
+	-given a table name, create a database table with the given name with fields = {id, createdby, taskheading, taskdetails, dateposted, completedornot, deadline}
+	-Functions: ( In the folder Databases create a python file with the below functions)
+		-given a table and date return all the tasks on that date.
+		-given a table name return all tasks
+		-create a table (name as input) with the above fields.
+		-given an id delete the task
+		-given an id modify the task with the given details
+7)Text Input Fields
+	-Need html and css for getting a text as input( atleast 5 different styles)
+	-Need also for inputting password so that the password is replaced by **** while typing, with option to show or hide password
+8)Button Dropdown
+	-should be able to select an option from a list of buttons(custom select)
+	-example: https://www.w3schools.com/howto/howto_custom_select.asp
+9)Button on image
+	-Need html+css+javascript for having a button on the back of a image(atleast 3 styles)
+	-example: https://www.w3schools.com/howto/howto_css_button_on_image.asp
 
