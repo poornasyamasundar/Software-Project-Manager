@@ -5,13 +5,14 @@ Sample task:
 	-<details>
 
 Tasks:
-1)Username Table
+1)Username Table		Yashwanth	completed
 	-Create a Database table with fields = {id, username, password}
 	-Functions: ( In the folder Databases create a python file with below functions )
 		-given a username return if the username exists or not.
 		-given a username and password return if the username and password are correct or not.
 		-given a username and password insert the details into the table.
-2)UserDetails Table
+		
+2)UserDetails Table		Yashwanth	completed
 	-Create a Database table with fields = {id, name, username, phone number, address, email}
 	-Functions:
 		-given a name return all the details of the user
