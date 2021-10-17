@@ -1,0 +1,69 @@
+body
+{
+	background-color: lightpink;
+}
+#homeMenu
+{
+	width: 100%;
+	height: 80px;
+	background-color: lightblue;
+}
+#logo
+{
+	width: 30vw;
+	height: 80px;
+	display: inline-block;
+	background-color: lightgreen;
+}
+#projectdetails
+{
+	height: 80px;
+	width: 300px;
+	display: inline-block;
+	background-color: orange;
+}
+#goback
+{
+	width: 80px;
+	height: 80px;
+	display: inline-block;
+	float: right;
+	background-color: red;
+}
+#help
+{
+	width: 80px;
+	height: 80px;
+	display: inline-block;
+	float: right;
+	background-color: lightgreen;
+}
+#projectBox
+{
+	display: grid;
+	margin-top: 5px;
+	height: 80vh;
+	width: 100%;
+	grid-template-columns: 200px auto 300px;
+	grid-gap: 10px;
+}
+#options, #display, #board
+{
+	background-color: red;
+}
+#options, #board
+{
+	padding: 5px;
+}
+#options > div
+{
+	margin-top: 5px;
+	background-color: blue;
+	height: 40px;
+}
+#board > div
+{
+	margin-top: 5px;
+	background-color: green;
+	height: 150px;
+}
