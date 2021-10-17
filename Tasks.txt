@@ -27,7 +27,7 @@ Tasks:
 	-Need html+css+javascript for slide show(atleast 3 different styles). upload in resources folder
 	-example: https://www.w3schools.com/w3css/w3css_slideshow.asp
 	
-5)Meetings table		Yashwanth
+5)Meetings table		Yashwanth, Nitesh
 	-given a table name,Create a Database table with the given name with fields = {id, createdby, meetingLink, createdOn, purpose}
 	-Functions: ( In the folder Databases create a python file with below functions )
 		-given a date and table name return all the meeting details on that date.
@@ -36,7 +36,7 @@ Tasks:
 		-given an id delete the meeting
 		-given an id modify the meeting with the given details
 		
-6)Tasks Table			Yashwanth
+6)Tasks Table			Yashwanth, Nitesh
 	-given a table name, create a database table with the given name with fields = {id, createdby, taskheading, taskdetails, dateposted, completedornot, deadline}
 	-Functions: ( In the folder Databases create a python file with the below functions)
 		-given a table and date return all the tasks on that date.
@@ -53,11 +53,11 @@ Tasks:
 	-should be able to select an option from a list of buttons(custom select)
 	-example: https://www.w3schools.com/howto/howto_custom_select.asp
 	
-9)Button on image
+9)Button on image		Nitesh
 	-Need html+css+javascript for having a button on the back of a image(atleast 3 styles)
 	-example: https://www.w3schools.com/howto/howto_css_button_on_image.asp
 	
-10)CheckBox
+10)CheckBox			Nitesh
 	-Need an check box module to select and deselect(atleast 5 different types)
 	
 11)Toggle Switch
