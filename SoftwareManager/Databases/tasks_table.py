@@ -38,6 +38,13 @@ def allTasks(table_name):
 
     return lst
 
+def insertTask(table_name, createdBy, taskHeading, taskDetails, createdOn, completed, deadline):
+    cursor = connection.cursor()
+    query = f"INSERT INTO {table_name} (createdBy, taskHeading, taskDetails, createdOn, completed, deadline) VALUES('{createdBy}', '{taskHeading}', '{taskDetails}', '{createdOn}', {completed}, '{deadline}')"
+    cursor.execute(query)
+
+    return True
+
 def deleteTask(table_name, id):
     cursor = connection.cursor()
     query = f"DELETE FROM {table_name} WHERE id = {id}"

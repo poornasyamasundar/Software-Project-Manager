@@ -39,6 +39,13 @@ def allMeetings(table_name):
 
     return lst
 
+def insertMeeting(table_name, createdBy, meetingLink, createdOn, purpose):
+    cursor = connection.cursor()
+    query = f"INSERT INTO {table_name} (createdBy, meetingLink, createdOn, purpose) VALUES('{createdBy}', '{meetingLink}', '{createdOn}', '{purpose}')"
+    cursor.execute(query)
+
+    return True
+
 def deleteMeetings(table_name, id):
     cursor = connection.cursor()
     query = f"DELETE FROM {table_name} WHERE id = {id}"
