@@ -1,0 +1,43 @@
+<form method="post" action="/Tests/Post">  
+    <fieldset>  
+    <legend>What is Your Favorite Pet?</legend>  
+    Option 1<input type="checkbox" name="options" value="Yes" ><br>  
+    Option 2<input type="checkbox" name="options" value="Yes" ><br>
+    Option 3<input type="checkbox" name="options" value="Yes" ><br> 
+    <input type="submit" value="Submit">  
+    </fieldset>  
+</form>  
+
+<div class="container">
+    <h2>Form control: checkbox</h2>
+    <p>The form below contains three checkboxes. The last option is disabled:</p>
+    <form>
+      <div class="checkbox">
+        <label><input type="checkbox" value="">Option 1</label>
+      </div>
+      <div class="checkbox">
+        <label><input type="checkbox" value="">Option 2</label>
+      </div>
+      <div class="checkbox disabled">
+        <label><input type="checkbox" value="" disabled>Option 3</label>
+      </div>
+    </form>
+  </div>
+
+<script type="text/javascript">  
+function ValidatePetSelection()  
+{  
+    var checkboxes = document.getElementsByName("favorite_pet");  
+    var numberOfCheckedItems = 0;  
+    for(var i = 0; i < checkboxes.length; i++)  
+    {  
+        if(checkboxes[i].checked)  
+            numberOfCheckedItems++;  
+    }  
+    if(numberOfCheckedItems > 2)  
+    {  
+        alert("You can't select more than two favorite pets!");  
+        return false;  
+    }  
+}  
+</script>

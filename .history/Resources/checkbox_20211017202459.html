@@ -1,0 +1,27 @@
+<form method="post" action="/Tests/Post">  
+    <fieldset>  
+    <legend>What is Your Favorite Pet?</legend>  
+    Option 1<input type="checkbox" name="options" value="Yes" ><input type="checkbox" name="favorite_pet" value="No" ><br>  
+    Option 2<input type="checkbox" name="options" value="Yes" ><input type="checkbox" name="favorite_pet" value="No" ><br>
+    Option 3<input type="checkbox" name="options" value="Yes" ><input type="checkbox" name="favorite_pet" value="No" ><br> 
+    <input type="submit" value="Submit">  
+    </fieldset>  
+</form>  
+
+<script type="text/javascript">  
+function ValidatePetSelection()  
+{  
+    var checkboxes = document.getElementsByName("favorite_pet");  
+    var numberOfCheckedItems = 0;  
+    for(var i = 0; i < checkboxes.length; i++)  
+    {  
+        if(checkboxes[i].checked)  
+            numberOfCheckedItems++;  
+    }  
+    if(numberOfCheckedItems > 2)  
+    {  
+        alert("You can't select more than two favorite pets!");  
+        return false;  
+    }  
+}  
+</script>
