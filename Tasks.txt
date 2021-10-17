@@ -33,11 +33,12 @@ Tasks:
 		-given a date and table name return all the meeting details on that date.
 		-given a table name return all the meetings in that table.
 		-Create a table with (name as input) with the above fields.
-		-given an id delete the meeting
-		-given an id modify the meeting with the given details
+		-given table_name, an id delete the meeting
+		-given table_name, an id modify the meeting with the given details
 		
 6)Tasks Table			Yashwanth, Nitesh
-	-given a table name, create a database table with the given name with fields = {id, createdby, taskheading, taskdetails, dateposted, completedornot, deadline}
+	-given a table name, create a database table with the given name with fields = {id, createdby, taskheading,
+	taskdetails, dateposted, completedornot, deadline}
 	-Functions: ( In the folder Databases create a python file with the below functions)
 		-given a table and date return all the tasks on that date.
 		-given a table name return all tasks
