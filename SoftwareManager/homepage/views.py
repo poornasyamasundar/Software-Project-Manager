@@ -2,9 +2,24 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.db import connection
 from Databases.sample import getSampleData
+from Databases.create import isUser, isTrueCredentials, insertUser
+from Databases.creation import getDetails, insertDetails, updateDetails
+
+def index(request):
+    print("**********************************")
+    print("Printed to terminal")
+    #use the functions in databases to get the data
+
+    if updateDetails('nitesh12', 'nitesh', 'nitesh123', '95599595955', 'tirupati, AP', 'nitesh_@gmail.com'):
+        print('yes')
+    else:
+        print("no")
+
+    print("**********************************")
+    return render(request, 'index.html')
 
 # Create your views here.
-def index(request):
+def index_(request):
     print("**********************************")
     print("Printed to terminal")
     #use the functions in databases to get the data
