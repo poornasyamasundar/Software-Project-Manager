@@ -19,7 +19,7 @@ Tasks:
 		-given all the details insert the user into the table.
 		-given a name and details, update the details for that particular user.
 		
-3)Buttons			Yashwanth
+3)Buttons			Yashwanth	completed
 	-Need css styling for atleast 5 different type of buttons.
 	-upload in resources folder one file for each type of styling
 	
@@ -49,7 +49,7 @@ Tasks:
 	-Need html and css for getting a text as input( atleast 5 different styles)
 	-Need also for inputting password so that the password is replaced by **** while typing, with option to show or hide password
 	
-8)Button Dropdown		Yashwanth
+8)Button Dropdown		Yashwanth	completed
 	-should be able to select an option from a list of buttons(custom select)
 	-example: https://www.w3schools.com/howto/howto_custom_select.asp
 	
