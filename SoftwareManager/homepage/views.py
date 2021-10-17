@@ -4,17 +4,18 @@ from django.db import connection
 from Databases.sample import getSampleData
 from Databases.create import isUser, isTrueCredentials, insertUser
 from Databases.creation import getDetails, insertDetails, updateDetails
+from Databases.meetings_table import createTable, specificMeetings, allMeetings, deleteMeetings, modifyMeeting
+from Databases.tasks_table import create_taskTable, specificTasks, allTasks, deleteTask, modifyTask
 
 def index(request):
     print("**********************************")
     print("Printed to terminal")
     #use the functions in databases to get the data
 
-    if updateDetails('nitesh12', 'nitesh', 'nitesh123', '95599595955', 'tirupati, AP', 'nitesh_@gmail.com'):
-        print('yes')
+    if(modifyTask('tasks', 2, "sundar", "task 1", "testing updated", "123", False, "456")):
+        print("yes")
     else:
         print("no")
-
     print("**********************************")
     return render(request, 'index.html')
 

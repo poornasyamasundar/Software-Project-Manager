@@ -7,7 +7,7 @@ def getSampleData():
     rows = cursor.fetchall()
     return rows
 
-
+"""
 # this is yashwanth's function
 def isUser(user_name):
     cursor = connection.cursor()
@@ -28,3 +28,4 @@ def isTrueCredentials(user_name, user_password):
     if msg==0:
         return False
     return True
+"""
