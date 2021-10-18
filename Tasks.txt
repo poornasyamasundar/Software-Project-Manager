@@ -76,4 +76,27 @@ Tasks:
 	-Given a time countdown to that time with days, hours, minutes and seconds
 	-example: https://www.w3schools.com/howto/howto_js_countdown.asp
 
+15)Style Login.html
+	-Style all the elements of Login.html with custom input fields, buttons and background.
+
+16)Style Register.html
+	-Style all the elements of Register.html with custom input fields, buttons and background.
+
+17)Projects Table
+	-given a table name create a database table with the following fields = {id, projectname, description, createdon, createdby, model}
+	-Functions: ( In the folder Databases create a python file with below functions )
+		-given a table name create a database with the above fields
+		-return all the projects
+		-given an id or projectname or model return all the projects with the above fields
+		-given an project details edit the project with id as key
+		-delete a project
+
+18)Feedback table
+	-create a database table with the following fields = {id, createdby, createdon, feedback, rating(int)}
+	-Functions: ( In the folder Databases create a python file with below functions )
+		-insert a comment
+		-return all comments by a person
+		-delete a comment
+		-modify a comment
+		-given a n, return latest n comments
 
