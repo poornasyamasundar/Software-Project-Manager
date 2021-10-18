@@ -72,7 +72,7 @@ Tasks:
 	-Need code for a collapsible div on click
 	-example: https://www.w3schools.com/howto/howto_js_collapsible.asp
 	
-14)Countdown Timer		Yashwanth
+14)Countdown Timer		Yashwanth		completed
 	-Given a time countdown to that time with days, hours, minutes and seconds
 	-example: https://www.w3schools.com/howto/howto_js_countdown.asp
 
@@ -82,7 +82,7 @@ Tasks:
 16)Style Register.html
 	-Style all the elements of Register.html with custom input fields, buttons and background.
 
-17)Projects Table
+17)Projects Table		Yashwanth		completed
 	-given a table name create a database table with the following fields = {id, projectname, description, createdon, createdby, model}
 	-Functions: ( In the folder Databases create a python file with below functions )
 		-given a table name create a database with the above fields
@@ -91,7 +91,7 @@ Tasks:
 		-given an project details edit the project with id as key
 		-delete a project
 
-18)Feedback table
+18)Feedback table		Yashwanth		
 	-create a database table with the following fields = {id, createdby, createdon, feedback, rating(int)}
 	-Functions: ( In the folder Databases create a python file with below functions )
 		-insert a comment
