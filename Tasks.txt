@@ -76,10 +76,10 @@ Tasks:
 	-Given a time countdown to that time with days, hours, minutes and seconds
 	-example: https://www.w3schools.com/howto/howto_js_countdown.asp
 
-15)Style Login.html
+15)Style Login.html		Nitesh 			completed
 	-Style all the elements of Login.html with custom input fields, buttons and background.
 
-16)Style Register.html
+16)Style Register.html		Nitesh 			completed
 	-Style all the elements of Register.html with custom input fields, buttons and background.
 
 17)Projects Table		Yashwanth		completed
