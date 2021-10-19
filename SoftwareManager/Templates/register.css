@@ -31,7 +31,7 @@ body
 	float: right;
 	background-color: lightgreen;
 }
-#registrationbox
+/* #registrationbox
 {
 	height: 400px;
 	width: 300px;
@@ -66,4 +66,24 @@ body
 	background-color: lightgreen;
 	margin: auto;
 	margin-top: 30px;
-}
+} */
+
+body {
+	background-color: #4BDBC3;
+	background-image: -webkit-linear-gradient(65deg, #E8505B 50%, #F8F7DE 50%);
+	min-height: 1000px;
+  }
+
+  #ui {
+	background-color: #333;
+	padding: 30px;
+	margin-top: 50px;
+	border-radius: 10px;
+	opacity: 0.92;
+	font-weight: bold;
+  }
+
+  #ui label,
+  h1 {
+	color: #fff;
+  }
