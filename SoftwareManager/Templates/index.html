@@ -45,9 +45,32 @@ div{
 			return result;
 		}
 
+		function meetingFunction(table_name, type_, id, createdBy, meetingLink, createdOn, purpose)
+		{
+			$.ajax(
+				{
+					type: "POST",
+					url: "meetingFunctionPy",
+					data: {
+						table_name: table_name,
+						type_: type_,
+						id: id,
+						createdBy: createdBy,
+						meetingLink: meetingLink,
+						createdOn: createdOn,
+						purpose: purpose
+						//csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken').val()
+					},
+					success: function(data){
+						console.log(data);
+					}
+				}
+			)
+		}
+
 		document.addEventListener('DOMContentLoaded', function(){
 
-				console.log(to_getTasks(5,1));
+				meetingFunction('testin', 3, 1, 'Yashu', 'fhsa hruifhuri', 'i', 'ajax');
 
 			/*	document.querySelector('p').onmouseover = () => {
 					document.querySelector('p').style.color = 'blue';
