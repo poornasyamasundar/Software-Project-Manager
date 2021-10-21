@@ -5,17 +5,17 @@ from Databases.sample import getSampleData
 from Databases.create import isUser, isTrueCredentials, insertUser
 from Databases.creation import getDetails, insertDetails, updateDetails
 from Databases.meetings_table import createTable, specificMeetings, allMeetings, deleteMeetings, modifyMeeting, insertMeeting
-from Databases.tasks_table import create_taskTable, specificTasks, allTasks, deleteTask, modifyTask, insertTask
+from Databases.tasks_table import create_taskTable, specificTasks, allTasks, deleteTask, modifyTask, insertTask, getTasks
 from Databases.feedback import insertFeedback, deleteFeedback, modifyFeedback, allFeedback
 from Databases.projects_table import create_projecttable, insertProject, modifyProject, deleteProject, allProjects, specificProjects
+import json
+from django.views.decorators.csrf import csrf_exempt
 
 def index(request):
     print("**********************************")
     print("Printed to terminal")
     #use the functions in databases to get the data
 
-    lst = specificProjects('projects', "waterfall")
-    print(lst)
 
     print("**********************************")
     return render(request, 'index.html')
@@ -28,6 +28,18 @@ def index_(request):
     print(getSampleData())
     print("**********************************")
     return render(request, 'index.html')
+
+@csrf_exempt
+def to_getTasksPy(request):
+    print(request.method)
+    print(request.POST)
+    if request.method == 'POST':
+        table_name = request.POST['table_name']
+        number = request.POST['number']
+        type = request.POST['type_']
+        result = getTasks(table_name, number , type)
+        #print(result)
+        return HttpResponse(json.dumps(result))
 
 #sample function to process a ajax GET request
 def testGET(request):

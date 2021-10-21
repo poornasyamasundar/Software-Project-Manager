@@ -15,15 +15,47 @@ div{
 </style>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 	<script>
-		document.addEventListener('DOMContentLoaded', function()
-			{
-				document.querySelector('p').onmouseover = () => {
+
+		function to_getTasks(number, type_)
+		{
+			var result;
+		//	console.log($('input[name=csrfmiddlewaretoken').val());
+			$.ajax(
+				{
+					type: "POST",
+					url: "to_getTasksPy",
+					data: {
+						table_name: 'tasks',
+						number: number,
+						type_: type_,
+						//csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken').val(),
+						//csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken').val()
+					},
+					success: function(data){
+						//console.log(data);
+						result = JSON.parse(data);
+						console.log(typeof data);
+						console.log(typeof result);
+
+						console.log(result);
+					}
+				}
+			)
+
+			return result;
+		}
+
+		document.addEventListener('DOMContentLoaded', function(){
+
+				console.log(to_getTasks(5,1));
+
+			/*	document.querySelector('p').onmouseover = () => {
 					document.querySelector('p').style.color = 'blue';
 				}
 				document.querySelector('p').onmouseout = () => {
 					document.querySelector('p').style.color = 'red';
 				}
-				/* sample get */
+				// sample get
 				document.querySelector('#button1').onclick = (e) =>{
 					e.preventDefault();
 					$.ajax(
@@ -31,14 +63,14 @@ div{
 							type: "GET",
 							url: "testGET",
 							success: function(data){
-								/*on successfully getting the value do whatever you want*/
+								// on successfully getting the value do whatever you want
 								document.querySelector('#you').innerHTML = data;
 							}
 
 						}
 						)
 				};
-				/* sampel post */
+				// sampel post
 				document.querySelector('#button2').onclick = (e) =>{
 					e.preventDefault();
 					$.ajax(
@@ -47,18 +79,19 @@ div{
 							url: "testPOST",
 							data: {
 								userinput: document.querySelector('#in').value,
-								csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken').val()
+								//csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken').val()
 							},
 							success: function(data){
 								document.querySelector('#you').innerHTML = document.querySelector('#you').innerHTML + data;
 							}
 						}
 					)
-				};
+				};*/
 			});
 	</script>
 	</head>
 	<body>
+
 		<p>This is body</p>
 		<div>
 			<form>

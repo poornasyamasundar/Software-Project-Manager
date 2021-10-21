@@ -2,8 +2,15 @@ from django.db import connection
 
 def create_projecttable(table_name):
     cursor = connection.cursor()
+
+    query = f"SELECT * FROM {table_name} WHERE id = 1"
+    cursor.execute(query)
+    if(cursor.rowcount != 0):
+        return False
+
     query = f"CREATE TABLE {table_name} (id INT AUTO_INCREMENT PRIMARY KEY, createdBy VARCHAR(100) NOT NULL, createdOn VARCHAR(20), model VARCHAR(30) NOT NULL, projectName VARCHAR(60) NOT NULL, description VARCHAR(300))"
     cursor.execute(query)
+    insertProject(table_name, '/', '/', '/', '/' , '/')
     return True
 
 def insertProject(table_name, createdBy, createdOn, model, projectName, description):
