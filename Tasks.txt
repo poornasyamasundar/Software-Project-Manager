@@ -242,6 +242,6 @@ Tasks:
 34)Modifications in the tables		Yashwanth
 	-In meetings table insert a new field called  meetingdate and time
 
-35)Style create project.html
+35)Style create project.html		Nitesh		completed
 	-apply css and html to the create project.html
 	
