@@ -100,3 +100,128 @@ Tasks:
 		-modify a comment
 		-given a n, return latest n comments
 
+19)Product Backlog table
+	-given a name create a table with the following fields = {id, type(int), foldername, createdby, taskheading,
+	taskdetails, dateposted, completedornot}
+	-Functions: ( In the folder database create a python file with below functions )
+		-insert a row 
+		-delete a row with id as key
+		-given a foldername return all the rows with the given foldername
+		-modify the row with id as key
+		-return all the rows
+
+20)Ajax pair to get tasks
+-Write a javascript and python ajax pair that takes n and c as inputs, where n is the number of tasks to return, and c is a boolean, if c is true return only incompleted tasks, else if c is false return both completed and incompleted.
+	-return the output as list of objects ( return empty list if the query is failed)
+	
+21)display tasks as notices
+	-given tasks list from the above funcion as input( task name, created by, created on, description ) generate an list of HTML li elements with the following structure
+	-<li>
+		<div>
+			<button class = 'thead'>task name</button>
+			<div>
+				<h5>Created on Created by</h5>
+				description
+			</div>
+		</div>
+	</li>
+	-return the list of generated li elements.
+22)display tasks for editing
+	-given tasks list from the function in 20 as input( taskname, created by, created on, description) generate a list of HTML li elements with the following structure
+	-<li>
+		<div>
+			<h5>Task1</h5>
+			<h6>Status created by created on</h6>
+			<p>Description:</p>
+			<button id = 'delete'>Delete Task</button>
+			<button id = 'edit'>Edit Task</button>
+		</div>
+	</li>
+	-return the list of generated li elements.
+	
+23)Ajax pair to get meetings
+	-Write a javascript and python ajax pair that takes n and date as inputs, where n is the number of meetings to return, and date is the date, return n number of meetings on and after the given date.( if the number of meetings after date m is less than n return only m meetings
+	-return the output as list of objects( empty list if the query is failed )
+
+24)display meetings as notices
+	-given meetings list from the above funcion as input(created by, created on, link, description ) generate an list of HTML li elements with the following structure
+	-<li>
+		<div>
+			<button class = 'mhead'>Meeting on(date and time)</button>
+			<div>
+				<h5>Created on and Created by</h5>
+				<a>Link</a>
+				<br>
+				Description
+			</div>
+		</div>
+	</li>
+	-return the list of generated li elements.
+
+25)display meetings for editing
+	-given meetings list from the above funcion as input(meeting on, created by, created on, link, description ) generate an list of HTML li elements with the following structure
+	-<li>
+		<div>
+			<h5>meeting on</h5>
+			<h6>created by created on</h6>
+			<h6>link</h6>
+			<p>Description:</p>
+			<button id = 'delete'>Delete Meeting</button>
+			<button id = 'edit'>Edit Meeting</button>
+		</div>
+	</li>
+	-return the list of generated li elements
+
+26)Ajax for inserting, deleting and editing a meeting
+	-given the meeting details , table name along with an int b insert the meeting into the table if the int is 1, if the int is 2 edit the meeting, if the int is 3 delete from the table.
+	-Note( the created by and created on will not be given as input, you should find the date and the created by will be available in the local storage )
+
+27)Ajax for inserting, deleting and editing a task
+	-given the task details, table name with an int b insert the task into the table if the int is 1, if the int is 2 edit the task, if the int is 3 delete the task
+	-Note( the created by and created on will not be given as input, you should find the date and the created by will be available in the local storage )
+	
+28)Ajax for inserting, deleting and editing a notice
+	-given the task details, table name with an int b insert the notice into te table if the int is 1, if the int is 2 edit the notice, if the int is 3 delete the task
+	-Note( the created by and created on will not be given as input, you should find the date and the created by will be available in the local storage )
+
+29)Ajax for getting notices
+	-Write a javascript and python ajax pair that takes n input, where n is the number of latest notices to return
+	-return the output as list of objects( empty list if the query is failed )
+	
+30)display notices as notices
+	-given notices from the above funcion as input(created by, created on, description ) generate an list of HTML li elements with the following structure
+	-<li>
+		<div>
+			<h5>Notice by: posted on</h5>
+			<p>Information about the notice</p>
+		</div>
+	</li>
+	-return the list of generated li elements.
+
+31)display notices for editing
+	-given notices list from the above funcion as input(created by, created on, description ) generate an list of HTML li elements with the following structure
+	-<li>
+		<div>
+			<h6>created by created on</h6>
+			<p>Description:</p>
+			<button id = 'delete'>Delete Notice</button>
+			<button id = 'edit'>Edit Notice</button>
+		</div>
+	</li>
+	-return the list of generated li elements
+32)Notice table
+	-create a database table with the given name with following fields = {id, createdby, createdon, description}
+	-Functions: ( In the folder Databases create a python file with below functions )
+		-insert a notice
+		-return all notices by a person
+		-delete a notice
+		-modify a notice
+		-given a n, return latest n notices
+
+33)Ajax for getting comments
+	-Write a javascript and python ajax pair that takes n input, where n is the number of latest comments to return
+	-return the output as list of objects( empty list if the query is failed )
+
+34)Modifications in the tables( to yashwanth )
+	-In meetings table insert a new field called  meetingdate and time
+	
