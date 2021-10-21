@@ -30,36 +30,47 @@ body
 	display: inline-block;
 	float: right;
 	background-color: lightgreen;
-}/*
-#newProjectBox
-{
-	background-color: purple;
-	width: 400px;
-	margin: auto;
-	height: 300px;
-	margin-top: 10px;
-	padding-top: 10px;
 }
-#create
+#registrationbox
 {
-	height: 40px;
-	width: 100px;
-	margin: auto;
-	margin-top: 10px;
-	background-color: yellow;
-}
-#name, #model, #contributors, #repositorylink
-{
-	height: 40px;
+	height: 400px;
 	width: 300px;
+	background-color: orange;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
 	margin: auto;
-	margin-top: 10px;
-	background-color: yellow;
-} */
+}
+#loginlogo
+{
+	height: 70px;
+	width: 250px;
+	background-color: lightgreen;
+	margin: auto;
+	margin-top: 20px;
+}
+#username, #password, #name, #email, #github
+{
+	height: 30px;
+	width: 250px;
+	background-color: lightgreen;
+	margin: auto;
+	margin-top: 20px;
+}
+#register
+{
+	height: 30px;
+	width: 100px;
+	background-color: lightgreen;
+	margin: auto;
+	margin-top: 30px;
+}
 
 body {
 	background-color: #4BDBC3;
-	background-image: -webkit-linear-gradient(65deg, #095836  50%,  #790ff1 50%); /*#4aeaf0 #f05151 #F8F7DE*/
+	background-image: -webkit-linear-gradient(65deg, #E8505B 50%, #F8F7DE 50%);
 	min-height: 1000px;
   }
 
@@ -68,7 +79,7 @@ body {
 	padding: 30px;
 	margin-top: 50px;
 	border-radius: 10px;
-	opacity: 0.9;
+	opacity: 0.8;
 	font-weight: bold;
   }
 

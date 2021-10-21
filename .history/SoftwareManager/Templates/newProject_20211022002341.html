@@ -8,12 +8,11 @@
 		</title>
 	</head>
 	<body>
-		<div id = 'homeMenu'>
+		<!-- <div id = 'homeMenu'>
 			<div id = 'logo'>Logo and name</div>
 			<div id = 'help'>Help</div>
 			<div id = 'goback'>Go Back</div>
 		</div>
-		<!-- 
 		<div id = 'newProjectBox'>
 			<div id = 'name'>
 				Name of the Project
@@ -38,36 +37,33 @@
 		
 			  <div class="col-lg-6">
 				<div id="ui">
-				  <h1 align = "center">New Project</h1>
-				  <br/>
-				  <form class="form-group text-center" action="" method="POST">
+				  <h1>New Project</h1>
+				  <form class="form-group text-center" action="/student/dashboard/requests/send" method="POST">
 					<div class="row">
-					  <div >
-						<label for="" align="left"><h4>Name of the Project</h4> </label>
+					  <div class="col-lg-6">
+						<label for="">Name of the Project </label>
 						<input type="text" name="name" class="form-control" placeholder="Enter Name">
 					  </div>
-					  
-					</div>
-					<br>
-					<div >
-						<label for="empty-space"><h4>Type of Model</h4></label>
+					  <div class="col-lg-6">
+						<label for="empty-space"></label>
 						<select class="form-control" name="type">
-						  <option>-Select-</option>
+						  <option>Location</option>
 						  <option>Waterfall Model</option>
 						  <option>Agile Model</option>
 						  <option>-</option>
 						  <option>--</option>
 						</select>
 					  </div>
-					  <br/>
-					<label><h4>Contributors Names</h4></label>
-					<input type="text" name="reason" class="form-control" placeholder="Enter Contributors Names">
+					</div>
 					<br>
-					<label><h4>GitHub Repository link</h4></label>
-					<input type="text" name="repo" class="form-control" placeholder="Enter GitHub Repository link">
+					<label></label>
+					<input type="text" name="reason" class="form-control" placeholder="State your reason">
+					<br>
+					<label>E-mail:</label>
+					<input type="email" name="email" class="form-control" placeholder="Enter Institute E-mail">
 					<br>
 					<br>
-					<input type="submit" name="submit" value="Create" class="btn btn-primary btn-lg">
+					<input type="submit" name="submit" value="Save Changes" class="btn btn-primary btn-lg">
 				  </form>
 				</div>
 			  </div>

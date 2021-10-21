@@ -1,4 +1,4 @@
-body
+/* body
 {
 	background-color: lightpink;
 }
@@ -30,7 +30,7 @@ body
 	display: inline-block;
 	float: right;
 	background-color: lightgreen;
-}/*
+}
 #newProjectBox
 {
 	background-color: purple;

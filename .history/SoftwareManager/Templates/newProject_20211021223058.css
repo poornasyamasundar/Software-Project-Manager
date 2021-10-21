@@ -1,4 +1,4 @@
-body
+/* body
 {
 	background-color: lightpink;
 }
@@ -30,7 +30,7 @@ body
 	display: inline-block;
 	float: right;
 	background-color: lightgreen;
-}/*
+}
 #newProjectBox
 {
 	background-color: purple;
@@ -59,7 +59,7 @@ body
 
 body {
 	background-color: #4BDBC3;
-	background-image: -webkit-linear-gradient(65deg, #095836  50%,  #790ff1 50%); /*#4aeaf0 #f05151 #F8F7DE*/
+	background-image: -webkit-linear-gradient(65deg, #004225  50%,  #3ab2e9 50%); /*#4aeaf0 #f05151 #F8F7DE*/
 	min-height: 1000px;
   }
 
