@@ -6,5 +6,6 @@ urlpatterns = [
         path('testGET', views.testGET, name = 'testGET'),
         path('testPOST', views.testPOST, name = 'testPOST'),
         path('to_getTasksPy', views.to_getTasksPy, name = 'to_getTasksPy'),
-        path('meetingFunctionPy', views.meetingFunctionPy, name = 'meetingFunctionPy')
+        path('meetingFunctionPy', views.meetingFunctionPy, name = 'meetingFunctionPy'),
+        path('taskFunctionPy', views.taskFunctionPy, name = 'taskFunctionPy')
 ]

@@ -16,7 +16,7 @@ div{
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 	<script>
 
-		function to_getTasks(number, type_)
+		function to_getTasks(table_name, number, type_)
 		{
 			var result;
 		//	console.log($('input[name=csrfmiddlewaretoken').val());
@@ -25,7 +25,7 @@ div{
 					type: "POST",
 					url: "to_getTasksPy",
 					data: {
-						table_name: 'tasks',
+						table_name: table_name,
 						number: number,
 						type_: type_,
 						//csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken').val(),
@@ -68,9 +68,34 @@ div{
 			)
 		}
 
+		function taskFunction(table_name, type_, id, createdBy, taskHeading, taskDetails, createdOn, completed, deadline)
+		{
+			$.ajax(
+				{
+					type: "POST",
+					url: "taskFunctionPy",
+					data: {
+						table_name: table_name,
+						type_: type_,
+						id: id,
+						createdBy: createdBy,
+						taskHeading: taskHeading,
+						taskDetails: taskDetails,
+						createdOn: createdOn,
+						completed: completed,
+						deadline: deadline
+						//csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken').val()
+					},
+					success: function(data){
+						console.log(data);
+					}
+				}
+			)
+		}
+
 		document.addEventListener('DOMContentLoaded', function(){
 
-				meetingFunction('testin', 3, 1, 'Yashu', 'fhsa hruifhuri', 'i', 'ajax');
+				taskFunction('tasks', 2, 8, 'nithin', 'task 7', 'i', 'ajax', 0, '7');
 
 			/*	document.querySelector('p').onmouseover = () => {
 					document.querySelector('p').style.color = 'blue';

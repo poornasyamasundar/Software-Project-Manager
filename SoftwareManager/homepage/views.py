@@ -66,6 +66,33 @@ def meetingFunctionPy(request):
 
         return HttpResponse("s")
 
+@csrf_exempt
+def taskFunctionPy(request):
+    if request.method == 'POST':
+
+        table_name = request.POST['table_name']
+        type = request.POST['type_']
+        id = request.POST['id']
+        createdBy = request.POST['createdBy']
+        taskHeading = request.POST['taskHeading']
+        taskDetails = request.POST['taskDetails']
+        createdOn = request.POST['createdOn']
+        completed = request.POST['completed']
+        deadline = request.POST['deadline']
+
+        date = str(datetime.datetime.today())
+        date = date[0:10]
+
+        if type == '1':
+            insertTask(table_name, createdBy, taskHeading, taskDetails, date, completed, deadline)
+        elif type == '2':
+            modifyTask(table_name, id, createdBy, taskHeading, taskDetails, createdOn, completed, deadline)
+        elif type == '3':
+            deleteTask(table_name, id)
+
+        return HttpResponse("y")
+
+
 #sample function to process a ajax GET request
 def testGET(request):
     if request.method == 'GET':
