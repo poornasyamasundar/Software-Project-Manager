@@ -110,7 +110,7 @@ Tasks:
 		-modify the row with id as key
 		-return all the rows
 
-20)Ajax pair to get tasks
+20)Ajax pair to get tasks		Yashwanth
 	-Write a javascript and python ajax pair that takes n and c as inputs, where n is the number of tasks to return, and c is a boolean, 
  	 if c is true return only incompleted tasks, else if c is false return both completed and incompleted.
 	-return the output as list of objects ( return empty list if the query is failed)
@@ -143,7 +143,7 @@ Tasks:
 	</li>
 	-return the list of generated li elements.
 	
-23)Ajax pair to get meetings
+23)Ajax pair to get meetings		Yashwanth
 	-Write a javascript and python ajax pair that takes n and date as inputs, where n is the number of meetings to return, and 
 	 date is the date, return n number of meetings on and after the given date.( if the number of meetings after date m is less 
 	 than n return only m meetings
@@ -180,25 +180,25 @@ Tasks:
 	</li>
 	-return the list of generated li elements
 
-26)Ajax for inserting, deleting and editing a meeting
+26)Ajax for inserting, deleting and editing a meeting		Yashwanth
 	-given the meeting details , table name along with an int b insert the meeting into the table if the int is 1, if the int 
 	 is 2 edit the meeting, if the int is 3 delete from the table.
 	-Note( the created by and created on will not be given as input, you should find the date and the created by will be available 
 	 in the local storage )
 
-27)Ajax for inserting, deleting and editing a task
+27)Ajax for inserting, deleting and editing a task		Yashwanth
 	-given the task details, table name with an int b insert the task into the table if the int is 1, if the int is 2 edit the 
 	 task, if the int is 3 delete the task
 	-Note( the created by and created on will not be given as input, you should find the date and the created by will be available 
 	 in the local storage )
 	
-28)Ajax for inserting, deleting and editing a notice
+28)Ajax for inserting, deleting and editing a notice		Yashwanth
 	-given the task details, table name with an int b insert the notice into te table if the int is 1, if the int is 2 edit the 
 	 notice, if the int is 3 delete the task
 	-Note( the created by and created on will not be given as input, you should find the date and the created by will be available 
 	 in the local storage )
 
-29)Ajax for getting notices
+29)Ajax for getting notices					Yashwanth
 	-Write a javascript and python ajax pair that takes n input, where n is the number of latest notices to return
 	-return the output as list of objects( empty list if the query is failed )
 	
@@ -225,7 +225,8 @@ Tasks:
 		</div>
 	</li>
 	-return the list of generated li elements
-32)Notice table
+	
+32)Notice table				Yashwanth
 	-create a database table with the given name with following fields = {id, createdby, createdon, description}
 	-Functions: ( In the folder Databases create a python file with below functions )
 		-insert a notice
@@ -234,11 +235,11 @@ Tasks:
 		-modify a notice
 		-given a n, return latest n notices
 
-33)Ajax for getting comments
+33)Ajax for getting comments		Yashwanth
 	-Write a javascript and python ajax pair that takes n input, where n is the number of latest comments to return
 	-return the output as list of objects( empty list if the query is failed )
 
-34)Modifications in the tables( to yashwanth )
+34)Modifications in the tables		Yashwanth
 	-In meetings table insert a new field called  meetingdate and time
 
 35)Style create project.html
