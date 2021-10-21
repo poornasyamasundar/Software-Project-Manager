@@ -91,7 +91,7 @@ Tasks:
 		-given an project details edit the project with id as key
 		-delete a project
 
-18)Feedback table		Yashwanth		
+18)Feedback table		Yashwanth		completed		
 	-create a database table with the following fields = {id, createdby, createdon, feedback, rating(int)}
 	-Functions: ( In the folder Databases create a python file with below functions )
 		-insert a comment
@@ -198,7 +198,7 @@ Tasks:
 	-Note( the created by and created on will not be given as input, you should find the date and the created by will be available 
 	 in the local storage )
 
-29)Ajax for getting notices					Yashwanth
+29)Ajax for getting notices					Yashwanth		completed
 	-Write a javascript and python ajax pair that takes n input, where n is the number of latest notices to return
 	-return the output as list of objects( empty list if the query is failed )
 	
@@ -235,7 +235,7 @@ Tasks:
 		-modify a notice
 		-given a n, return latest n notices
 
-33)Ajax for getting comments		Yashwanth
+33)Ajax for getting comments		Yashwanth		completed
 	-Write a javascript and python ajax pair that takes n input, where n is the number of latest comments to return
 	-return the output as list of objects( empty list if the query is failed )
 
