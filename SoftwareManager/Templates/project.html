@@ -9,42 +9,44 @@
 	</head>
 	<body>
 		<div id = 'homeMenu'>
-			<div id = 'logo'>Logo and name</div>
-			<div id = 'projectdetails'>
-				Project Details
+			<div id = 'logo'>
+				<img id = 'logopng' src = 'logo.png' align= 'left'></img>
+				Software Project Manager
 			</div>
-			<div id = 'help'>Help</div>
-			<div id = 'goback'>Go Back</div>
+			<div id = 'help'>
+				<button id = 'helpbutton'>
+					Help
+				</button>
+			</div>
+			<div id = 'goback'>
+				<button id ='gobackbutton'>
+					GoBack
+				</button>
+			</div>
 		</div>
 		<div id = 'projectBox'>
 			<div id = 'options'>
-				<div id = 'overview'>
+				<button id = 'overview'>
 					Overview
-				</div>
-				<div id = 'meetings'>
-					Meetings
-				</div>
-				<div id = 'tasks'>
-					Tasks
-				</div>
-				<div id = 'currentscrum'>
+				</button>
+				<button id = 'currentscrum'>
 					Current Scrum
-				</div>
-				<div id = 'currentsprint'>
+				</button>
+				<button id = 'currentsprint'>
 					Current Sprint
-				</div>
-				<div id = 'productbacklogs'>
+				</button>
+				<button id = 'productbacklogs'>
 					Product Backlogs
-				</div>
-				<div id = 'progress'>
+				</button>
+				<button id = 'progress'>
 					Progress
-				</div>
-				<div id = 'timeline'>
+				</button>
+				<button id = 'timeline'>
 					Timeline
-				</div>
-				<div id = 'Contributors'>
+				</button>
+				<button id = 'Contributors'>
 					Contributors 
-				</div>
+				</button>
 			</div>
 			<div id = 'display'>
 				<div id = 'overviewbox'>
@@ -54,6 +56,93 @@
 				<div id = 'tasksbox'>
 				</div>
 				<div id = 'scrumbox'>
+					<h2>Scrum number, start date, finish time</h2>
+					<h3>Time for the current scrum to complete:</h3>
+					<div class = 'title'>Tasks for this scrum</div>
+					<div>
+						<ul id = 'pretasks'>
+							<li>
+								<div>
+									<h5>Task1</h5>
+									<h6>Status created by created on</h6>
+									<p>Description:</p>
+									<button id = 'delete'>Delete Task</button>
+									<button id = 'edit'>Edit Task</button>
+								</div>
+							</li>
+							<li>
+								<div>
+									<h5>Task1</h5>
+									<h6>Status created by created on</h6>
+									<p>Description:</p>
+									<button id = 'delete'>Delete Task</button>
+									<button id = 'edit'>Edit Task</button>
+								</div>
+							</li>
+							<li>
+								<div>
+									<h5>Task1</h5>
+									<h6>Status created by created on</h6>
+									<p>Description:</p>
+									<button id = 'delete'>Delete Task</button>
+									<button id = 'edit'>Edit Task</button>
+								</div>
+							</li>
+						</ul>
+						<form id = 'createTask'>
+							<h4>Create New Task</h4>
+							<label for = 'taskname'>Task Title</label>
+							<input type='text' id = 'taskname' name = 'taskname' placeholder='New Task name'>
+							<label for = 'taskDescription'>Description</label>
+							<textarea type='text' id = 'taskDescription' name='taskDescription' placeholder='Describe the task'></textarea>
+							<button type='submit'>Create</button>
+						</form>
+					</div>
+					<div class = 'title'>Meetings scheduled for this scrum</div>
+					<div>
+						<ul id = 'premeets'>
+							<li>
+								<div>
+									<h5>Meeting1</h5>
+									<h6>Status created by created on</h6>
+									<h6>link</h6>
+									<p>Description:</p>
+									<button id = 'delete'>Delete Meeting</button>
+									<button id = 'edit'>Edit Meeting</button>
+								</div>
+							</li>
+							<li>
+								<div>
+									<h5>Meeting2</h5>
+									<h6>Status created by created on</h6>
+									<p>Description:</p>
+									<button id = 'delete'>Delete Meeting</button>
+									<button id = 'edit'>Edit Meeting</button>
+								</div>
+							</li>
+							<li>
+								<div>
+									<h5>Meeting2</h5>
+									<h6>Status created by created on</h6>
+									<p>Description:</p>
+									<button id = 'delete'>Delete Meeting</button>
+									<button id = 'edit'>Edit Meeting</button>
+								</div>
+							</li>
+						</ul>
+						<form id = 'createmeet'>
+							<h4>Create New Meeting</h4>
+							<label for = 'meetingtopic'>Topic</label>
+							<input type='text' id = 'meetingtopic' name = 'meetingtopic' placeholder='Topic of the Meeting'>
+							<label for = 'meetingtime'>Date and Time</label>
+							<input type='text' id = 'meetingtime' name = 'meetingtime' placeholder='Date and time of the Meeting'>
+							<label for = 'meetinglink'>Link</label>
+							<input type='text' id = 'meetinglink' name = 'meetinglink' placeholder='Link to the Meeting'>
+							<label for = 'meetDescription'>Purpose</label>
+							<textarea type='text' id = 'meetDescription' name='meetDescription' placeholder='Describe the Purpose'></textarea>
+							<button type='submit'>Create</button>
+						</form>
+					</div>
 				</div>
 				<div id = 'sprintbox'>
 				</div>
@@ -66,13 +155,79 @@
 			</div>
 			<div id = 'board'>
 				<div id = 'notices'>
-					Notices
+					<div id = 'noticeshead'>
+						Notices
+					</div>
+					<ul>
+						<li>
+							<div>
+								<h5>Notice by: posted on</h5>
+								<p>Information about the notice</p>
+							</div>
+						</li>
+						<li>
+							<div>
+								<h5>Notice by: posted on</h5>
+								<p>Information about the notice</p>
+							</div>
+						</li>
+						<li>
+							<div>
+								<h5>Notice by: posted on</h5>
+								<p>Information about the notice</p>
+							</div>
+						</li>
+					</ul>
 				</div>
 				<div id = 'upcomingmeets'>
-					Upcoming Meetings
+					<div id = 'upcomingmeetshead'>
+						Upcoming Meetings
+					</div>
+					<ul>
+						<li>
+							<div>
+								<button class = 'mhead'>Meeting on(date and time</button>
+								<div><h5>Created on and Created by</h5><a>Link</a><br>Description: the description of the meeting will be here</div>
+							</div>
+						</li>
+						<li>
+							<div>
+								<button class = 'mhead'>Meeting on(date and time)</button>
+								<div><h5>Created on and Created by</h5><a>Link</a><br>Description: the description of the meeting will be here</div>
+							</div>
+						</li>
+						<li>
+							<div>
+								<button class = 'mhead'>Meeting on(date and time)</button>
+								<div><h5>Created on and Created by</h5><a>Link</a><br>Description: the description of the meeting will be here</div>
+							</div>
+						</li>
+					</ul>
 				</div>
 				<div id = 'duetasks'>
-					Tasks to be done
+					<div id = 'duetaskshead'>
+						Tasks to be done
+					</div>
+					<ul>
+						<li>
+							<div>
+								<button class = 'thead'>Task</button>
+								<div><h5>Created on and Created by</h5>Description: the description of the task will be here</div>
+							</div>
+						</li>
+						<li>
+							<div>
+								<button class = 'thead'>Task</button>
+								<div><h5>Created on and Created by</h5>Description: the description of the task will be here</div>
+							</div>
+						</li>
+						<li>
+							<div>
+								<button class = 'thead'>Task</button>
+								<div><h5>Created on and Created by</h5>Description: the description of the task will be here</div>
+							</div>
+						</li>
+					</ul>
 				</div>
 			</div>
 		</div>

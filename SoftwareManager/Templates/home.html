@@ -6,27 +6,104 @@
 		<script src = 'home.js'></script>
 	</head>
 	<body>
+		<div class="fab-container">
+			<div class="fab fab-icon-holder">
+				<img src = 'questionmark.png'></img>
+			</div>
+
+			<ul class="fab-options">
+				<li>
+					<span class="fab-label">Feedback</span>
+					<div class="fab-icon-holder">
+						<img src = 'feedback.png'></img>
+					</div>
+				</li><li>
+					<span class="fab-label">Contact Us</span>
+					<div class="fab-icon-holder">
+						<img src = 'contact.png'></img>
+					</div>
+				</li>
+				<li>
+					<span class="fab-label">Information</span>
+					<div class="fab-icon-holder">
+						<img src = 'info.png'></img>
+					</div>
+				</li>
+			</ul>
+		</div>
 		<div id = 'homeMenu'>
-			<div id = 'logo'>Logo and name</div>
-			<div id = 'help'>Help</div>
-			<div id = 'signin'>Signin</div>
+			<div id = 'logo'>
+				<img id = 'logopng' src = 'logo.png' align= 'left'></img>
+				Software Project Manager
+			</div>
+			<div id = 'help'>
+				<button id = 'helpbutton'>
+					Help
+				</button>
+			</div>
+			<div id = 'signin'>
+				<button id ='signinbutton'>
+					Sign In
+				</button>
+			</div>
 		</div>
 		<div id = 'modelslide'>
-			Models slide
+			<div id = 'modelhead'>
+				Models
+			</div>
+			<div id = 'modelContainer'>
+				<div class="mySlides" style = "display:block">
+					<img src="agile.jpeg">
+				</div>
+
+				<div class="mySlides">
+					<img src="waterfall.jpeg">
+				</div>
+
+				<div class="mySlides">
+					<img src="spiral.jpeg">
+				</div>
+
+				<a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+				<a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+			</div>
+			<br>
+
+			<div style="text-align:center">
+				<span class="dot" onclick="currentSlide(1)"></span> 
+				<span class="dot" onclick="currentSlide(2)"></span> 
+				<span class="dot" onclick="currentSlide(3)"></span> 
+			</div>
+		</div>
 		</div>
 		<div id = 'projectlist'>
-			Project list
+			<div id = 'yourProjects'>
+				Your Projects
+			</div>
+			<ul>
+				<li class = 'projects'>
+					<img src = 'projectThemes/img1.png'>
+					<h1>Project 1</h1>
+					<p class = 'author'>Author</p>
+					<p class = 'description'>Descriptionodfaosihfoiasjf ;sif pthis is a demo project with a description</p>
+					<p class = 'viewbutton'><button>View Project</button></p>
+				</li>
+			</ul>
 		</div>
-		<div id = 'footnotes'>
-			<div id = 'aboutus'>
-				About Us
+		<div id = 'comments'>
+			<div id = 'commenthead'>
+				Comments
 			</div>
-			<div id = 'contactus'>
-				Contact Us
-			</div>
-			<div id ='terms'>
-				Terms and Conditions
-			</div>
+			<ul>
+				<li>
+					<div>
+						<h6>Comment by comment on</h6>
+						<p>Comment</p>
+
+					</div>
+				</li>
+			</ul>
 		</div>
 	</body>
 </html>

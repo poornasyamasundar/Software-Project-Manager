@@ -1,77 +1,321 @@
 body
 {
-	background-color: lightpink;
+	background-color: rgb(218, 194, 255);
+}
+.fab-container {
+	position: fixed;
+	bottom: 50px;
+	right: 50px;
+	z-index: 999;
+	cursor: pointer;
+}
+.fab-icon-holder {
+	width: 50px;
+	height: 50px;
+	background: white;
+	box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+	border-radius: 100%;
+}
+.fab-icon-holder > img
+{
+	margin-left: 5px;
+	margin-top: 5px;
+}
+.fab-container img
+{
+	width: 40px;
+	height: 40px;
+}
+.fab {
+	width: 60px;
+	height: 60px;
+	background: #d23f31;
+}
+.fab > img
+{
+	margin-top: 10px;
+	margin-left: 10px;
+}
+.fab-options {
+	list-style-type: none;
+	dargin: 0;
+
+	position: absolute;
+	bottom: 70px;
+	right: 0;
+
+	opacity: 0;
+
+	transition: all 0.3s ease;
+	transform: scale(0);
+	transform-origin: 85% bottom;
+}
+
+.fab:hover + .fab-options, .fab-options:hover {
+	opacity: 1;
+	transform: scale(1);
+}
+
+.fab-options li {
+	display: flex;
+	justify-content: flex-end;
+	padding: 5px;
+}
+
+.fab-label {
+	padding: 2px 5px;
+	align-self: center;
+	user-select: none;
+	white-space: nowrap;
+	border-radius: 3px;
+	font-size: 16px;
+	background: #666666;
+	color: #ffffff;
+	box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+	margin-right: 10px;
 }
 #homeMenu
 {
 	width: 100%;
 	height: 80px;
-	background-color: lightblue;
 }
 #logo
 {
-	width: 30vw;
+	width: 400px;
 	height: 80px;
 	display: inline-block;
-	background-color: lightgreen;
+	font-family: 'Cursive', 'Lucida Handwriting';
+	background-color: white;
+	text-align: center;
+	font-size: 30px;
+	margin-top: 0px;
+	color: green;
+	border-radius: 30px;
+	font-weight: 10px;
+	box-shadow: 0px 0px 10px blue;
 }
 #signin
 {
-	width: 80px;
+	width: 120px;
 	height: 80px;
 	display: inline-block;
 	float: right;
-	background-color: red;
 }
 #help
 {
-	width: 80px;
+	width: 100px;
 	height: 80px;
 	display: inline-block;
 	float: right;
-	background-color: lightgreen;
 }
 #modelslide
 {
-	width: 100%;
-	height: 40vh;
-	background-color: blue;
+	width: 60vw;
+	height: 70vh;
+	margin: auto;
+	margin-top: 20px;
+	box-shadow: 0px 0px 10px blue;
+	border-radius: 10px;
 }
-#projectlist
+#projectlist, #comments
 {
+	margin-top: 40px;
 	width: 100%;
-	height: 50vh;
-	background-color: orange;
+	padding: 20px;
+	box-sizing: border-box;
+	box-shadow: 0px 0px 10px blue;
 }
-#footnotes
+#helpbutton,#signinbutton
 {
-	width: 100%;
-	height: 50px;
-	background-color: yellow;
-	bottom: 0px;
-	position: inherit;
+	margin-top: 16px;
+	border: 2px solid black;
+	background-color: white;
+	color: black;
+	padding: 14px 28px;
+	font-size: 16px;
+	cursor: pointer;
+	border-color: #2196F3;
+	color: dodgerblue;
+	border-radius: 30px;
+	box-shadow: 0px 0px 5px blue;
 }
-#aboutus
+#helpbutton:hover, #signinbutton:hover
 {
-	width: 70px;
-	height: 50px;
-	background-color: red;
+	background: #2196F3;
+	color: white;
+}
+#logopng
+{
+	height: 80px;
+	width: 80px;
+	border-radius: 10px;
+	margin-left: 20px;
+}
+#modelhead
+{
+	font-size: 30px;
+	width: inherit;
+	box-sizing: border-box;
+	padding:10px;
+	border-style: solid;
+	border-width: 2px;
+	box-shadow: 0px 0px 10px blue;
+	background-color: rgb(192, 114, 247);
+	border-radius: 10px;
+}
+.mySlides 
+{
+	display: none;
+	width: inherit;
+	height: inherit;
+}
+#modelContainer{
+	margin: auto;
+	height: 60vh;
+	width: inherit;
+	position: relative;
+	box-shadow: 0 20px 20px 0 rgba(0, 0, 0, 0.2);
+}
+#modelContainer img
+{
+	width: inherit;
+	height: inherit;
+	border-radius: 10px;
+}
+.prev, .next {
+	cursor: pointer;
+	position: absolute;
+	top: 50%;
+	width: auto;
+	padding: 16px;
+	margin-top: -22px;
+	color: blue;
+	font-weight: bold;
+	font-size: 18px;
+	transition: 0.6s ease;
+	border-radius: 0 3px 3px 0;
+	user-select: none;
+}
+.next {
+	right: 0;
+	border-radius: 3px 0 0 3px;
+}
+.prev:hover, .next:hover {
+	background-color: rgba(0,0,0,0.8);
+}
+.dot {
+	cursor: pointer;
+	height: 15px;
+	width: 15px;
+	margin: 0 2px;
+	background-color: #bbb;
+	border-radius: 50%;
 	display: inline-block;
-	float: left;
+	transition: background-color 0.6s ease;
 }
-#contactus
+.active, .dot:hover {
+	background-color: #717171;
+}
+.mySlides {
+	-webkit-animation-name: fade;
+	-webkit-animation-duration: 1.5s;
+	animation-name: fade;
+	animation-duration: 1.5s;
+}
+@-webkit-keyframes fade {
+	from {opacity: .4} 
+	to {opacity: 1}
+}
+@keyframes fade {
+	from {opacity: .4} 
+	to {opacity: 1}
+}
+.projects
 {
-	width: 70px;
-	height: 50px;
+	max-width: 250px;
+	text-align: center;
+	font-family: arial;
 	background-color: pink;
-	display: inline-block;
-	float: left;
+	margin-top: 20px;
+	margin-left: 20px;
+	box-shadow: 0px 0px 10px blue;
 }
-#terms
+#comments ul li
 {
-	width: 70px;
-	height: 50px;
-	background-color: violet;
-	display: inline-block;
-	float: left;
+	box-shadow: 0px 0px 5px blue;
+	font-family: arial;
+	background-color: pink;
+	border-style: solid;
+	margin-top: 5px;
+	border-width: 2px;
+	border-radius: 10px;
+}
+#comments ul li div h6, #comments ul li div p
+{
+	margin: 0px;
+	padding: 5px;
+}
+#comments ul li div h6
+{
+	font-size: 15px;
+}
+#projectlist ul li h1
+{
+	margin: 0px;
+	padding: 5px;
+}
+#projectlist ul li .author
+{
+	color: grey;
+	font-size: 22px;
+	padding: 4px;
+	margin: 0px;
+}
+#projectlist ul li .description
+{
+	padding: 4px;
+	margin: 0px;
+}
+#projectlist ul li .viewbutton button
+{
+	border: none;
+	outline: 0;
+	padding: 12px;
+	color: white;
+	background-color: #000;
+	text-align: center;
+	cursor: pointer;
+	width: 100%;
+	font-size: 18px;
+	transition: transform .2s;
+}
+#projectlist ul li img
+{
+	width: 250px;
+	height: 200px;
+}
+#projectlist ul, #comments ul
+{
+	list-style-type: none;
+	padding: 0px;
+	margin: 0px;
+	overflow-y: auto;
+	overflow-x: hidden;
+	max-height: 500px;
+}
+.viewbutton button:hover
+{
+	transform: scale(1.05);
+}
+#yourProjects, #commenthead
+{
+	font-size: 30px;
+	width: inherit;
+	background-color: rgb(192, 114, 247);
+	box-sizing: border-box;
+	padding:10px;
+	border-style: solid;
+	border-width: 2px;
+	box-shadow: 0px 0px 10px blue;
+	border-radius: 10px;
 }
