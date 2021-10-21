@@ -111,11 +111,13 @@ Tasks:
 		-return all the rows
 
 20)Ajax pair to get tasks
--Write a javascript and python ajax pair that takes n and c as inputs, where n is the number of tasks to return, and c is a boolean, if c is true return only incompleted tasks, else if c is false return both completed and incompleted.
+	-Write a javascript and python ajax pair that takes n and c as inputs, where n is the number of tasks to return, and c is a boolean, 
+ 	 if c is true return only incompleted tasks, else if c is false return both completed and incompleted.
 	-return the output as list of objects ( return empty list if the query is failed)
 	
 21)display tasks as notices
-	-given tasks list from the above funcion as input( task name, created by, created on, description ) generate an list of HTML li elements with the following structure
+	-given tasks list from the above funcion as input( task name, created by, created on, description ) generate an list of HTML 
+	 li elements with the following structure
 	-<li>
 		<div>
 			<button class = 'thead'>task name</button>
@@ -126,8 +128,10 @@ Tasks:
 		</div>
 	</li>
 	-return the list of generated li elements.
+	
 22)display tasks for editing
-	-given tasks list from the function in 20 as input( taskname, created by, created on, description) generate a list of HTML li elements with the following structure
+	-given tasks list from the function in 20 as input( taskname, created by, created on, description) generate a list of HTML li 
+	 elements with the following structure
 	-<li>
 		<div>
 			<h5>Task1</h5>
@@ -140,11 +144,14 @@ Tasks:
 	-return the list of generated li elements.
 	
 23)Ajax pair to get meetings
-	-Write a javascript and python ajax pair that takes n and date as inputs, where n is the number of meetings to return, and date is the date, return n number of meetings on and after the given date.( if the number of meetings after date m is less than n return only m meetings
+	-Write a javascript and python ajax pair that takes n and date as inputs, where n is the number of meetings to return, and 
+	 date is the date, return n number of meetings on and after the given date.( if the number of meetings after date m is less 
+	 than n return only m meetings
 	-return the output as list of objects( empty list if the query is failed )
 
 24)display meetings as notices
-	-given meetings list from the above funcion as input(created by, created on, link, description ) generate an list of HTML li elements with the following structure
+	-given meetings list from the above funcion as input(created by, created on, link, description ) generate an list of HTML 
+	 li elements with the following structure
 	-<li>
 		<div>
 			<button class = 'mhead'>Meeting on(date and time)</button>
@@ -159,7 +166,8 @@ Tasks:
 	-return the list of generated li elements.
 
 25)display meetings for editing
-	-given meetings list from the above funcion as input(meeting on, created by, created on, link, description ) generate an list of HTML li elements with the following structure
+	-given meetings list from the above funcion as input(meeting on, created by, created on, link, description ) generate an list 
+	 of HTML li elements with the following structure
 	-<li>
 		<div>
 			<h5>meeting on</h5>
@@ -173,23 +181,30 @@ Tasks:
 	-return the list of generated li elements
 
 26)Ajax for inserting, deleting and editing a meeting
-	-given the meeting details , table name along with an int b insert the meeting into the table if the int is 1, if the int is 2 edit the meeting, if the int is 3 delete from the table.
-	-Note( the created by and created on will not be given as input, you should find the date and the created by will be available in the local storage )
+	-given the meeting details , table name along with an int b insert the meeting into the table if the int is 1, if the int 
+	 is 2 edit the meeting, if the int is 3 delete from the table.
+	-Note( the created by and created on will not be given as input, you should find the date and the created by will be available 
+	 in the local storage )
 
 27)Ajax for inserting, deleting and editing a task
-	-given the task details, table name with an int b insert the task into the table if the int is 1, if the int is 2 edit the task, if the int is 3 delete the task
-	-Note( the created by and created on will not be given as input, you should find the date and the created by will be available in the local storage )
+	-given the task details, table name with an int b insert the task into the table if the int is 1, if the int is 2 edit the 
+	 task, if the int is 3 delete the task
+	-Note( the created by and created on will not be given as input, you should find the date and the created by will be available 
+	 in the local storage )
 	
 28)Ajax for inserting, deleting and editing a notice
-	-given the task details, table name with an int b insert the notice into te table if the int is 1, if the int is 2 edit the notice, if the int is 3 delete the task
-	-Note( the created by and created on will not be given as input, you should find the date and the created by will be available in the local storage )
+	-given the task details, table name with an int b insert the notice into te table if the int is 1, if the int is 2 edit the 
+	 notice, if the int is 3 delete the task
+	-Note( the created by and created on will not be given as input, you should find the date and the created by will be available 
+	 in the local storage )
 
 29)Ajax for getting notices
 	-Write a javascript and python ajax pair that takes n input, where n is the number of latest notices to return
 	-return the output as list of objects( empty list if the query is failed )
 	
 30)display notices as notices
-	-given notices from the above funcion as input(created by, created on, description ) generate an list of HTML li elements with the following structure
+	-given notices from the above funcion as input(created by, created on, description ) generate an list of HTML li elements 
+	 with the following structure
 	-<li>
 		<div>
 			<h5>Notice by: posted on</h5>
@@ -199,7 +214,8 @@ Tasks:
 	-return the list of generated li elements.
 
 31)display notices for editing
-	-given notices list from the above funcion as input(created by, created on, description ) generate an list of HTML li elements with the following structure
+	-given notices list from the above funcion as input(created by, created on, description ) generate an list of HTML li elements
+	 with the following structure
 	-<li>
 		<div>
 			<h6>created by created on</h6>
