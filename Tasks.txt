@@ -110,7 +110,7 @@ Tasks:
 		-modify the row with id as key
 		-return all the rows
 
-20)Ajax pair to get tasks		Yashwanth
+20)Ajax pair to get tasks		Yashwanth		completed
 	-Write a javascript and python ajax pair that takes n and c as inputs, where n is the number of tasks to return, and c is a boolean, 
  	 if c is true return only incompleted tasks, else if c is false return both completed and incompleted.
 	-return the output as list of objects ( return empty list if the query is failed)
@@ -180,13 +180,13 @@ Tasks:
 	</li>
 	-return the list of generated li elements
 
-26)Ajax for inserting, deleting and editing a meeting		Yashwanth
+26)Ajax for inserting, deleting and editing a meeting		Yashwanth		completed
 	-given the meeting details , table name along with an int b insert the meeting into the table if the int is 1, if the int 
 	 is 2 edit the meeting, if the int is 3 delete from the table.
 	-Note( the created by and created on will not be given as input, you should find the date and the created by will be available 
 	 in the local storage )
 
-27)Ajax for inserting, deleting and editing a task		Yashwanth
+27)Ajax for inserting, deleting and editing a task		Yashwanth		completed
 	-given the task details, table name with an int b insert the task into the table if the int is 1, if the int is 2 edit the 
 	 task, if the int is 3 delete the task
 	-Note( the created by and created on will not be given as input, you should find the date and the created by will be available 
