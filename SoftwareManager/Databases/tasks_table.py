@@ -1,4 +1,5 @@
 from django.db import connection
+import json
 
 def create_taskTable(table_name):
     cursor = connection.cursor()

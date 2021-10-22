@@ -36,3 +36,20 @@ def allFeedback(createdBy):
         #print(dict)
 
     return lst
+
+def getComments(number):
+    cursor = connection.cursor()
+
+    query = f"SELECT * FROM (SELECT * FROM Feedbacks ORDER BY id DESC) AS alias LIMIT {number}"
+
+    cursor.execute(query)
+    result = cursor.fetchall()
+    keys = ("id", "createdBy", "createdOn", "feedback", "rating")
+    lst = []
+
+    for row in result:
+        dict = {keys[i] : row[i] for i in range(len(keys))}
+        lst.append(dict)
+        #print(dict)
+
+    return lst
