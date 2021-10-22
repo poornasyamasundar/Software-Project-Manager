@@ -100,7 +100,7 @@ Tasks:
 		-modify a comment
 		-given a n, return latest n comments
 
-19)Product Backlog table
+19)Product Backlog table	G.vaibhav		completed
 	-given a name create a table with the following fields = {id, type(int), foldername, createdby, taskheading,
 	taskdetails, dateposted, completedornot}
 	-Functions: ( In the folder database create a python file with below functions )
@@ -115,7 +115,7 @@ Tasks:
  	 if c is true return only incompleted tasks, else if c is false return both completed and incompleted.
 	-return the output as list of objects ( return empty list if the query is failed)
 	
-21)display tasks as notices
+21)display tasks as notices	G.vaibhav		completed
 	-given tasks list from the above funcion as input( task name, created by, created on, description ) generate an list of HTML 
 	 li elements with the following structure
 	-<li>
@@ -149,7 +149,7 @@ Tasks:
 	 than n return only m meetings
 	-return the output as list of objects( empty list if the query is failed )
 
-24)display meetings as notices
+24)display meetings as notices	G.vaibhav		completed
 	-given meetings list from the above funcion as input(created by, created on, link, description ) generate an list of HTML 
 	 li elements with the following structure
 	-<li>
@@ -165,7 +165,7 @@ Tasks:
 	</li>
 	-return the list of generated li elements.
 
-25)display meetings for editing
+25)display meetings for editing	G.vaibhav		completed
 	-given meetings list from the above funcion as input(meeting on, created by, created on, link, description ) generate an list 
 	 of HTML li elements with the following structure
 	-<li>
@@ -202,7 +202,7 @@ Tasks:
 	-Write a javascript and python ajax pair that takes n input, where n is the number of latest notices to return
 	-return the output as list of objects( empty list if the query is failed )
 	
-30)display notices as notices
+30)display notices as notices	G.vaibhav		completed
 	-given notices from the above funcion as input(created by, created on, description ) generate an list of HTML li elements 
 	 with the following structure
 	-<li>
@@ -213,7 +213,7 @@ Tasks:
 	</li>
 	-return the list of generated li elements.
 
-31)display notices for editing
+31)display notices for editing	G.vaibhav		completed
 	-given notices list from the above funcion as input(created by, created on, description ) generate an list of HTML li elements
 	 with the following structure
 	-<li>
