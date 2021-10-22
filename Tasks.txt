@@ -244,4 +244,10 @@ Tasks:
 
 35)Style create project.html		Nitesh		completed
 	-apply css and html to the create project.html
+ 
+36)Customer Feedback page
+	-Create a Customer Feedback page( new html page with a css file) that gets the feedback in one field and suggestions in another field along with a star based rating.
+
+37)Modification of Project table
+	-int Project table insert a new fields called {currentscrum number(int), currentsprint number(int)}
 	
