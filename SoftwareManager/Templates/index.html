@@ -45,6 +45,88 @@ div{
 			return result;
 		}
 
+		function DisplayingTasks(Objectarray)
+		{
+			var str="";
+			for(object in Objectarray)
+			{
+				str+="<li><div><button class = 'thead'>";
+				str+=" "+object.taskHeading;
+				str+="</button><div><h5>";
+				str+="Created on"+object.createdOn+" ";
+				str+="Created By"+object.createdBy+" ";
+				str+="</h5>";
+				str+=object.taskDetails;
+				str+="</div></div></li>";
+			}
+		}
+
+		function DisplayingMeetings(Objectarray)
+		{
+			var str="";
+			for(object in Objectarray)
+			{
+				str+="<li><div><button class = 'mhead'>";
+				str+="Meeting on"+object +"</button>";//missing meeting on
+				str+="<div><h5>";
+				str+="Created on "+object.createdOn;
+				str+="and Created by"=object.createdBy;
+				str+="</h5><a>";
+				str+="Link "+object.meetingLink;
+				str+="</a><br>";
+				str+="Description:"+object.purpose;
+				str+="</div></div></li>";
+			}
+		}
+
+		function DisplayingMeetingsEdit(Objectarray)
+		{
+			var str="";
+			for(object in Objectarray)
+			{
+				str+="<li><div><h5>";
+				str+="Meeting on"+objcet +"</h5><h6>";
+				str+="Created on "+object.createdOn;
+				str+="and Created by"=object.createdBy;
+				str+="</h6><h6>";
+				str+="Link "+object.meetingLink;
+				str+="</h6><p>";
+				str+="Description:"+object.purpose;
+				str+="<button id = 'delete'>Delete Meeting</button>";
+				str+="<button id = 'edit'>Edit Meeting</button>";
+				str+="</div></li>";
+			}
+		}
+
+		function DisplayingNotices()
+		{
+			var str="";
+			for(object in Objectarray)
+			{
+				
+			}
+		}
+
+		function DisplayingTasksEdit(Objectarray)
+		{
+			var str="";
+			i=1;
+			for(object in Objectarray)
+			{
+				str+="<li><div><h5>";
+				str+="Task"+toString(i);
+				str+=object.taskHeading+"</h5><h6>";
+				if(object.completed==1)
+				str+="Done";
+				else
+				str+="Pending";
+				str+=" "+object.createdBy+" "+object.createdOn+"</h6>";
+				str+="<p>Description:"+object.taskDetails+"</p>";
+				str+="<button id = 'delete'>Delete Task</button><button id = 'edit'>Edit Task</button></div></li>";
+				i++;
+			}
+		}
+
 		function meetingFunction(table_name, type_, id, createdBy, meetingLink, createdOn, purpose)
 		{
 			$.ajax(
