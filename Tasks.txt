@@ -239,7 +239,7 @@ Tasks:
 	-Write a javascript and python ajax pair that takes n input, where n is the number of latest comments to return
 	-return the output as list of objects( empty list if the query is failed )
 
-34)Modifications in the tables		Yashwanth
+34)Modifications in the tables		Yashwanth		completed
 	-In meetings table insert a new field called  meetingdate and time
 
 35)Style create project.html		Nitesh		completed
@@ -248,6 +248,6 @@ Tasks:
 36)Customer Feedback page
 	-Create a Customer Feedback page( new html page with a css file) that gets the feedback in one field and suggestions in another field along with a star based rating.
 
-37)Modification of Project table
+37)Modification of Project table	Yashwanth	completed
 	-int Project table insert a new fields called {currentscrum number(int), currentsprint number(int)}
 	
