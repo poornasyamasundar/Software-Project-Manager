@@ -319,3 +319,21 @@ body
 	box-shadow: 0px 0px 10px blue;
 	border-radius: 10px;
 }
+#newProject
+{
+	background-color: rgb(192, 114, 247);
+	height: 40px;
+	color: black;
+	font-size: 18px;
+	font-weight: bold;
+	border-width: 0px;
+	box-shadow: 0px 0px 5px blue;
+	float: right;
+}
+#newProject:hover
+{
+	background-color: rgb(144, 0, 247);
+	color: white;
+	cursor: pointer;
+}
+

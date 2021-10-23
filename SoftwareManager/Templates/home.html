@@ -1,39 +1,40 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		{% load static %}
 		<title>Software Project Mananger</title>
-		<link rel = 'stylesheet' href = 'home.css'>
-		<script src = 'home.js'></script>
+		<link rel = 'stylesheet' href = "{% static 'home.css' %}">
+		<script src = "{% static 'home.js' %}"></script>
 	</head>
 	<body>
 		<div class="fab-container">
 			<div class="fab fab-icon-holder">
-				<img src = 'questionmark.png'></img>
+				<img src = "{% static 'questionmark.png' %}"></img>
 			</div>
 
 			<ul class="fab-options">
 				<li>
 					<span class="fab-label">Feedback</span>
 					<div class="fab-icon-holder">
-						<img src = 'feedback.png'></img>
+						<img src = "{% static 'feedback.png' %}"></img>
 					</div>
 				</li><li>
 					<span class="fab-label">Contact Us</span>
 					<div class="fab-icon-holder">
-						<img src = 'contact.png'></img>
+						<img src = "{% static 'contact.png' %}"></img>
 					</div>
 				</li>
 				<li>
 					<span class="fab-label">Information</span>
 					<div class="fab-icon-holder">
-						<img src = 'info.png'></img>
+						<img src = "{% static 'info.png' %}"></img>
 					</div>
 				</li>
 			</ul>
 		</div>
 		<div id = 'homeMenu'>
 			<div id = 'logo'>
-				<img id = 'logopng' src = 'logo.png' align= 'left'></img>
+				<img id = 'logopng' src = "{% static 'logo.png' %}" align= 'left'></img>
 				Software Project Manager
 			</div>
 			<div id = 'help'>
@@ -53,15 +54,15 @@
 			</div>
 			<div id = 'modelContainer'>
 				<div class="mySlides" style = "display:block">
-					<img src="agile.jpeg">
+					<img src= "{% static 'agile.jpeg' %}">
 				</div>
 
 				<div class="mySlides">
-					<img src="waterfall.jpeg">
+					<img src= "{% static 'waterfall.jpeg' %}">
 				</div>
 
 				<div class="mySlides">
-					<img src="spiral.jpeg">
+					<img src= "{% static 'spiral.jpeg' %}">
 				</div>
 
 				<a class="prev" onclick="plusSlides(-1)">&#10094;</a>
@@ -80,10 +81,11 @@
 		<div id = 'projectlist'>
 			<div id = 'yourProjects'>
 				Your Projects
+				<button id = 'newProject'>Create a New Project</button>
 			</div>
 			<ul>
 				<li class = 'projects'>
-					<img src = 'projectThemes/img1.png'>
+					<img src = "{% static 'projectThemes/img1.png' %}">
 					<h1>Project 1</h1>
 					<p class = 'author'>Author</p>
 					<p class = 'description'>Descriptionodfaosihfoiasjf ;sif pthis is a demo project with a description</p>

@@ -150,4 +150,5 @@ document.addEventListener('DOMContentLoaded', function()
 		}
 		handleScrumTasksAndMeets();
 		handleSprintTasks();
+		document.querySelector('#projectname').innerHTML = localStorage.getItem('Project');
 	});

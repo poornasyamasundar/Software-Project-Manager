@@ -2,21 +2,27 @@ from django.db import connection
 
 def create_projecttable(table_name):
     cursor = connection.cursor()
-    query = f"CREATE TABLE {table_name} (id INT AUTO_INCREMENT PRIMARY KEY, createdBy VARCHAR(100) NOT NULL, createdOn VARCHAR(20), model VARCHAR(30) NOT NULL, projectName VARCHAR(60) NOT NULL, description VARCHAR(300), currentScrum INT NOT NULL, currentSprint INT NOT NULL)"
-    cursor.execute(query)
 
+    query = f"SELECT * FROM {table_name} WHERE id = 1"
+    cursor.execute(query)
+    if(cursor.rowcount != 0):
+        return False
+
+    query = f"CREATE TABLE {table_name} (id INT AUTO_INCREMENT PRIMARY KEY, createdBy VARCHAR(100) NOT NULL, createdOn VARCHAR(20), model VARCHAR(30) NOT NULL, projectName VARCHAR(60) NOT NULL, description VARCHAR(300))"
+    cursor.execute(query)
+    insertProject(table_name, '/', '/', '/', '/' , '/')
     return True
 
-def insertProject(table_name, createdBy, createdOn, model, projectName, description, currentScrum, currentSprint):
+def insertProject(table_name, createdBy, createdOn, model, projectName, description):
     cursor = connection.cursor()
-    query = f"INSERT INTO {table_name} (createdBy, createdOn, model, projectName, description, currentScrum, currentSprint) VALUES ('{createdBy}' , '{createdOn}', '{model}', '{projectName}', '{description}', {currentScrum}, {currentSprint})"
+    query = f"INSERT INTO {table_name} (createdBy, createdOn, model, projectName, description) VALUES ('{createdBy}' , '{createdOn}', '{model}', '{projectName}', '{description}')"
 
     cursor.execute(query)
     return True
 
-def modifyProject(table_name, id, createdBy, createdOn, model, projectName, description, currentScrum, currentSprint):
+def modifyProject(table_name, id, createdBy, createdOn, model, projectName, description):
     cursor = connection.cursor()
-    query = f"UPDATE {table_name} SET createdBy = '{createdBy}', createdOn = '{createdOn}', model = '{model}', projectName = '{projectName}', description = '{description}', currentScrum = {currentScrum}, currentSprint = {currentSprint} WHERE id = {id}"
+    query = f"UPDATE {table_name} SET createdBy = '{createdBy}', createdOn = '{createdOn}', model = '{model}', projectName = '{projectName}', description = '{description}' WHERE id = {id}"
 
     cursor.execute(query)
     return True
@@ -27,7 +33,7 @@ def allProjects(table_name):
     cursor.execute(query)
 
     result = cursor.fetchall()
-    keys = ("id", "createdBy", "createdOn", "model", "projectName", "description", "currentScrum", "currentSprint")
+    keys = ("id", "createdBy", "createdOn", "model", "projectName", "description")
     lst = []
 
     for row in result:
@@ -43,7 +49,7 @@ def specificProjects(table_name, model):
     cursor.execute(query)
 
     result = cursor.fetchall()
-    keys = ("id", "createdBy", "createdOn", "model", "projectName", "description", "currentScrum", "currentSprint")
+    keys = ("id", "createdBy", "createdOn", "model", "projectName", "description")
     lst = []
 
     for row in result:

@@ -193,32 +193,6 @@ div{
 			return result;
 		}
 
-		function to_getMeetings(table_name, number, date)
-		{
-			var result;
-		//	console.log($('input[name=csrfmiddlewaretoken').val());
-			$.ajax(
-				{
-					type: "POST",
-					url: "to_getMeetingsPy",
-					data: {
-						table_name: table_name,
-						number: number,
-						date: date
-						//csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken').val(),
-						//csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken').val()
-					},
-					success: function(data){
-					//	console.log(data);
-						result = JSON.parse(data);
-					//	console.log(result);
-					}
-				}
-			)
-
-			return result;
-		}
-
 		function meetingFunction(table_name, type_, id, createdBy, meetingLink, createdOn, purpose)
 		{
 			$.ajax(

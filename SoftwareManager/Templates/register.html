@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		{% load static %}
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-		<link rel = 'stylesheet' href = 'register.css'>
+		<link rel = 'stylesheet' href = "{% static 'register.css' %}">
+		<script src = "{% static 'register.js' %}"></script>
 		<title>
 			Registration Page
 		</title>
@@ -10,7 +12,7 @@
 	<body>
 		<div id = 'homeMenu'>
 			<div id = 'logo'>
-				<img id = 'logopng' src = 'logo.png' align= 'left'></img>
+				<img id = 'logopng' src = "{% static 'logo.png' %}" align= 'left'></img>
 				Software Project Manager
 			</div>
 			<div id = 'help'>

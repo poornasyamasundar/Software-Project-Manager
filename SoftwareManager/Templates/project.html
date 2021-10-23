@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<link rel = 'stylesheet' href = 'project.css'>
-		<script src = 'project.js'></script>
+		{% load static %}
+		<link rel = 'stylesheet' href = "{% static 'project.css' %}">
+		<script src = "{% static 'project.js' %}"></script>
 		<title>
 			Project Name
 		</title>
@@ -10,7 +11,7 @@
 	<body>
 		<div id = 'homeMenu'>
 			<div id = 'logo'>
-				<img id = 'logopng' src = 'logo.png' align= 'left'></img>
+				<img id = 'logopng' src = "{% static 'logo.png' %}" align= 'left'></img>
 				Software Project Manager
 			</div>
 			<div id = 'projectname'>
