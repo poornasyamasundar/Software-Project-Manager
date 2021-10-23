@@ -7,52 +7,39 @@
 		</title>
 	</head>
 	<body>
-		 <div id = 'homeMenu'>
-			<div id = 'logo'>Logo and name</div>
-			<div id = 'help'>Help</div>
-			<div id = 'goback'>Go Back</div>
-		<!--</div>
-		<div id = 'loginbox'>
-			<div id = 'loginlogo'>
-				logo
+		<div id = 'homeMenu'>
+			<div id = 'logo'>
+				<img id = 'logopng' src = 'logo.png' align= 'left'></img>
+				Software Project Manager
 			</div>
-			<div id = 'username'>
-				username
+			<div id = 'help'>
+				<button id = 'helpbutton'>
+					Help
+				</button>
 			</div>
-			<div id = 'password'>
-				password
+			<div id = 'goback'>
+				<button id ='gobackbutton'>
+					GoBack
+				</button>
 			</div>
-			<div id = 'login'>
-				login
-			</div>
-			<div id = 'register'>
-				register
-			</div>
-		</div> -->
-
+		</div>
 		<div class="center">
-			
-			
-			
 			<h1>Sign in</h1>
 			<form class="" action="" method="post">
-			  <div class="txt_field">
-				<input type="email" name="email" value="" required>
-				<span></span>
-				<label>Email</label>
-			  </div>
-			  <div class="txt_field">
-				<input type="password" name="password" value="" required>
-				<span></span>
-				<label>Password</label>
-			  </div>
-			  
-			  <input type="submit" name="submit" value="Login">
+				<div class="txt_field">
+					<input type="email" name="email" value="" required placeholder='Username'>
+					<span></span>
+					<label>Email</label>
+				</div>
+				<div class="txt_field">
+					<input type="password" name="password" value="" required placeholder='Password'>
+					<span></span>
+					<label>Password</label>
+				</div>
+
+				<input type="submit" name="submit" value="Login">
 			</form>
-			<div class="pass">Forgot Password?</div>
-		<!-- <div class="newuser">New User?</div>  -->
-		<div class="reghere">Register Here</div>
-	
-		  </div>
+				<button class="reghere">Register</button>
+		</div>
 	</body>
 </html>

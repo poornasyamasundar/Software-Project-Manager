@@ -1,29 +1,35 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 		<link rel = 'stylesheet' href = 'newProject.css'>
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 		<title>
 			New Project
 		</title>
 	</head>
 	<body>
-		<div id = 'homeMenu'>
-			<div id = 'logo'>
-				<img id = 'logopng' src = 'logo.png' align= 'left'></img>
-				Software Project Manager
-			</div>
-			<div id = 'help'>
-				<button id = 'helpbutton'>
-					Help
-				</button>
-			</div>
-			<div id = 'goback'>
-				<button id ='gobackbutton'>
-					GoBack
-				</button>
-			</div>
+		<!-- <div id = 'homeMenu'>
+			<div id = 'logo'>Logo and name</div>
+			<div id = 'help'>Help</div>
+			<div id = 'goback'>Go Back</div>
 		</div>
+		<div id = 'newProjectBox'>
+			<div id = 'name'>
+				Name of the Project
+			</div>
+			<div id = 'model'>
+				Life Cycle model
+			</div>
+			<div id = 'contributors'>
+				Contributors
+			</div>
+			<div id = 'repositorylink'>
+				Github Repo Link
+			</div>
+			<div id = 'create'>
+				Create
+			</div>
+		</div> -->
 
 		<div class="container">
 			<div class="row">
@@ -33,7 +39,7 @@
 				<div id="ui">
 				  <h1 align = "center">New Project</h1>
 				  <br/>
-				  <form class="form-group text-center" action="" method="POST">
+				  <form class="form-group text-center" action="/student/dashboard/requests/send" method="POST">
 					<div class="row">
 					  <div >
 						<label for="" align="left"><h4>Name of the Project</h4> </label>
@@ -45,17 +51,18 @@
 					<div >
 						<label for="empty-space"><h4>Type of Model</h4></label>
 						<select class="form-control" name="type">
-						  <option>-Select-</option>
-						  <option>Agile Model</option>
+						  <option></option>
 						  <option>Waterfall Model</option>
-						  <option>Spiral Model</option>
+						  <option>Agile Model</option>
+						  <option>-</option>
+						  <option>--</option>
 						</select>
 					  </div>
 					  <br/>
 					<label><h4>Contributors Names</h4></label>
 					<input type="text" name="reason" class="form-control" placeholder="Enter Contributors Names">
 					<br>
-					<label><h4>GitHub Repository link</h4></label>
+					<label>Repository link</label>
 					<input type="text" name="repo" class="form-control" placeholder="Enter GitHub Repository link">
 					<br>
 					<br>

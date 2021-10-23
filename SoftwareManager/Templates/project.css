@@ -4,8 +4,7 @@ body
 }
 #homeMenu
 {
-	width: 100%;
-	height: 80px;
+	padding: 5px;
 }
 #logo
 {
@@ -16,11 +15,28 @@ body
 	background-color: white;
 	text-align: center;
 	font-size: 30px;
-	margin-top: 0px;
 	color: green;
 	border-radius: 30px;
-	font-weight: 10px;
+	font-weight: bold;
 	box-shadow: 0px 0px 10px blue;
+	float: left;
+}
+#projectname
+{
+	width: 400px;
+	font-family: 'Cursive', 'Lucida Handwriting';
+	display: inline-block;
+	background-color: white;
+	text-align: center;
+	font-size: 30px;
+	color: green;
+	padding: 20px;
+	float: left;
+	border-radius: 30px;
+	font-weight: bold;
+	margin-left: 30px;
+	box-shadow: 0px 0px 10px blue;
+	margin-top: 0px;
 }
 #goback
 {
@@ -62,17 +78,10 @@ body
 	border-radius: 10px;
 	margin-left: 20px;
 }
-#projectdetails
-{
-	height: 80px;
-	width: 300px;
-	display: inline-block;
-	background-color: orange;
-}
 #projectBox
 {
 	display: grid;
-	margin-top: 5px;
+	margin-top: 100px;
 	width: 100%;
 	grid-template-columns: 200px auto 300px;
 	grid-gap: 10px;
@@ -82,14 +91,15 @@ body
 {
 	box-shadow: 0px 0px 10px blue;
 	padding: 5px;
+	box-sizing: border-box;
 }
 #options
 {
-	height: 300px;
+	height: 310px;
 }
 #board
 {
-	height: 480px;
+	height: 500px;
 }
 #options > button
 {
@@ -114,7 +124,7 @@ body
 	margin-top: 5px;
 	background-color: white;
 	height: 150px;
-	width: 286px;
+	width: 280px;
 	background-color: rgb(232, 186, 255);
 	border-style: solid;
 	border-width: 2px;
@@ -130,7 +140,7 @@ body
 	font-weight: bold;
 	background-color: rgb(162, 0, 255);
 }
-#duetasks ul, #upcomingmeets ul, #notices ul, #pretasks, #premeets
+#duetasks ul, #upcomingmeets ul, #notices ul, #pretasks, #sprintTasks, #premeets, #overviewbox ul, #backlogsbox ul
 {
 	list-style-type: none;
 	padding: 0px;
@@ -143,7 +153,7 @@ body
 {
 	display: none;
 }
-#duetasks ul li, #upcomingmeets ul li, #notices ul li, #pretasks li, #premeets
+#duetasks ul li, #upcomingmeets ul li, #notices ul li, #pretasks li, #sprintTasks li, #premeets
 {
 	margin-top: 5px;
 }
@@ -152,19 +162,23 @@ body
 	margin: 5px;
 	border-radius: 5px;
 }
-#notices ul li div, #pretasks li div, #premeets li div
+#notices ul li div, #pretasks li div, #sprintTasks li div, #premeets li div, #backlogsbox ul li div
 {
 	margin: 5px;
 	background-color: lightyellow;
 	padding: 3px;
 	border-radius: 5px;
 }
-.thead, .mhead
+#pretasks li div, #sprintTasks li div, #premeets li div, #backlogsbox ul li div
+{
+	margin: 0px;
+}
+.thead, .mhead, .create
 {
 	background-color: rgb(232, 130, 255);
 	cursor: pointer;
 	padding: 5px;
-	width: 280px;
+	width: 100%;
 	border: none;
 	text-align: left;
 	outline: none;
@@ -173,11 +187,17 @@ body
 	box-shadow: 0px 0px 5px blue;
 	font-color: black;
 }
-.tactive, .thead:hover, .mactive, .mhead:hover
+.create
+{
+	margin-top: 5px;
+	font-size: 20px;
+	padding: 5px;
+}
+.tactive, .thead:hover, .mactive, .mhead:hover, .create:hover
 {
 	background-color: rgb(208, 0, 255);
 }
-.thead:after, .mhead:after
+.thead:after, .mhead:after, .create:after
 {
 	content: '\002B';
 	color: white;
@@ -185,7 +205,7 @@ body
 	float: right;
 	margin-left: 5px;
 }
-.tactive:after, .mactive:after
+.tactive:after, .mactive:after, .createactive:after
 {
 	content: '\2212';
 }
@@ -198,41 +218,45 @@ body
 	background-color: lightyellow;
 	margin: 0px;
 }
-#duetasks ul li div div h5, #upcomingmeets ul li div div h5, #notices ul li div h5, #pretasks li div h5, #premeets li div h5
+#duetasks ul li div div h5, #upcomingmeets ul li div div h5, #notices ul li div h5, #pretasks li div h5, #premeets li div h5, #sprintTasks li div h5, #backlogsbox ul li div h5
 {
 	font-size: 20px;
 	margin: 0px;
 	padding: 0px;
 }
-#scrumbox h3, #scrumbox h2
+#scrumbox h3, #scrumbox h2, #sprintbox h3, #sprintbox h2
 {
 	text-align: center;
 	font-size: 30px;
 	margin: 0px;
 	padding: 0px;
 }
-#pretasks li div h6, #pretasks li div p, #premeets li div h6, #premeets li div p
+#pretasks li div h6, #pretasks li div p, #sprintTasks li div h6, #sprintTasks li div p, #premeets li div h6, #premeets li div p, #backlogsbox ul li div h6, #backlogsbox ul li div > p
 {
 	margin: 0px;
 	padding: 0px;
 }
-#pretasks li div h6, #premeets li div h6
+#pretasks li div h6, #sprintTasks li div h6, #premeets li div h6, #backlogsbox ul li div h6
 {
 	font-size: 15px;
 } 
-#pretasks li div, #premeets li div 
+#pretasks li div, #sprintTasks li div, #premeets li div, #backlogsbox ul li div 
 {
 	padding: 5px;
 }
-#pretasks, #premeets
+#pretasks, #premeets, #sprintTasks
 {
-	max-height: 200px;
+	max-height: 400px;
 	margin-top: 5px;
 	box-shadow: 0px 0px 5px blue;
 	border-width: 1px;
 	border-style: solid;
 }
-#pretasks li div button, #premeets li div button
+#pretasks li, #premeets li, #sprintTasks li
+{
+	padding: 5px;
+}
+#pretasks li div button, #sprintTasks li div button, #premeets li div button, #backlogsbox ul li div button
 {
 	margin:auto;
 	margin-left: 50px;
@@ -246,7 +270,7 @@ body
 	margin-top: 2px;
 	box-shadow: 0px 0px 5px blue;
 }
-#pretasks li div button:hover, #premeets li div button:hover
+#pretasks li div button:hover, #sprintTasks li div button:hover, #premeets li div button:hover, #backlogsbox ul li div button:hover
 {
 	background-color: rgb(144, 0, 247);
 	color: white;
@@ -260,23 +284,30 @@ body
 	margin-top: 5px;
 	box-shadow: 0px 0px 5px blue;
 }
-#createTask, #createmeet
+#createTask, #createmeet, .edit
 {
 	font-size: 15px;
 	box-shadow: 0px 0px 5px blue;
 	margin-top: 5px;
 	border-radius: 3px;
-	padding:5px;
 	background-color: lightyellow;
+	max-height: 0;
+	overflow: hidden;
+	transition: max-height 0.2s ease-out;
 }
-#createTask h4, #createmeet h4
+.edit
+{
+	padding: 5px;
+	max-height: 400px;
+}
+#createTask h4, #createmeet h4, .edit h4
 {
 	text-align: left;
 	padding: 4px;
 	margin: 0px;
 	font-size: 20px;
 }
-#createTask label, #createmeet label
+#createTask label, #createmeet label, .edit label
 {
 	display: block;
 	font-size: 20px;
@@ -284,7 +315,7 @@ body
 	font-weight: bold;
 	padding: 3px;
 }
-#createTask input, #createTask textarea, #createmeet input, #createmeet textarea
+#createTask input, #createTask textarea, #createmeet input, #createmeet textarea, .edit input, .edit textarea
 {
 	box-shadow: 0px 0px 5px blue;
 	font-size: 18px;
@@ -293,7 +324,7 @@ body
 	display: block;
 	margin: 4px;
 }
-#createTask button, #createmeet button
+#createTask button, #createmeet button, .edit button
 {
 	margin-left: 10px;
 	background-color: rgb(192, 114, 247);
@@ -311,10 +342,42 @@ body
 	width: 400px;
 	height: 100px;
 }
-#createTask button:hover, #createmeet button:hover
+#createTask button:hover, #createmeet button:hover, .edit button:hover
 {
 	background-color: rgb(144, 0, 247);
 	color: white;
 }
-
-
+.id
+{
+	font-size: 25px;
+	font-weight: bold;
+	display: inline;
+	font-family: cursive;
+}
+.value
+{
+	font-size: 22px;
+	font-family: sans-serif;
+	display: inline;
+}
+#overviewbox ul
+{
+	max-height: 1000px;
+}
+#backlogsbox ul
+{
+	max-height: 1000px;
+}
+#backlogsbox ul li
+{
+	padding: 5px;
+	margin-top: 2px;
+}
+#overviewbox ul li, #backlogsbox > h4, #backlogsbox > p, #backlogsbox ul li > p
+{
+	border-radius: 10px;
+	background-color: rgb(192, 114, 247);
+	padding:5px;
+	margin-top: 5px;
+	box-shadow: 0px 0px 5px blue;
+}

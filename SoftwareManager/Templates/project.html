@@ -13,6 +13,9 @@
 				<img id = 'logopng' src = 'logo.png' align= 'left'></img>
 				Software Project Manager
 			</div>
+			<div id = 'projectname'>
+				Project Name
+			</div>
 			<div id = 'help'>
 				<button id = 'helpbutton'>
 					Help
@@ -50,10 +53,29 @@
 			</div>
 			<div id = 'display'>
 				<div id = 'overviewbox'>
-				</div>
-				<div id = 'meetingsbox'>
-				</div>
-				<div id = 'tasksbox'>
+					<ul>
+						<li>
+							<p class = 'id'>Name of the Project: </p><p class = 'value'>Software Project Manager</p>
+						</li>
+						<li>
+							<p class = 'id'>Created By         : </p><p class = 'value'>Team 3</p>
+						</li>
+						<li>
+							<p class = 'id'>Created On         : </p><p class = 'value'>15-09-2021</p>
+						</li>
+						<li>
+							<p class = 'id'>Contributors       : </p><p class = 'value'>Yashwanth, Vaibhav, Nitesh, Poorna</p>
+						</li>
+						<li>
+							<p class = 'id'>Sprint Number      : </p><p class = 'value'>1</p>
+						</li>
+						<li>
+							<p class = 'id'>Scrum Number       : </p><p class = 'value'>10</p>
+						</li>
+						<li>
+							<p class = 'id'>Scrum Number       : </p><p class = 'value'>10</p>
+						</li>
+					</ul>
 				</div>
 				<div id = 'scrumbox'>
 					<h2>Scrum number, start date, finish time</h2>
@@ -69,6 +91,15 @@
 									<button id = 'delete'>Delete Task</button>
 									<button id = 'edit'>Edit Task</button>
 								</div>
+								<form class = 'edit'>
+									<h4>Edit Task</h4>
+									<label for = 'taskname'>Task Title</label>
+									<input type='text' id = 'taskname' name = 'taskname' placeholder='New Task name'>
+									<label for = 'taskDescription'>Description</label>
+									<textarea type='text' id = 'taskDescription' name='taskDescription' placeholder='Describe the task'></textarea>
+									<button type='submit'>Save</button>
+									<button>Cancel</button>
+								</form>
 							</li>
 							<li>
 								<div>
@@ -78,6 +109,15 @@
 									<button id = 'delete'>Delete Task</button>
 									<button id = 'edit'>Edit Task</button>
 								</div>
+								<form class = 'edit'>
+									<h4>Edit Task</h4>
+									<label for = 'taskname'>Task Title</label>
+									<input type='text' id = 'taskname' name = 'taskname' placeholder='New Task name'>
+									<label for = 'taskDescription'>Description</label>
+									<textarea type='text' id = 'taskDescription' name='taskDescription' placeholder='Describe the task'></textarea>
+									<button type='submit'>Save</button>
+									<button>Cancel</button>
+								</form>
 							</li>
 							<li>
 								<div>
@@ -87,8 +127,18 @@
 									<button id = 'delete'>Delete Task</button>
 									<button id = 'edit'>Edit Task</button>
 								</div>
+								<form class = 'edit'>
+									<h4>Edit Task</h4>
+									<label for = 'taskname'>Task Title</label>
+									<input type='text' id = 'taskname' name = 'taskname' placeholder='New Task name'>
+									<label for = 'taskDescription'>Description</label>
+									<textarea type='text' id = 'taskDescription' name='taskDescription' placeholder='Describe the task'></textarea>
+									<button type='submit'>Save</button>
+									<button>Cancel</button>
+								</form>
 							</li>
 						</ul>
+						<button class = 'create'>Create a New Task</button>
 						<form id = 'createTask'>
 							<h4>Create New Task</h4>
 							<label for = 'taskname'>Task Title</label>
@@ -110,6 +160,19 @@
 									<button id = 'delete'>Delete Meeting</button>
 									<button id = 'edit'>Edit Meeting</button>
 								</div>
+								<form class = 'edit'>
+									<h4>Edit Meeting</h4>
+									<label for = 'meetingtopic'>Topic</label>
+									<input type='text' id = 'meetingtopic' name = 'meetingtopic' placeholder='Topic of the Meeting'>
+									<label for = 'meetingtime'>Date and Time</label>
+									<input type='text' id = 'meetingtime' name = 'meetingtime' placeholder='Date and time of the Meeting'>
+									<label for = 'meetinglink'>Link</label>
+									<input type='text' id = 'meetinglink' name = 'meetinglink' placeholder='Link to the Meeting'>
+									<label for = 'meetDescription'>Purpose</label>
+									<textarea type='text' id = 'meetDescription' name='meetDescription' placeholder='Describe the Purpose'></textarea>
+									<button type='submit'>Save</button>
+									<button>Cancel</button>
+								</form>
 							</li>
 							<li>
 								<div>
@@ -119,6 +182,19 @@
 									<button id = 'delete'>Delete Meeting</button>
 									<button id = 'edit'>Edit Meeting</button>
 								</div>
+								<form class = 'edit'>
+									<h4>Edit Meeting</h4>
+									<label for = 'meetingtopic'>Topic</label>
+									<input type='text' id = 'meetingtopic' name = 'meetingtopic' placeholder='Topic of the Meeting'>
+									<label for = 'meetingtime'>Date and Time</label>
+									<input type='text' id = 'meetingtime' name = 'meetingtime' placeholder='Date and time of the Meeting'>
+									<label for = 'meetinglink'>Link</label>
+									<input type='text' id = 'meetinglink' name = 'meetinglink' placeholder='Link to the Meeting'>
+									<label for = 'meetDescription'>Purpose</label>
+									<textarea type='text' id = 'meetDescription' name='meetDescription' placeholder='Describe the Purpose'></textarea>
+									<button type='submit'>Save</button>
+									<button>Cancel</button>
+								</form>
 							</li>
 							<li>
 								<div>
@@ -128,8 +204,22 @@
 									<button id = 'delete'>Delete Meeting</button>
 									<button id = 'edit'>Edit Meeting</button>
 								</div>
+								<form class = 'edit'>
+									<h4>Edit Meeting</h4>
+									<label for = 'meetingtopic'>Topic</label>
+									<input type='text' id = 'meetingtopic' name = 'meetingtopic' placeholder='Topic of the Meeting'>
+									<label for = 'meetingtime'>Date and Time</label>
+									<input type='text' id = 'meetingtime' name = 'meetingtime' placeholder='Date and time of the Meeting'>
+									<label for = 'meetinglink'>Link</label>
+									<input type='text' id = 'meetinglink' name = 'meetinglink' placeholder='Link to the Meeting'>
+									<label for = 'meetDescription'>Purpose</label>
+									<textarea type='text' id = 'meetDescription' name='meetDescription' placeholder='Describe the Purpose'></textarea>
+									<button type='submit'>Save</button>
+									<button>Cancel</button>
+								</form>
 							</li>
 						</ul>
+						<button class = 'create'>Create a New Meeting</button>
 						<form id = 'createmeet'>
 							<h4>Create New Meeting</h4>
 							<label for = 'meetingtopic'>Topic</label>
@@ -145,12 +235,109 @@
 					</div>
 				</div>
 				<div id = 'sprintbox'>
+					<h2>Sprint number, start date, finish time</h2>
+					<h3>Time for the current Sprint to complete:</h3>
+					<div class = 'title'>Tasks for this Sprint</div>
+					<div>
+						<ul id = 'sprintTasks'>
+							<li>
+								<div>
+									<h5>Task1</h5>
+									<h6>Status created by created on</h6>
+									<p>Description:</p>
+									<button id = 'delete'>Delete Task</button>
+									<button id = 'edit'>Edit Task</button>
+								</div>
+								<form class = 'edit'>
+									<h4>Edit Task</h4>
+									<label for = 'taskname'>Task Title</label>
+									<input type='text' id = 'taskname' name = 'taskname' placeholder='New Task name'>
+									<label for = 'taskDescription'>Description</label>
+									<textarea type='text' id = 'taskDescription' name='taskDescription' placeholder='Describe the task'></textarea>
+									<button type='submit'>Save</button>
+									<button>Cancel</button>
+								</form>
+							</li>
+							<li>
+								<div>
+									<h5>Task1</h5>
+									<h6>Status created by created on</h6>
+									<p>Description:</p>
+									<button id = 'delete'>Delete Task</button>
+									<button id = 'edit'>Edit Task</button>
+								</div>
+								<form class = 'edit'>
+									<h4>Edit Task</h4>
+									<label for = 'taskname'>Task Title</label>
+									<input type='text' id = 'taskname' name = 'taskname' placeholder='New Task name'>
+									<label for = 'taskDescription'>Description</label>
+									<textarea type='text' id = 'taskDescription' name='taskDescription' placeholder='Describe the task'></textarea>
+									<button type='submit'>Save</button>
+									<button>Cancel</button>
+								</form>
+							</li>
+							<li>
+								<div>
+									<h5>Task1</h5>
+									<h6>Status created by created on</h6>
+									<p>Description:</p>
+									<button id = 'delete'>Delete Task</button>
+									<button id = 'edit'>Edit Task</button>
+								</div>
+								<form class = 'edit'>
+									<h4>Edit Task</h4>
+									<label for = 'taskname'>Task Title</label>
+									<input type='text' id = 'taskname' name = 'taskname' placeholder='New Task name'>
+									<label for = 'taskDescription'>Description</label>
+									<textarea type='text' id = 'taskDescription' name='taskDescription' placeholder='Describe the task'></textarea>
+									<button type='submit'>Save</button>
+									<button>Cancel</button>
+								</form>
+							</li>
+						</ul>
+						<button class = 'create'>Create a New Task</button>
+						<form id = 'createTask'>
+							<h4>Create New Task</h4>
+							<label for = 'taskname'>Task Title</label>
+							<input type='text' id = 'taskname' name = 'taskname' placeholder='New Task name'>
+							<label for = 'taskDescription'>Description</label>
+							<textarea type='text' id = 'taskDescription' name='taskDescription' placeholder='Describe the task'></textarea>
+							<button type='submit'>Create</button>
+						</form>
+					</div>
 				</div>
 				<div id = 'backlogsbox'>
+					<h4>Product Backlogs</h4>
+					<p>Path :root/</p>
+					<ul>
+						<li>
+							<p>FolderName</p>
+						</li>
+						<li>
+							<div>
+								<h5>Task1</h5>
+								<h6>Status created by created on</h6>
+								<p>Description:</p>
+								<button id = 'delete'>Delete Task</button>
+								<button id = 'edit'>Edit Task</button>
+							</div>
+							<form class = 'edit'>
+								<h4>Create New Task</h4>
+								<label for = 'taskname'>Task Title</label>
+								<input type='text' id = 'taskname' name = 'taskname' placeholder='New Task name'>
+								<label for = 'taskDescription'>Description</label>
+								<textarea type='text' id = 'taskDescription' name='taskDescription' placeholder='Describe the task'></textarea>
+								<button type='submit'>Save</button>
+								<button>Cancel</button>
+							</form>
+						</li>
+					</ul>
 				</div>
 				<div id = 'progressbox'>
 				</div>
 				<div id = 'timelinebox'>
+				</div>
+				<div id = 'contributorsbox'>
 				</div>
 			</div>
 			<div id = 'board'>

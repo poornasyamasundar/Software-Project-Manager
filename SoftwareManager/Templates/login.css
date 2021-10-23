@@ -1,155 +1,92 @@
 body
 {
-	background-color: lightpink;
+	background-color: rgb(218, 194, 255);
 }
 #homeMenu
 {
 	width: 100%;
 	height: 80px;
-	background-color: lightblue;
 }
 #logo
 {
-	width: 30vw;
+	width: 400px;
 	height: 80px;
 	display: inline-block;
-	background-color: lightgreen;
+	font-family: 'Cursive', 'Lucida Handwriting';
+	background-color: white;
+	text-align: center;
+	font-size: 30px;
+	margin-top: 0px;
+	color: green;
+	border-radius: 30px;
+	font-weight: 10px;
+	box-shadow: 0px 0px 10px blue;
 }
 #goback
 {
-	width: 80px;
+	width: 120px;
 	height: 80px;
 	display: inline-block;
 	float: right;
-	background-color: red;
 }
 #help
 {
-	width: 80px;
+	width: 100px;
 	height: 80px;
 	display: inline-block;
 	float: right;
-	background-color: lightgreen;
 }
-/*#loginbox
+#helpbutton,#gobackbutton
 {
-	height: 350px;
-	width: 300px;
-	background-color: orange;
-	position: absolute;
-	top: 0;
-	bottom: 0;
-	left: 0;
-	right: 0;
+	margin-top: 16px;
+	border: 2px solid black;
+	background-color: white;
+	color: black;
+	padding: 14px 28px;
+	font-size: 16px;
+	cursor: pointer;
+	border-color: #2196F3;
+	color: dodgerblue;
+	border-radius: 30px;
+	box-shadow: 0px 0px 5px blue;
+}
+#gobackbutton:hover, #helpbutton:hover
+{
+	background: #2196F3;
+	color: white;
+}
+#logopng
+{
+	height: 80px;
+	width: 80px;
 	border-radius: 10px;
-	margin: auto;
+	margin-left: 20px;
 }
-#loginlogo
-{
-	height: 70px;
-	width: 260px;
-	background-color: lightgreen;
+.center {
 	margin: auto;
-	margin-top: 20px;
-}
-#username, #password
-{
-	height: 40px;
-	width: 260px;
-	background-color: lightgreen;
-	margin: auto;
-	margin-top: 20px;
-}
-#login
-{
-	height: 30px;
-	width: 120px;
-	background-color: lightgreen;
-	display: inline-block;
 	margin-top: 50px;
-	margin-left: 20px;
-}
-#register
-{
-	position: relative;
-	height: 30px;
-	width: 120px;
-	background-color: lightgreen;
-	display: inline-block;
-	margin-left: 20px;
-} */
-
-body {
-	margin: 0;
-	padding: 0;
-	/* font-family: montserrat; */
-	font-family: 'Montserrat', sans-serif;
-	background: linear-gradient(120deg, #2980b9, #8e44ad);
-	height: 100vh;
-	overflow: hidden;
-  }
-
-  .center {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
 	width: 400px;
-	background: white;
 	border-radius: 10px;
-  }
+	background-color: white;
+	box-shadow: 0px 0px 10px blue;
+}
 
-  .center h1 {
+.center h1 {
 	text-align: center;
 	padding: 0 0 20px 0;
 	border-bottom: 1px solid silver;
-  }
+}
 
-  .center form {
+.center form {
 	padding: 0 40px;
 	box-sizing: border-box;
-  }
-
-  .pass {
-	margin: -5px 0px 20px 20px;
-	color: #6a8ff3;
-	cursor: pointer;
-	float: left;
-  }
-
-  .pass:hover {
-	color: #e42d15;
-	text-decoration: underline;
-  }
-
-  .reghere {
-	margin: -5px 20px 0px 0px;
-	color: #6a8ff3;
-	cursor: pointer;
-	float: right;
-  }
-
-  .reghere:hover {
-	color: #15e449;
-	text-decoration: underline;
-  }
-
-  /* .newuser {
-	margin: -5px 0px 20px 20px;
-	color: #6a8ff3;
-	cursor: pointer;
-	position: relative;
-  } */
-
-  
-
-  form .txt_field {
+}
+form .txt_field {
 	position: relative;
 	border-bottom: 2px solid #adadad;
 	margin: 30px 0;
-  }
-
-  .txt_field input {
+}
+.txt_field input {
 	width: 100%;
 	padding: 0 5px;
 	height: 40px;
@@ -157,19 +94,19 @@ body {
 	border: none;
 	background: none;
 	outline: none;
-  }
+}
 
-  .txt_field label {
+.txt_field label {
 	position: absolute;
-	top: 50%;
 	left: 5px;
-	color: #adadad;
+	top: -5px;
+	color: #2691d9;
 	transform: translateY(-50%);
 	font-size: 16px;
 	pointer-events: none;
-  }
+}
 
-  .txt_field span::before {
+.txt_field span::before {
 	content: '';
 	position: absolute;
 	top: 40px;
@@ -178,24 +115,9 @@ body {
 	height: 2px;
 	background: #2691d9;
 	transition: .5s;
-  }
+}
 
-  .txt_field input:focus~label,
-  .txt_field input:valid~label {
-	top: -5px;
-	color: #2691d9;
-  }
-
-  .txt_field input:focus~span::before,
-  .txt_field input:valid~span::before {
-	width: 100%;
-  }
-
-  
-
-
-
-  input[type="submit"] {
+input[type="submit"], .reghere {
 	width: 100%;
 	height: 50px;
 	border: 1px solid;
@@ -206,5 +128,11 @@ body {
 	cursor: pointer;
 	outline: none;
 	margin-top: 20px;
+}
+.reghere
+{
+	margin-left: 40px;
+	margin-top: 5px;
 	margin-bottom: 40px;
-  }
+	width: 320px;
+}
