@@ -4,7 +4,7 @@ from django.db import connection
 from Databases.sample import getSampleData
 from Databases.create import isUser, isTrueCredentials, insertUser
 from Databases.creation import getDetails, insertDetails, updateDetails
-from Databases.meetings_table import createTable, specificMeetings, allMeetings, deleteMeetings, modifyMeeting, insertMeeting
+from Databases.meetings_table import createTable, specificMeetings, allMeetings, deleteMeetings, modifyMeeting, insertMeeting, getMeetings
 from Databases.tasks_table import create_taskTable, specificTasks, allTasks, deleteTask, modifyTask, insertTask, getTasks
 from Databases.feedback import insertFeedback, deleteFeedback, modifyFeedback, allFeedback, getComments
 from Databases.projects_table import create_projecttable, insertProject, modifyProject, deleteProject, allProjects, specificProjects
@@ -60,6 +60,18 @@ def to_getCommentsPy(request):
     if request.method == 'POST':
         number = request.POST['number']
         result = getComments(number)
+        #print(result)
+        return HttpResponse(json.dumps(result))
+
+@csrf_exempt
+def to_getMeetingsPy(request):
+    #print(request.method)
+    #print(request.POST)
+    if request.method == 'POST':
+        table_name = request.POST['table_name']
+        number = request.POST['number']
+        date = request.POST['date']
+        result = getMeetings(table_name, number, date)
         #print(result)
         return HttpResponse(json.dumps(result))
 
