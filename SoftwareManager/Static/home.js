@@ -51,6 +51,11 @@ document.addEventListener('DOMContentLoaded', function()
 			window.location = '/newProject';
 		}
 
+		document.querySelector('.fab-options').querySelector('li').onclick = () =>
+		{
+			window.location = '/Feedback';
+		}
+
 		projectlist = document.querySelector('#projectlist').querySelector('ul').querySelectorAll('li')
 		for( var i = 0 ; i < projectlist.length ; i++ )
 		{

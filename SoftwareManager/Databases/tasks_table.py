@@ -62,10 +62,10 @@ def modifyTask(table_name, id, createdBy, taskHeading, taskDetails, createdOn, c
 
     return True
 
-def getTasks(table_name, number, type):
+def getTasks(table_name, number, type_):
     cursor = connection.cursor()
 
-    if(type==0):
+    if(type_==0):
         query = f"SELECT * FROM (SELECT * FROM {table_name} ORDER BY id DESC) AS alias WHERE completed = 0 LIMIT {number}"
     else:
         query = f"SELECT * FROM (SELECT * FROM {table_name} ORDER BY id DESC) AS alias LIMIT {number}"

@@ -140,7 +140,7 @@ body
 	font-weight: bold;
 	background-color: rgb(162, 0, 255);
 }
-#duetasks ul, #upcomingmeets ul, #notices ul, #pretasks, #sprintTasks, #premeets, #overviewbox ul, #backlogsbox ul
+#duetasks ul, #upcomingmeets ul, #notices ul, #pretasks, #sprintTasks, #premeets, #overviewbox ul, #backlogsbox ul, #contributorsbox ul
 {
 	list-style-type: none;
 	padding: 0px;
@@ -363,14 +363,15 @@ body
 #overviewbox ul
 {
 	max-height: 1000px;
+	padding: 5px;
 }
 #backlogsbox ul
 {
 	max-height: 1000px;
+	padding: 5px;
 }
 #backlogsbox ul li
 {
-	padding: 5px;
 	margin-top: 2px;
 }
 #overviewbox ul li, #backlogsbox > h4, #backlogsbox > p, #backlogsbox ul li > p
@@ -380,4 +381,38 @@ body
 	padding:5px;
 	margin-top: 5px;
 	box-shadow: 0px 0px 5px blue;
+}
+#contributorsbox ul
+{
+	max-height: 1000px;
+}
+#contributorsbox ul li
+{
+	padding: 5px;
+	margin-top: 5px;
+	border-radius: 10px;
+	background-color: rgb(232, 130, 255);
+	font-size: 20px;
+}
+#contributorsbox ul li button
+{
+	float: right;
+	padding: 2px;
+	background-color: rgb(192, 114, 247);
+	border-radius: 3px;
+	color: black;
+	font-weight: bold;
+	border-width: 0px;
+}
+#contributorsbox ul li button:hover
+{
+	background-color: rgb(144, 0, 247);
+	box-shadow: 0px 0px 5px blue;
+	color: white;
+}
+.folder:hover
+{
+	cursor: pointer;
+	box-shadow: 0px 0px 5px blue;
+	color: white;
 }

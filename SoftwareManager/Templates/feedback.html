@@ -5,11 +5,28 @@
 		
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 		<link rel = 'stylesheet' href = "{% static 'feedback.css' %}">
+		<script src = "{% static 'feedback.js' %}"></script>
         <title>
 			Feedback
 		</title>
 	</head>
 	<body>
+		<div id = 'homeMenu'>
+			<div id = 'logo'>
+				<img id = 'logopng' src = "{% static 'logo.png' %}" align= 'left'></img>
+				Software Project Manager
+			</div>
+			<div id = 'help'>
+				<button id = 'helpbutton'>
+					Help
+				</button>
+			</div>
+			<div id = 'goback'>
+				<button id ='gobackbutton'>
+					GoBack
+				</button>
+			</div>
+		</div>
 
         <p align="center" >Feedback</p>
 

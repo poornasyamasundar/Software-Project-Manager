@@ -66,6 +66,72 @@ function handleSprintTasks()
 		}
 	}
 }
+function handleBacklogTasks()
+{
+	tasks = document.querySelector('#backlogsbox').querySelector('ul').querySelectorAll('li');
+	for( i = 0 ; i < tasks.length ; i++ )
+	{
+		if( tasks[i].querySelector('form') != null )
+		{
+			tasks[i].querySelector('form').style.display = 'none';
+		}
+	}
+	for( i = 0 ; i < tasks.length ; i++ )
+	{
+		if( tasks[i].querySelector('div') != null )
+		{
+			tasks[i].querySelector('div').querySelector('#edit').onclick = (e) =>
+			{
+				var j = 0;
+				for( j = 0 ; j < tasks.length ; j++ )
+				{
+					if( tasks[j].querySelector('div') != null )
+					{
+						if( tasks[j].querySelector('div').querySelector('#edit') == e.target )
+						{
+							tasks[j].querySelector('form').style.display = 'block';
+							tasks[j].querySelector('div').style.display = 'none';
+						}
+					}
+				}
+			}
+		}
+	}
+}
+function to_getTasks(table_name, number, type_)
+{
+	//	console.log($('input[name=csrfmiddlewaretoken').val());
+	var result;
+	$.ajax(
+		{
+			type: "POST",
+			url: "to_getTasksPy",
+			data: {
+				table_name: table_name,
+				number: number,
+				type_: 0,
+				//csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken').val(),
+				//csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken').val()
+			},
+			success: function(data){
+				//console.log(data);
+				result = JSON.parse(data);
+				console.log(result);
+			}
+		}
+	)
+}
+
+function reloadNoticeTasks()
+{
+	document.querySelector('#duetasks').querySelector('ul').innerHTML = '';
+	let result;
+	to_getTasks('tasks', 5, 0);
+	/*
+	to_getTasks('tasks', 5, 0).then( function(value) {
+		console.log(value)});
+		*/
+}
 
 document.addEventListener('DOMContentLoaded', function() 
 	{
@@ -150,5 +216,11 @@ document.addEventListener('DOMContentLoaded', function()
 		}
 		handleScrumTasksAndMeets();
 		handleSprintTasks();
+		handleBacklogTasks();
+		reloadNoticeTasks();
+		document.querySelector('#gobackbutton').onclick = () =>
+		{
+			window.location = '/';
+		}
 		document.querySelector('#projectname').innerHTML = localStorage.getItem('Project');
 	});

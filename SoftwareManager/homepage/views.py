@@ -32,8 +32,8 @@ def to_getTasksPy(request):
     if request.method == 'POST':
         table_name = request.POST['table_name']
         number = request.POST['number']
-        type = request.POST['type_']
-        result = getTasks(table_name, number , type)
+        type_ = request.POST['type_']
+        result = getTasks(table_name, number , type_)
         #print(result)
         return HttpResponse(json.dumps(result))
 

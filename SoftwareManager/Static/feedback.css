@@ -1,7 +1,68 @@
-body {font-family: Arial, Helvetica, sans-serif;
-    background-color: #4BDBC3;
-    background-image: -webkit-linear-gradient(65deg, #6fdaab  50%,  #bd88f8 50%); 
-    min-height: 1000px;
+body 
+{
+	background-color: rgb(218, 194, 255);
+	min-height: 1000px;
+	margin: 8px;
+}
+#homeMenu
+{
+	width: 100%;
+	height: 80px;
+}
+#logo
+{
+	width: 400px;
+	height: 80px;
+	display: inline-block;
+	font-family: 'Cursive', 'Lucida Handwriting';
+	background-color: white;
+	text-align: center;
+	font-size: 30px;
+	margin-top: 0px;
+	color: green;
+	border-radius: 30px;
+	font-weight: 10px;
+	box-shadow: 0px 0px 10px blue;
+}
+#goback
+{
+	width: 120px;
+	height: 80px;
+	display: inline-block;
+	float: right;
+}
+#help
+{
+	width: 100px;
+	height: 80px;
+	display: inline-block;
+	float: right;
+}
+#helpbutton,#gobackbutton
+{
+	margin-top: 16px;
+	border: 2px solid black;
+	background-color: white;
+	color: black;
+	padding: 14px 28px;
+	font-size: 16px;
+	cursor: pointer;
+	border-color: #2196F3;
+	color: dodgerblue;
+	border-radius: 30px;
+	box-shadow: 0px 0px 5px blue;
+}
+#gobackbutton:hover, #helpbutton:hover
+{
+	background: #2196F3;
+	color: white;
+}
+#logopng
+{
+	height: 80px;
+	width: 80px;
+	border-radius: 10px;
+	margin-left: 20px;
 }
 #ui {
 	/* background-color: #333; */
@@ -10,88 +71,88 @@ body {font-family: Arial, Helvetica, sans-serif;
 	border-radius: 10px;
 	opacity: 0.9;
 	font-weight: bold;
-    font-size: 17px;
-  }
+	font-size: 17px;
+}
 
 * {box-sizing: border-box;}
 
 input[type=text], select, textarea {
-  width: 100%;
-  padding: 12px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-  margin-top: 6px;
-  margin-bottom: 16px;
-  resize: vertical;
+	width: 100%;
+	padding: 12px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	box-sizing: border-box;
+	margin-top: 6px;
+	margin-bottom: 16px;
+	resize: vertical;
 }
 
 input[type=submit] {
-  background-color: #04AA6D;
-  color: white;
-  padding: 12px 20px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+	background-color: #04AA6D;
+	color: white;
+	padding: 12px 20px;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
 }
 
 input[type=submit]:hover {
-  background-color: #45a049;
+	background-color: #45a049;
 }
 
 .container {
-  border-radius: 5px;
-  background-color: #f2f2f2;
-  padding: 20px;
-  margin-top: 10px;
+	border-radius: 5px;
+	background-color: #f2f2f2;
+	padding: 20px;
+	margin-top: 10px;
 }
 
 .submit_button{
-    text-align: center;
+	text-align: center;
 }
 
 
 *{
-    margin: 0;
-    padding: 0px;
+	margin: 0;
+	padding: 0px;
 }
 .rate {
-    float: left;
-    height: 46px;
-    padding: 0 10px;
+	float: left;
+	height: 46px;
+	padding: 0 10px;
 }
 .rate:not(:checked) > input {
-    position:absolute;
-    top:-9999px;
+	position:absolute;
+	top:-9999px;
 }
 .rate:not(:checked) > label {
-    float:right;
-    width:1em;
-    overflow:hidden;
-    white-space:nowrap;
-    cursor:pointer;
-    font-size:30px;
-    color:#ccc;
+	float:right;
+	width:1em;
+	overflow:hidden;
+	white-space:nowrap;
+	cursor:pointer;
+	font-size:30px;
+	color:#ccc;
 }
 .rate:not(:checked) > label:before {
-    content: '★ ';
+	content: '★ ';
 }
 .rate > input:checked ~ label {
-    color: #ffc700;    
+	color: #ffc700;    
 }
 .rate:not(:checked) > label:hover,
 .rate:not(:checked) > label:hover ~ label {
-    color: #deb217;  
+	color: #deb217;  
 }
 .rate > input:checked + label:hover,
 .rate > input:checked + label:hover ~ label,
 .rate > input:checked ~ label:hover,
 .rate > input:checked ~ label:hover ~ label,
 .rate > label:hover ~ input:checked ~ label {
-    color: #c59b08;
+	color: #c59b08;
 }
 
 p{
-    font-family:serif; 
-    font-size: 60px;
+	font-family:serif; 
+	font-size: 60px;
 }

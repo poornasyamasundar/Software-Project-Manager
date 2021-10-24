@@ -3,6 +3,7 @@
 	<head>
 		{% load static %}
 		<link rel = 'stylesheet' href = "{% static 'project.css' %}">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 		<script src = "{% static 'project.js' %}"></script>
 		<title>
 			Project Name
@@ -69,9 +70,6 @@
 						</li>
 						<li>
 							<p class = 'id'>Sprint Number      : </p><p class = 'value'>1</p>
-						</li>
-						<li>
-							<p class = 'id'>Scrum Number       : </p><p class = 'value'>10</p>
 						</li>
 						<li>
 							<p class = 'id'>Scrum Number       : </p><p class = 'value'>10</p>
@@ -312,7 +310,13 @@
 					<p>Path :root/</p>
 					<ul>
 						<li>
-							<p>FolderName</p>
+							<p class = 'folder'>FolderName</p>
+						</li>
+						<li>
+							<p class = 'folder'>FolderName</p>
+						</li>
+						<li>
+							<p class = 'folder'>FolderName</p>
 						</li>
 						<li>
 							<div>
@@ -333,12 +337,54 @@
 							</form>
 						</li>
 					</ul>
+					<button class = 'create'>Create a New Task</button>
+					<form id = 'createTask'>
+						<h4>Create New Task</h4>
+						<label for = 'taskname'>Task Title</label>
+						<input type='text' id = 'taskname' name = 'taskname' placeholder='New Task name'>
+						<label for = 'taskDescription'>Description</label>
+						<textarea type='text' id = 'taskDescription' name='taskDescription' placeholder='Describe the task'></textarea>
+						<button type='submit'>Create</button>
+					</form>
+					<button class = 'create'>Create a New Folder</button>
+					<form id = 'createTask'>
+						<h4>Create New Folder</h4>
+						<label for = 'taskname'>FolderName</label>
+						<input type='text' id = 'taskname' name = 'taskname' placeholder='New Folder name'>
+						<button type='submit'>Create</button>
+					</form>
 				</div>
 				<div id = 'progressbox'>
 				</div>
 				<div id = 'timelinebox'>
 				</div>
 				<div id = 'contributorsbox'>
+					<h4 class = 'title'>List of Contributors</h4>
+					<ul>
+						<li>
+							Nitesh
+							<button>Remove</button>
+						</li>
+						<li>
+							Vaibhav
+							<button>Remove</button>
+						</li>
+						<li>
+							Yashwanth
+							<button>Remove</button>
+						</li>
+						<li>
+							Poorna
+							<button>Remove</button>
+						</li>
+					</ul>
+					<button class = 'create'>Add a New Contributor</button>
+					<form id = 'createTask'>
+						<h4>Add New Contributor</h4>
+						<label for = 'taskname'>Username</label>
+						<input type='text' id = 'taskname' name = 'taskname' placeholder='Username'>
+						<button type='submit'>Add</button>
+					</form>
 				</div>
 			</div>
 			<div id = 'board'>
