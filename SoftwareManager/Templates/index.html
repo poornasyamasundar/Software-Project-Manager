@@ -15,36 +15,6 @@ div{
 </style>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 	<script>
-
-		function to_getTasks(table_name, number, type_)
-		{
-			var result;
-		//	console.log($('input[name=csrfmiddlewaretoken').val());
-			$.ajax(
-				{
-					type: "POST",
-					url: "to_getTasksPy",
-					data: {
-						table_name: table_name,
-						number: number,
-						type_: type_,
-						//csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken').val(),
-						//csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken').val()
-					},
-					success: function(data){
-						//console.log(data);
-						result = JSON.parse(data);
-						console.log(typeof data);
-						console.log(typeof result);
-
-						console.log(result);
-					}
-				}
-			)
-
-			return result;
-		}
-
 		function DisplayingTasks(Objectarray)
 		{
 			var str="";

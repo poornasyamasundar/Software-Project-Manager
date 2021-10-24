@@ -4,11 +4,12 @@ from django.db import connection
 from Databases.sample import getSampleData
 from Databases.create import isUser, isTrueCredentials, insertUser
 from Databases.creation import getDetails, insertDetails, updateDetails
-from Databases.meetings_table import createTable, specificMeetings, allMeetings, deleteMeetings, modifyMeeting, insertMeeting
+from Databases.meetings_table import createTable, specificMeetings, allMeetings, deleteMeetings, modifyMeeting, insertMeeting, getLatestMeetings
 from Databases.tasks_table import create_taskTable, specificTasks, allTasks, deleteTask, modifyTask, insertTask, getTasks
 from Databases.feedback import insertFeedback, deleteFeedback, modifyFeedback, allFeedback, getComments
 from Databases.projects_table import create_projecttable, insertProject, modifyProject, deleteProject, allProjects, specificProjects
 from Databases.notices_table import create_noticeTable, insertNotice, modifyNotice, deleteNotice, specificNotices, getNotices
+from Databases.product_backlog_table import create_taskTable, allTasks, insert, delete, modifyTask, getBacklogs 
 import json
 from django.views.decorators.csrf import csrf_exempt
 import datetime
@@ -27,14 +28,27 @@ def index_(request):
 
 @csrf_exempt
 def to_getTasksPy(request):
-    #print(request.method)
-    #print(request.POST)
     if request.method == 'POST':
         table_name = request.POST['table_name']
         number = request.POST['number']
         type_ = request.POST['type_']
         result = getTasks(table_name, number , type_)
-        #print(result)
+        return HttpResponse(json.dumps(result))
+
+@csrf_exempt
+def to_getBacklogsPy(request):
+    if request.method == 'POST':
+        table_name = request.POST['table_name']
+        foldername = request.POST['foldername']
+        result = getBacklogs(table_name, foldername)
+        return HttpResponse(json.dumps(result))
+
+@csrf_exempt
+def to_getMeetsPy(request):
+    if request.method == 'POST':
+        table_name = request.POST['table_name']
+        number = request.POST['number']
+        result = getLatestMeetings(table_name, number)
         return HttpResponse(json.dumps(result))
 
 @csrf_exempt
@@ -61,24 +75,26 @@ def to_getCommentsPy(request):
 @csrf_exempt
 def meetingFunctionPy(request):
     if request.method == 'POST':
-
+        print(request.POST)
         table_name = request.POST['table_name']
-        type = request.POST['type_']
-        id = request.POST['id']
+        type_ = request.POST['type_']
+        i = request.POST['id']
         createdBy = request.POST['createdBy']
         meetingLink = request.POST['meetingLink']
         createdOn = request.POST['createdOn']
+        meetingDate = request.POST['meetingDate']
+        meetingTime = request.POST['meetingTime']
         purpose = request.POST['purpose']
 
         date = str(datetime.datetime.today())
         date = date[0:10]
 
-        if type == '1':
-            insertMeeting(table_name, createdBy, meetingLink, date, purpose)
-        elif type == '2':
-            modifyMeeting(table_name, id, createdBy, meetingLink, createdOn, purpose)
-        elif type == '3':
-            deleteMeetings(table_name, id)
+        if type_ == '1':
+            insertMeeting(table_name, createdBy, meetingLink, date, meetingDate, meetingTime, purpose)
+        elif type_ == '2':
+            modifyMeeting(table_name, i, createdBy, meetingLink, date, meetingDate, meetingTime, purpose)
+        elif type_ == '3':
+            deleteMeetings(table_name, i)
 
         return HttpResponse("s")
 

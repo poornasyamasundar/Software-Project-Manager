@@ -65,11 +65,13 @@ def modifyTask(table_name, id, createdBy, taskHeading, taskDetails, createdOn, c
 def getTasks(table_name, number, type_):
     cursor = connection.cursor()
 
-    if(type_==0):
-        query = f"SELECT * FROM (SELECT * FROM {table_name} ORDER BY id DESC) AS alias WHERE completed = 0 LIMIT {number}"
+    if( int(number) == -1 ):
+        return allTasks(table_name)
+    type_ = int(type_)
+    if type_ == 1:
+        query = f"SELECT * FROM (SELECT * FROM {table_name} ORDER BY id DESC) AS alias WHERE completed = 1 LIMIT {number}"
     else:
         query = f"SELECT * FROM (SELECT * FROM {table_name} ORDER BY id DESC) AS alias LIMIT {number}"
-    #query = f"SELECT * FROM (SELECT * FROM {table_name} ORDER BY id DESC) AS alias LIMIT {number}"
     cursor.execute(query)
     result = cursor.fetchall()
     keys = ("id", "createdBy", "taskHeading", "taskDetails", "createdOn", "completed", "deadline")

@@ -1,3 +1,54 @@
+function meetingFunction(table_name, type_, id, createdBy, meetingLink, createdOn, meetingDate, meetingTime, purpose)
+{
+	$.ajax(
+		{
+			type: "POST",
+			url: "meetingFunctionPy",
+			data: {
+				table_name: table_name,
+				type_: type_,
+				id: id,
+				createdBy: createdBy,
+				meetingLink: meetingLink,
+				createdOn: createdOn,
+				meetingDate: meetingDate, 
+				meetingTime: meetingTime,
+				purpose: purpose,
+			},
+			success: function(data){
+				console.log(data);
+				reloadScrumMeetings();
+				document.querySelector('#createmeet').reset();
+			}
+		}
+	)
+}
+function taskFunction(table_name, type_, id, createdBy, taskHeading, taskDetails, createdOn, completed, deadline)
+{
+	$.ajax(
+		{
+			type: "POST",
+			url: "taskFunctionPy",
+			data: {
+				table_name: table_name,
+				type_: type_,
+				id: id, createdBy: createdBy, taskHeading: taskHeading, taskDetails: taskDetails,
+				createdOn: createdOn,
+				completed: completed,
+				deadline: deadline
+			},
+			success: function(data){
+				reloadNoticeTasks();
+				reloadScrumTasks();
+				reloadSprintTasks();
+				document.querySelector('#createTask').querySelector('#taskname').value = '';
+				document.querySelector('#createTask').querySelector('#taskDescription').value = '';
+				document.querySelector('#sprintbox').querySelector('#createTask').querySelector('#taskname').value = '';
+				document.querySelector('#sprintbox').querySelector('#createTask').querySelector('#taskDescription').value = '';
+			}
+		}
+	)
+}
 function handleScrumTasksAndMeets()
 {
 	scrumboxTasks = document.querySelector('#pretasks').querySelectorAll('li');
@@ -19,6 +70,54 @@ function handleScrumTasksAndMeets()
 				}
 			}
 		}
+		scrumboxTasks[i].querySelector('div').querySelector('#delete').onclick = (e) =>
+		{
+			var j = 0;
+			for( j = 0 ; j < scrumboxTasks.length ; j++ )
+			{
+				if( scrumboxTasks[j].querySelector('div').querySelector('#delete') == e.target )
+				{
+					e.preventDefault();
+					taskFunction('tasks', 3, scrumboxTasks[j].id, localStorage.getItem('Username'), '', '','', 0, 0);
+				}
+			}
+		}
+		scrumboxTasks[i].querySelector('form').querySelector('#save').onclick = (e) =>
+		{
+			e.preventDefault();
+			var j = 0;
+			for( j = 0 ; j < scrumboxTasks.length ; j++ )
+			{
+				if( scrumboxTasks[j].querySelector('form').querySelector('#save') == e.target )
+				{
+					var b;
+					if( scrumboxTasks[j].querySelector('#taskcompleted').checked == true )
+					{
+						b = 1;
+					}
+					else
+					{
+						b = 0;
+					}
+					taskFunction('tasks', 2, scrumboxTasks[j].id, localStorage.getItem('Username'), scrumboxTasks[j].querySelector('#taskname').value, scrumboxTasks[j].querySelector('#taskDescription').value,'', b, 0);
+				}
+			}
+		}
+		scrumboxTasks[i].querySelector('form').querySelector('#cancel').onclick = (e) =>
+		{
+			e.preventDefault();
+			var j = 0;
+			for( j = 0 ; j < scrumboxTasks.length ; j++ )
+			{
+				if( scrumboxTasks[j].querySelector('form').querySelector('#cancel') == e.target )
+				{
+					scrumboxTasks[j].querySelector('form').reset();
+					scrumboxTasks[j].querySelector('form').style.display = 'none';
+					scrumboxTasks[j].querySelector('div').style.display = 'block';
+				}
+			}
+		}
+
 	}
 
 	scrumboxmeets = document.querySelector('#premeets').querySelectorAll('li');
@@ -40,9 +139,48 @@ function handleScrumTasksAndMeets()
 				}
 			}
 		}
+		scrumboxmeets[i].querySelector('div').querySelector('#delete').onclick = (e) =>
+		{
+			var j = 0;
+			for( j = 0 ; j < scrumboxmeets.length ; j++ )
+			{
+				if( scrumboxmeets[j].querySelector('div').querySelector('#delete') == e.target )
+				{
+					e.preventDefault();
+					meetingFunction('newMeets', 3, scrumboxmeets[j].id, '','', '', '', '','');
+				}
+			}
+		}
+		scrumboxmeets[i].querySelector('form').querySelector('#save').onclick = (e) =>
+		{
+			e.preventDefault();
+			var j = 0;
+			for( j = 0 ; j < scrumboxmeets.length ; j++ )
+			{
+				if( scrumboxmeets[j].querySelector('form').querySelector('#save') == e.target )
+				{
+					date = scrumboxmeets[j].querySelector('#meetingdate').value;
+					date = date.substring(0, 4)+date.substring(5, 7)+date.substring(8, 10);
+					meetingFunction('newMeets', 2, scrumboxmeets[j].id, localStorage.getItem('Username'), scrumboxmeets[j].querySelector('#meetinglink').value, '', date, scrumboxmeets[j].querySelector('#meetingtime').value, scrumboxmeets[j].querySelector('#meetpurpose').value );
+				}
+			}
+		}
+		scrumboxmeets[i].querySelector('form').querySelector('#cancel').onclick = (e) =>
+		{
+			e.preventDefault();
+			var j = 0;
+			for( j = 0 ; j < scrumboxmeets.length ; j++ )
+			{
+				if( scrumboxmeets[j].querySelector('form').querySelector('#cancel') == e.target )
+				{
+					scrumboxmeets[j].querySelector('form').reset();
+					scrumboxmeets[j].querySelector('form').style.display = 'none';
+					scrumboxmeets[j].querySelector('div').style.display = 'block';
+				}
+			}
+		}
 	}
 }
-
 function handleSprintTasks()
 {
 	sprintboxTasks = document.querySelector('#sprintTasks').querySelectorAll('li');
@@ -61,6 +199,53 @@ function handleSprintTasks()
 				{
 					sprintboxTasks[j].querySelector('form').style.display = 'block';
 					sprintboxTasks[j].querySelector('div').style.display = 'none';
+				}
+			}
+		}
+		sprintboxTasks[i].querySelector('div').querySelector('#delete').onclick = (e) =>
+		{
+			var j = 0;
+			for( j = 0 ; j < sprintboxTasks.length ; j++ )
+			{
+				if( sprintboxTasks[j].querySelector('div').querySelector('#delete') == e.target )
+				{
+					e.preventDefault();
+					taskFunction('tasks', 3, sprintboxTasks[j].id, localStorage.getItem('Username'), '', '','', 0, 0);
+				}
+			}
+		}
+		sprintboxTasks[i].querySelector('form').querySelector('#save').onclick = (e) =>
+		{
+			e.preventDefault();
+			var j = 0;
+			for( j = 0 ; j < sprintboxTasks.length ; j++ )
+			{
+				if( sprintboxTasks[j].querySelector('form').querySelector('#save') == e.target )
+				{
+					var b;
+					if( sprintboxTasks[j].querySelector('#taskcompleted').checked == true )
+					{
+						b = 1;
+					}
+					else
+					{
+						b = 0;
+					}
+					taskFunction('tasks', 2, sprintboxTasks[j].id, localStorage.getItem('Username'), sprintboxTasks[j].querySelector('#taskname').value, sprintboxTasks[j].querySelector('#taskDescription').value,'', b, 0);
+				}
+			}
+		}
+		sprintboxTasks[i].querySelector('form').querySelector('#cancel').onclick = (e) =>
+		{
+			e.preventDefault();
+			var j = 0;
+			for( j = 0 ; j < sprintboxTasks.length ; j++ )
+			{
+				if( sprintboxTasks[j].querySelector('form').querySelector('#cancel') == e.target )
+				{
+					sprintboxTasks[j].querySelector('form').reset();
+					sprintboxTasks[j].querySelector('form').style.display = 'none';
+					sprintboxTasks[j].querySelector('div').style.display = 'block';
 				}
 			}
 		}
@@ -95,12 +280,245 @@ function handleBacklogTasks()
 					}
 				}
 			}
+			tasks[i].querySelector('div').querySelector('#delete').onclick = (e) =>
+			{
+				var j = 0;
+				for( j = 0 ; j < tasks.length ; j++ )
+				{
+					if( tasks[j].querySelector('div').querySelector('#delete') == e.target )
+					{
+						e.preventDefault();
+						taskFunction('backlog', 3, tasks[j].id, localStorage.getItem('Username'), '', '','', 0, 0);
+					}
+				}
+			}
+			tasks[i].querySelector('form').querySelector('#save').onclick = (e) =>
+			{
+				e.preventDefault();
+				var j = 0;
+				for( j = 0 ; j < tasks.length ; j++ )
+				{
+					if( tasks[j].querySelector('form').querySelector('#save') == e.target )
+					{
+						var b;
+						if( sprintboxTasks[j].querySelector('#taskcompleted').checked == true )
+						{
+							b = 1;
+						}
+						else
+						{
+							b = 0;
+						}
+						taskFunction('tasks', 2, sprintboxTasks[j].id, localStorage.getItem('Username'), sprintboxTasks[j].querySelector('#taskname').value, sprintboxTasks[j].querySelector('#taskDescription').value,'', b, 0);
+					}
+				}
+			}
+			sprintboxTasks[i].querySelector('form').querySelector('#cancel').onclick = (e) =>
+			{
+				e.preventDefault();
+				var j = 0;
+				for( j = 0 ; j < sprintboxTasks.length ; j++ )
+				{
+					if( sprintboxTasks[j].querySelector('form').querySelector('#cancel') == e.target )
+					{
+						sprintboxTasks[j].querySelector('form').reset();
+						sprintboxTasks[j].querySelector('form').style.display = 'none';
+						sprintboxTasks[j].querySelector('div').style.display = 'block';
+					}
+				}
+			}
+		}
+		else
+		{
+			tasks[i].querySelector('p').onclick = (e) =>
+			{
+				e.preventDefault();
+				reloadBacklogs(document.querySelector('#backlogsbox').querySelector('p').innerHTML.substring(6) + '/' + e.target.innerHTML);
+			}
 		}
 	}
 }
-function to_getTasks(table_name, number, type_)
+
+function handleMeetsNoticeViewing()
 {
-	//	console.log($('input[name=csrfmiddlewaretoken').val());
+	var meets = document.querySelector('#upcomingmeets').querySelector('ul').querySelectorAll('li');
+	var i;
+
+	console.log(meets);
+	for( i = 0 ; i < meets.length ; i++ )
+	{
+		meets[i].querySelector('div').querySelector('button').addEventListener('click', function() {
+			this.classList.toggle('mactive');
+			var content = this.nextElementSibling;
+			if( content.style.maxHeight )
+			{
+				content.style.maxHeight = null;
+			}
+			else
+			{
+				content.style.maxHeight = content.scrollHeight + 'px';
+			}
+		});
+	}
+}
+
+function handleTasksNoticeViewing()
+{
+	var i;
+	var tasks = document.querySelector('#duetasks').querySelector('ul').querySelectorAll('li');
+	console.log(tasks);
+
+	for( i = 0 ; i < tasks.length ; i++ )
+	{
+		tasks[i].querySelector('div').querySelector('button').addEventListener('click', function() {
+			this.classList.toggle('tactive');
+			var content = this.nextElementSibling;
+			if( content.style.maxHeight )
+			{
+				content.style.maxHeight = null;
+			}
+			else
+			{
+				content.style.maxHeight = content.scrollHeight + 'px';
+			}
+		});
+	}
+}
+function DisplayingMeetings(Objectarray)
+{
+	var str="";
+	for( i = 0 ; i < Objectarray.length ; i++)
+	{
+		str+="<li><div><button class = 'mhead'>";
+		date = Objectarray[i].meetingDate.toString();
+		str+="Meeting on "+Objectarray[i].meetingTime+' '+date.substring(0, 4)+'-'+ date.substring(4, 6) + '-'+date.substring(6, 8)+"</button>";
+		str+="<div><h5>";
+		str+="Created on: "+Objectarray[i].createdOn;
+		str+="</h5><h5>Created by: "+Objectarray[i].createdBy;
+		str+="</h5>Link: <a href = ";
+		str+=Objectarray[i].meetingLink+">";
+		str+=Objectarray[i].meetingLink;
+		str+="</a><br>";
+		str+="Description: "+Objectarray[i].purpose;
+		str+="</div></div></li>";
+	}
+	console.log(str);
+	return str;
+}
+
+function DisplayingTasks(Objectarray)
+{
+	console.log(Objectarray);
+	var str="";
+	for( var i = 0 ; i <  Objectarray.length ; i++ )
+	{
+		str+="<li><div><button class = 'thead'>";
+		str+=" "+Objectarray[i].taskHeading;
+		str+="</button><div><h5>";
+		str+="Created on "+Objectarray[i].createdOn+" ";
+		str+="</h5><h5>Created By "+Objectarray[i].createdBy+" ";
+		str+="</h5>";
+		str+=Objectarray[i].taskDetails;
+		str+="</div></div></li>";
+	}
+	console.log(str);
+	return str;
+}
+function DisplayingTasksEdit(Objectarray)
+{
+	var str="";
+	var i=1;
+	for( j = 0 ; j < Objectarray.length ; j++ )
+	{
+		str+="<li id = '"+Objectarray[j].id+"'><div><h5>";
+		str+=Objectarray[j].taskHeading+"</h5><h6>Status: ";
+		if(Objectarray[j].completed=='1')
+			str+="Done";
+		else
+			str+="Pending";
+		str+="</h6><h6>Created by: "+Objectarray[j].createdBy+"</h6><h6>Created on: "+Objectarray[j].createdOn+"</h6>";
+		str+="<p>Description:"+Objectarray[j].taskDetails+"</p>";
+		str+="<button id = 'delete'>Delete Task</button><button id = 'edit'>Edit Task</button></div>";
+		str+="<form class = 'edit' style ='display : none'><h4>Edit Tasks</h4><label for = 'taskname'>";
+		str+="TaskTitle</label><input type = 'text' id = 'taskname' name = 'taskname' placeholder = 'Task Name' value = '"+Objectarray[j].taskHeading+"'>";
+		str+="<label for = 'taskcompleted'>Task Completed or Not</label>";
+		str+="<input type = 'checkbox' id = 'taskcompleted' ";
+		if( Objectarray[j].completed == '1' )
+		{
+			str+="checked";
+		}
+		str+="><label for = 'taskDescription'>Description</label>";
+		str+="<textarea type = 'text' id = 'taskDescription' name = 'taskDescription' placeholder = 'Describe the Task'>"+Objectarray[j].taskDetails+"</textarea>";
+		str+="<button id = 'save' type= 'button'>Save</button><button id = 'cancel' type = 'button'>Cancel</button>"
+		str+="</form></li>";
+		i++;
+	}
+	console.log(str);
+	return str;
+}
+function DisplayingMeetingsEdit(Objectarray)
+{
+	var str="";
+	for(i = 0 ; i < Objectarray.length ; i++ )
+	{
+		str+="<li id = "+Objectarray[i].id+"><div><h5>";
+		date = Objectarray[i].meetingDate.toString();
+		str+="Meeting on "+Objectarray[i].meetingTime+' '+date.substring(0, 4)+'-'+ date.substring(4, 6) + '-'+date.substring(6, 8)+"</h5>";
+		str+="<h5>Created on: "+Objectarray[i].createdOn;
+		str+="</h5><h5>Created by: "+Objectarray[i].createdBy;
+		str+="</h5>Link: <a href = ";
+		str+=Objectarray[i].meetingLink+">";
+		str+=Objectarray[i].meetingLink;
+		str+="</a><br>";
+		str+="Description: "+Objectarray[i].purpose;
+		str+="<br><button id = 'delete'>Delete Meet</button><button id = 'edit'>Edit Meet</button></div>";
+		str+="<form class = 'edit'>";
+		str+=	"<h4>Edit Meeting</h4>";
+		str+=	"<label for = 'meetingtopic'>Time</label>";
+		str+=	"<input type = 'text' id = 'meetingtime' name = 'meetingtime' placeholder = 'Meeting Time' value = '"+Objectarray[i].meetingTime+"'>";
+		str+=	"<label for = 'meetingdate'>Date</label>";
+		str+= 	"<input type = 'text' id = 'meetingdate' name = 'meetingdate' placeholder = 'Meeting Date' value = '"+date.substring(0, 4)+'-'+ date.substring(4, 6) + '-'+date.substring(6, 8)+"'>";
+		str+= 	"<label for = 'meetinglink'>Link</label>";
+		str+= 	"<input type = 'text' id = 'meetinglink' name = 'meetinglink' placeholde = 'Link for the Meeting' value = '"+Objectarray[i].meetingLink+"'>";
+		str+=	"<label for = 'meetpurpose'>Purpose</label>"
+		str+= 	"<textarea type = 'text' id = 'meetpurpose' name = 'meetpurpose' placeholder = 'Describe the Purpose'>"+Objectarray[i].purpose+"</textarea>";
+		str+=	"<button id = 'save' type= 'button'>Save</button><button id = 'cancel' type = 'button'>Cancel</button>"
+		str+="</form></li>";
+	}
+	return str;
+}
+
+function Display_ProductBacklogs( Objectarray )
+{
+	var str = '';
+	for( i = 0 ; i < Objectarray.length ; i++ )
+	{
+		if( Objectarray[i].type == '0' )
+		{
+			str += "<li id = "+Objectarray[i].id+">";
+			str += "<p class = 'folder'>"+Objectarray[i].foldername+"</p>";
+			str += "</li>";
+		}
+		else
+		{
+			str+="<li id = '"+Objectarray[i].id+"'><div><h5>";
+			str+=Objectarray[i].taskHeading+"</h5>";
+			str+="<h6>Created by: "+Objectarray[i].createdBy+"</h6>";
+			str+="<p>Description:"+Objectarray[i].taskDetails+"</p>";
+			str+="<button id = 'delete'>Delete Task</button><button id = 'edit'>Edit Task</button></div>";
+			str+="<form class = 'edit' style ='display : none'><h4>Edit Tasks</h4><label for = 'taskname'>";
+			str+="TaskTitle</label><input type = 'text' id = 'taskname' name = 'taskname' placeholder = 'Task Name' value = '"+Objectarray[i].taskHeading+"'>";
+			str+="<label for = 'taskDescription'>Description</label>";
+			str+="<textarea type = 'text' id = 'taskDescription' name = 'taskDescription' placeholder = 'Describe the Task'>"+Objectarray[i].taskDetails+"</textarea>";
+			str+="<button id = 'save' type= 'button'>Save</button><button id = 'cancel' type = 'button'>Cancel</button>"
+			str+="</form></li>";
+		}
+	}
+	return str;
+}
+
+function to_getTasks(n, table_name, number, type_)
+{
 	var result;
 	$.ajax(
 		{
@@ -109,67 +527,121 @@ function to_getTasks(table_name, number, type_)
 			data: {
 				table_name: table_name,
 				number: number,
-				type_: 0,
-				//csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken').val(),
-				//csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken').val()
+				type_: type_,
 			},
 			success: function(data){
-				//console.log(data);
 				result = JSON.parse(data);
 				console.log(result);
+				if( n == 0 )
+				{
+					document.querySelector('#duetasks').querySelector('ul').innerHTML = DisplayingTasks(result);
+					handleTasksNoticeViewing();
+				}
+				else if( n == 1 )
+				{
+					document.querySelector('#pretasks').innerHTML = DisplayingTasksEdit(result);
+					handleScrumTasksAndMeets();
+				}
+				else if( n == 2 )
+				{
+					document.querySelector('#sprintTasks').innerHTML = DisplayingTasksEdit(result);
+					handleSprintTasks();
+				}
 			}
 		}
 	)
 }
 
+function to_getMeets(n, table_name, number)
+{
+	var result;
+	$.ajax(
+		{
+			type: "POST",
+			url: "to_getMeetsPy",
+			data: {
+				table_name: table_name,
+				number: number,
+			},
+			success: function(data){
+				result = JSON.parse(data);
+				console.log(result);
+				if( n == 0 )
+				{
+					document.querySelector('#upcomingmeets').querySelector('ul').innerHTML = DisplayingMeetings(result);
+					handleMeetsNoticeViewing();
+				}
+				else if( n == 1 )
+				{
+					document.querySelector('#premeets').innerHTML = DisplayingMeetingsEdit(result);
+					handleScrumTasksAndMeets();
+				}
+			}
+		}
+	)
+}
+
+function to_getBacklogs(table_name, foldername)
+{
+	$.ajax(
+		{
+			type: 'POST',
+			url: 'to_getBacklogsPy',
+			data:
+			{
+				foldername: foldername,
+				table_name: table_name,
+			},
+			success: function(data)
+			{
+				result = JSON.parse(data);
+				console.log(result);
+				console.log(Display_ProductBacklogs( result ));
+				document.querySelector('#backlogsbox').querySelector('ul').innerHTML = Display_ProductBacklogs( result );
+				handleBacklogTasks()
+			}
+		}
+	)
+}
+
+function reloadBacklogs(foldername)
+{
+	document.querySelector('#backlogsbox').querySelector('p').innerHTML = 'Path :'+foldername;
+	document.querySelector('#backlogsbox').querySelector('ul').innerHTML = '';
+	to_getBacklogs('backlog', foldername);
+}
+
 function reloadNoticeTasks()
 {
 	document.querySelector('#duetasks').querySelector('ul').innerHTML = '';
-	let result;
-	to_getTasks('tasks', 5, 0);
-	/*
-	to_getTasks('tasks', 5, 0).then( function(value) {
-		console.log(value)});
-		*/
+	to_getTasks(0,'tasks', 5, 1);
 }
 
+function reloadNoticeMeets()
+{
+	document.querySelector('#upcomingmeets').querySelector('ul').innerHTML = '';
+	to_getMeets(0, 'newMeets', 5);
+}
+
+function reloadScrumTasks()
+{
+	document.querySelector('#pretasks').innerHTML = '';
+	to_getTasks(1,'tasks', -1, 0);
+}
+
+function reloadScrumMeetings()
+{
+	document.querySelector('#premeets').innerHTML = '';
+	to_getMeets(1, 'newMeets', 5);
+}
+
+function reloadSprintTasks()
+{
+	document.querySelector('#sprintTasks').innerHTML = '';
+	to_getTasks(2, 'tasks', -1, 0);
+}
 document.addEventListener('DOMContentLoaded', function() 
 	{
-		var meets = document.querySelector('#upcomingmeets').querySelector('ul').querySelectorAll('li');
-		var i;
-
-		for( i = 0 ; i < meets.length ; i++ )
-		{
-			meets[i].querySelector('div').querySelector('button').addEventListener('click', function() {
-				this.classList.toggle('mactive');
-				var content = this.nextElementSibling;
-				if( content.style.maxHeight )
-				{
-					content.style.maxHeight = null;
-				}
-				else
-				{
-					content.style.maxHeight = content.scrollHeight + 'px';
-				}
-			});
-		}
-		var tasks = document.querySelector('#duetasks').querySelector('ul').querySelectorAll('li');
-
-		for( i = 0 ; i < tasks.length ; i++ )
-		{
-			tasks[i].querySelector('div').querySelector('button').addEventListener('click', function() {
-				this.classList.toggle('tactive');
-				var content = this.nextElementSibling;
-				if( content.style.maxHeight )
-				{
-					content.style.maxHeight = null;
-				}
-				else
-				{
-					content.style.maxHeight = content.scrollHeight + 'px';
-				}
-			});
-		}
 		create = document.querySelectorAll('.create');
 		for( i = 0 ; i < create.length ; i++ )
 		{
@@ -188,6 +660,27 @@ document.addEventListener('DOMContentLoaded', function()
 				}
 			});
 		}
+
+		document.querySelector('#createTask').querySelector('button').onclick = (e) =>
+		{
+			e.preventDefault();
+			taskFunction('tasks', 1, 1, localStorage.getItem('Username'), document.querySelector('#createTask').querySelector('#taskname').value, document.querySelector('#createTask').querySelector('#taskDescription').value,'', 0, 0);
+		}
+
+		document.querySelector('#sprintbox').querySelector('#createTask').querySelector('button').onclick = (e) =>
+		{
+			e.preventDefault();
+			taskFunction('tasks', 1, 1, localStorage.getItem('Username'), document.querySelector('#sprintbox').querySelector('#createTask').querySelector('#taskname').value, document.querySelector('#sprintbox').querySelector('#createTask').querySelector('#taskDescription').value,'', 0, 0);
+		}
+
+		document.querySelector('#createmeet').querySelector('button').onclick = (e) =>
+		{
+			e.preventDefault();
+			date = document.querySelector('#createmeet').querySelector('#meetingDate').value;
+			date = date.substring(0, 4)+date.substring(5, 7)+date.substring(8, 10);
+			meetingFunction('newMeets', 1, 1, localStorage.getItem('Username'), document.querySelector('#createmeet').querySelector('#meetinglink').value, '', date, document.querySelector('#createmeet').querySelector('#meetingtime').value, document.querySelector('#createmeet').querySelector('#meetDescription').value );
+		}
+
 		options = document.querySelector('#options').querySelectorAll('button');
 		display = document.querySelector('#display').children;
 
@@ -214,10 +707,12 @@ document.addEventListener('DOMContentLoaded', function()
 				}
 			}
 		}
-		handleScrumTasksAndMeets();
-		handleSprintTasks();
-		handleBacklogTasks();
 		reloadNoticeTasks();
+		reloadNoticeMeets();
+		reloadScrumTasks();
+		reloadScrumMeetings()
+		reloadSprintTasks();
+		reloadBacklogs('/root');
 		document.querySelector('#gobackbutton').onclick = () =>
 		{
 			window.location = '/';
