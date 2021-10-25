@@ -4,6 +4,7 @@
 		{% load static %}
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 		<link rel = 'stylesheet' href = "{% static 'newProject.css' %}">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 		<script src = "{% static 'newProject.js' %}"></script>
 		<title>
 			New Project
@@ -39,7 +40,7 @@
 					<div class="row">
 					  <div >
 						<label for="" align="left"><h4>Name of the Project</h4> </label>
-						<input type="text" name="name" class="form-control" placeholder="Enter Name">
+						<input type="text" name="name" class="form-control" id = 'name' placeholder="Enter Name">
 					  </div>
 					  
 					</div>
@@ -57,11 +58,11 @@
 					<label><h4>Contributors Names</h4></label>
 					<input type="text" name="contributors" class="form-control" placeholder="Enter Contributors Names">
 					<br>
-					<label><h4>GitHub Repository link</h4></label>
-					<input type="text" name="repo" class="form-control" placeholder="Enter GitHub Repository link">
+					<label><h4>Description</h4></label>
+					<input type="text" name="repo" class="form-control" id = 'des' placeholder="Description for the project">
 					<br>
 					<br>
-					<input type="submit" name="submit" value="Create" class="btn btn-primary btn-lg">
+					<input id = 'save' type="submit" name="submit" value="Create" class="btn btn-primary btn-lg">
 				  </form>
 				</div>
 			  </div>

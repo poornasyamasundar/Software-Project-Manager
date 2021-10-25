@@ -77,11 +77,11 @@ WSGI_APPLICATION = 'SoftwareManager.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'SoftwareManager',
+        'NAME': 'database',
         'USER': 'admin',
-        'PASSWORD': '27Syu9zD',
-        'HOST': 'mysql-54487-0.cloudclusters.net',
-        'PORT': '18193',
+        'PASSWORD': 'ECBbQcgY',
+        'HOST': 'mysql-55624-0.cloudclusters.net',
+        'PORT': '18211',
     }
 }
 

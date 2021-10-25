@@ -8,14 +8,16 @@ urlpatterns = [
         path('to_getTasksPy', views.to_getTasksPy, name = 'to_getTasksPy'),
         path('to_getMeetsPy', views.to_getMeetsPy, name = 'to_getMeetsPy'),
         path('to_getNoticesPy', views.to_getNoticesPy, name = 'to_getNoticesPy'),
+        path('backlogFunctionPy',  views.backlogFunctionPy, name = 'backlogFunctionPy'),
+        path('getProjectsPy', views.getProjectsPy, name = 'getProjectsPy'),
         path('to_getBacklogsPy', views.to_getBacklogsPy, name = 'to_getBacklogsPy'),
         path('to_getCommentsPy', views.to_getCommentsPy, name = 'to_getCommentsPy'),
         path('meetingFunctionPy', views.meetingFunctionPy, name = 'meetingFunctionPy'),
         path('taskFunctionPy', views.taskFunctionPy, name = 'taskFunctionPy'),
         path('noticeFunctionPy', views.noticeFunctionPy, name = 'noticeFunctionPy'),
-        path('isUser', views.isUser, name = 'isUser'),
+	path('isUser', views.isUser, name = 'isUser'),
         path('isTrueCredentials', views.isTrueCredentials, name = 'isTrueCredentials'),
         path('insertUser', views.insertUser , name = 'insertUser'),
+        path('insertComment', views.insertComment, name = 'insertComment'),
         path('insertProject', views.insertProject , name = 'insertProject'),
-
 ]

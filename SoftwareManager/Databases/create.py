@@ -10,7 +10,7 @@ def isUser(user_name):
         return False
     return True
 
-def isTrueCredentials(user_name, user_password):
+def isTrueCredentialscorrect(user_name, user_password):
     cursor = connection.cursor()
     query = "SELECT username FROM Users WHERE EXISTS(SELECT username,pass FROM Users WHERE username = %s AND pass = %s)"
     cursor.execute(query,(user_name,user_password,))
@@ -20,7 +20,7 @@ def isTrueCredentials(user_name, user_password):
         return False
     return True
 
-def insertUser(user_name, user_password):
+def insertUserIntoTable(user_name, user_password):
     if(isUser(user_name)):
         return False
 

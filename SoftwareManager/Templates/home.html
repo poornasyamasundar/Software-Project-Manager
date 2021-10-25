@@ -4,6 +4,7 @@
 		{% load static %}
 		<title>Software Project Mananger</title>
 		<link rel = 'stylesheet' href = "{% static 'home.css' %}">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 		<script src = "{% static 'home.js' %}"></script>
 	</head>
 	<body>
@@ -84,13 +85,6 @@
 				<button id = 'newProject'>Create a New Project</button>
 			</div>
 			<ul>
-				<li class = 'projects'>
-					<img src = "{% static 'projectThemes/img1.png' %}">
-					<h1>Project 1</h1>
-					<p class = 'author'>Author</p>
-					<p class = 'description'>Descriptionodfaosihfoiasjf ;sif pthis is a demo project with a description</p>
-					<p class = 'viewbutton'><button>View Project</button></p>
-				</li>
 			</ul>
 		</div>
 		<div id = 'comments'>
@@ -98,13 +92,6 @@
 				Comments
 			</div>
 			<ul>
-				<li>
-					<div>
-						<h6>Comment by comment on</h6>
-						<p>Comment</p>
-
-					</div>
-				</li>
 			</ul>
 		</div>
 	</body>

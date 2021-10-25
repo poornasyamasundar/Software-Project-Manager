@@ -18,6 +18,7 @@ function meetingFunction(table_name, type_, id, createdBy, meetingLink, createdO
 			success: function(data){
 				console.log(data);
 				reloadScrumMeetings();
+				reloadNoticeMeets()
 				document.querySelector('#createmeet').reset();
 			}
 		}
@@ -49,6 +50,33 @@ function taskFunction(table_name, type_, id, createdBy, taskHeading, taskDetails
 		}
 	)
 }
+function backlogFunction(table_name, mode, id, createdBy, dateposted, foldername, par, taskDetails, taskHeading, type )
+{
+	$.ajax(
+		{
+			type: 'POST',
+			url: 'backlogFunctionPy',
+			data:{
+				table_name: table_name,
+				mode: mode,
+				id: id, 
+				createdBy: createdBy,
+				dateposted: dateposted,
+				foldername: foldername,
+				par: par,
+				taskDetails: taskDetails,
+				taskHeading: taskHeading,
+				type: type,
+			},
+			success: function(data){
+				reloadBacklogs(par);
+				document.querySelector('.createBacklog').reset();
+				document.querySelector('.createfolder').reset();
+			}
+		}
+	)
+}
+
 function handleScrumTasksAndMeets()
 {
 	scrumboxTasks = document.querySelector('#pretasks').querySelectorAll('li');
@@ -78,7 +106,7 @@ function handleScrumTasksAndMeets()
 				if( scrumboxTasks[j].querySelector('div').querySelector('#delete') == e.target )
 				{
 					e.preventDefault();
-					taskFunction('tasks', 3, scrumboxTasks[j].id, localStorage.getItem('Username'), '', '','', 0, 0);
+					taskFunction(localStorage.getItem('Username')+localStorage.getItem('Project')+localStorage.getItem('currentScrum')+'tasks', 3, scrumboxTasks[j].id, localStorage.getItem('Username'), '', '','', 0, 0);
 				}
 			}
 		}
@@ -99,7 +127,7 @@ function handleScrumTasksAndMeets()
 					{
 						b = 0;
 					}
-					taskFunction('tasks', 2, scrumboxTasks[j].id, localStorage.getItem('Username'), scrumboxTasks[j].querySelector('#taskname').value, scrumboxTasks[j].querySelector('#taskDescription').value,'', b, 0);
+					taskFunction(localStorage.getItem('Username')+localStorage.getItem('Project')+localStorage.getItem('currentScrum')+'tasks', 2, scrumboxTasks[j].id, localStorage.getItem('Username'), scrumboxTasks[j].querySelector('#taskname').value, scrumboxTasks[j].querySelector('#taskDescription').value,'', b, 0);
 				}
 			}
 		}
@@ -147,7 +175,7 @@ function handleScrumTasksAndMeets()
 				if( scrumboxmeets[j].querySelector('div').querySelector('#delete') == e.target )
 				{
 					e.preventDefault();
-					meetingFunction('newMeets', 3, scrumboxmeets[j].id, '','', '', '', '','');
+					meetingFunction(localStorage.getItem('Username')+localStorage.getItem('Project')+localStorage.getItem('currentScrum')+'meets', 3, scrumboxmeets[j].id, '','', '', '', '','');
 				}
 			}
 		}
@@ -161,7 +189,7 @@ function handleScrumTasksAndMeets()
 				{
 					date = scrumboxmeets[j].querySelector('#meetingdate').value;
 					date = date.substring(0, 4)+date.substring(5, 7)+date.substring(8, 10);
-					meetingFunction('newMeets', 2, scrumboxmeets[j].id, localStorage.getItem('Username'), scrumboxmeets[j].querySelector('#meetinglink').value, '', date, scrumboxmeets[j].querySelector('#meetingtime').value, scrumboxmeets[j].querySelector('#meetpurpose').value );
+					meetingFunction(localStorage.getItem('Username')+localStorage.getItem('Project')+localStorage.getItem('currentScrum')+'meets', 2, scrumboxmeets[j].id, localStorage.getItem('Username'), scrumboxmeets[j].querySelector('#meetinglink').value, '', date, scrumboxmeets[j].querySelector('#meetingtime').value, scrumboxmeets[j].querySelector('#meetpurpose').value );
 				}
 			}
 		}
@@ -210,7 +238,7 @@ function handleSprintTasks()
 				if( sprintboxTasks[j].querySelector('div').querySelector('#delete') == e.target )
 				{
 					e.preventDefault();
-					taskFunction('tasks', 3, sprintboxTasks[j].id, localStorage.getItem('Username'), '', '','', 0, 0);
+					taskFunction(localStorage.getItem('Username')+localStorage.getItem('Project')+localStorage.getItem('currentScrum')+'sprint', 3, sprintboxTasks[j].id, localStorage.getItem('Username'), '', '','', 0, 0);
 				}
 			}
 		}
@@ -231,7 +259,7 @@ function handleSprintTasks()
 					{
 						b = 0;
 					}
-					taskFunction('tasks', 2, sprintboxTasks[j].id, localStorage.getItem('Username'), sprintboxTasks[j].querySelector('#taskname').value, sprintboxTasks[j].querySelector('#taskDescription').value,'', b, 0);
+					taskFunction(localStorage.getItem('Username')+localStorage.getItem('Project')+localStorage.getItem('currentScrum')+'sprint', 2, sprintboxTasks[j].id, localStorage.getItem('Username'), sprintboxTasks[j].querySelector('#taskname').value, sprintboxTasks[j].querySelector('#taskDescription').value,'', b, 0);
 				}
 			}
 		}
@@ -265,30 +293,18 @@ function handleBacklogTasks()
 	{
 		if( tasks[i].querySelector('div') != null )
 		{
-			tasks[i].querySelector('div').querySelector('#edit').onclick = (e) =>
+			tasks[i].querySelector('div').querySelector('#delete').onclick = (e) =>
 			{
 				var j = 0;
 				for( j = 0 ; j < tasks.length ; j++ )
 				{
 					if( tasks[j].querySelector('div') != null )
 					{
-						if( tasks[j].querySelector('div').querySelector('#edit') == e.target )
+						if( tasks[j].querySelector('div').querySelector('#delete') == e.target )
 						{
-							tasks[j].querySelector('form').style.display = 'block';
-							tasks[j].querySelector('div').style.display = 'none';
+							e.preventDefault();
+							backlogFunction('backlog', 1, tasks[j].id, '', 0, '', tasks[j].value, '', '', 3);
 						}
-					}
-				}
-			}
-			tasks[i].querySelector('div').querySelector('#delete').onclick = (e) =>
-			{
-				var j = 0;
-				for( j = 0 ; j < tasks.length ; j++ )
-				{
-					if( tasks[j].querySelector('div').querySelector('#delete') == e.target )
-					{
-						e.preventDefault();
-						taskFunction('backlog', 3, tasks[j].id, localStorage.getItem('Username'), '', '','', 0, 0);
 					}
 				}
 			}
@@ -298,32 +314,29 @@ function handleBacklogTasks()
 				var j = 0;
 				for( j = 0 ; j < tasks.length ; j++ )
 				{
-					if( tasks[j].querySelector('form').querySelector('#save') == e.target )
+					if( tasks[j].querySelector('div') != null )
 					{
-						var b;
-						if( sprintboxTasks[j].querySelector('#taskcompleted').checked == true )
+						if( tasks[j].querySelector('form').querySelector('#save') == e.target )
 						{
-							b = 1;
+							backlogFunction('backlog', 1, tasks[j].id, localStorage.getItem('Username'), '',tasks[j].id, tasks[j].querySelector('#taskDescription'), tasks[j].querySelector('#taskname'), 2); 
 						}
-						else
-						{
-							b = 0;
-						}
-						taskFunction('tasks', 2, sprintboxTasks[j].id, localStorage.getItem('Username'), sprintboxTasks[j].querySelector('#taskname').value, sprintboxTasks[j].querySelector('#taskDescription').value,'', b, 0);
 					}
 				}
 			}
-			sprintboxTasks[i].querySelector('form').querySelector('#cancel').onclick = (e) =>
+			tasks[i].querySelector('form').querySelector('#cancel').onclick = (e) =>
 			{
 				e.preventDefault();
 				var j = 0;
-				for( j = 0 ; j < sprintboxTasks.length ; j++ )
+				for( j = 0 ; j < tasks.length ; j++ )
 				{
-					if( sprintboxTasks[j].querySelector('form').querySelector('#cancel') == e.target )
+					if( tasks[j].querySelector('div') != null )
 					{
-						sprintboxTasks[j].querySelector('form').reset();
-						sprintboxTasks[j].querySelector('form').style.display = 'none';
-						sprintboxTasks[j].querySelector('div').style.display = 'block';
+						if( tasks[j].querySelector('form').querySelector('#cancel') == e.target )
+						{
+							tasks[j].querySelector('form').reset();
+							tasks[j].querySelector('form').style.display = 'none';
+							tasks[j].querySelector('div').style.display = 'block';
+						}
 					}
 				}
 			}
@@ -495,13 +508,13 @@ function Display_ProductBacklogs( Objectarray )
 	{
 		if( Objectarray[i].type == '0' )
 		{
-			str += "<li id = "+Objectarray[i].id+">";
+			str += "<li id = "+Objectarray[i].id+ " value = "+Objectarray[i].parent+">";
 			str += "<p class = 'folder'>"+Objectarray[i].foldername+"</p>";
 			str += "</li>";
 		}
 		else
 		{
-			str+="<li id = '"+Objectarray[i].id+"'><div><h5>";
+			str+="<li id = '"+Objectarray[i].id+"' value = "+Objectarray[i].parent+"><div><h5>";
 			str+=Objectarray[i].taskHeading+"</h5>";
 			str+="<h6>Created by: "+Objectarray[i].createdBy+"</h6>";
 			str+="<p>Description:"+Objectarray[i].taskDetails+"</p>";
@@ -609,39 +622,126 @@ function reloadBacklogs(foldername)
 	document.querySelector('#backlogsbox').querySelector('p').innerHTML = 'Path :'+foldername;
 	document.querySelector('#backlogsbox').querySelector('ul').innerHTML = '';
 	to_getBacklogs('backlog', foldername);
+	document.querySelector('.createBacklog').parent = foldername;
 }
 
 function reloadNoticeTasks()
 {
 	document.querySelector('#duetasks').querySelector('ul').innerHTML = '';
-	to_getTasks(0,'tasks', 5, 1);
+	to_getTasks(0,localStorage.getItem('Username')+localStorage.getItem('Project')+localStorage.getItem('currentScrum')+'tasks', 5, 1);
 }
 
 function reloadNoticeMeets()
 {
 	document.querySelector('#upcomingmeets').querySelector('ul').innerHTML = '';
-	to_getMeets(0, 'newMeets', 5);
+	to_getMeets(0, localStorage.getItem('Username')+localStorage.getItem('Project')+localStorage.getItem('currentScrum')+'meets', 5);
 }
 
 function reloadScrumTasks()
 {
 	document.querySelector('#pretasks').innerHTML = '';
-	to_getTasks(1,'tasks', -1, 0);
+	to_getTasks(1,localStorage.getItem('Username')+localStorage.getItem('Project')+localStorage.getItem('currentScrum')+'tasks', -1, 0);
 }
 
 function reloadScrumMeetings()
 {
 	document.querySelector('#premeets').innerHTML = '';
-	to_getMeets(1, 'newMeets', 5);
+	to_getMeets(1, localStorage.getItem('Username')+localStorage.getItem('Project')+localStorage.getItem('currentScrum')+'meets', 5);
 }
 
 function reloadSprintTasks()
 {
 	document.querySelector('#sprintTasks').innerHTML = '';
-	to_getTasks(2, 'tasks', -1, 0);
+	to_getTasks(2,localStorage.getItem('Username')+localStorage.getItem('Project')+localStorage.getItem('currentScrum')+'sprint', -1, 0);
+}
+function modifyProjects(scrum, sprint, project)
+{
+	$.ajax(
+		{
+			type: "POST",
+			url: 'getProjectsPy',
+			data:{
+				username: localStorage.getItem('Username'),
+				currentScrum: scrum,
+				currentSprint: sprint,
+				projectName: project,
+				mode: 1,
+			},
+			success: function(data)
+			{
+			}
+		}
+	)
 }
 document.addEventListener('DOMContentLoaded', function() 
 	{
+		if( localStorage.getItem('currentScrum') == 0 )
+		{
+			console.log('empty scrum');
+			alert('A 2 day scrum is necessary to follow an agile model, start a scrum');
+			document.querySelector('#scrumbox').querySelector('#createscrum').style.display = 'block';	
+			document.querySelector('#scrumbox').querySelector('#scrum').style.display = 'none';	
+			document.querySelector('#scrumbox').querySelector('#createscrum').onclick = () =>
+			{
+				localStorage.setItem('scrumstart', new Date().getTime() + 172800000);
+				modifyProjects(parseInt(localStorage.getItem('currentScrum'))+1, localStorage.getItem('currentSprint'), localStorage.getItem('Project'));
+				localStorage.setItem('currentScrum', parseInt(localStorage.getItem('currentScrum'))+1);
+				window.location = '';
+			}
+		}
+		else
+		{
+			document.querySelector('#scrumbox').querySelector('#scrum').style.display = 'block';	
+			document.querySelector('#scrumbox').querySelector('#createscrum').style.display = 'none';
+			var x = setInterval(function() {
+
+				var now = new Date().getTime();
+
+				var distance = localStorage.getItem('scrumstart') - now;
+
+				var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+				var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+				var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+				var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+				document.querySelector('#scrumbox').querySelector('#scrum').querySelector('h3').innerHTML = days + "d " + hours + "h "+ minutes + "m " + seconds + "s ";
+
+			}, 1000);	
+		}
+		if( localStorage.getItem('currentSprint') == 0 )
+		{
+			console.log('empty sprint');
+			alert('A 30 day sprint is necessary to follow an agile model, start a sprint');
+			document.querySelector('#sprintbox').querySelector('#createsprint').style.display = 'block';	
+			document.querySelector('#sprintbox').querySelector('#sprint').style.display = 'none';	
+			document.querySelector('#sprintbox').querySelector('#createsprint').onclick = () =>
+			{
+				localStorage.setItem('sprintstart', new Date().getTime() + 2592000000);
+				modifyProjects(parseInt(localStorage.getItem('currentScrum')), parseInt(localStorage.getItem('currentSprint'))+1, localStorage.getItem('Project'));
+				localStorage.setItem('currentSprint', parseInt(localStorage.getItem('currentSprint'))+1);
+				window.location = '';
+			}
+		}
+		else
+		{
+			document.querySelector('#sprintbox').querySelector('#sprint').style.display = 'block';	
+			document.querySelector('#sprintbox').querySelector('#createsprint').style.display = 'none';
+			var x = setInterval(function() {
+
+				var now = new Date().getTime();
+
+				var distance = localStorage.getItem('sprintstart') - now;
+
+				var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+				var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+				var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+				var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+				document.querySelector('#sprintbox').querySelector('#sprint').querySelector('h3').innerHTML = days + "d " + hours + "h "+ minutes + "m " + seconds + "s ";
+
+			}, 1000);	
+		}
+
 		create = document.querySelectorAll('.create');
 		for( i = 0 ; i < create.length ; i++ )
 		{
@@ -661,16 +761,34 @@ document.addEventListener('DOMContentLoaded', function()
 			});
 		}
 
+		tas = document.querySelector('#overviewbox').querySelector('ul').querySelectorAll('li');
+		tas[0].innerHTML = "<p class = 'id'>Name of the Project: </p><p class = 'value'>"+localStorage.getItem('Project')+"</p>";
+		tas[1].innerHTML = "<p class = 'id'>Created By: </p><p class = 'value'>"+localStorage.getItem('Username')+"</p>";
+		tas[2].innerHTML = "<p class = 'id'>Created On: </p><p class = 'value'>"+localStorage.getItem('createdOn')+"</p>";
+		tas[3].innerHTML = "<p class = 'id'>Current Sprint: </p><p class = 'value'>"+localStorage.getItem('currentSprint')+"</p>";
+		tas[4].innerHTML = "<p class = 'id'>Current Scrum: </p><p class = 'value'>"+localStorage.getItem('currentScrum')+"</p>";
+		document.querySelector('#contributorsbox').querySelector('ul').querySelector('li').innerHTML = localStorage.getItem('Username');
 		document.querySelector('#createTask').querySelector('button').onclick = (e) =>
 		{
 			e.preventDefault();
-			taskFunction('tasks', 1, 1, localStorage.getItem('Username'), document.querySelector('#createTask').querySelector('#taskname').value, document.querySelector('#createTask').querySelector('#taskDescription').value,'', 0, 0);
+			taskFunction(localStorage.getItem('Username')+localStorage.getItem('Project')+localStorage.getItem('currentScrum')+'tasks', 1, 1, localStorage.getItem('Username'), document.querySelector('#createTask').querySelector('#taskname').value, document.querySelector('#createTask').querySelector('#taskDescription').value,0, 0, 0);
 		}
+		/*document.querySelector('.createBacklog').querySelector('button').onclick = (e) =>
+		{
+			e.preventDefault();
+			console.log('clicked');
+			backlogFunction('backlog', 1, '', localStorage.getItem('Username'), 0, '',document.querySelector('.createBacklog').parent, document.querySelector('.createBacklog').querySelector('#taskDescription').value, document.querySelector('.createBacklog').querySelector('#taskname').value, 1); 
+		}
+		document.querySelector('.createfolder').querySelector('button').onclick = (e) =>
+		{
+			e.preventDefault();
+			backlogFunction('backlog', 0, '', localStorage.getItem('Username'), 0, document.querySelector('.createfolder').querySelector('#taskname').value, document.querySelector('.createBacklog').parent, '', '', 1); 
+		}*/
 
 		document.querySelector('#sprintbox').querySelector('#createTask').querySelector('button').onclick = (e) =>
 		{
 			e.preventDefault();
-			taskFunction('tasks', 1, 1, localStorage.getItem('Username'), document.querySelector('#sprintbox').querySelector('#createTask').querySelector('#taskname').value, document.querySelector('#sprintbox').querySelector('#createTask').querySelector('#taskDescription').value,'', 0, 0);
+			taskFunction(localStorage.getItem('Username')+localStorage.getItem('Project')+localStorage.getItem('currentScrum')+'sprint', 1, 1, localStorage.getItem('Username'), document.querySelector('#sprintbox').querySelector('#createTask').querySelector('#taskname').value, document.querySelector('#sprintbox').querySelector('#createTask').querySelector('#taskDescription').value,'', 0, 0);
 		}
 
 		document.querySelector('#createmeet').querySelector('button').onclick = (e) =>
@@ -678,19 +796,19 @@ document.addEventListener('DOMContentLoaded', function()
 			e.preventDefault();
 			date = document.querySelector('#createmeet').querySelector('#meetingDate').value;
 			date = date.substring(0, 4)+date.substring(5, 7)+date.substring(8, 10);
-			meetingFunction('newMeets', 1, 1, localStorage.getItem('Username'), document.querySelector('#createmeet').querySelector('#meetinglink').value, '', date, document.querySelector('#createmeet').querySelector('#meetingtime').value, document.querySelector('#createmeet').querySelector('#meetDescription').value );
+			meetingFunction(localStorage.getItem('Username')+localStorage.getItem('Project')+localStorage.getItem('currentScrum')+'meets', 1, 1, localStorage.getItem('Username'), document.querySelector('#createmeet').querySelector('#meetinglink').value, '', date, document.querySelector('#createmeet').querySelector('#meetingtime').value, document.querySelector('#createmeet').querySelector('#meetDescription').value );
 		}
 
 		options = document.querySelector('#options').querySelectorAll('button');
 		display = document.querySelector('#display').children;
 
-		for( i = 0 ; i < 7 ; i++ )
+		for( i = 0 ; i < 5 ; i++ )
 		{
 			display[i].style.display = 'none';
 		}
 		display[0].style.display = 'block';
 
-		for( i = 0 ; i < 7 ; i++ )
+		for( i = 0 ; i < 5 ; i++ )
 		{
 			options[i].onclick = (e) =>
 			{
@@ -712,7 +830,6 @@ document.addEventListener('DOMContentLoaded', function()
 		reloadScrumTasks();
 		reloadScrumMeetings()
 		reloadSprintTasks();
-		reloadBacklogs('/root');
 		document.querySelector('#gobackbutton').onclick = () =>
 		{
 			window.location = '/';

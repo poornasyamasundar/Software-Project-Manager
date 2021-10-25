@@ -4,40 +4,48 @@ document.addEventListener('DOMContentLoaded', function()
 		{
 			window.history.back()
 		}
-	});
 
-	const form = document.querySelector("#register");
+		const form = document.querySelector("#register");
 
-	form.addEventListener("submit", function (event) {
-		event.preventDefault();
+		form.querySelector('#save').onclick = (event) =>
+		{
+			event.preventDefault();
 
-		var email = form.elements['email'];
-		var password = form.elements['password'];
-		var retypepassword = form.elements['retype-password'];
-		if(password == retypepassword){
-			$.ajax(
-				{
-					type: "POST",
-					url: "insertUser",
-					data: {
-						user_name: email,
-						user_password: password,
-					},
-					success: function(data){
-						if(data == True){
-							window.location = '';
-						}
-						else{
-							alert("You are already a User. Please login to continue.");
-							window.location = '';
+			var name = form.querySelector('#name').value;
+			var email = form.querySelector('#email').value;
+			var git = form.querySelector('#github_name').value;
+			var password = form.querySelector('#password').value;
+			var retypepassword = form.querySelector('#retype-password').value;
+			if(password == retypepassword)
+			{
+				$.ajax(
+					{
+						type: "POST",
+						url: "insertUser",
+						data: {
+							username: name,
+							password: password,
+							git: git,
+							email: email,
+						},
+						success: function(data){
+							if(data === 'S'){
+								alert('Successfully registered');
+								window.location = '';
+							}
+							else{
+								alert("Error: couldn't register");
+								window.location = '';
+							}
 						}
 					}
-				}
-			)
+				)
+			}
+			else{
+				alert("Password do not match! Please try again");
+				window.location = '';
+			}
+
 		}
-		else{
-			alert("Password do not match! Please try again");
-			window.location = '';
-		}
-		
 	});
+

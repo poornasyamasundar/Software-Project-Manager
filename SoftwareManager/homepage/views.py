@@ -2,14 +2,13 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.db import connection
 from Databases.sample import getSampleData
-from Databases.create import isUser, isTrueCredentials, insertUser
+from Databases.create import isUser, isTrueCredentialscorrect, insertUserIntoTable
 from Databases.creation import getDetails, insertDetails, updateDetails
 from Databases.meetings_table import createTable, specificMeetings, allMeetings, deleteMeetings, modifyMeeting, insertMeeting, getLatestMeetings
 from Databases.tasks_table import create_taskTable, specificTasks, allTasks, deleteTask, modifyTask, insertTask, getTasks
 from Databases.feedback import insertFeedback, deleteFeedback, modifyFeedback, allFeedback, getComments
-from Databases.projects_table import create_projecttable, insertProject, modifyProject, deleteProject, allProjects, specificProjects
+from Databases.projects_table import create_projecttable, insertProjectIntoTable, modifyProject, deleteProject, allProjects, specificProjects
 from Databases.notices_table import create_noticeTable, insertNotice, modifyNotice, deleteNotice, specificNotices, getNotices
-from Databases.product_backlog_table import create_taskTable, allTasks, insert, delete, modifyTask, getBacklogs 
 import json
 from django.views.decorators.csrf import csrf_exempt
 import datetime
@@ -70,6 +69,8 @@ def to_getCommentsPy(request):
         number = request.POST['number']
         result = getComments(number)
         #print(result)
+        print('comments')
+        print(result)
         return HttpResponse(json.dumps(result))
 
 @csrf_exempt
@@ -97,6 +98,53 @@ def meetingFunctionPy(request):
             deleteMeetings(table_name, i)
 
         return HttpResponse("s")
+@csrf_exempt
+def backlogFunctionPy(request):
+    if request.method == 'POST':
+        print(request.POST)
+        table_name = request.POST['table_name']
+        mode = request.POST['mode']
+        id = request.POST['id']
+        createdBy = request.POST['createdBy']
+        dateposted = request.POST['dateposted']
+        foldername = request.POST['foldername']
+        par = request.POST['par']
+        taskDetails = request.POST['taskDetails']
+        taskHeading = request.POST['taskHeading']
+        type = request.POST['type']
+
+        date = str(datetime.datetime.today())
+        date = date[0:10]
+
+        if type == '1':
+            insert(table_name, type, par, foldername, createdBy, taskHeading, taskDetails, date, 0)
+        elif type == '2':
+            modifyTask(table_name, id, type, par, foldername, createdBy, taskHeading, taskDetails, date, 0)
+        elif type == '3':
+            deleteTask(table_name, id)
+
+        return HttpResponse("y")
+
+@csrf_exempt
+def getProjectsPy(request):
+    if  request.method == 'POST':
+        mode = request.POST['mode']
+        username = request.POST['username']
+        if mode == '0':
+            result = allProjects(username+'projects')
+            return HttpResponse(json.dumps(result))
+        elif mode == '1':
+            scrum = request.POST['currentScrum']
+            sprint = request.POST['currentSprint']
+            project = request.POST['projectName']
+            modifyProject(username+'projects', project, scrum, sprint)
+            if scrum == '1' and sprint == '0':
+                create_taskTable(username+project+str(scrum)+'tasks') 
+                createTable(username+project+str(scrum)+'meets') 
+            if sprint == '1':
+                create_taskTable(username+project+str(scrum)+'sprint')  
+            return HttpResponse('y')
+
 
 @csrf_exempt
 def taskFunctionPy(request):
@@ -123,6 +171,61 @@ def taskFunctionPy(request):
             deleteTask(table_name, id)
 
         return HttpResponse("y")
+
+@csrf_exempt
+def insertProject(request):
+    if request.method == 'POST':
+        model = request.POST['model']
+        projectName = request.POST['projectName']
+        table_name = request.POST['table_name']
+        createdBy = request.POST['createdBy']
+        createdOn = request.POST['createdOn']
+        description = request.POST['description']
+
+        insertProjectIntoTable(table_name, createdBy, createdOn, model, projectName, description, 0, 0)
+        return HttpResponse('y')
+
+
+@csrf_exempt
+def insertComment(request):
+    if request.method == 'POST':
+        print(request.POST)
+        createdBy = request.POST['createdBy']
+        createdOn = request.POST['createdOn']
+        feedback = request.POST['feedback']
+        rating = request.POST['rating']
+        insertFeedback(createdBy, createdOn, feedback, rating)
+        return HttpResponse('y')
+
+@csrf_exempt
+def isTrueCredentials(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        if( isUser(username) ):
+            if( isTrueCredentialscorrect(username, password) ):
+                return HttpResponse('C')
+            else:
+                return HttpResponse('W')
+        else:
+            return HttpResponse('U')
+        
+@csrf_exempt
+def insertUser(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        email = request.POST['email']
+        git = request.POST['git']
+        password = request.POST['password']
+        b = insertUserIntoTable(username, password)
+        print("b = ", b)
+        if b == True:
+            c = insertDetails(git, username,'', '', email) 
+            create_projecttable(username+'projects')
+            print("c = ", c)
+            return HttpResponse('S')
+        else:
+            return HttpResponse('E')
 
 
 @csrf_exempt

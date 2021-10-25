@@ -4,17 +4,16 @@ document.addEventListener('DOMContentLoaded', function()
 		{
 			window.history.back()
 		}
-	});
 
-	const form = document.querySelector("#new_project");
+		const form = document.querySelector('#new_project');
 
-	form.addEventListener("submit", function (event) {
-		event.preventDefault();
+		form.querySelector('#save').onclick = (event) =>
+		{
+			event.preventDefault();
 
-		var name = form.elements['name'];
-		var type = form.elements['type'];
-		var contributors = form.elements['contributors'];
-		var repo_link = form.elements['repo'];
+		var name = form.querySelector('#name').value;
+		var type = 'agile';
+		var repo_link = form.querySelector('#des').value;
 
 		const d = new Date();
 		var x = d.getDate()+"-"+ (d.getMonth()+1) +"-"+d.getFullYear();
@@ -22,22 +21,23 @@ document.addEventListener('DOMContentLoaded', function()
 		$.ajax(
 			{
 				type: "POST",
-				url: "",
+				url: "insertProject",
 				data: {
 					model: type,
 					projectName: name,
-					table_name:	,
-					createdBy:	,
+					table_name: localStorage.getItem('Username')+'projects',
+					createdBy:localStorage.getItem('Username'),
 					createdOn: x, 
-					description: 
+					description: repo_link,
 				},
 				success: function(data){
-					if(data == True){
+					if(data == 'y'){
 						window.location = '';
 						alert("New Project Created");
 					}
 				}
 			}
 		)
-		
+		}
+
 	});

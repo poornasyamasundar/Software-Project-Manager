@@ -8,35 +8,38 @@ document.addEventListener('DOMContentLoaded', function()
 		{
 			window.location = '/register';
 		}
-	});
 
 
-	const form = document.querySelector("#signup");
+		const form = document.querySelector("#signup");
 
-	form.addEventListener("submit", function (event) {
-		event.preventDefault();
+		form.querySelector('#save').onclick = (event) =>
+		{
+			event.preventDefault();
 
-		var email = form.elements['email'];
-		var password = form.elements['password'];
+			var email = form.querySelector('#username').value;
+			var password = form.querySelector('#password').value;
 
-		$.ajax(
-			{
-				type: "POST",
-				url: "isTrueCredentials",
-				data: {
-					user_name: email,
-					user_password: password,
-				},
-				success: function(data){
-					if(data == True){
-						window.location = '';
-					}
-					else{
-						alert("Login Credentials wrong! Please try again");
-						window.location = '';
+			$.ajax(
+				{
+					type: "POST",
+					url: "isTrueCredentials",
+					data: {
+						username: email,
+						password: password,
+					},
+					success: function(data){
+						if(data == 'C'){
+							alert('successfull Sign Ined');
+							window.history.back();
+							localStorage.setItem('Username', email);
+						}
+						else{
+							alert("Login Credentials wrong! Please try again");
+							window.location = '';
+						}
 					}
 				}
-			}
-		)
-		
+			)
+
+		}
 	});

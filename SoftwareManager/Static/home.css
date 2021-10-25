@@ -235,6 +235,7 @@ body
 	max-width: 250px;
 	text-align: center;
 	font-family: arial;
+	display: inline-block;
 	background-color: pink;
 	margin-top: 20px;
 	margin-left: 20px;

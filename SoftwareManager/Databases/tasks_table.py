@@ -69,7 +69,7 @@ def getTasks(table_name, number, type_):
         return allTasks(table_name)
     type_ = int(type_)
     if type_ == 1:
-        query = f"SELECT * FROM (SELECT * FROM {table_name} ORDER BY id DESC) AS alias WHERE completed = 1 LIMIT {number}"
+        query = f"SELECT * FROM (SELECT * FROM {table_name} ORDER BY id DESC) AS alias WHERE completed = 0 LIMIT {number}"
     else:
         query = f"SELECT * FROM (SELECT * FROM {table_name} ORDER BY id DESC) AS alias LIMIT {number}"
     cursor.execute(query)
