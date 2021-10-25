@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function()
 			$.ajax(
 				{
 					type: "POST",
-					url: "insertUser",
+					url: "isTrueCredentials",
 					data: {
 						user_name: email,
 						user_password: password,
@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function()
 							window.location = '';
 						}
 						else{
-							alert("You are already a User. Please login to continue.");
+							alert("Login Credentials wrong! Please try again");
 							window.location = '';
 						}
 					}

@@ -12,10 +12,5 @@ urlpatterns = [
         path('to_getCommentsPy', views.to_getCommentsPy, name = 'to_getCommentsPy'),
         path('meetingFunctionPy', views.meetingFunctionPy, name = 'meetingFunctionPy'),
         path('taskFunctionPy', views.taskFunctionPy, name = 'taskFunctionPy'),
-        path('noticeFunctionPy', views.noticeFunctionPy, name = 'noticeFunctionPy'),
-        path('isUser', views.isUser, name = 'isUser'),
-        path('isTrueCredentials', views.isTrueCredentials, name = 'isTrueCredentials'),
-        path('insertUser', views.insertUser , name = 'insertUser'),
-        path('insertProject', views.insertProject , name = 'insertProject'),
-
+        path('noticeFunctionPy', views.noticeFunctionPy, name = 'noticeFunctionPy')
 ]

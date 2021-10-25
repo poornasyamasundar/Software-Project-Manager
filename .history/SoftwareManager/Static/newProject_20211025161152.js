@@ -26,10 +26,10 @@ document.addEventListener('DOMContentLoaded', function()
 				data: {
 					model: type,
 					projectName: name,
-					table_name:	,
-					createdBy:	,
+					table_name:	w,
+					createdBy:	w,
 					createdOn: x, 
-					description: 
+					description: d 
 				},
 				success: function(data){
 					if(data == True){

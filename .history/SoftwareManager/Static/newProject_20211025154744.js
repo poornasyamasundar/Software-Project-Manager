@@ -4,20 +4,17 @@ document.addEventListener('DOMContentLoaded', function()
 		{
 			window.history.back()
 		}
-		document.querySelector('.reghere').onclick = () =>
-		{
-			window.location = '/register';
-		}
 	});
 
-
-	const form = document.querySelector("#signup");
+	const form = document.querySelector("#new_project");
 
 	form.addEventListener("submit", function (event) {
 		event.preventDefault();
 
-		var email = form.elements['email'];
-		var password = form.elements['password'];
+		var name = form.elements['name'];
+		var type = form.elements['type'];
+		var contributors = form.elements['contributors'];
+		var repo_link = form.elements['repo'];
 
 		$.ajax(
 			{

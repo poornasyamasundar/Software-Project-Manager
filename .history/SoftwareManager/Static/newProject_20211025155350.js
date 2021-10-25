@@ -4,28 +4,29 @@ document.addEventListener('DOMContentLoaded', function()
 		{
 			window.history.back()
 		}
-		document.querySelector('.reghere').onclick = () =>
-		{
-			window.location = '/register';
-		}
 	});
 
-
-	const form = document.querySelector("#signup");
+	const form = document.querySelector("#new_project");
 
 	form.addEventListener("submit", function (event) {
 		event.preventDefault();
 
-		var email = form.elements['email'];
-		var password = form.elements['password'];
+		var name = form.elements['name'];
+		var type = form.elements['type'];
+		var contributors = form.elements['contributors'];
+		var repo_link = form.elements['repo'];
 
 		$.ajax(
 			{
 				type: "POST",
-				url: "isTrueCredentials",
+				url: "",
 				data: {
-					user_name: email,
-					user_password: password,
+					model: type,
+					projectName: name,
+					table_name:	,
+					createdBy:	,
+					createdOn: , 
+					description:
 				},
 				success: function(data){
 					if(data == True){

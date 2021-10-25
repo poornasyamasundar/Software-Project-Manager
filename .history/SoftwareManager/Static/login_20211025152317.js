@@ -11,6 +11,13 @@ document.addEventListener('DOMContentLoaded', function()
 	});
 
 
+	// function Email_Valid(input){
+
+	// }
+
+	// function Password_Valid(input){
+
+	// }
 	const form = document.querySelector("#signup");
 
 	form.addEventListener("submit", function (event) {
@@ -40,3 +47,16 @@ document.addEventListener('DOMContentLoaded', function()
 		)
 		
 	});
+
+
+	// e.Validate();
+		// 		window.location = '';
+
+		
+		
+		// if(email_valid && password_valid){
+		// 	form.querySelector('submit').onclick = (e) => {
+		// 		e.Validate();
+		// 		window.location = '';
+		// 	}
+		// }

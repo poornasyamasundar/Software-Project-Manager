@@ -11,6 +11,13 @@ document.addEventListener('DOMContentLoaded', function()
 	});
 
 
+	// function Email_Valid(input){
+
+	// }
+
+	// function Password_Valid(input){
+
+	// }
 	const form = document.querySelector("#signup");
 
 	form.addEventListener("submit", function (event) {

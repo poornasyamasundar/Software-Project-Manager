@@ -17,5 +17,6 @@ urlpatterns = [
         path('isTrueCredentials', views.isTrueCredentials, name = 'isTrueCredentials'),
         path('insertUser', views.insertUser , name = 'insertUser'),
         path('insertProject', views.insertProject , name = 'insertProject'),
+        
 
 ]

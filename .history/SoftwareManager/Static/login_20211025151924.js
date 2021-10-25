@@ -11,13 +11,20 @@ document.addEventListener('DOMContentLoaded', function()
 	});
 
 
+	// function Email_Valid(input){
+
+	// }
+
+	// function Password_Valid(input){
+
+	// }
 	const form = document.querySelector("#signup");
 
 	form.addEventListener("submit", function (event) {
 		event.preventDefault();
 
-		var email = form.elements['email'];
-		var password = form.elements['password'];
+		let email = form.elements['email'];
+		let password = form.elements['password'];
 
 		$.ajax(
 			{
@@ -28,15 +35,22 @@ document.addEventListener('DOMContentLoaded', function()
 					user_password: password,
 				},
 				success: function(data){
-					if(data == True){
-						window.location = '';
-					}
-					else{
-						alert("Login Credentials wrong! Please try again");
-						window.location = '';
-					}
+					//console.log(data);
+					window.location = '';
 				}
 			}
 		)
+
+		// e.Validate();
+		// 		window.location = '';
+
+		
+		
+		// if(email_valid && password_valid){
+		// 	form.querySelector('submit').onclick = (e) => {
+		// 		e.Validate();
+		// 		window.location = '';
+		// 	}
+		// }
 		
 	});

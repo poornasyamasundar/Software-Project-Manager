@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function()
 							window.location = '';
 						}
 						else{
-							alert("You are already a User. Please login to continue.");
+							alert("Login Credentials wrong! Please try again");
 							window.location = '';
 						}
 					}

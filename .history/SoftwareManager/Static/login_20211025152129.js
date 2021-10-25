@@ -11,6 +11,13 @@ document.addEventListener('DOMContentLoaded', function()
 	});
 
 
+	// function Email_Valid(input){
+
+	// }
+
+	// function Password_Valid(input){
+
+	// }
 	const form = document.querySelector("#signup");
 
 	form.addEventListener("submit", function (event) {
@@ -31,12 +38,22 @@ document.addEventListener('DOMContentLoaded', function()
 					if(data == True){
 						window.location = '';
 					}
-					else{
-						alert("Login Credentials wrong! Please try again");
-						window.location = '';
-					}
+					
 				}
 			}
 		)
 		
 	});
+
+
+	// e.Validate();
+		// 		window.location = '';
+
+		
+		
+		// if(email_valid && password_valid){
+		// 	form.querySelector('submit').onclick = (e) => {
+		// 		e.Validate();
+		// 		window.location = '';
+		// 	}
+		// }
