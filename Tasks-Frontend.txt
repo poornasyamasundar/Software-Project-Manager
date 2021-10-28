@@ -1,0 +1,15 @@
+Each task contains the main feature and sub features that need to be implemented in the website
+
+1)Product Backlogs
+  -Create a button in the options(left side of project page) called Product Backlogs
+  -Upon clicking the button the middle display should display the following-
+    -Heading( Product backlogs )
+    -Path:( initially the path will be 'root/' )
+    -List of folders and backlogs
+    -A back button to go back to the previous parent folder
+    -upon clicking each folder the contents of the display should be replaced with the contents of the clicked folder
+      -example: if the user clicks the folder 'user interface', then the path changes to 'root/user interface/'
+    -The backlog can be displayed just like the tasks can be displayed.
+    -A folder should have the option to delete and change folder name
+    -a backlog can be edited and deleted
+    -Each folder should have the option to insert a folder and insert a task.
