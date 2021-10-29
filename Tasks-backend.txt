@@ -5,3 +5,10 @@ Each backend task will be linked to the corresponding frontend task.
   -create a function to get all the contents of a file
   -create a function to store and retrieve tasks in a file in an efficient manner
   -create a function to modify the contents of a file.
+  
+2)Commits and Notices
+  -write a function to get all the commits after a given date and time
+  -write a function to get the latest n notices.
+  -write a function to get edit, insert and delete a notice
+  -commits are available through the github api
+  -store notices in a project column, and each notice will be a card in the column.
