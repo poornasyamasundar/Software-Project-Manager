@@ -13,3 +13,10 @@ Each task contains the main feature and sub features that need to be implemented
     -A folder should have the option to delete and change folder name
     -a backlog can be edited and deleted
     -Each folder should have the option to insert a folder and insert a task.
+  
+2)Commits and Notices
+    -Create a field for showing the latest commits for the repository( on the right ), just like the notice board for notices, meetings, and tasks that are already present.
+    -Create a button in the options(on the left) called notices
+      -upon clicking the button all the notices should be displayed along with the options to edit, delete create notices.( just like it is done for 
+      the tasks and meetings).
+    -All the appropriate backend functions can be assumed to be available.
