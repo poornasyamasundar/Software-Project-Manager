@@ -12,3 +12,17 @@ Each backend task will be linked to the corresponding frontend task.
   -write a function to get edit, insert and delete a notice
   -commits are available through the github api
   -store notices in a project column, and each notice will be a card in the column.
+
+3)Progress and Timeline
+  -write a function for each of the below tasks: 
+    -the amount of time left for a sprint or scrum( can be found by the created time of the project )
+    -the amount of tasks completed and planned( can be found by the total no of cards and the no of cards archived )
+    -the contributions( can be found by the no of cards archived by a given person)
+    -the average no of tasks completed per scrum( by counting the no of tasks  archived in each scrum/sprint)
+    -productivity( no of task cards archived/ no of meetings )
+    -average of (no of cards archived / no of cards)
+    -get the start time and closed time for all the scrums and calculate the average
+  -write one function that returns all the above values.
+  -function to return the array of start and end of all sprints
+  -given a sprint return array of start time and end times of all scrums
+  -given scrums return all the tasks completed.
