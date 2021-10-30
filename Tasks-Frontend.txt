@@ -20,3 +20,18 @@ Each task contains the main feature and sub features that need to be implemented
       -upon clicking the button all the notices should be displayed along with the options to edit, delete create notices.( just like it is done for 
       the tasks and meetings).
     -All the appropriate backend functions can be assumed to be available.
+    
+3)Timeline and Progress
+    -There is already a button in the options(left side) called progress, upon clicking the button the following should be displayed
+        -There should be two fields one for the current scrum, and other for the current sprint, upon clicking the option for scrum or sprint, the below sub fields should be displayed.
+            -a progress bar should be displayed telling the amount of time completed in the current scrum/ current sprint( input is in percentage )
+            -a progress bar telling the no of tasks completed out of the total tasks( input is integers representing completed tasks and total tasks )
+            -a field telling the no of tasks completed by each contributor( for each contributor the integer representing the completed tasks will be given )
+            -a field telling the average no of tasks completed in a scrum/sprint( a float value will be given )
+            -a field telling the productivity i.e no of tasks completed per every meeting conducted( a float value )
+            -a field telling the no of tasks completed vs no of tasks planned per scrum or sprint( both completed and planned numbers will be given )
+            -a field telling the average amount of time between the end of a scrum(sprint) and start of another scrum(sprint)( the average number will be given)
+     -Create a button called Timeline in the left side options, upon clicking the button the following should be displayed
+        -A timeline diagram( example: https://www.w3schools.com/howto/howto_css_timeline.asp ) should be displayed,
+              -The input will be an array of objects with the fields{ note(string), time(in milliseconds), noteClickableOrNot(bool), link(string)), get the start milliseconds and end milliseconds, scale the length appropriately and display a clickable note.
+              -upon clicking the note call the backend function with the given link for the note, and replace the current timeline with another timeline with input as the output from previously called function.
