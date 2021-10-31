@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		{% load static %}
+		<link rel = 'stylesheet' href = "{% static 'project.css' %}">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+		<script src = "{% static 'project.js' %}"></script>
+		<title>
+			Project Name
+		</title>
+	</head>
+	<body>
+		<div id = 'homeMenu'>
+			<div id = 'logo'>
+				<img id = 'logopng' src = "{% static 'logo.png' %}" align= 'left'></img>
+				Software Project Manager
+			</div>
+			<div id = 'projectname'>
+				Project Name
+			</div>
+			<div id = 'help'>
+				<button id = 'helpbutton'>
+					Help
+				</button>
+			</div>
+			<div id = 'goback'>
+				<button id ='gobackbutton'>
+					GoBack
+				</button>
+			</div>
+		</div>
+		<div id = 'projectBox'>
+			<div id = 'options'>
+				<button id = 'overview'>
+					Overview
+				</button>
+				<button id = 'currentscrum'>
+					Current Scrum
+				</button>
+				<button id = 'currentsprint'>
+					Current Sprint
+				</button>
+				<button id = 'progress'>
+					Progress
+				</button>
+				<button id = 'Contributors'>
+					Contributors 
+				</button>
+				<button id = 'notices'>
+					Notices
+				</button>
+			</div>
+			<div id = 'display'>
+				<div id = 'overviewbox'>
+					<ul>
+						<li>
+							<p class = 'id'>Name of the Project: </p><p class = 'value'>Software Project Manager</p>
+						</li>
+						<li>
+							<p class = 'id'>Created By         : </p><p class = 'value'>Team 3</p>
+						</li>
+						<li>
+							<p class = 'id'>Created On         : </p><p class = 'value'>15-09-2021</p>
+						</li>
+						<li>
+							<p class = 'id'>Sprint Number      : </p><p class = 'value'>1</p>
+						</li>
+						<li>
+							<p class = 'id'>Scrum Number       : </p><p class = 'value'>10</p>
+						</li>
+					</ul>
+				</div>
+				<div id = 'scrumbox'>
+					<button id = 'createscrum' class = 'create'>Click here to create a new scrum</button>
+					<div id = 'scrum'>
+						<h2>Time for the current scrum to complete:</h2>
+						<h3></h3>
+						<div class = 'title'>Tasks for this scrum</div>
+						<div>
+							<ul id = 'pretasks'>
+							</ul>
+							<button class = 'create'>Create a New Task</button>
+							<form id = 'createTask'>
+								<h4>Create New Task</h4>
+								<label for = 'taskname'>Task Title</label>
+								<input type='text' id = 'taskname' name = 'taskname' placeholder='New Task name'>
+								<label for = 'taskDescription'>Description</label>
+								<textarea type='text' id = 'taskDescription' name='taskDescription' placeholder='Describe the task'></textarea>
+								<button type='submit'>Create</button>
+							</form>
+						</div>
+						<div class = 'title'>Meetings scheduled for this scrum</div>
+						<div>
+							<ul id = 'premeets'>
+							</ul>
+							<button class = 'create'>Create a New Meeting</button>
+							<form id = 'createmeet'>
+								<h4>Create New Meeting</h4>
+								<label for = 'meetingtime'>Time</label>
+								<input type='text' id = 'meetingtime' name = 'meetingtime' placeholder='Time of the Meeting'>
+								<label for = 'meetingDate'>Date</label>
+								<input type='text' id = 'meetingDate' name = 'meetingDate' placeholder='yyyy-mm-dd'>
+								<label for = 'meetinglink'>Link</label>
+								<input type='text' id = 'meetinglink' name = 'meetinglink' placeholder='Link to the Meeting'>
+								<label for = 'meetDescription'>Purpose</label>
+								<textarea type='text' id = 'meetDescription' name='meetDescription' placeholder='Describe the Purpose'></textarea>
+								<button type='submit'>Create</button>
+							</form>
+						</div>
+					</div>
+				</div>
+				<div id = 'sprintbox'>
+					<button id = 'createsprint' class = 'create'>Click here to create a new sprint</button>
+					<div id = 'sprint'>
+					<h2>Time for the current sprint to complete:</h2>
+					<h3></h3>
+						<div class = 'title'>Tasks for this Sprint</div>
+						<div>
+							<ul id = 'sprintTasks'>
+							</ul>
+							<button class = 'create'>Create a New Task</button>
+							<form id = 'createTask'>
+								<h4>Create New Task</h4>
+								<label for = 'taskname'>Task Title</label>
+								<input type='text' id = 'taskname' name = 'taskname' placeholder='New Task name'>
+								<label for = 'taskDescription'>Description</label>
+								<textarea type='text' id = 'taskDescription' name='taskDescription' placeholder='Describe the task'></textarea>
+								<button type='submit'>Create</button>
+							</form>
+						</div>
+					</div>
+				</div>
+				
+	    
+	    <!-- <div id = 'backlogsbox'>
+	    <h4>Product Backlogs</h4>
+	    <p>Path :root/</p>
+	    <ul>
+	    <li>
+	    <p class = 'folder'>FolderName</p>
+	    </li>
+	    <li>
+	    <p class = 'folder'>FolderName</p>
+	    </li>
+	    <li>
+	    <p class = 'folder'>FolderName</p>
+	    </li>
+	    <li>
+	    <div>
+	    <h5>Task1</h5>
+	    <h6>Status created by created on</h6>
+	    <p>Description:</p>
+	    <button id = 'delete'>Delete Task</button>
+	    <button id = 'edit'>Edit Task</button>
+	    </div>
+	    <form class = 'edit'>
+	    <h4>Create New Task</h4>
+	    <label for = 'taskname'>Task Title</label>
+	    <input type='text' id = 'taskname' name = 'taskname' placeholder='New Task name'>
+	    <label for = 'taskDescription'>Description</label>
+	    <textarea type='text' id = 'taskDescription' name='taskDescription' placeholder='Describe the task'></textarea>
+	    <button type='submit'>Save</button>
+	    <button>Cancel</button>
+	    </form>
+	    </li>
+	    </ul>
+	    <button class = 'create'>Create a New Task</button>
+	    <form id = 'createTask' class = 'createBacklog'>
+	    <h4>Create New Task</h4>
+	    <label for = 'taskname'>Task Title</label>
+	    <input type='text' id = 'taskname' name = 'taskname' placeholder='New Task name'>
+	    <label for = 'taskDescription'>Description</label>
+	    <textarea type='text' id = 'taskDescription' name='taskDescription' placeholder='Describe the task'></textarea>
+	    <button type='submit'>Create</button>
+	    </form>
+	    <button class = 'create'>Create a New Folder</button>
+	    <form id = 'createTask' class = 'createfolder'>
+	    <h4>Create New Folder</h4>
+	    <label for = 'taskname'>FolderName</label>
+	    <input type='text' id = 'taskname' name = 'taskname' placeholder='New Folder name'>
+	    <button type='submit'>Create</button>
+	    </form>
+	    </div> -->
+	    <div id = 'progressbox'>
+		    Progress analysis is part of release 2
+	    </div>
+	    <!--<div id = 'timelinebox'>
+	     </div>-->
+	     <div id = 'contributorsbox'>
+		     <h4 class = 'title'>List of Contributors</h4>
+		     <ul>
+			     <li>
+				     Poorna
+			     </li>
+		     </ul>
+		     Multi Contributors will be included for next release
+		     <!--<button class = 'create'>Add a New Contributor</button>
+	       <form id = 'createTask'>
+	       <h4>Add New Contributor</h4>
+	       <label for = 'taskname'>Username</label>
+	       <input type='text' id = 'taskname' name = 'taskname' placeholder='Username'>
+	       <button type='submit'>Add</button>
+	       </form> -->
+	     </div>
+		 <!-- <div id = 'noticesbox'>
+						<div>
+							<ul id = 'prenotices'>
+							</ul>
+							<button class = 'create'>Create a New Task</button>
+							<form id = 'createTask'>
+								<h4>Create New Task</h4>
+								<label for = 'taskname'>Task Title</label>
+								<input type='text' id = 'taskname' name = 'taskname' placeholder='New Task name'>
+								<label for = 'taskDescription'>Description</label>
+								<textarea type='text' id = 'taskDescription' name='taskDescription' placeholder='Describe the task'></textarea>
+								<button type='submit'>Create</button>
+							</form>
+						</div>
+						<div class = 'title'>Meetings scheduled for this scrum</div>
+						<div>
+							<ul id = 'premeets'>
+							</ul>
+							<button class = 'create'>Create a New Meeting</button>
+							<form id = 'createmeet'>
+								<h4>Create New Meeting</h4>
+								<label for = 'meetingtime'>Time</label>
+								<input type='text' id = 'meetingtime' name = 'meetingtime' placeholder='Time of the Meeting'>
+								<label for = 'meetingDate'>Date</label>
+								<input type='text' id = 'meetingDate' name = 'meetingDate' placeholder='yyyy-mm-dd'>
+								<label for = 'meetinglink'>Link</label>
+								<input type='text' id = 'meetinglink' name = 'meetinglink' placeholder='Link to the Meeting'>
+								<label for = 'meetDescription'>Purpose</label>
+								<textarea type='text' id = 'meetDescription' name='meetDescription' placeholder='Describe the Purpose'></textarea>
+								<button type='submit'>Create</button>
+							</form>
+						</div>
+					</div> -->
+	    </div>
+	</div>
+			<div id = 'board'>
+				<div id = 'notices'>
+					<div id = 'noticeshead'>
+						Notices
+					</div>
+					<ul>
+						<li>
+							<div>
+								<h5>Notice by: posted on</h5>
+								<p>Information about the notice</p>
+							</div>
+						</li>
+						<li>
+							<div>
+								<h5>Notice by: posted on</h5>
+								<p>Information about the notice</p>
+							</div>
+						</li>
+						<li>
+							<div>
+								<h5>Notice by: posted on</h5>
+								<p>Information about the notice</p>
+							</div>
+						</li>
+					</ul>
+				</div>
+				<div id = 'upcomingmeets'>
+					<div id = 'upcomingmeetshead'>
+						Upcoming Meetings
+					</div>
+					<ul>
+					</ul>
+				</div>
+				<div id = 'duetasks'>
+					<div id = 'duetaskshead'>
+						Tasks to be done
+					</div>
+					<ul>
+					</ul>
+				</div>
+				<div id='latestcommits'>
+					<div id = 'commits'>
+						Latest Commits
+					</div>
+					<ul>
+						<li>
+							<div>
+								<h3>Commit by : Name</h3>
+								<p>Commit message</p>
+							</div>
+						</li>
+						<li>
+							<div>
+								<h3>Commit by : Name</h3>
+								<p>Commit message</p>
+							</div>
+						</li><li>
+							<div>
+								<h3>Commit by : Name</h3>
+								<p>Commit message</p>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

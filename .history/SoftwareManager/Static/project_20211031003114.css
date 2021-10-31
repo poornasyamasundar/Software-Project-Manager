@@ -1,0 +1,418 @@
+body
+{
+	background-color: rgb(218, 194, 255);
+}
+#homeMenu
+{
+	padding: 5px;
+}
+#logo
+{
+	width: 400px;
+	height: 80px;
+	display: inline-block;
+	font-family: 'Cursive', 'Lucida Handwriting';
+	background-color: white;
+	text-align: center;
+	font-size: 30px;
+	color: green;
+	border-radius: 30px;
+	font-weight: bold;
+	box-shadow: 0px 0px 10px blue;
+	float: left;
+}
+#projectname
+{
+	width: 400px;
+	font-family: 'Cursive', 'Lucida Handwriting';
+	display: inline-block;
+	background-color: white;
+	text-align: center;
+	font-size: 30px;
+	color: green;
+	padding: 20px;
+	float: left;
+	border-radius: 30px;
+	font-weight: bold;
+	margin-left: 30px;
+	box-shadow: 0px 0px 10px blue;
+	margin-top: 0px;
+}
+#goback
+{
+	width: 120px;
+	height: 80px;
+	display: inline-block;
+	float: right;
+}
+#help
+{
+	width: 100px;
+	height: 80px;
+	display: inline-block;
+	float: right;
+}
+#helpbutton,#gobackbutton
+{
+	margin-top: 16px;
+	border: 2px solid black;
+	background-color: white;
+	color: black;
+	padding: 14px 28px;
+	font-size: 16px;
+	cursor: pointer;
+	border-color: #2196F3;
+	color: dodgerblue;
+	border-radius: 30px;
+	box-shadow: 0px 0px 10px lightblue;
+}
+#helpbutton:hover, #gobackbutton:hover
+{
+	background: #2196F3;
+	color: white;
+}
+#logopng
+{
+	height: 80px;
+	width: 80px;
+	border-radius: 10px;
+	margin-left: 20px;
+}
+#projectBox
+{
+	display: grid;
+	margin-top: 100px;
+	width: 100%;
+	grid-template-columns: 200px auto 300px;
+	grid-gap: 10px;
+	
+}
+#projectBox > div
+{
+	box-shadow: 0px 0px 10px blue;
+	padding: 5px;
+	box-sizing: border-box;
+}
+#options
+{
+	height: 220px;
+}
+#board
+{
+	height: 500px;
+}
+#options > button
+{
+	background-color: rgb(192, 114, 247);
+	height: 40px;
+	width: 190px;
+	color: black;
+	font-size: 18px;
+	font-weight: bold;
+	border-width: 0px;
+	margin-top: 2px;
+	box-shadow: 0px 0px 5px blue;
+}
+#options > button:hover
+{
+	background-color: rgb(144, 0, 247);
+	color: white;
+	cursor: pointer;
+}
+#notices, #upcomingmeets, #duetasks, #latestcommits
+{
+	margin-top: 5px;
+	background-color: white;
+	height: 150px;
+	width: 280px;
+	background-color: rgb(232, 186, 255);
+	border-style: solid;
+	border-width: 2px;
+	box-shadow: 0px 0px 3px blue;
+}
+#noticeshead, #upcomingmeetshead, #duetaskshead, #commits
+{
+	width: inherit;
+	height: 30px;
+	font-size: 20px;
+	padding: 5px;
+	box-sizing: border-box;
+	font-weight: bold;
+	background-color: rgb(162, 0, 255);
+}
+/* #duetasks ul, #upcomingmeets ul, #notices ul, #pretasks, #sprintTasks, #premeets, #overviewbox ul, #backlogsbox ul, #contributorsbox ul, #latestcommits ul
+{
+	list-style-type: none;
+	padding: 0px;
+	margin: 0px;
+	overflow-y: auto;
+	overflow-x: hidden;
+	max-height: 120px;
+} */
+#duetasks ul::-webkit-scrollbar, #upcomingmeets ul::-webkit-scrollbar, #notices ul::-webkit-scrollbar, #latestcommits ul::-webkit-scrollbar
+{
+	display: none;
+}
+#duetasks ul li, #upcomingmeets ul li, #notices ul li, #pretasks li, #sprintTasks li, #premeets, #latestcommits ul li
+{
+	margin-top: 5px;
+}
+#duetasks ul li div, #upcomingmeets ul li div
+{
+	margin: 5px;
+	border-radius: 5px;
+}
+#notices ul li div, #pretasks li div, #sprintTasks li div, #premeets li div, #backlogsbox ul li div, #latestcommits ul li div
+{
+	margin: 5px;
+	background-color: lightyellow;
+	padding: 3px;
+	border-radius: 5px;
+}
+#pretasks li div, #sprintTasks li div, #premeets li div, #backlogsbox ul li div
+{
+	margin: 0px;
+}
+.thead, .mhead, .create
+{
+	background-color: rgb(232, 130, 255);
+	cursor: pointer;
+	padding: 5px;
+	width: 100%;
+	border: none;
+	text-align: left;
+	outline: none;
+	font-size: 15px;
+	border-radius: 5px;
+	box-shadow: 0px 0px 5px blue;
+	font-color: black;
+}
+.create
+{
+	margin-top: 5px;
+	font-size: 20px;
+	padding: 5px;
+}
+.tactive, .thead:hover, .mactive, .mhead:hover, .create:hover
+{
+	background-color: rgb(208, 0, 255);
+}
+.thead:after, .mhead:after, .create:after
+{
+	content: '\002B';
+	color: white;
+	font-weight: bold;
+	float: right;
+	margin-left: 5px;
+}
+.tactive:after, .mactive:after, .createactive:after
+{
+	content: '\2212';
+}
+#duetasks ul li div div, #upcomingmeets ul li div div
+{
+	padding: 0 18px;
+	max-height: 0;
+	overflow: hidden;
+	transition: max-height 0.2s ease-out;
+	background-color: lightyellow;
+	margin: 0px;
+}
+#duetasks ul li div div h5, #upcomingmeets ul li div div h5, #notices ul li div h5, #pretasks li div h5, #premeets li div h5, #sprintTasks li div h5, #backlogsbox ul li div h5, #latestcommits ul li div div h5
+{
+	font-size: 20px;
+	margin: 0px;
+	padding: 0px;
+}
+#scrumbox h3, #scrumbox h2, #sprintbox h3, #sprintbox h2
+{
+	text-align: center;
+	font-size: 30px;
+	margin: 0px;
+	padding: 0px;
+}
+#pretasks li div h6, #pretasks li div p, #sprintTasks li div h6, #sprintTasks li div p, #premeets li div h6, #premeets li div p, #backlogsbox ul li div h6, #backlogsbox ul li div > p
+{
+	margin: 0px;
+	padding: 0px;
+}
+#pretasks li div h6, #sprintTasks li div h6, #premeets li div h6, #backlogsbox ul li div h6
+{
+	font-size: 15px;
+} 
+#pretasks li div, #sprintTasks li div, #premeets li div, #backlogsbox ul li div 
+{
+	padding: 5px;
+}
+#pretasks, #premeets, #sprintTasks
+{
+	max-height: 400px;
+	margin-top: 5px;
+	box-shadow: 0px 0px 5px blue;
+	border-width: 1px;
+	border-style: solid;
+}
+#pretasks li, #premeets li, #sprintTasks li
+{
+	padding: 5px;
+}
+#pretasks li div button, #sprintTasks li div button, #premeets li div button, #backlogsbox ul li div button
+{
+	margin:auto;
+	margin-left: 50px;
+	background-color: rgb(192, 114, 247);
+	font-size: 15px;
+	padding: 4px;
+	border-radius: 5px;
+	color: black;
+	font-weight: bold;
+	border-width: 0px;
+	margin-top: 2px;
+	box-shadow: 0px 0px 5px blue;
+}
+#pretasks li div button:hover, #sprintTasks li div button:hover, #premeets li div button:hover, #backlogsbox ul li div button:hover
+{
+	background-color: rgb(144, 0, 247);
+	color: white;
+}
+.title
+{
+	font-size: 25px;
+	background-color: rgb(192, 114, 247);
+	padding:3px;
+	border-radius: 3px;
+	margin-top: 5px;
+	box-shadow: 0px 0px 5px blue;
+}
+#createTask, #createmeet, .edit
+{
+	font-size: 15px;
+	box-shadow: 0px 0px 5px blue;
+	margin-top: 5px;
+	border-radius: 3px;
+	background-color: lightyellow;
+	max-height: 0;
+	overflow: hidden;
+	transition: max-height 0.2s ease-out;
+}
+.edit
+{
+	padding: 5px;
+	max-height: 400px;
+}
+#createTask h4, #createmeet h4, .edit h4
+{
+	text-align: left;
+	padding: 4px;
+	margin: 0px;
+	font-size: 20px;
+}
+#createTask label, #createmeet label, .edit label
+{
+	display: block;
+	font-size: 20px;
+	color: black;
+	font-weight: bold;
+	padding: 3px;
+}
+#createTask input, #createTask textarea, #createmeet input, #createmeet textarea, .edit input, .edit textarea
+{
+	box-shadow: 0px 0px 5px blue;
+	font-size: 18px;
+	padding: 5px;
+	border-width: 0px;
+	display: block;
+	margin: 4px;
+}
+#createTask button, #createmeet button, .edit button
+{
+	margin-left: 10px;
+	background-color: rgb(192, 114, 247);
+	font-size: 15px;
+	padding: 4px;
+	border-radius: 5px;
+	color: black;
+	font-weight: bold;
+	border-width: 0px;
+	margin-top: 5px;
+	box-shadow: 0px 0px 5px blue;
+}
+#createTask #taskDescription, #createmeet #meetDescription
+{
+	width: 400px;
+	height: 100px;
+}
+#createTask button:hover, #createmeet button:hover, .edit button:hover
+{
+	background-color: rgb(144, 0, 247);
+	color: white;
+}
+.id
+{
+	font-size: 25px;
+	font-weight: bold;
+	display: inline;
+	font-family: cursive;
+}
+.value
+{
+	font-size: 22px;
+	font-family: sans-serif;
+	display: inline;
+}
+#overviewbox ul
+{
+	max-height: 1000px;
+	padding: 5px;
+}
+#backlogsbox ul
+{
+	max-height: 1000px;
+	padding: 5px;
+}
+#backlogsbox ul li
+{
+	margin-top: 2px;
+}
+#overviewbox ul li, #backlogsbox > h4, #backlogsbox > p, #backlogsbox ul li > p
+{
+	border-radius: 10px;
+	background-color: rgb(192, 114, 247);
+	padding:5px;
+	margin-top: 5px;
+	box-shadow: 0px 0px 5px blue;
+}
+#contributorsbox ul
+{
+	max-height: 1000px;
+}
+#contributorsbox ul li
+{
+	padding: 5px;
+	margin-top: 5px;
+	border-radius: 10px;
+	background-color: rgb(232, 130, 255);
+	font-size: 20px;
+}
+#contributorsbox ul li button
+{
+	float: right;
+	padding: 2px;
+	background-color: rgb(192, 114, 247);
+	border-radius: 3px;
+	color: black;
+	font-weight: bold;
+	border-width: 0px;
+}
+#contributorsbox ul li button:hover
+{
+	background-color: rgb(144, 0, 247);
+	box-shadow: 0px 0px 5px blue;
+	color: white;
+}
+.folder:hover
+{
+	cursor: pointer;
+	box-shadow: 0px 0px 5px blue;
+	color: white;
+}
