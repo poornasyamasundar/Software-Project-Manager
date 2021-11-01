@@ -35,3 +35,9 @@ Each task contains the main feature and sub features that need to be implemented
         -A timeline diagram( example: https://www.w3schools.com/howto/howto_css_timeline.asp ) should be displayed,
               -The input will be an array of objects with the fields{ note(string), time(in milliseconds), noteClickableOrNot(bool), link(string)), get the start milliseconds and end milliseconds, scale the length appropriately and display a clickable note.
               -upon clicking the note call the backend function with the given link for the note, and replace the current timeline with another timeline with input as the output from previously called function.
+ 
+ 4)Minor fixes
+    -Include an option to add more contributors to the project under contributos option in the left, upon clicking the contributor button the list of contributors will be displayed and an option to remove a contributor should be included, also an option to include a new contributor should be included
+    -Create an Icon in the home page at the top right corner say your account, upon clicking the button a new contact page should open showing the user details and also to edit each of the user details. The user details include below fields: User Name, Password, Github user ID and email.( user name cannot be changed)
+    -In the new Project page, remove contributors field and include a field to include the github repository link, and display the github repository link in the overview tab, so that when the user clicks the link, the github repo page should open in a new tab.
+    -create a new app called waterfall, with the page layout same as agile, but with the left side options of only overview, contributors, timeline, progress. Rest all would be same as the previous one. 
