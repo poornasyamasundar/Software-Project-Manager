@@ -41,3 +41,10 @@ Each task contains the main feature and sub features that need to be implemented
     -Create an Icon in the home page at the top right corner say your account, upon clicking the button a new contact page should open showing the user details and also to edit each of the user details. The user details include below fields: User Name, Password, Github user ID and email.( user name cannot be changed)
     -In the new Project page, remove contributors field and include a field to include the github repository link, and display the github repository link in the overview tab, so that when the user clicks the link, the github repo page should open in a new tab.
     -create a new app called waterfall, with the page layout same as agile, but with the left side options of only overview, contributors, timeline, progress. Rest all would be same as the previous one. 
+   
+5)Spiral Model
+    -Create a new app called spiral, with the page layout same as agile, but with the left side options of only overview, contributors, timeline, progress. Rest all would be same as the previous one.
+    -Create a button in the options called view spiral, upon cicking the button a diagram with concentric circles should appear with four quadrants, with highlighting the current phase in one of the concentric circles.
+    -upon clicking a phase in any of the concentric circles a information box with editable feature should be displayed at the below the spiral diagram.
+    -each phase should have a tooltip to display the information like start date, end date, short description, type of the phase etc.
+    -There should also be a option to add another layer, and on clicking a layer all the information about all four phases should be displayed.
