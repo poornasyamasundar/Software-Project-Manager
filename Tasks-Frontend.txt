@@ -48,3 +48,19 @@ Each task contains the main feature and sub features that need to be implemented
     -upon clicking a phase in any of the concentric circles a information box with editable feature should be displayed at the below the spiral diagram.
     -each phase should have a tooltip to display the information like start date, end date, short description, type of the phase etc.
     -There should also be a option to add another layer, and on clicking a layer all the information about all four phases should be displayed.
+
+6)Progress for spiral model:
+        -There should be two progress bars, one for the amount of time completed in the current circle and one for the current phase.
+        -average amount to time spent in each of the four phases in all circles.
+        -average time spent on each circle.
+        -average amount of time between two circles.
+        -average no of meetings conducted in each circle.
+
+7)Waterfall Model:
+        -Create a button in the options called "Create File Layout", upon clicking the button, a display with essentially checkboxes should be displayed with fields and subfields with the various stages of waterfall model, upon selecting the checkboxes, and then clicking create, the respective folders will be created in the repository.
+        -A timeline should be displayed based on the already selected layout above. upon clicking each phase the file corresponding to
+the layout should be displayed( just display, no edit option ).
+        -Progress is not needed, all information will be displayed in the timeline itself.
+
+8)Tasks and Meetings:
+        -Include tasks, meetings and notices in spiral and waterfall model also.
