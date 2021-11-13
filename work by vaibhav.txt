@@ -60,3 +60,18 @@
 		</div>
 	</li>
 	-return the list of generated li elements.
+
+6)display tasks for editing -Vaibhav
+	-given tasks list from the function in 20 as input( taskname, created by, created on, description) generate a list of HTML li 
+	 elements with the following structure
+	-<li>
+		<div>
+			<h5>Task1</h5>
+			<h6>Status created by created on</h6>
+			<p>Description:</p>
+			<button id = 'delete'>Delete Task</button>
+			<button id = 'edit'>Edit Task</button>
+		</div>
+	</li>
+	-return the list of generated li elements.
+	
