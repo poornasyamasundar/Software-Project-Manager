@@ -1,4 +1,4 @@
-1)Product Backlog table	G.vaibhav		completed
+1)Product Backlog table	
 	-given a name create a table with the following fields = {id, type(int), foldername, createdby, taskheading,
 	taskdetails, dateposted, completedornot}
 	-Functions: ( In the folder database create a python file with below functions )
@@ -7,7 +7,7 @@
 		-given a foldername return all the rows with the given foldername
 		-modify the row with id as key
 		-return all the rows
-2)display notices for editing	G.vaibhav		completed
+2)display notices for editing
 	-given notices list from the above funcion as input(created by, created on, description ) generate an list of HTML li elements
 	 with the following structure
 	-<li>
@@ -19,7 +19,7 @@
 		</div>
 	</li>
 	-return the list of generated li elements
-3)display meetings for editing	G.vaibhav		completed
+3)display meetings for editing	
 	-given meetings list from the above funcion as input(meeting on, created by, created on, link, description ) generate an list 
 	 of HTML li elements with the following structure
 	-<li>
@@ -34,7 +34,7 @@
 	</li>
 	-return the list of generated li elements
 
-4)display meetings as notices	G.vaibhav		completed
+4)display meetings as notices
 	-given meetings list from the above funcion as input(created by, created on, link, description ) generate an list of HTML 
 	 li elements with the following structure
 	-<li>
@@ -50,7 +50,7 @@
 	</li>
 	-return the list of generated li elements.
 
-5)display notices as notices	G.vaibhav		completed
+5)display notices as notices
 	-given notices from the above funcion as input(created by, created on, description ) generate an list of HTML li elements 
 	 with the following structure
 	-<li>
@@ -61,7 +61,7 @@
 	</li>
 	-return the list of generated li elements.
 
-6)display tasks for editing -Vaibhav
+6)display tasks for editing
 	-given tasks list from the function in 20 as input( taskname, created by, created on, description) generate a list of HTML li 
 	 elements with the following structure
 	-<li>
@@ -74,7 +74,7 @@
 		</div>
 	</li>
 	-return the list of generated li elements.
-7)display tasks as notices	G.vaibhav		completed
+7)display tasks as notices
 	-given tasks list from the above funcion as input( task name, created by, created on, description ) generate an list of HTML 
 	 li elements with the following structure
 	-<li>
