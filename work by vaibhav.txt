@@ -1,0 +1,9 @@
+Product Backlog table	G.vaibhav		completed
+	-given a name create a table with the following fields = {id, type(int), foldername, createdby, taskheading,
+	taskdetails, dateposted, completedornot}
+	-Functions: ( In the folder database create a python file with below functions )
+		-insert a row 
+		-delete a row with id as key
+		-given a foldername return all the rows with the given foldername
+		-modify the row with id as key
+		-return all the rows
