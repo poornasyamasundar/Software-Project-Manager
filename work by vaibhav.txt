@@ -34,7 +34,23 @@
 	</li>
 	-return the list of generated li elements
 
-4)display notices as notices	G.vaibhav		completed
+4)display meetings as notices	G.vaibhav		completed
+	-given meetings list from the above funcion as input(created by, created on, link, description ) generate an list of HTML 
+	 li elements with the following structure
+	-<li>
+		<div>
+			<button class = 'mhead'>Meeting on(date and time)</button>
+			<div>
+				<h5>Created on and Created by</h5>
+				<a>Link</a>
+				<br>
+				Description
+			</div>
+		</div>
+	</li>
+	-return the list of generated li elements.
+
+5)display notices as notices	G.vaibhav		completed
 	-given notices from the above funcion as input(created by, created on, description ) generate an list of HTML li elements 
 	 with the following structure
 	-<li>
