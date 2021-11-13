@@ -1,4 +1,4 @@
-Product Backlog table	G.vaibhav		completed
+1)Product Backlog table	G.vaibhav		completed
 	-given a name create a table with the following fields = {id, type(int), foldername, createdby, taskheading,
 	taskdetails, dateposted, completedornot}
 	-Functions: ( In the folder database create a python file with below functions )
@@ -7,3 +7,16 @@ Product Backlog table	G.vaibhav		completed
 		-given a foldername return all the rows with the given foldername
 		-modify the row with id as key
 		-return all the rows
+2)display notices for editing	G.vaibhav		completed
+	-given notices list from the above funcion as input(created by, created on, description ) generate an list of HTML li elements
+	 with the following structure
+	-<li>
+		<div>
+			<h6>created by created on</h6>
+			<p>Description:</p>
+			<button id = 'delete'>Delete Notice</button>
+			<button id = 'edit'>Edit Notice</button>
+		</div>
+	</li>
+	-return the list of generated li elements
+	
