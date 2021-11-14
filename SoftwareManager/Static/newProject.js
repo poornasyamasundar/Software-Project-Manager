@@ -13,7 +13,8 @@ document.addEventListener('DOMContentLoaded', function()
 
 		var name = form.querySelector('#name').value;
 		var type = 'agile';
-		var repo_link = form.querySelector('#des').value;
+		var repo_link = form.querySelector("#repo").value;
+		var description = form.querySelector('#des').value;
 
 		const d = new Date();
 		var x = d.getDate()+"-"+ (d.getMonth()+1) +"-"+d.getFullYear();
@@ -28,7 +29,8 @@ document.addEventListener('DOMContentLoaded', function()
 					table_name: localStorage.getItem('Username')+'projects',
 					createdBy:localStorage.getItem('Username'),
 					createdOn: x, 
-					description: repo_link,
+					repolink: repo_link,
+					description: description,
 				},
 				success: function(data){
 					if(data == 'y'){

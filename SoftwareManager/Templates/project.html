@@ -10,6 +10,14 @@
 		</title>
 	</head>
 	<body>
+		<div id = 'modal'>
+			<div>
+				<h1>Delete Task</h1>
+				<p>Are you sure you want to delete the task</p>
+				<button id = 'yes'>Yes</button>
+				<button id = 'no'>No</button>
+			</div>
+		</div>
 		<div id = 'homeMenu'>
 			<div id = 'logo'>
 				<img id = 'logopng' src = "{% static 'logo.png' %}" align= 'left'></img>
@@ -57,19 +65,18 @@
 				<div id = 'overviewbox'>
 					<ul>
 						<li>
-							<p class = 'id'>Name of the Project: </p><p class = 'value'>Software Project Manager</p>
 						</li>
 						<li>
-							<p class = 'id'>Created By         : </p><p class = 'value'>Team 3</p>
 						</li>
 						<li>
-							<p class = 'id'>Created On         : </p><p class = 'value'>15-09-2021</p>
 						</li>
 						<li>
-							<p class = 'id'>Sprint Number      : </p><p class = 'value'>1</p>
 						</li>
 						<li>
-							<p class = 'id'>Scrum Number       : </p><p class = 'value'>10</p>
+						</li>
+						<li>
+						</li>
+						<li>
 						</li>
 					</ul>
 				</div>
@@ -82,7 +89,7 @@
 						<div>
 							<ul id = 'pretasks'>
 							</ul>
-							<button class = 'create'>Create a New Task</button>
+							<button class = 'create' id = 'createScrumTaskButton' >Create a New Task</button>
 							<form id = 'createTask'>
 								<h4>Create New Task</h4>
 								<label for = 'taskname'>Task Title</label>
@@ -96,13 +103,13 @@
 						<div>
 							<ul id = 'premeets'>
 							</ul>
-							<button class = 'create'>Create a New Meeting</button>
+							<button class = 'create' id = 'createScrumMeetButton' >Create a New Meeting</button>
 							<form id = 'createmeet'>
 								<h4>Create New Meeting</h4>
 								<label for = 'meetingtime'>Time</label>
-								<input type='text' id = 'meetingtime' name = 'meetingtime' placeholder='Time of the Meeting'>
+								<input type='time' id = 'meetingtime' name = 'meetingtime' placeholder='Time of the Meeting'>
 								<label for = 'meetingDate'>Date</label>
-								<input type='text' id = 'meetingDate' name = 'meetingDate' placeholder='yyyy-mm-dd'>
+								<input type='date' id = 'meetingDate' name = 'meetingDate' placeholder='yyyy-mm-dd'>
 								<label for = 'meetinglink'>Link</label>
 								<input type='text' id = 'meetinglink' name = 'meetinglink' placeholder='Link to the Meeting'>
 								<label for = 'meetDescription'>Purpose</label>
@@ -121,7 +128,7 @@
 						<div>
 							<ul id = 'sprintTasks'>
 							</ul>
-							<button class = 'create'>Create a New Task</button>
+							<button class = 'create' id = 'createSprintTaskButton'>Create a New Task</button>
 							<form id = 'createTask'>
 								<h4>Create New Task</h4>
 								<label for = 'taskname'>Task Title</label>

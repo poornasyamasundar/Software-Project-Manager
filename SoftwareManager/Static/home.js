@@ -58,6 +58,7 @@ function insertProjects(result)
 					localStorage.setItem('currentScrum', result[i].currentScrum);
 					localStorage.setItem('currentSprint', result[i].currentSprint);
 					localStorage.setItem('createdOn', result[i].createdOn);
+					localStorage.setItem('repoName', result[i].repolink);
 				}
 			}
 			window.location = '/Project';

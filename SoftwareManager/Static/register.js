@@ -31,6 +31,7 @@ document.addEventListener('DOMContentLoaded', function()
 						success: function(data){
 							if(data === 'S'){
 								alert('Successfully registered');
+								localStorage.setItem("gitUserName", git);
 								window.location = '';
 							}
 							else{
