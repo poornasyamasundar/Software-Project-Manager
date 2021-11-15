@@ -1,0 +1,660 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="description" content="This is a basic webpage">
+	<meta name="author" content="Yashwanth">
+	<meta name="keywords" content="HTML, basics">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>Yashwanth's Webpage</title>
+</head>
+<body onload = "getAll()">
+
+	<h2>Yashwanth's Webpage</h2>
+
+</body>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script type="text/javascript">
+	
+	function beforeSend(xhr)
+	{
+		xhr.setRequestHeader("Authorization", "token "+'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');
+	}
+
+	function print(tasksDone, typeCount)
+{
+	console.log(tasksDone, typeCount);
+	console.log(tasksDone/typeCount);
+	return tasksDone/typeCount;
+}
+
+function avgTasksHelper(list, counter, tasksDone, type, sprints, scrums)
+{
+	if(counter == list.length)
+	{
+		print(tasksDone, list.length)
+		if(type == 'sprint')
+		{
+			console.log('avgTasksCompleted for scrum');
+			avgTasksCompleted('scrum', sprints, scrums); 
+		}
+		else
+		{
+			console.log('printing time left for each sprint');
+			timeLeftHelper('sprint', sprints, scrums, 0);
+		}
+	}
+	else 
+	{
+	$.ajax(
+
+		{
+
+			type: 'GET',
+			url: list[counter],
+			beforeSend: beforeSend, 
+								
+			success: function(response)
+			{
+									//console.log(response)
+				$.ajax(
+
+					{
+
+						type: 'GET',
+						url: response[0].cards_url,
+						beforeSend: beforeSend, 
+						data:
+						{
+							archived_state: 'archived',
+						},
+						success: function(response)
+						{
+							avgTasksHelper(list, counter+1, tasksDone+response.length, type, sprints, scrums)
+						}
+					}
+
+					)
+			}
+		}
+
+	)
+	}
+}
+
+function avgTasksCompleted(type, sprints, scrums)
+	{
+		username = 'poornasyamasundar';
+		repoName = 'git_demo';
+		
+		$.ajax(
+
+			{
+
+				type: 'GET',
+				url: 'https://api.github.com/repos/'+username+'/'+repoName+'/projects',
+				beforeSend: beforeSend, 
+				
+				success: function(response)
+				{
+					list = []
+					for(i=0 ; i<response.length ; i++)
+					{
+
+						model = response[i].name.slice(0, type.length).toLowerCase();
+						//console.log(model)
+						if(model != type)
+							continue;
+
+						list.push(response[i].columns_url); 
+						
+					}
+
+					avgTasksHelper(list, 0, 0, type, sprints, scrums);
+				}
+			}
+
+			)
+	}
+	
+
+
+function productivityHelper2(list, url, counter, tasksDone, meetings)
+{
+	
+				$.ajax(
+
+					{
+
+						type: 'GET',
+						url: url,
+						beforeSend: beforeSend, 
+						
+						success: function(response)
+						{
+
+							productivityHelper(list, counter+1, tasksDone, meetings+response.length, sprints, scrums)
+						}
+					}
+
+					)
+		
+}
+
+function productivityHelper(list, counter, tasksDone, meetings, sprints, scrums)
+{
+	if(counter == list.length)
+	{
+		print(tasksDone, meetings)
+		console.log('avgTasksCompleted for sprint');
+		avgTasksCompleted('sprint', sprints, scrums);
+	}
+	else 
+	{
+	$.ajax(
+
+		{
+
+			type: 'GET',
+			url: list[counter],
+			beforeSend: beforeSend, 
+								
+			success: function(response)
+			{
+				//console.log(response)
+				$.ajax(
+
+					{
+
+						type: 'GET',
+						url: response[0].cards_url,
+						beforeSend: beforeSend, 
+						data:
+						{
+							archived_state: 'archived',
+						},
+						success: function(response_)
+						{
+
+							productivityHelper2(list, response[1].cards_url, counter, tasksDone+response_.length, meetings, sprints, scrums)
+						}
+					}
+
+					)
+			}
+		}
+
+	)
+	}
+}
+
+function productivity(sprints, scrums)
+	{
+		username = 'poornasyamasundar';
+		repoName = 'git_demo';
+		
+		$.ajax(
+
+			{
+
+				type: 'GET',
+				url: 'https://api.github.com/repos/'+username+'/'+repoName+'/projects',
+				beforeSend: beforeSend, 
+				
+				success: function(response)
+				{
+					list = []
+					for(i=0 ; i<response.length ; i++)
+					{
+
+						model = response[i].name.slice(0, 5).toLowerCase();
+						//console.log(model)
+						if(model != 'scrum')
+							continue;
+
+						list.push(response[i].columns_url); 
+						
+					}
+
+					productivityHelper(list, 0, 0, 0, sprints, scrums);
+				}
+			}
+
+			)
+	}
+	
+function avgCardsHelper(list, counter, avg, type, sprints, scrums)
+{
+	if(counter == list.length)
+	{
+		print(avg, list.length)
+		if(type == 'sprint')
+		{
+			console.log('avgCards for scrums');
+			avgCards('scrum', sprints, scrums);
+		}
+		else if(type == 'scrum')
+		{
+			console.log("productivity");
+			productivity(sprints, scrums);
+		}
+	}
+	else 
+	{
+	$.ajax(
+
+		{
+
+			type: 'GET',
+			url: list[counter],
+			beforeSend: beforeSend, 
+								
+			success: function(response)
+			{
+									//console.log(response)
+				$.ajax(
+
+					{
+
+						type: 'GET',
+						url: response[0].cards_url,
+						beforeSend: beforeSend, 
+						data:
+						{
+							archived_state: 'all',
+						},
+						success: function(response)
+						{
+							done=0;
+							for(i=0 ; i<response.length ; i++)
+							{
+								if(response[i].archived)
+									done++;
+							}
+							total = response.length;
+							if(done==0)
+								total++;
+							avgCardsHelper(list, counter+1, avg+(done/total), type, sprints, scrums)
+						}
+					}
+
+					)
+			}
+		}
+
+	)
+	}
+}
+
+function avgCards(type, sprint, scrums)
+	{
+		username = 'poornasyamasundar';
+		repoName = 'git_demo';
+		
+		$.ajax(
+
+			{
+
+				type: 'GET',
+				url: 'https://api.github.com/repos/'+username+'/'+repoName+'/projects',
+				beforeSend: beforeSend, 
+				
+				success: function(response)
+				{
+					//console.log(response.length)
+					list = []
+					for(i=0 ; i<response.length ; i++)
+					{
+
+						model = response[i].name.slice(0, type.length).toLowerCase();
+						//console.log(model)
+						if(model != type)
+							continue;
+
+						list.push(response[i].columns_url); 
+						
+					}
+
+					avgCardsHelper(list, 0, 0, type, sprints, scrums);
+					
+					
+				}
+			}
+
+			)
+	}
+
+function timeLeftHelper(type, sprints, scrums, idx)
+{
+	if(type == 'sprint')
+	{
+		if(idx == sprints.length)
+		{
+			console.log('printing time left for each scrum');
+			timeLeftHelper('scrum', sprints, scrums, 0);
+		}
+		else
+		{
+			timeLeft(sprints[idx].url, "", 'sprint');
+			timeLeftHelper('sprint', sprints, scrums, idx+1); 
+		}
+	}
+	else
+	{
+		if(idx == scrums.length)
+		{
+			return;
+		}
+		else
+		{
+			timeLeft(scrums[idx].url, "", 'scrum');
+			timeLeftHelper('scrum', sprints, scrums, idx+1); 
+		}
+	}
+}
+
+function timeLeft(url, callback, type)
+{
+	username = 'poornasyamasundar';
+	repoName = 'git_demo';
+		
+		$.ajax(
+
+			{
+
+				type: 'GET',
+				url: url,
+				beforeSend: beforeSend, 
+
+				success: function(response)
+				{
+					createdTime = response.created_at;
+					console.log(response.name)
+
+					if(type == 'sprint')
+					{
+						endTime=new Date(createdTime);
+    					endTime.setDate(endTime.getDate()+ 30);
+					}
+					else if(type == 'scrum')
+					{
+						endTime=new Date(createdTime);
+    					endTime.setDate(endTime.getDate()+ 2);
+					}
+					endTime = endTime.toISOString();
+					console.log(createdTime, endTime)
+				}
+			}
+			)
+}
+
+
+function sprintsInfo(sprints, scrums)
+	{
+		username = 'poornasyamasundar';
+		repoName = 'git_demo';
+		
+		$.ajax(
+
+			{
+
+				type: 'GET',
+				url: 'https://api.github.com/repos/'+username+'/'+repoName+'/projects',
+				beforeSend: beforeSend, 
+				
+				success: function(response)
+				{
+					//console.log(response)
+					list = []
+					for(i=0 ; i<response.length ; i++)
+					{
+
+						model = response[i].name.slice(0, 6).toLowerCase();
+						//console.log(model)
+						if(model != 'sprint')
+							continue;
+
+						createdTime = response[i].created_at;
+						endTime=new Date(createdTime);
+    					endTime.setDate(endTime.getDate()+ 30);
+    					endTime = endTime.toISOString();
+
+						list.push({name: response[i].name, createdTime: createdTime, endTime: endTime})
+						
+					}
+
+					console.log(list)
+					//return list;
+					console.log('printing all tasks done for each scrum')
+					scrumTasksDoneHelper(sprints, scrums, 0);
+				}
+			}
+
+			)
+	}
+
+
+
+function scrumTasksDone(sprints, scrums, url, idx)
+{
+	
+
+	$.ajax(
+
+	{
+		type: 'GET',
+		url: url,
+		beforeSend: beforeSend,
+		data: {
+			archived_state: 'archived'
+		},
+
+		success: function(response)
+		{
+			//console.log(response);
+			list = []
+
+			for(i=0 ; i<response.length ; i++)
+			{
+				list.push({creater: response[i].creator['login'], name: response[i].note, created_at: response[i].created_at, closed_at: response[i].updated_at})
+			}
+
+			console.log(list)
+			scrumTasksDoneHelper(sprints, scrums, idx+1);
+		}
+
+	}
+
+	)
+}
+
+function scrumTasksDoneHelper(sprints, scrums, idx)
+{
+
+	if(idx == scrums.length)
+	{
+		console.log('avgCards for sprint');
+		avgCards('sprint', sprints, scrums);
+		
+		return;
+	}
+	else 
+	{
+		console.log(scrums[idx].name);
+		url = scrums[idx].columns_url; 
+
+		$.ajax(
+
+		{
+			type: 'GET',
+			url: url,
+			beforeSend: beforeSend,
+
+			success: function(response)
+			{
+				// getting the cards and picking the cards_url for tasks.
+				//console.log(response);
+
+				//console.log(list)
+				scrumTasksDone(sprints, scrums, response[0].cards_url, idx);
+			}
+
+		}
+
+		)
+	}
+	
+}
+
+
+function getScrums(endTime)
+{
+	username = 'poornasyamasundar';
+	repoName = 'git_demo';
+		
+		$.ajax(
+
+			{
+
+				type: 'GET',
+				url: 'https://api.github.com/repos/'+username+'/'+repoName+'/projects',
+				beforeSend: beforeSend, 
+				
+				success: function(response)
+				{
+					//console.log(response)
+					list = []
+					for(i=0 ; i<response.length ; i++)
+					{
+
+						model = response[i].name.slice(0, 5).toLowerCase();
+						//console.log(model)
+						if(model != 'scrum')
+							continue;
+
+						createdTime = response[i].created_at;
+						scrum_endTime=new Date(createdTime);
+    					scrum_endTime.setDate(scrum_endTime.getDate()+ 2);
+    					scrum_endTime = scrum_endTime.toISOString();
+
+    					//endTime = endTime.toISOString()
+    					//console.log(createdTime, endTime) 
+    					if(createdTime <= endTime)
+						list.push({name: response[i].name, createdTime: createdTime, endTime: scrum_endTime})
+						
+					}
+
+					console.log(list)
+					return list;
+				}
+			}
+
+			)
+}
+
+function specificScrums(sprints, idx, scrums)
+	{
+		if(idx == sprints.length)
+		{
+			console.log('getting sprints info')
+			sprintsInfo(sprints, scrums)
+			return;
+		}
+
+		url = sprints[idx].url;
+
+		username = 'poornasyamasundar';
+		repoName = 'git_demo';
+		
+		$.ajax(
+
+			{
+
+				type: 'GET',
+				url: url,
+				beforeSend: beforeSend, 
+				
+				success: function(response)
+				{
+					//console.log(response)
+
+					createdTime = response.created_at;
+					endTime=new Date(createdTime);
+    				endTime.setDate(endTime.getDate()+ 30);
+
+    				console.log(sprints[idx].name);
+    				 getScrums(endTime.toISOString())
+    				 specificScrums(sprints, idx+1, scrums);
+				}
+			}
+
+			)
+	}
+
+// collecting all scrums, sprints
+// collecting scrums under each sprint
+// getting sprints info
+// under each scrum, getting all the tasks done
+// printing avgCards for sprint
+// printing avgCards for scrum
+// productivity
+// avgTasksCompleted for sprint
+// avgTasksCompleted for scrum
+// timeLeft for each sprint
+// timeLeft for each scrum 
+ 
+function getAll()
+{
+
+	username = 'poornasyamasundar';
+	repoName = 'git_demo';
+
+
+		
+		$.ajax(
+
+			{
+
+				type: 'GET',
+				url: 'https://api.github.com/repos/'+username+'/'+repoName+'/projects',
+				beforeSend: beforeSend, 
+				
+				success: function(response)
+				{
+					//console.log(response)
+					sprints = []
+					scrums = []
+					for(i=0 ; i<response.length ; i++)
+					{
+
+						model = response[i].name.slice(0, 6).toLowerCase();
+						model_ = response[i].name.slice(0, 5).toLowerCase();
+						if(model != 'sprint' && model_ != 'scrum')
+							continue;
+
+						name = response[i].name;
+						url = response[i].url;
+						columns_url = response[i].columns_url;
+						if(model == 'sprint')
+							sprints.push({name: name, url: url, columns_url: columns_url})
+						else scrums.push({name: name, url: url, columns_url: columns_url}) 
+						
+					}
+
+					console.log('scrums under each sprint');
+					specificScrums(sprints, 0, scrums);
+					
+				}
+			}
+
+			)
+
+
+}
+
+
+</script>
+</html>
