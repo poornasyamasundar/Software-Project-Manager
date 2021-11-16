@@ -143,30 +143,100 @@
 						</div>
 					</div>
 				</div> 
+				<div id = 'backlogsbox'>
+	    <h4>Product Backlogs</h4>
+	    <p>Path :root/</p>
+	    <ul>
+	    <li>
+	    <p class = 'folder'>FolderName</p>
+	    </li>
+	    <li>
+			<div>
+			<h5>Task1</h5>
+			<h6>Status created by created on</h6>
+			<p>Description:</p>
+			<button id = 'delete'>Delete Task</button>
+			<button id = 'edit'>Edit Task</button>
+			</div>
+			<form class = 'edit'>
+				<h4>Create New Task</h4>
+				<label for = 'taskname'>Task Title</label>
+				<input type='text' id = 'taskname' name = 'taskname' placeholder='New Task name'>
+				<label for = 'taskDescription'>Description</label>
+				<textarea type='text' id = 'taskDescription' name='taskDescription' placeholder='Describe the task'></textarea>
+				<button type='submit'>Save</button>
+				<button>Cancel</button>
+			</form>
+	    </li>
+	    </ul>
+	    <button class = 'create'>Create a New Task</button>
+	    <form id = 'createTask' class = 'createBacklog'>
+	    <h4>Create New Task</h4>
+	    <label for = 'taskname'>Task Title</label>
+	    <input type='text' id = 'taskname' name = 'taskname' placeholder='New Task name'>
+	    <label for = 'taskDescription'>Description</label>
+	    <textarea type='text' id = 'taskDescription' name='taskDescription' placeholder='Describe the task'></textarea>
+	    <button type='submit'>Create</button>
+	    </form>
+	    <button class = 'create'>Create a New Folder</button>
+	    <form id = 'createTask' class = 'createfolder'>
+	    <h4>Create New Folder</h4>
+	    <label for = 'taskname'>FolderName</label>
+	    <input type='text' id = 'taskname' name = 'taskname' placeholder='New Folder name'>
+	    <button type='submit'>Create</button>
+	    </form>
+	    </div>
 				<div id = 'progressbox'>
-					<ul>
-						<li>
-						</li>
-						<li>
-						</li>
-						<li>
-						</li>
-						<li>
-						</li>
-						<li>
-						</li>
-						<li>
-						</li>
-						<li>
-						</li>
-						<li>
-						</li>
-						<li>
-						</li>
-						<li>
-						</li>
-					</ul>
+		    <!-- Progress analysis is part of release 2 -->
+			<div class="container mt-5">
+				<div class="row">
+					<div class="col"><!-- for scrum -->
+						<h4>Current Scrum</h4>
+						<progress value="40" max="100"></progress>
+						<progress value="40" max="100"></progress>
+						<ul>
+							<li>
+								Poorna completed 5 tasks
+							</li>
+						</ul>
+						<p>Average number of tasks : </p>
+						<p>Productivity : </p>
+						<p>number of tasks completed vs no of tasks planned per scrum :</p>
+						<p>Average time : </p>
+					</div>
+					<div class="col"><!-- for sprint -->
+						<h4>Current Sprint</h4>
+						<progress value="40" max="100"></progress>
+						<progress value="40" max="100"></progress>
+						<ul>
+							<li>
+								Poorna completed 5 tasks
+							</li>
+						</ul>
+						<p>Average number of tasks : </p>
+						<p>Productivity : </p>
+						<p>number of tasks completed vs no of tasks planned per sprint :</p>
+						<p>Average time : </p>
+					</div>
+				</div>	
+			</div>
+		</div>
+	    <div id = 'timelinebox'>
+			<div class="timeline">
+				<div class="container left">
+				  <div class="content">
+					<h2>Date : </h2>
+					<p>Place hoder</p>
+				  </div>
 				</div>
+				<div class="container right">
+				  <div class="content">
+					<h2>Date : </h2>
+					<p>Place hoder</p>
+				  </div>
+				</div>
+			</div>
+	    </div>
 				<div id = 'contributorsbox'>
 					<h4 class = 'title'>List of Contributors</h4>
 					<ul>
