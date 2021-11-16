@@ -137,14 +137,18 @@ def getProjectsPy(request):
             scrum = request.POST['currentScrum']
             sprint = request.POST['currentSprint']
             project = request.POST['projectName']
-            modifyProject(username+'projects', project, scrum, sprint)
+            modifyProject(username+'projects', project, scrum, sprint, '')
             if scrum == '1' and sprint == '0':
                 create_taskTable(username+project+str(scrum)+'tasks') 
                 createTable(username+project+str(scrum)+'meets') 
             if sprint == '1':
                 create_taskTable(username+project+str(scrum)+'sprint')  
             return HttpResponse('y')
-
+        elif mode == '2':
+            description = request.POST['description']
+            project = request.POST['projectName']
+            modifyProject(username+'projects', project, 0, 0, description)
+            return HttpResponse('y')
 
 @csrf_exempt
 def taskFunctionPy(request):
@@ -181,8 +185,9 @@ def insertProject(request):
         createdBy = request.POST['createdBy']
         createdOn = request.POST['createdOn']
         description = request.POST['description']
+        repolink = request.POST['repolink']
 
-        insertProjectIntoTable(table_name, createdBy, createdOn, model, projectName, description, 0, 0)
+        insertProjectIntoTable(table_name, createdBy, createdOn, model, projectName, repolink, description, 0, 0)
         return HttpResponse('y')
 
 
@@ -202,13 +207,19 @@ def isTrueCredentials(request):
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
+        if( password == '' ):
+            if( isUser(username) ):
+                return HttpResponse('y');
+            else:
+                return HttpResponse('n');
+        
         if( isUser(username) ):
             if( isTrueCredentialscorrect(username, password) ):
-                return HttpResponse('C')
+                return HttpResponse(json.dumps(getDetails(username)))
             else:
-                return HttpResponse('W')
+                return HttpResponse('')
         else:
-            return HttpResponse('U')
+            return HttpResponse('')
         
 @csrf_exempt
 def insertUser(request):
@@ -216,11 +227,12 @@ def insertUser(request):
         username = request.POST['username']
         email = request.POST['email']
         git = request.POST['git']
+        token = request.POST['token']
         password = request.POST['password']
         b = insertUserIntoTable(username, password)
         print("b = ", b)
         if b == True:
-            c = insertDetails(git, username,'', '', email) 
+            c = insertDetails(token, username,'', git, email) 
             create_projecttable(username+'projects')
             print("c = ", c)
             return HttpResponse('S')
