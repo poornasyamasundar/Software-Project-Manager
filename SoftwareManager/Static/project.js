@@ -576,11 +576,6 @@ function specificScrums(sprints, idx, scrums)
 // timeLeft for each sprint
 // timeLeft for each scrum 
 
-function insertingintohtml()
-{
-	list=getAll();
-}
-
 function getAll()
 {
 	username = 'poornasyamasundar';
