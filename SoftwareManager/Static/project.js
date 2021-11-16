@@ -4,6 +4,59 @@ function print(tasksDone, typeCount)
 	console.log(tasksDone/typeCount);
 	return tasksDone/typeCount;
 }
+/*
+object has keys =[time,completed_task,total_task,avg_tasks,productivity,avg_time]
+time		=amount of time completed in the current scrum/ current sprint( input is in percentage )
+completed_task=no.of tasks done in the current scrum/ current sprint
+total_task	=total no.of tasks in the current scrum/ current sprint
+avg_tasks	=average no of tasks completed in a scrum/sprint( a float value will be given )
+productivity=productivity i.e no of tasks completed per every meeting conducted( a float value )
+avg_time	=average amount of time between the end of a scrum(sprint) and start of another scrum(sprint)
+
+*/ //			object for scrum, object for sprint
+function setValues(scrum_object,sprint_object)
+{
+	document.getElementById("prog_scrumtime").value=scrum_object['time'];
+	document.getElementById("prog_scrumtask").value=scrum_object['completed_task'];
+	document.getElementById("prog_scrumtask").max=scrum_object['total_task'];
+	document.getElementById("scrumavg_tasks").innerHTML="Average number of tasks : "+scrum_object['avg_tasks'];
+	document.getElementById("scrum_Productivity").innerHTML="Productivity : "+scrum_object['Productivity'];
+	document.getElementById("scrum_tasks").innerHTML="number of tasks completed vs no of tasks planned per scrum :"+scrum_object['completed_tasks']+" / "+scrum_object['total_task'];
+	document.getElementById("scrum_avg_time").innerHTML=""+scrum_object['avg_time'];
+
+	document.getElementById("prog_sprinttime").value=sprint_object['time'];
+	document.getElementById("prog_sprinttask").value=sprint_object['completed_task'];
+	document.getElementById("prog_sprinttask").max=sprint_object['total_task'];
+	document.getElementById("sprintavg_tasks").innerHTML="Average number of tasks : "+sprint_object['avg_tasks'];
+	document.getElementById("sprint_Productivity").innerHTML="Productivity : "+sprint_object['Productivity'];
+	document.getElementById("sprint_tasks").innerHTML="number of tasks completed vs no of tasks planned per scrum :"+sprint_object['completed_tasks']+" / "+sprint_object['total_task'];
+	document.getElementById("sprint_avg_time").innerHTML=""+sprint_object['avg_time'];
+
+}
+
+//we need to get objectarray
+function get_timeline(Objectarray)
+{
+	for(object in Objectarray)
+	{
+		var node = document.createElement("LI");                 // Create a <li> node
+		var div	 = document.createElement("div");
+		div.classList.add("timeline-content");
+		var h3 = document.createElement('h3');
+		var text=document.createTextNode(object['date']);
+
+		h3.classList.add("date")
+		var p = document.createElement('p');
+		var textnode = document.createTextNode(object['note']);
+		h3.appendChild(text);
+		p.appendChild(textnode);                              // Append the text to <li>
+		div.appendChild(h3);
+		div.appendChild(p);
+		node.appendChild(div);
+		document.getElementByClassName("myList").appendChild(node);
+	}
+	
+}
 
 function avgTasksHelper(list, counter, tasksDone, type, sprints, scrums)
 {

@@ -21,7 +21,7 @@ Each task contains the main feature and sub features that need to be implemented
       the tasks and meetings).
     -All the appropriate backend functions can be assumed to be available.
     
-3)Timeline and Progress
+3)Timeline and Progress done
     -There is already a button in the options(left side) called progress, upon clicking the button the following should be displayed
         -There should be two fields one for the current scrum, and other for the current sprint, upon clicking the option for scrum or sprint, the below sub fields should be displayed.
             -a progress bar should be displayed telling the amount of time completed in the current scrum/ current sprint( input is in percentage )

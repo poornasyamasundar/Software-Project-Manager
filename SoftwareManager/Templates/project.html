@@ -191,53 +191,75 @@
 				<div class="col"><!-- for scrum -->
 					<h4>Current Scrum</h4>
 					amount of time
-					<progress value="40" max="100"></progress>
+					<progress id="prog_scrumtime" value="40" max="100"></progress>
 					<br>
 					number of tasks
-					<progress value="40" max="100"></progress>
+					<progress id="prog_scrumtask" value="40" max="100"></progress>
 					<ul>
 						<li>
 							Poorna completed 5 tasks
 						</li>
 					</ul>
-					<p>Average number of tasks : </p>
-					<p>Productivity : </p>
-					<p>number of tasks completed vs no of tasks planned per scrum :</p>
-					<p>Average time : </p>
+					<p id="scrumavg_tasks">Average number of tasks : </p>
+					<p id="scrum_Productivity">Productivity : </p>
+					<p id="scrum_tasks">number of tasks completed vs no of tasks planned per scrum :</p>
+					<p id="scrum_avg_time">Average time : </p>
 				</div>
 				<div class="col"><!-- for sprint -->
 					<h4>Current Sprint</h4>
 					amount of time
-					<progress value="40" max="100"></progress>
+					<progress id="prog_sprinttime" value="40" max="100"></progress>
 					<br>
 					number of tasks
-					<progress value="40" max="100"></progress>
+					<progress id="prog_sprinttask" value="40" max="100"></progress>
 					<ul>
 						<li>
 							Poorna completed 5 tasks
 						</li>
 					</ul>
-					<p>Average number of tasks : </p>
-					<p>Productivity : </p>
-					<p>number of tasks completed vs no of tasks planned per sprint :</p>
-					<p>Average time : </p>
+					<p id="sprintavg_tasks">Average number of tasks : </p>
+					<p id="sprint_Productivity">Productivity : </p>
+					<p id="sprint_tasks">number of tasks completed vs no of tasks planned per sprint :</p>
+					<p id="scrum_avg_time">Average time : </p>
 				</div>
+				<script>
+					setvalues();
+					</script>
 			</div>	
 		</div>
-		<div>
+		<button class="time" onclick="get_timeline">get timeline </button>
+		<div class="containers">
 			<div class="timeline">
-				<div class="container left">
-				<div class="content">
-					<h2>Date : </h2>
-					<p id="placeholder">Place hoder</p>
-				</div>
-				</div>
-				<div class="container right">
-				<div class="content">
-					<h2>Date : </h2>
-					<p>Place hoder</p>
-				</div>
-				</div>
+				<ul class="myList">
+					<li>
+						<div class="timeline-content">
+							<h3 class="date">20th may, 2010</h3>
+							<p>note dshbvjhawjer</p>
+						  </div>
+					</li>
+					<li>
+						<div class="timeline-content">
+							<h3 class="date">20th may, 2010</h3>
+							<p>note sdgerdg</p>
+						  </div>
+					</li>
+					<li>
+						<div class="timeline-content">
+							<h3 class="date">20th may, 2010</h3>
+							<p>note dshbvjhawjer</p>
+						  </div>
+					</li><li>
+						<div class="timeline-content">
+							<h3 class="date">20th may, 2010</h3>
+							<p>note dshbvjhawjer</p>
+						  </div>
+					</li><li>
+						<div class="timeline-content">
+							<h3 class="date">20th may, 2010</h3>
+							<p>note dshbvjhawjer</p>
+						  </div>
+					</li>
+				</ul>
 			</div>
 		</div>
 		
