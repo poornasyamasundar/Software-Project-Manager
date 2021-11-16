@@ -1,3 +1,77 @@
+function beforeSend(xhr)
+{
+	xhr.setRequestHeader("Authorization", "token "+localStorage.getItem('token'));
+}
+function getFolderList( repoName, path, callBack )
+{
+	username = localStorage.getItem('gitUserName');
+	$.ajax(
+		{
+			type: 'GET',
+			url: 'https://api.github.com/repos/'+username+'/'+repoName+'/contents'+path,
+			beforeSend: beforeSend,
+			success: function(response)
+			{
+				console.log(response);
+				callBack();
+			},
+			error: function()
+			{
+				alert("Incorrect Repo name");
+			}
+		}
+	)
+}
+function createProject( name, callback , repoName)
+{
+	username = localStorage.getItem('gitUserName');
+	console.log("gitUsername = ", username);
+	$.ajax(
+		{
+			type: 'POST',
+			url: 'https://api.github.com/repos/'+username+'/'+repoName+'/projects',
+			beforeSend: beforeSend, 
+			data:
+			JSON.stringify({
+				name: name,
+			}),
+			success: function(response)
+			{
+				console.log("Created Project = ", name, " Successfully");
+				console.log(response);
+				obj = { name: response.name, columnsURL: response.columns_url, projectURL: response.url };
+				callback(obj);
+			},
+			error: function()
+			{
+				console.log("Couldn't create project");
+			}
+		})
+}
+
+function createColumn( projectURL, name, callback )
+{
+	$.ajax(
+		{
+			type:'POST',
+			url: projectURL+'/columns',
+			beforeSend: beforeSend,
+			data: JSON.stringify({
+				name: name,
+			}),
+			success: function(response)
+			{
+				console.log("CreatedColumns = ",name, "  successfully");
+				console.log(response);
+				obj = { name: response.name, cardsURL: response.cards_url, columnURL: response.url , createdTime: response.created_at }
+				callback(obj);
+			},
+			error: function()
+			{
+				console.log("Couldn't create column");
+			}
+		})
+}
 document.addEventListener('DOMContentLoaded', function() 
 	{
 		document.querySelector('#gobackbutton').onclick = () =>
@@ -11,35 +85,81 @@ document.addEventListener('DOMContentLoaded', function()
 		{
 			event.preventDefault();
 
-		var name = form.querySelector('#name').value;
-		var type = 'agile';
-		var repo_link = form.querySelector("#repo").value;
-		var description = form.querySelector('#des').value;
-
-		const d = new Date();
-		var x = d.getDate()+"-"+ (d.getMonth()+1) +"-"+d.getFullYear();
-
-		$.ajax(
+			var name = form.querySelector('#name').value;
+			var type = form.querySelector("select").value;
+			var repo_link = form.querySelector("#repo").value;
+			var description = form.querySelector('#des').value;
+			var list = [localStorage.getItem('Username')];
+			var obj = {
+				contributors: list,
+				des: description,
+			};
+			description = JSON.stringify(obj);
+			if(name == '' )
 			{
-				type: "POST",
-				url: "insertProject",
-				data: {
-					model: type,
-					projectName: name,
-					table_name: localStorage.getItem('Username')+'projects',
-					createdBy:localStorage.getItem('Username'),
-					createdOn: x, 
-					repolink: repo_link,
-					description: description,
-				},
-				success: function(data){
-					if(data == 'y'){
-						window.location = '';
-						alert("New Project Created");
-					}
-				}
+				alert("Name is empty");
 			}
-		)
+			else if( type == '-Select-' )
+			{
+				alert("Select a model");
+			}
+			else if( repo_link == '' )
+			{
+				alert("Enter the Repo Name");
+			}
+			else if( description == '' )
+			{
+				alert("Provide a description for the project");
+			}
+			else
+			{
+				getFolderList( repo_link, '', function() {
+
+					const d = new Date();
+					var x = d.getDate()+"-"+ (d.getMonth()+1) +"-"+d.getFullYear();
+
+					$.ajax(
+						{
+							type: "POST",
+							url: "insertProject",
+							data: {
+								model: type,
+								projectName: name,
+								table_name: localStorage.getItem('Username')+'projects',
+								createdBy:localStorage.getItem('Username'),
+								createdOn: x, 
+								repolink: repo_link,
+								description: description,
+							},
+							success: function(data)
+							{
+								if(data == 'y')
+								{		
+									createProject( "Notices", function(projectObj) {
+										createColumn( projectObj.projectURL, 'Notices', function(tasksObj) {
+											localStorage.setItem('NoticeDetails', JSON.stringify(tasksObj));
+											if( type != 'Agile Model' )
+											{
+												createColumn( projectObj.projectURL, 'Meetings', function(tasksobj1) {
+													localStorage.setItem('MeetingsDetails', JSON.stringify(tasksobj1));
+													alert("New Project Created");
+													window.location = "http://127.0.0.1:8000/";
+												});
+											}
+											else
+											{
+												window.location = "http://127.0.0.1:8000/";
+												alert("New Project Created");
+											}
+										});
+									}, repo_link);
+								}
+							}
+						}
+					);
+				});
+			}
+
 		}
 
 	});

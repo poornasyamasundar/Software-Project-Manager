@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		{% load static %}
+		<link rel = 'stylesheet' href = "{% static 'spiral.css' %}">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+		<script src = "{% static 'spiral.js' %}"></script>
+		<title>
+			Project Name
+		</title>
+	</head>
+	<body>
+		<div id = 'modal'>
+			<div>
+				<h1>Delete Task</h1>
+				<p>Are you sure you want to delete the task</p>
+				<button id = 'yes'>Yes</button>
+				<button id = 'no'>No</button>
+			</div>
+		</div>
+		<div id = 'homeMenu'>
+			<div id = 'logo'>
+				<img id = 'logopng' src = "{% static 'logo.png' %}" align= 'left'></img>
+				Software Project Manager
+			</div>
+			<div id = 'projectname'>
+				Project Name
+			</div>
+			<div id = 'help'>
+				<button id = 'helpbutton'>
+					Help
+				</button>
+			</div>
+			<div id = 'goback'>
+				<button id ='gobackbutton'>
+					GoBack
+				</button>
+			</div>
+		</div>
+		<div id = 'projectBox'>
+			<div id = 'options'>
+				<button id = 'overview'>
+					Overview
+				</button>
+				<button id = 'Spiral'>
+					Spiral
+				</button>
+				<button id = 'progress'>
+					Progress
+				</button>
+				<button id = 'Contributors'>
+					Contributors 
+				</button>
+				<button id = 'notices'>
+					Notices
+				</button>
+				<button id = 'meetings'>
+					Meetings
+				</button>
+			</div>
+			<div id = 'display'>
+				<div id = 'overviewbox'>
+					<ul>
+						<li>
+						</li>
+						<li>
+						</li>
+						<li>
+						</li>
+						<li>
+						</li>
+						<li>
+						</li>
+						<li>
+						</li>
+						<li>
+						</li>
+						<li>
+						</li>
+					</ul>
+				</div>
+				<div id = 'spiralbox'>
+					<div id = 'chart'>
+					</div>
+					<div id = 'tasks'>
+
+					</div>
+				</div>
+				<div id = 'progressbox'>
+					Progress analysis is part of release 2
+				</div>
+				<div id = 'contributorsbox'>
+					<h4 class = 'title'>List of Contributors</h4>
+					<ul>
+						<li>
+						</li>
+					</ul>
+					<button class = 'create'>Add a New Contributor</button>
+					<form id = 'createTask'>
+						<h4>Add New Contributor</h4>
+						<label for = 'taskname'>Username</label>
+						<input type='text' id = 'taskname' name = 'taskname' placeholder='Username'>
+						<button type='submit'>Add</button>
+					</form> 
+
+				</div>
+				<div id = 'noticesbox'>
+					<div class = 'title'>Notices</div>
+					<div>
+						<ul id = 'noticelist'>
+						</ul>
+						<button class = 'create' id = 'createNoticeButton'>Create a New Notice</button>
+						<form id = 'createNotice'>
+							<h4>Create New Notice</h4>
+							<label for = 'taskname'>Notice</label>
+							<input type='text' id = 'taskname' name = 'taskname' placeholder='New Notice'>
+							<label for = 'taskDescription'>Description</label>
+							<textarea type='text' id = 'taskDescription' name='taskDescription' placeholder='Description'></textarea>
+							<button type='submit'>Create</button>
+						</form>
+					</div>
+				</div>
+				<div id = 'meetingsbox'>
+					<div class = 'title'>Meetings scheduled for this scrum</div>
+					<div>
+						<ul id = 'premeets'>
+						</ul>
+						<button class = 'create' id = 'createScrumMeetButton' >Create a New Meeting</button>
+						<form id = 'createmeet'>
+							<h4>Create New Meeting</h4>
+							<label for = 'meetingtime'>Time</label>
+							<input type='time' id = 'meetingtime' name = 'meetingtime' placeholder='Time of the Meeting'>
+							<label for = 'meetingDate'>Date</label>
+							<input type='date' id = 'meetingDate' name = 'meetingDate' placeholder='yyyy-mm-dd'>
+							<label for = 'meetinglink'>Link</label>
+							<input type='text' id = 'meetinglink' name = 'meetinglink' placeholder='Link to the Meeting'>
+							<label for = 'meetDescription'>Purpose</label>
+							<textarea type='text' id = 'meetDescription' name='meetDescription' placeholder='Describe the Purpose'></textarea>
+							<button type='submit'>Create</button>
+						</form>
+					</div>
+				</div>
+			</div>
+			<div id = 'board'>
+				<div id = 'notices'>
+					<div id = 'noticeshead'>
+						Notices
+					</div>
+					<ul>
+					</ul>
+				</div>
+				<div id = 'upcomingmeets'>
+					<div id = 'upcomingmeetshead'>
+						Upcoming Meetings
+					</div>
+					<ul>
+					</ul>
+				</div>
+				<div id='latestcommits'>
+					<div id = 'commits'>
+						Latest Commits
+					</div>
+					<ul>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

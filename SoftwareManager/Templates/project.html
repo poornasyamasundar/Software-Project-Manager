@@ -36,11 +36,6 @@
 					GoBack
 				</button>
 			</div>
-			<div id = 'profile'>
-				<button id ='profilebutton'>
-					My Profile
-				</button>
-			</div>
 		</div>
 		<div id = 'projectBox'>
 			<div id = 'options'>
@@ -58,9 +53,6 @@
 				</button>
 				<button id = 'Contributors'>
 					Contributors 
-				</button>
-				<button id = 'Product_backlogs'>
-					Product Backlogs
 				</button>
 				<button id = 'notices'>
 					Notices
@@ -83,10 +75,16 @@
 						</li>
 						<li>
 						</li>
+						<li>
+						</li>
+						<li>
+						</li>
+						<li>
+						</li>
 					</ul>
 				</div>
 				<div id = 'scrumbox'>
-					<button id = 'createscrum' class = 'create'>Click here to create a new scrum</button>
+					<button id = 'createscrum' >Click here to create a new scrum</button>
 					<div id = 'scrum'>
 						<h2>Time for the current scrum to complete:</h2>
 						<h3></h3>
@@ -125,7 +123,7 @@
 					</div>
 				</div>
 				<div id = 'sprintbox'>
-					<button id = 'createsprint' class = 'create'>Click here to create a new sprint</button>
+					<button id = 'createsprint'>Click here to create a new sprint</button>
 					<div id = 'sprint'>
 					<h2>Time for the current sprint to complete:</h2>
 					<h3></h3>
@@ -144,120 +142,69 @@
 							</form>
 						</div>
 					</div>
+				</div> 
+				<div id = 'progressbox'>
+					<ul>
+						<li>
+						</li>
+						<li>
+						</li>
+						<li>
+						</li>
+						<li>
+						</li>
+						<li>
+						</li>
+						<li>
+						</li>
+						<li>
+						</li>
+						<li>
+						</li>
+						<li>
+						</li>
+						<li>
+						</li>
+					</ul>
 				</div>
-				
-	    
-	    <!-- <div id = 'backlogsbox'>
-	    <h4>Product Backlogs</h4>
-	    <p>Path :root/</p>
-	    <ul>
-	    <li>
-	    <p class = 'folder'>FolderName</p>
-	    </li>
-	    <li>
-	    <p class = 'folder'>FolderName</p>
-	    </li>
-	    <li>
-	    <p class = 'folder'>FolderName</p>
-	    </li>
-	    <li>
-	    <div>
-	    <h5>Task1</h5>
-	    <h6>Status created by created on</h6>
-	    <p>Description:</p>
-	    <button id = 'delete'>Delete Task</button>
-	    <button id = 'edit'>Edit Task</button>
-	    </div>
-	    <form class = 'edit'>
-	    <h4>Create New Task</h4>
-	    <label for = 'taskname'>Task Title</label>
-	    <input type='text' id = 'taskname' name = 'taskname' placeholder='New Task name'>
-	    <label for = 'taskDescription'>Description</label>
-	    <textarea type='text' id = 'taskDescription' name='taskDescription' placeholder='Describe the task'></textarea>
-	    <button type='submit'>Save</button>
-	    <button>Cancel</button>
-	    </form>
-	    </li>
-	    </ul>
-	    <button class = 'create'>Create a New Task</button>
-	    <form id = 'createTask' class = 'createBacklog'>
-	    <h4>Create New Task</h4>
-	    <label for = 'taskname'>Task Title</label>
-	    <input type='text' id = 'taskname' name = 'taskname' placeholder='New Task name'>
-	    <label for = 'taskDescription'>Description</label>
-	    <textarea type='text' id = 'taskDescription' name='taskDescription' placeholder='Describe the task'></textarea>
-	    <button type='submit'>Create</button>
-	    </form>
-	    <button class = 'create'>Create a New Folder</button>
-	    <form id = 'createTask' class = 'createfolder'>
-	    <h4>Create New Folder</h4>
-	    <label for = 'taskname'>FolderName</label>
-	    <input type='text' id = 'taskname' name = 'taskname' placeholder='New Folder name'>
-	    <button type='submit'>Create</button>
-	    </form>
-	    </div> -->
-	    <div id = 'progressbox'>
-		    Progress analysis is part of release 2
-	    </div>
-	    <!--<div id = 'timelinebox'>
-	     </div>-->
-	     <div id = 'contributorsbox'>
-		     <h4 class = 'title'>List of Contributors</h4>
-		     <ul>
-			     <li>
-				     Poorna
-			     </li>
-		     </ul>
-		     Multi Contributors will be included for next release
-		     <!--<button class = 'create'>Add a New Contributor</button>
-	       <form id = 'createTask'>
-	       <h4>Add New Contributor</h4>
-	       <label for = 'taskname'>Username</label>
-	       <input type='text' id = 'taskname' name = 'taskname' placeholder='Username'>
-	       <button type='submit'>Add</button>
-	       </form> -->
-	     </div>
-		 <div id = 'noticesbox'>
-			<div>
-				<ul id = 'preNotices'>
-				</ul>
-				<button class = 'create'>Create a New Notice</button>
-				<form id = 'createNotice'>
-					<h4>Create New Notice</h4>
-					<label for = 'taskname'>Notice Title</label>
-					<input type='text' id = 'noticename' name = 'noticename' placeholder='New Notice name'>
-					<label for = 'noticeDescription'>Description</label>
-					<textarea type='text' id = 'noticeDescription' name='noticeDescription' placeholder='Describe the Notice'></textarea>
-					<button type='submit'>Create</button>
-				</form>
+				<div id = 'contributorsbox'>
+					<h4 class = 'title'>List of Contributors</h4>
+					<ul>
+						<li>
+						</li>
+					</ul>
+					<button class = 'create'>Add a New Contributor</button>
+					<form id = 'createTask'>
+						<h4>Add New Contributor</h4>
+						<label for = 'taskname'>Username</label>
+						<input type='text' id = 'taskname' name = 'taskname' placeholder='Username'>
+						<button type='submit'>Add</button>
+					</form> 
+
+				</div>
+				<div id = 'noticesbox'>
+					<div class = 'title'>Notices</div>
+					<div>
+						<ul id = 'noticelist'>
+						</ul>
+						<button class = 'create' id = 'createNoticeButton'>Create a New Notice</button>
+						<form id = 'createNotice'>
+							<h4>Create New Notice</h4>
+							<label for = 'taskname'>Notice</label>
+							<input type='text' id = 'taskname' name = 'taskname' placeholder='New Notice'>
+							<label for = 'taskDescription'>Description</label>
+							<textarea type='text' id = 'taskDescription' name='taskDescription' placeholder='Description'></textarea>
+							<button type='submit'>Create</button>
+						</form>
+					</div>
+				</div>
 			</div>
-			<div class = 'title'>All Notices</div>
-	    </div>
-	</div>
 			<div id = 'board'>
 				<div id = 'notices'>
 					<div id = 'noticeshead'>
 						Notices
 					</div>
 					<ul>
-						<li>
-							<div>
-								<h5>Notice by: posted on</h5>
-								<p>Information about the notice</p>
-							</div>
-						</li>
-						<li>
-							<div>
-								<h5>Notice by: posted on</h5>
-								<p>Information about the notice</p>
-							</div>
-						</li>
-						<li>
-							<div>
-								<h5>Notice by: posted on</h5>
-								<p>Information about the notice</p>
-							</div>
-						</li>
 					</ul>
 				</div>
 				<div id = 'upcomingmeets'>
@@ -279,23 +226,6 @@
 						Latest Commits
 					</div>
 					<ul>
-						<li>
-							<div>
-								<h3>Commit by : Name</h3>
-								<p>Commit message</p>
-							</div>
-						</li>
-						<li>
-							<div>
-								<h3>Commit by : Name</h3>
-								<p>Commit message</p>
-							</div>
-						</li><li>
-							<div>
-								<h3>Commit by : Name</h3>
-								<p>Commit message</p>
-							</div>
-						</li>
 					</ul>
 				</div>
 			</div>

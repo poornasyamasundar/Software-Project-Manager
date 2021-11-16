@@ -189,7 +189,7 @@ body
 	font-weight: bold;
 	background-color: rgb(162, 0, 255);
 }
-#duetasks ul, #upcomingmeets ul, #notices ul, #pretasks, #preNotices, #sprintTasks, #noticelist, #premeets, #overviewbox ul, #progressbox ul, #backlogsbox ul, #contributorsbox ul, #latestcommits ul
+#duetasks ul, #upcomingmeets ul, #notices ul, #pretasks, #preNotices, #sprintTasks, #noticelist, #premeets, #overviewbox ul, #backlogsbox ul, #contributorsbox ul, #latestcommits ul
 {
 	list-style-type: none;
 	padding: 0px;
@@ -338,6 +338,18 @@ body
 	margin-top: 5px;
 	box-shadow: 0px 0px 5px blue;
 }
+#chart
+{
+	width: 800px;
+	height: 400px;
+	margin:auto;
+	background-color: white;
+}
+#tasks
+{
+	height: 600px;
+	box-shadow: 0px 0px 5px blue;
+}
 #createTask, #createmeet, #createNotice, .edit
 {
 	font-size: 15px;
@@ -348,6 +360,35 @@ body
 	max-height: 0;
 	overflow: hidden;
 	transition: max-height 0.2s ease-out;
+}
+.tooltiptext {
+	visibility: hidden;
+	width: 120px;
+	background-color: black;
+	color: #fff;
+	text-align: center;
+	border-radius: 6px;
+	padding: 5px 0;
+	position: absolute;
+	z-index: 10;
+	bottom: 100%;
+	left: 50%;
+	margin-left: -60px;
+}
+
+.circle .tooltiptext::after {
+	content: "";
+	position: absolute;
+	top: 100%;
+	left: 50%;
+	margin-left: -5px;
+	border-width: 5px;
+	border-style: solid;
+	border-color: black transparent transparent transparent;
+}
+
+.circle:hover .tooltiptext {
+	visibility: visible;
 }
 .edit
 {
@@ -414,7 +455,7 @@ body
 	font-family: sans-serif;
 	display: inline;
 }
-#overviewbox ul, #progressbox ul
+#overviewbox ul
 {
 	max-height: 1000px;
 	padding: 5px;
@@ -428,7 +469,7 @@ body
 {
 	margin-top: 2px;
 }
-#overviewbox ul li, #progressbox ul li, #backlogsbox > h4, #backlogsbox > p, #backlogsbox ul li > p
+#overviewbox ul li, #backlogsbox > h4, #backlogsbox > p, #backlogsbox ul li > p
 {
 	border-radius: 10px;
 	background-color: rgb(192, 114, 247);

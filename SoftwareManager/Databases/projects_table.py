@@ -3,20 +3,23 @@ from django.db import connection
 def create_projecttable(table_name):
     cursor = connection.cursor()
 
-    query = f"CREATE TABLE {table_name} (id INT AUTO_INCREMENT PRIMARY KEY, createdBy VARCHAR(100) NOT NULL, createdOn VARCHAR(20), model VARCHAR(30) NOT NULL, projectName VARCHAR(60) NOT NULL, description VARCHAR(300), currentScrum int, currentSprint int)"
+    query = f"CREATE TABLE {table_name} (id INT AUTO_INCREMENT PRIMARY KEY, createdBy VARCHAR(100) NOT NULL, createdOn VARCHAR(20), model VARCHAR(30) NOT NULL, projectName VARCHAR(60) NOT NULL, description VARCHAR(300), currentScrum int, currentSprint int, repolink varchar(200))"
     cursor.execute(query)
     return True
 
-def insertProjectIntoTable(table_name, createdBy, createdOn, model, projectName, description, currentScrum, currentSprint):
+def insertProjectIntoTable(table_name, createdBy, createdOn, model, projectName, repolink, description, currentScrum, currentSprint):
     cursor = connection.cursor()
-    query = f"INSERT INTO {table_name} (createdBy, createdOn, model, projectName, description, currentScrum, currentSprint) VALUES ('{createdBy}' , '{createdOn}', '{model}', '{projectName}', '{description}', '{currentScrum}', '{currentSprint}')"
+    query = f"INSERT INTO {table_name} (createdBy, createdOn, model, projectName, description, currentScrum, currentSprint, repolink) VALUES ('{createdBy}' , '{createdOn}', '{model}', '{projectName}', '{description}', '{currentScrum}', '{currentSprint}', '{repolink}')"
 
     cursor.execute(query)
     return True
 
-def modifyProject(table_name,projectName, currentScrum, currentSprint):
+def modifyProject(table_name,projectName, currentScrum, currentSprint, description):
     cursor = connection.cursor()
-    query = f"UPDATE {table_name} SET currentScrum = '{currentScrum}', currentSprint = '{currentSprint}' WHERE projectName = '{projectName}'"
+    if( description == '' ):
+        query = f"UPDATE {table_name} SET currentScrum = '{currentScrum}', currentSprint = '{currentSprint}' WHERE projectName = '{projectName}'"
+    else:
+        query = f"UPDATE {table_name} SET description = '{description}' WHERE projectName = '{projectName}'"
 
     print(query)
     cursor.execute(query)
@@ -28,7 +31,7 @@ def allProjects(table_name):
     cursor.execute(query)
 
     result = cursor.fetchall()
-    keys = ("id", "createdBy", "createdOn", "model", "projectName", "description", 'currentScrum', 'currentSprint')
+    keys = ("id", "createdBy", "createdOn", "model", "projectName", "description", 'currentScrum', 'currentSprint', 'repolink')
     lst = []
 
     for row in result:

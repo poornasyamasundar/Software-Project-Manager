@@ -24,4 +24,7 @@ urlpatterns = [
     path('newProject', include('newProject.urls')),
     path('Project', include('agile.urls')),
     path('Feedback', include('feedback.urls')),
+    path('Profile', include('profilepage.urls')),
+    path('Waterfall', include('waterfall.urls')),
+    path('Spiral', include('spiral.urls')),
 ]

@@ -28,12 +28,19 @@ document.addEventListener('DOMContentLoaded', function()
 						password: password,
 					},
 					success: function(data){
-						if(data == 'C'){
+						console.log(data);
+						if(data != '')
+						{
 							alert('successfull Sign Ined');
-							window.history.back();
+							data = JSON.parse(data);
+							console.log(data);
 							localStorage.setItem('Username', email);
+							localStorage.setItem('gitUserName', data[4]);
+							localStorage.setItem('token', data[1]);
+							window.location = "http://127.0.0.1:8000/";
 						}
-						else{
+						else
+						{
 							alert("Login Credentials wrong! Please try again");
 							window.location = '';
 						}

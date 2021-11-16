@@ -9,11 +9,11 @@ def getDetails(user_name):
     details = cursor.fetchone()
     return details
 
-def insertDetails(name_, user_name,phone, address_, mail):
+def insertDetails(token, user_name,phone, gitUserName, mail):
 
     cursor = connection.cursor()
-    query = "INSERT INTO UserDetails (name, userName, phoneNo, address, email) VALUES (%s, %s, %s, %s, %s)"
-    cursor.execute(query, (name_, user_name, phone, address_, mail))
+    query = "INSERT INTO UserDetails (name, userName, phoneNo, gitUserName, email) VALUES (%s, %s, %s, %s, %s)"
+    cursor.execute(query, (token, user_name, phone, gitUserName, mail))
 
     return True
 

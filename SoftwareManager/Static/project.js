@@ -1,7 +1,619 @@
+function print(tasksDone, typeCount)
+{
+	console.log(tasksDone, typeCount);
+	console.log(tasksDone/typeCount);
+	return tasksDone/typeCount;
+}
+
+function avgTasksHelper(list, counter, tasksDone, type, sprints, scrums)
+{
+	if(counter == list.length)
+	{
+		print(tasksDone, list.length)
+		if(type == 'sprint')
+		{
+			console.log('avgTasksCompleted for scrum');
+			avgTasksCompleted('scrum', sprints, scrums); 
+		}
+		else
+		{
+			console.log('printing time left for each sprint');
+			timeLeftHelper('sprint', sprints, scrums, 0);
+		}
+	}
+	else 
+	{
+		$.ajax(
+
+			{
+
+				type: 'GET',
+				url: list[counter],
+				beforeSend: beforeSend, 
+
+				success: function(response)
+				{
+					//console.log(response)
+					$.ajax(
+
+						{
+
+							type: 'GET',
+							url: response[0].cards_url,
+							beforeSend: beforeSend, 
+							data:
+							{
+								archived_state: 'archived',
+							},
+							success: function(response)
+							{
+								avgTasksHelper(list, counter+1, tasksDone+response.length, type, sprints, scrums)
+							}
+						}
+
+					)
+				}
+			}
+
+		)
+	}
+}
+
+function avgTasksCompleted(type, sprints, scrums)
+{
+	username = 'poornasyamasundar';
+	repoName = 'git_demo';
+
+	$.ajax(
+
+		{
+
+			type: 'GET',
+			url: 'https://api.github.com/repos/'+username+'/'+repoName+'/projects',
+			beforeSend: beforeSend, 
+
+			success: function(response)
+			{
+				list = []
+				for(i=0 ; i<response.length ; i++)
+				{
+
+					model = response[i].name.slice(0, type.length).toLowerCase();
+					//console.log(model)
+					if(model != type)
+						continue;
+
+					list.push(response[i].columns_url); 
+
+				}
+
+				avgTasksHelper(list, 0, 0, type, sprints, scrums);
+			}
+		}
+
+	)
+}
+
+
+
+function productivityHelper2(list, url, counter, tasksDone, meetings)
+{
+
+	$.ajax(
+
+		{
+
+			type: 'GET',
+			url: url,
+			beforeSend: beforeSend, 
+
+			success: function(response)
+			{
+
+				productivityHelper(list, counter+1, tasksDone, meetings+response.length, sprints, scrums)
+			}
+		}
+
+	)
+
+}
+
+function productivityHelper(list, counter, tasksDone, meetings, sprints, scrums)
+{
+	if(counter == list.length)
+	{
+		print(tasksDone, meetings)
+		console.log('avgTasksCompleted for sprint');
+		avgTasksCompleted('sprint', sprints, scrums);
+	}
+	else 
+	{
+		$.ajax(
+
+			{
+
+				type: 'GET',
+				url: list[counter],
+				beforeSend: beforeSend, 
+
+				success: function(response)
+				{
+					//console.log(response)
+					$.ajax(
+
+						{
+
+							type: 'GET',
+							url: response[0].cards_url,
+							beforeSend: beforeSend, 
+							data:
+							{
+								archived_state: 'archived',
+							},
+							success: function(response_)
+							{
+
+								productivityHelper2(list, response[1].cards_url, counter, tasksDone+response_.length, meetings, sprints, scrums)
+							}
+						}
+
+					)
+				}
+			}
+
+		)
+	}
+}
+
+function productivity(sprints, scrums)
+{
+	username = 'poornasyamasundar';
+	repoName = 'git_demo';
+
+	$.ajax(
+
+		{
+
+			type: 'GET',
+			url: 'https://api.github.com/repos/'+username+'/'+repoName+'/projects',
+			beforeSend: beforeSend, 
+
+			success: function(response)
+			{
+				list = []
+				for(i=0 ; i<response.length ; i++)
+				{
+
+					model = response[i].name.slice(0, 5).toLowerCase();
+					//console.log(model)
+					if(model != 'scrum')
+						continue;
+
+					list.push(response[i].columns_url); 
+
+				}
+
+				productivityHelper(list, 0, 0, 0, sprints, scrums);
+			}
+		}
+
+	)
+}
+
+function avgCardsHelper(list, counter, avg, type, sprints, scrums)
+{
+	if(counter == list.length)
+	{
+		print(avg, list.length)
+		if(type == 'sprint')
+		{
+			console.log('avgCards for scrums');
+			avgCards('scrum', sprints, scrums);
+		}
+		else if(type == 'scrum')
+		{
+			console.log("productivity");
+			productivity(sprints, scrums);
+		}
+	}
+	else 
+	{
+		$.ajax(
+
+			{
+
+				type: 'GET',
+				url: list[counter],
+				beforeSend: beforeSend, 
+
+				success: function(response)
+				{
+					//console.log(response)
+					$.ajax(
+
+						{
+
+							type: 'GET',
+							url: response[0].cards_url,
+							beforeSend: beforeSend, 
+							data:
+							{
+								archived_state: 'all',
+							},
+							success: function(response)
+							{
+								done=0;
+								for(i=0 ; i<response.length ; i++)
+								{
+									if(response[i].archived)
+										done++;
+								}
+								total = response.length;
+								if(done==0)
+									total++;
+								avgCardsHelper(list, counter+1, avg+(done/total), type, sprints, scrums)
+							}
+						}
+
+					)
+				}
+			}
+
+		)
+	}
+}
+
+function avgCards(type, sprint, scrums)
+{
+	username = 'poornasyamasundar';
+	repoName = 'git_demo';
+
+	$.ajax(
+
+		{
+
+			type: 'GET',
+			url: 'https://api.github.com/repos/'+username+'/'+repoName+'/projects',
+			beforeSend: beforeSend, 
+
+			success: function(response)
+			{
+				//console.log(response.length)
+				list = []
+				for(i=0 ; i<response.length ; i++)
+				{
+
+					model = response[i].name.slice(0, type.length).toLowerCase();
+					//console.log(model)
+					if(model != type)
+						continue;
+
+					list.push(response[i].columns_url); 
+
+				}
+				avgCardsHelper(list, 0, 0, type, sprints, scrums);
+			}
+		}
+
+	)
+}
+
+function timeLeftHelper(type, sprints, scrums, idx)
+{
+	if(type == 'sprint')
+	{
+		if(idx == sprints.length)
+		{
+			console.log('printing time left for each scrum');
+			timeLeftHelper('scrum', sprints, scrums, 0);
+		}
+		else
+		{
+			timeLeft(sprints[idx].url, "", 'sprint');
+			timeLeftHelper('sprint', sprints, scrums, idx+1); 
+		}
+	}
+	else
+	{
+		if(idx == scrums.length)
+		{
+			return;
+		}
+		else
+		{
+			timeLeft(scrums[idx].url, "", 'scrum');
+			timeLeftHelper('scrum', sprints, scrums, idx+1); 
+		}
+	}
+}
+
+function timeLeft(url, callback, type)
+{
+	username = 'poornasyamasundar';
+	repoName = 'git_demo';
+
+	$.ajax(
+
+		{
+
+			type: 'GET',
+			url: url,
+			beforeSend: beforeSend, 
+
+			success: function(response)
+			{
+				createdTime = response.created_at;
+				console.log(response.name)
+
+				if(type == 'sprint')
+				{
+					endTime=new Date(createdTime);
+					endTime.setDate(endTime.getDate()+ 30);
+				}
+				else if(type == 'scrum')
+				{
+					endTime=new Date(createdTime);
+					endTime.setDate(endTime.getDate()+ 2);
+				}
+				endTime = endTime.toISOString();
+				console.log(createdTime, endTime)
+			}
+		}
+	)
+}
+
+
+function sprintsInfo(sprints, scrums)
+{
+	username = 'poornasyamasundar';
+	repoName = 'git_demo';
+
+	$.ajax(
+
+		{
+
+			type: 'GET',
+			url: 'https://api.github.com/repos/'+username+'/'+repoName+'/projects',
+			beforeSend: beforeSend, 
+
+			success: function(response)
+			{
+				//console.log(response)
+				list = []
+				for(i=0 ; i<response.length ; i++)
+				{
+
+					model = response[i].name.slice(0, 6).toLowerCase();
+					//console.log(model)
+					if(model != 'sprint')
+						continue;
+
+					createdTime = response[i].created_at;
+					endTime=new Date(createdTime);
+					endTime.setDate(endTime.getDate()+ 30);
+					endTime = endTime.toISOString();
+
+					list.push({name: response[i].name, createdTime: createdTime, endTime: endTime})
+
+				}
+				console.log("All sprints are = ");
+				console.log(list)
+				//return list;
+				console.log('printing all tasks done for each scrum')
+				scrumTasksDoneHelper(sprints, scrums, 0);
+			}
+		}
+
+	)
+}
+
+
+
+function scrumTasksDone(sprints, scrums, url, idx)
+{
+
+
+	$.ajax(
+
+		{
+			type: 'GET',
+			url: url,
+			beforeSend: beforeSend,
+			data: {
+				archived_state: 'archived'
+			},
+
+			success: function(response)
+			{
+				//console.log(response);
+				list = []
+
+				for(i=0 ; i<response.length ; i++)
+				{
+					list.push({creater: response[i].creator['login'], name: response[i].note, created_at: response[i].created_at, closed_at: response[i].updated_at})
+				}
+
+				console.log(list)
+				scrumTasksDoneHelper(sprints, scrums, idx+1);
+			}
+
+		}
+
+	)
+}
+
+function scrumTasksDoneHelper(sprints, scrums, idx)
+{
+
+	if(idx == scrums.length)
+	{
+		console.log('avgCards for sprint');
+		avgCards('sprint', sprints, scrums);
+
+		return;
+	}
+	else 
+	{
+		console.log(scrums[idx].name);
+		url = scrums[idx].columns_url; 
+
+		$.ajax(
+
+			{
+				type: 'GET',
+				url: url,
+				beforeSend: beforeSend,
+
+				success: function(response)
+				{
+					// getting the cards and picking the cards_url for tasks.
+					//console.log(response);
+
+					//console.log(list)
+					scrumTasksDone(sprints, scrums, response[0].cards_url, idx);
+				}
+
+			}
+
+		)
+	}
+
+}
+
+
+function getScrums(endTime, callback, sprints, idx, scrums)
+{
+	username = 'poornasyamasundar';
+	repoName = 'git_demo';
+
+	$.ajax(
+
+		{
+
+			type: 'GET',
+			url: 'https://api.github.com/repos/'+username+'/'+repoName+'/projects',
+			beforeSend: beforeSend, 
+
+			success: function(response)
+			{
+				//console.log(response)
+				list = []
+				for(i=0 ; i<response.length ; i++)
+				{
+
+					model = response[i].name.slice(0, 5).toLowerCase();
+					//console.log(model)
+					if(model != 'scrum')
+						continue;
+
+					createdTime = response[i].created_at;
+					scrum_endTime=new Date(createdTime);
+					scrum_endTime.setDate(scrum_endTime.getDate()+ 2);
+					scrum_endTime = scrum_endTime.toISOString();
+
+					//endTime = endTime.toISOString()
+					//console.log(createdTime, endTime) 
+					if(createdTime <= endTime)
+						list.push({name: response[i].name, createdTime: createdTime, endTime: scrum_endTime})
+
+				}
+				console.log("Scrums under this sprint");
+				console.log(list)
+				callback(sprints, idx, scrums);
+			}
+		}
+
+	)
+}
+
+function specificScrums(sprints, idx, scrums)
+{
+	if(idx == sprints.length)
+	{
+		console.log("Sprints completed");
+		sprintsInfo(sprints, scrums)
+		return;
+	}
+
+	url = sprints[idx].url;
+
+	username = 'poornasyamasundar';
+	repoName = 'git_demo';
+
+	$.ajax(
+
+		{
+
+			type: 'GET',
+			url: url,
+			beforeSend: beforeSend, 
+
+			success: function(response)
+			{
+				//console.log(response)
+
+				createdTime = response.created_at;
+				endTime=new Date(createdTime);
+				endTime.setDate(endTime.getDate()+ 30);
+
+				console.log("current sprint = ", sprints[idx].name);
+				getScrums(endTime.toISOString(), specificScrums, sprints, idx+1, scrums)
+			}
+		}
+
+	)
+}
+
+// collecting all scrums, sprints
+// collecting scrums under each sprint
+// getting sprints info
+// under each scrum, getting all the tasks done
+// printing avgCards for sprint
+// printing avgCards for scrum
+// productivity
+// avgTasksCompleted for sprint
+// avgTasksCompleted for scrum
+// timeLeft for each sprint
+// timeLeft for each scrum 
+
+function getAll()
+{
+	username = 'poornasyamasundar';
+	repoName = 'git_demo';
+	$.ajax(
+		{
+			type: 'GET',
+			url: 'https://api.github.com/repos/'+username+'/'+repoName+'/projects',
+			beforeSend: beforeSend,
+			success: function(response)
+			{
+				//console.log(response)
+				sprints = []
+				scrums = []
+				for(i=0 ; i<response.length ; i++)
+				{
+					model = response[i].name.slice(0, 6).toLowerCase();
+					model_ = response[i].name.slice(0, 5).toLowerCase();
+					if(model != 'sprint' && model_ != 'scrum')
+						continue;
+					name = response[i].name;
+					url = response[i].url;
+					columns_url = response[i].columns_url;
+					if(model == 'sprint')
+						sprints.push({name: name, url: url, columns_url: columns_url})
+					else scrums.push({name: name, url: url, columns_url: columns_url}) 
+				}
+				console.log("Sprints[] = ", sprints);
+				console.log("Scrums[] = ", scrums);
+				specificScrums(sprints, 0, scrums);
+			}
+		}
+	)
+}
 //import {printf} from './sample.js';
 //import {getAllProjects, getAllColumns,getAllCards, editCard, deleteCard, createProject, createColumn, createCard} from './gitHubApi.js'; 
 //import {createScrum, createSprint, DisplayScrumTasks, DisplayScrumMeets, DisplaySprintTasks, editScrumMeet, deleteScrumMeet, saveScrumMeet, cancelScrumMeet, deleteScrumTask, saveScrumTask, cancelScrumTask} from './ScrumSprint.js'; 
-function meetingFunction(table_name, type_, id, createdBy, meetingLink, createdOn, meetingDate, meetingTime, purpose)
+/*function meetingFunction(table_name, type_, id, createdBy, meetingLink, createdOn, meetingDate, meetingTime, purpose)
 {
 	$.ajax(
 		{
@@ -354,7 +966,7 @@ function handleBacklogTasks()
 		}
 	}
 }
-
+*/
 function handleMeetsNoticeViewing()
 {
 	var meets = document.querySelector('#upcomingmeets').querySelector('ul').querySelectorAll('li');
@@ -400,6 +1012,31 @@ function handleTasksNoticeViewing()
 		});
 	}
 }
+
+function handleNoticeViewing()
+{
+	var i;
+	var tasks = document.querySelector('#latestcommits').querySelector('ul').querySelectorAll('li');
+	console.log(tasks);
+
+	for( i = 0 ; i < tasks.length ; i++ )
+	{
+		tasks[i].querySelector('div').querySelector('button').addEventListener('click', function() {
+			this.classList.toggle('tactive');
+			var content = this.nextElementSibling;
+			if( content.style.maxHeight )
+			{
+				content.style.maxHeight = null;
+			}
+			else
+			{
+				content.style.maxHeight = content.scrollHeight + 'px';
+			}
+		});
+	}
+}
+
+/*
 function DisplayingMeetings(Objectarray)
 {
 	var str="";
@@ -656,7 +1293,8 @@ function reloadSprintTasks()
 {
 	document.querySelector('#sprintTasks').innerHTML = '';
 	to_getTasks(2,localStorage.getItem('Username')+localStorage.getItem('Project')+localStorage.getItem('currentScrum')+'sprint', -1, 0);
-}
+}*/
+
 function modifyProjects(scrum, sprint, project)
 {
 	$.ajax(
@@ -668,6 +1306,7 @@ function modifyProjects(scrum, sprint, project)
 				currentScrum: scrum,
 				currentSprint: sprint,
 				projectName: project,
+				description: '',
 				mode: 1,
 			},
 			success: function(data)
@@ -682,10 +1321,13 @@ function loadOverviewBox()
 	tas[0].innerHTML = "<p class = 'id'>Name of the Project: </p><p class = 'value'>"+localStorage.getItem('Project')+"</p>";
 	tas[1].innerHTML = "<p class = 'id'>GitHub UserName: </p><p class = 'value'>"+localStorage.getItem('gitUserName')+"</p>";
 	tas[2].innerHTML = "<p class = 'id'>Repo Name: </p><p class = 'value'>"+localStorage.getItem('repoName')+"</p>";
-	tas[3].innerHTML = "<p class = 'id'>Created By: </p><p class = 'value'>"+localStorage.getItem('Username')+"</p>";
-	tas[4].innerHTML = "<p class = 'id'>Created On: </p><p class = 'value'>"+localStorage.getItem('createdOn')+"</p>";
-	tas[5].innerHTML = "<p class = 'id'>Current Sprint: </p><p class = 'value'>"+localStorage.getItem('currentSprint')+"</p>";
-	tas[6].innerHTML = "<p class = 'id'>Current Scrum: </p><p class = 'value'>"+localStorage.getItem('currentScrum')+"</p>";
+	tas[3].innerHTML = "<p class = 'id'>RepositoryLink: </p><p class = 'value'><a href = 'https://github.com/"+localStorage.getItem('gitUserName')+"/"+localStorage.getItem('repoName')+"' target = '_blank' >"+"https://github.com/"+localStorage.getItem('gitUserName')+"/"+localStorage.getItem('repoName')+"</a></p>";
+	tas[4].innerHTML = "<p class = 'id'>Model: </p><p class = 'value'>"+localStorage.getItem('model')+"</p>";
+	tas[5].innerHTML = "<p class = 'id'>Created By: </p><p class = 'value'>"+localStorage.getItem('Username')+"</p>";
+	tas[6].innerHTML = "<p class = 'id'>Created On: </p><p class = 'value'>"+localStorage.getItem('createdOn')+"</p>";
+	tas[7].innerHTML = "<p class = 'id'>Description: </p><p class = 'value'>"+JSON.parse(localStorage.getItem('description')).des+"</p>";
+	tas[8].innerHTML = "<p class = 'id'>Current Sprint: </p><p class = 'value'>"+localStorage.getItem('currentSprint')+"</p>";
+	tas[9].innerHTML = "<p class = 'id'>Current Scrum: </p><p class = 'value'>"+localStorage.getItem('currentScrum')+"</p>";
 }
 function beforeSend(xhr)
 {
@@ -693,7 +1335,7 @@ function beforeSend(xhr)
 }
 function getAllProjects( callback )
 {
-	username = localStorage.getItem('Username');
+	username = localStorage.getItem('gitUserName');
 	repoName = localStorage.getItem('repoName');
 	$.ajax(
 		{
@@ -733,8 +1375,6 @@ function getAllColumns( url, callback )
 				{
 					list.push({name:response[i].name, columnURL: response[i].url, cardsURL: response[i].cards_url});
 				}
-				console.log(response);
-				console.log(list);
 				callback(list);
 			}
 		}
@@ -784,8 +1424,6 @@ function getAllCards( url , callback )
 			},
 			success: function(response)
 			{
-				console.log("Displaying all Cards");
-				console.log(response);
 				var list = [];
 				for( let i = 0 ; i < response.length ; i++ )
 				{
@@ -898,6 +1536,7 @@ function createCard( columnURL, content, callback )
 			}
 		})
 }
+
 function createScrum( name )
 {
 	console.log("Entered createScrum with name = ", name);
@@ -930,12 +1569,14 @@ function createSprint( name )
 		});
 	});
 }
+
 function editScrumTask(event)
 {
 	var c = event.target.parentElement.parentElement; 
 	c.querySelector("div").style.display = 'none'; 
 	c.querySelector('form').style.display = 'block';
 }
+
 function deleteScrumTask(event)
 {
 	var c = event.target.parentElement.parentElement;
@@ -959,6 +1600,7 @@ function saveScrumTask(event)
 	}
 	editCard( c.parentElement.getAttribute('data-cardurl'), c.querySelector('#taskname').value+'\n'+c.querySelector('#taskDescription').value,b, function(obj){DisplayScrumTasks();DisplaySprintTasks();});
 }
+
 
 function cancelScrumTask(event)
 {
@@ -1093,6 +1735,86 @@ function DisplaySprintTasks()
 		});
 }
 
+function DisplayNotices()
+{
+	getAllCards( JSON.parse(localStorage.getItem("NoticeDetails")).cardsURL, function(list)
+		{
+			document.querySelector('#noticelist').innerHTML = '';
+			var str = '';
+			for( let j = 0 ; j < list.length ; j++ )
+			{
+				let taskname = '';
+				let taskDescription = '';
+				let k = 0;
+				for( let i = 0 ; i <  list[j].note.length ; i++ )
+				{
+					if(list[j].note[i] == '\n')
+					{
+						k = 1;
+					}
+					else if( k == 0 )
+					{
+						taskname += list[j].note[i];
+					}
+					else if( k == 1 )
+					{
+						taskDescription += list[j].note[i];
+					}
+				}
+				str +=	"<li data-cardurl = '"+list[j].url+"'>";
+				str +=		"<div>";
+				str +=			"<h5>" +taskname+"</h5>";
+				str +=			"<h5>Description:\n"+taskDescription+"</h5>";
+				str +=			"<h6>Created by: "+list[j].creator+"</h6>";
+				var date = new Date(list[j].time);
+				str +=			"<h6>Last Modified: "+date+"</h6>";
+				str +=			"<button id = 'delete' onclick = \"deleteNotice(event)\">Delete Notice</button>";
+				str += 			"<button id = 'edit' onclick = \"editNotice(event)\">Edit Notice</button>";
+				str += 		"</div>";
+				str +=		"<form class = 'edit' style ='display : none'>";
+				str +=			"<h4>Edit Notice</h4>";
+				str += 			"<label for = 'taskname'>TaskTitle</label>";
+				str +=			"<input type = 'text' id = 'taskname' name = 'taskname' placeholder = 'Notice Name' value = '"+taskname+"'>";
+				str +=			"<label for = 'taskDescription'>Description</label>";
+				str +=			"<textarea type = 'text' id = 'taskDescription' name = 'taskDescription' placeholder = 'Describe the Notice'>"+taskDescription+"</textarea>";
+				str +=			"<button id = 'save' type= 'button' onclick = \"saveNotice(event)\">Save</button>";
+				str +=			"<button id = 'cancel' type = 'button' onclick = \"cancelNotice(event)\">Cancel</button>"
+				str +=		"</form>";
+				str += 	"</li>";
+			}
+			document.querySelector('#noticelist').innerHTML = str;
+		});
+}
+
+function editNotice(event)
+{
+	var c = event.target.parentElement.parentElement; 
+	c.querySelector("div").style.display = 'none'; 
+	c.querySelector('form').style.display = 'block';
+}
+
+function deleteNotice(event)
+{
+	var c = event.target.parentElement.parentElement;
+	handleModal('Delete Notice', "This cannot be undone, Are you sure you want to delete the Notice?" , function()
+		{
+			deleteCard( c.getAttribute('data-cardurl'), function(obj){ console.log("Deleted Notice"); DisplayNotices();DisplayNoticeNotices(); } );
+		});
+}
+
+function saveNotice(event)
+{
+	var c = event.target.parentElement;
+	editCard( c.parentElement.getAttribute('data-cardurl'), c.querySelector('#taskname').value+'\n'+c.querySelector('#taskDescription').value,false, function(obj){DisplayNotices();DisplayNoticeNotices();});
+}
+
+function cancelNotice(event)
+{
+	var c = event.target.parentElement.parentElement; 
+	c.querySelector("div").style.display = 'block'; 
+	c.querySelector('form').style.display = 'none';
+}
+
 function DisplayScrumMeets()
 {
 	getAllCards( JSON.parse(localStorage.getItem("CurrentScrumMeetsDetails")).cardsURL, function(list)
@@ -1174,7 +1896,7 @@ function deleteScrumMeet(event)
 	var c = event.target.parentElement.parentElement;
 	handleModal('Delete Meeting', "This cannot be undone, Are you sure you want to delete the Meeting?" , function()
 		{
-			deleteCard( c.getAttribute('data-cardurl'), function(obj){ console.log("Deleted Meeting"); DisplayScrumMeets(); } );
+			deleteCard( c.getAttribute('data-cardurl'), function(obj){ console.log("Deleted Meeting"); DisplayScrumMeets(); DisplayNoticeMeets();} );
 		});
 }
 
@@ -1187,7 +1909,7 @@ function saveScrumMeet(event)
 	meetTime = c.querySelector('#meetingtime').value;
 	meetDescription = c.querySelector('#meetDescription').value;
 	con = meetLink+"\n"+meetDate+"\n"+meetTime+"\n"+meetDescription;
-	editCard( c.parentElement.getAttribute('data-cardurl'), con, false, function(obj){DisplayScrumMeets();});
+	editCard( c.parentElement.getAttribute('data-cardurl'), con, false, function(obj){DisplayScrumMeets();DisplayNoticeMeets();});
 }
 
 function cancelScrumMeet(event)
@@ -1242,6 +1964,44 @@ function DisplayNoticeTasks()
 		});
 }
 
+function DisplayNoticeNotices()
+{
+	getAllCards( JSON.parse(localStorage.getItem("NoticeDetails")).cardsURL, function(list)
+		{
+			document.querySelector("#board").querySelector("#notices").querySelector("ul").innerHTML = '';
+			var str = '';
+			for( let j = 0 ; j < list.length ; j++ )
+			{
+				let taskname = '';
+				let taskDescription = '';
+				let k = 0;
+				for( let i = 0 ; i <  list[j].note.length ; i++ )
+				{
+					if(list[j].note[i] == '\n')
+					{
+						k = 1;
+					}
+					else if( k == 0 )
+					{
+						taskname += list[j].note[i];
+					}
+					else if( k == 1 )
+					{
+						taskDescription += list[j].note[i];
+					}
+				}
+				str +=	"<li>";
+				str +=		"<div>";
+				str +=			"<h5>"+taskname+"</h5>";
+				str +=			"<p>"+taskDescription+"</p>";
+				str +=		"</div>";
+				str +=	"</li>";
+
+			}
+			document.querySelector("#board").querySelector("#notices").querySelector("ul").innerHTML = str;
+		});
+}
+
 function DisplayCommits()
 {
 	getCommits(function(list){
@@ -1249,12 +2009,21 @@ function DisplayCommits()
 		var str = '';
 		for( let i = 0 ; i < list.length ; i++ )
 		{
-			str += "<li><div><h3>"+list[i].author+"</h3>";
+			str += "<li>";
+			str += 		"<div>";
+			str +=			"<button class = 'nhead'>";
+			str += 				list[i].message;
+			str +=			"</button>";
+			str += 			"<div>";
+			str +=				"author: "+list[i].author;
 			date = new Date(list[i].date);
-			str += "<p>Commited on: "+date+"</p>";
-			str += "<p>message: "+list[i].message+"</p></div></li>";
+			str += 				"<br>Commited on: "+date;
+			str +=			"</div>";
+			str +=		"</div>";
+			str += "</li>";
 		}
 		document.querySelector("#latestcommits").querySelector("ul").innerHTML = str;
+		handleNoticeViewing();
 	});
 }
 
@@ -1317,6 +2086,107 @@ function DisplayNoticeMeets()
 		});
 }
 
+function handleContributors()
+{
+	var list = JSON.parse(localStorage.getItem('contributors'));
+	var str = '';
+	for( var i = 0 ; i < list.length ; i++ )
+	{
+		str += "<li>"+list[i]+"</li>";
+	}
+	document.querySelector("#contributorsbox").querySelector('ul').innerHTML = str;
+	document.querySelector('#contributorsbox').querySelector('form').querySelector('button').onclick = function(event)
+	{
+		event.preventDefault();
+		username = document.querySelector('#contributorsbox').querySelector('form').querySelector('#taskname').value;
+		var b = false;
+		console.log(list[0]);
+		console.log(username);
+		for( var j = 0 ; j < list.length ; j++ )
+		{
+			if( list[j] == username )
+			{
+				b = true;
+			}
+		}
+		if( username == '' )
+		{
+			alert("Enter Username");
+		}
+		else if( b == true )
+		{
+			alert("User already exists");
+		}
+		else
+		{
+			$.ajax(
+				{
+					type: "POST",
+					url: "isTrueCredentials",
+					data: {
+						username: username,
+						password: '',
+					},
+					success: function(data)
+					{
+						console.log(data);
+						if(data != 'y')
+						{
+							alert("No user with the given username");
+						}
+						else
+						{
+							var obj = JSON.parse(localStorage.getItem('description'));
+							obj.contributors.push(username);
+							localStorage.setItem('description', JSON.stringify(obj));
+							localStorage.setItem('contributors', JSON.stringify(obj.contributors));
+							$.ajax(
+								{
+									type: "POST",
+									url: 'getProjectsPy',
+									data:{
+										username: localStorage.getItem('Username'),
+										currentScrum: 0,
+										currentSprint: 0,
+										projectName: localStorage.getItem('Project'),
+										description: localStorage.getItem('description'),
+										mode: 2,
+									},
+									success: function(data)
+									{
+										console.log("successfull modified");
+										$.ajax(
+											{
+
+												type: "POST",
+												url: "insertProject",
+												data: {
+													model: localStorage.getItem('model'),
+													projectName: localStorage.getItem('Project'),
+													table_name: username+'projects',
+													createdBy:localStorage.getItem('Username'),
+													createdOn: localStorage.getItem('createdOn'), 
+													repolink: localStorage.getItem('repoName'),
+													description: localStorage.getItem('description'),
+												},
+												success: function(data)
+												{
+													alert("Successfully Added");
+													handleContributors();
+												}
+											}
+										)
+									}
+								}
+							)
+						}
+					}
+				}
+			)
+		}
+	}
+
+}
 
 function handleModal( heading, content, callback )
 {
@@ -1348,16 +2218,78 @@ function handleModal( heading, content, callback )
 	}
 }
 
+function setValues()
+{
+	getAllProjects(function(list1)
+		{
+			for( var i = 0 ; i < list1.length ; i++ )
+			{
+				if( list1[i].name == 'Notices' )
+				{
+					getAllColumns(list1[i].columnsURL, function(list2)
+						{
+							for( var j = 0 ; j < list2.length ; j++ )
+							{
+								if(list2[j].name == 'Notices')
+								{
+									localStorage.setItem('NoticeDetails', list2[j].cardsURL);
+								}
+							}
+						});
+				}
+				if( parseInt(localStorage.getItem('currentScrum')) != 0 )
+				{
+					if(list1[i].name == 'Scrum-'+parseInt(localStorage.getItem('currentScrum')).toString())
+					{
+						getAllColumns(list1[i].columnURL, function(list2)
+							{
+								for( var j = 0 ; j < list2.length ; j++ )
+								{
+									if(list2[j].name == 'Tasks')
+									{
+										localStorage.setItem('CurrentScrumTasksDetails', JSON.stringify(list2[j].cardsURL));
+
+									}
+									if(list2[j].name == 'Meetings')
+									{
+										localStorage.setItem('CurrentScrumMeetsDetails', JSON.stringify(list2[j].cardsURL));
+									}
+								}
+							});
+					}
+				}
+				if( parseInt(localStorage.getItem('currentSprint')) != 0 )
+				{
+					if(list1[i].name == 'Sprint-'+parseInt(localStorage.getItem('currentSprint')).toString())
+					{
+						getAllColumns(list1[i].columnURL, function(list2)
+							{
+								for( var j = 0 ; j < list2.length ; j++ )
+								{
+									if(list2[j].name == 'Tasks')
+									{
+										localStorage.setItem('CurrentSprintTasksDetails', JSON.stringify(list2[j].cardsURL));
+									}
+								}
+							});
+					}
+				}
+			}
+		});
+}
+
 document.addEventListener('DOMContentLoaded', function() 
 	{
-		localStorage.setItem('token', "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");
+		document.querySelector("title").innerHTML = localStorage.getItem("Project");
 		loadOverviewBox();
-		DisplayScrumTasks();
-		DisplayScrumMeets();
-		DisplaySprintTasks();
-		DisplayNoticeTasks();
-		DisplayNoticeMeets();
 		DisplayCommits();
+		DisplayNotices();
+		DisplayNoticeNotices();
+		handleContributors();
+		document.querySelector("#gobackbutton").onclick = function(){
+			window.location = "http://127.0.0.1:8000/";
+		}
+
 		if( localStorage.getItem('currentScrum') == 0 )
 		{
 			console.log('No scrum Created');
@@ -1366,19 +2298,24 @@ document.addEventListener('DOMContentLoaded', function()
 			document.querySelector('#scrumbox').querySelector('#scrum').style.display = 'none';	
 			document.querySelector('#scrumbox').querySelector('#createscrum').onclick = () =>
 			{
+				console.log("clicked");
 				scrumNumber = parseInt(localStorage.getItem('currentScrum'))+1;
 				createScrum( 'Scrum-'+scrumNumber );
 			}
 		}
 		else
 		{
+			DisplayScrumTasks();
+			DisplayScrumMeets();
+			DisplayNoticeTasks();
+			DisplayNoticeMeets();
 			document.querySelector('#scrumbox').querySelector('#scrum').style.display = 'block';	
 			document.querySelector('#scrumbox').querySelector('#createscrum').style.display = 'none';
 			var x = setInterval(function() {
 
 				var now = new Date().getTime();
 
-				var distance = localStorage.getItem('scrumstart') - now;
+				var distance = parseInt(localStorage.getItem('scrumstart')) + 172800000 - now;
 
 				var days = Math.floor(distance / (1000 * 60 * 60 * 24));
 				var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -1399,18 +2336,18 @@ document.addEventListener('DOMContentLoaded', function()
 			{
 				sprintNumber = parseInt(localStorage.getItem('currentSprint'))+1;
 				createSprint( 'Sprint-'+sprintNumber );
-
 			}
 		}
 		else
 		{
+			//DisplaySprintTasks();
 			document.querySelector('#sprintbox').querySelector('#sprint').style.display = 'block';	
 			document.querySelector('#sprintbox').querySelector('#createsprint').style.display = 'none';
 			var x = setInterval(function() {
 
 				var now = new Date().getTime();
 
-				var distance = localStorage.getItem('sprintstart') - now;
+				var distance = parseInt(localStorage.getItem('sprintstart')) + 2592000000- now;
 
 				var days = Math.floor(distance / (1000 * 60 * 60 * 24));
 				var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -1567,6 +2504,46 @@ document.addEventListener('DOMContentLoaded', function()
 				}
 			}
 		}
+		document.querySelector('#createNotice').querySelector('button').onclick = (event) =>
+		{
+			event.preventDefault();
+			var taskname = document.querySelector('#createNotice').querySelector('#taskname').value;
+			var taskDescription = document.querySelector('#createNotice').querySelector('#taskDescription').value;
+			if( taskname == '' )
+			{
+				alert("Notice name is empty");
+			}
+			else
+			{
+				if( taskDescription == '' )
+				{
+					alert("Notice Description is empty");
+				}
+				else
+				{
+					var con = taskname+"\n"+taskDescription;
+					createCard( JSON.parse(localStorage.getItem("NoticeDetails")).columnURL, con, function(cardObj){
+						var b = document.querySelector("#createNoticeButton");
+						console.log(b);
+						b.classList.toggle('createactive');
+						var content = b.nextElementSibling;
+						content.reset();
+						if( content.style.maxHeight )
+						{
+							content.style.maxHeight = null;
+							content.style.padding = '0px';
+						}
+						else
+						{
+							content.style.maxHeight = content.scrollHeight + 'px';
+							content.style.padding = '5px';
+						}
+					});
+					DisplayNotices();
+					DisplayNoticeNotices();
+				}
+			}
+		}
 		/*
 		document.querySelector('#sprintbox').querySelector('#createTask').querySelector('button').onclick = (e) =>
 		{
@@ -1613,9 +2590,5 @@ document.addEventListener('DOMContentLoaded', function()
 		//reloadScrumTasks();
 		//reloadScrumMeetings()
 		//reloadSprintTasks();
-		document.querySelector('#gobackbutton').onclick = () =>
-		{
-			window.location = '/';
-		}
 		document.querySelector('#projectname').innerHTML = localStorage.getItem('Project');
 	});
