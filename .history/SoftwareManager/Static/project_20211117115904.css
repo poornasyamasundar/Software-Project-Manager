@@ -444,7 +444,7 @@ body
 	margin-top: 5px;
 	box-shadow: 0px 0px 5px blue;
 }
-#createTask, #createmeet, #createNotice, #AddContributor, .edit
+#createTask, #createmeet, #createNotice, .edit
 {
 	font-size: 15px;
 	box-shadow: 0px 0px 5px blue;
@@ -460,14 +460,14 @@ body
 	padding: 5px;
 	max-height: 400px;
 }
-#createTask h4, #createmeet h4, #createNotice h4, #AddContributor, .edit h4
+#createTask h4, #createmeet h4, #createNotice h4, .edit h4
 {
 	text-align: left;
 	padding: 4px;
 	margin: 0px;
 	font-size: 20px;
 }
-#createTask label, #createmeet label, #createNotice label, #AddContributor label, .edit label
+#createTask label, #createmeet label, #createNotice label, .edit label
 {
 	display: block;
 	font-size: 20px;
@@ -475,7 +475,7 @@ body
 	font-weight: bold;
 	padding: 3px;
 }
-#createTask input, #createTask textarea, #createmeet input, #createmeet textarea, #createNotice input, #createNotice textarea, #AddContributor textarea, .edit input, .edit textarea
+#createTask input, #createTask textarea, #createmeet input, #createmeet textarea, #createNotice input, #createNotice textarea, .edit input, .edit textarea
 {
 	box-shadow: 0px 0px 5px blue;
 	font-size: 18px;
@@ -484,7 +484,7 @@ body
 	display: block;
 	margin: 4px;
 }
-#createTask button, #createmeet button, #createNotice button, #AddContributor button, .edit button
+#createTask button, #createmeet button, #createNotice button, .edit button
 {
 	margin-left: 10px;
 	background-color: rgb(192, 114, 247);
@@ -502,7 +502,7 @@ body
 	width: 400px;
 	height: 100px;
 }
-#createTask button:hover, #createmeet button:hover, #createNotice button:hover, #AddContributor button:hover, .edit button:hover
+#createTask button:hover, #createmeet button:hover, #createNotice button:hover, .edit button:hover
 {
 	background-color: rgb(144, 0, 247);
 	color: white;
