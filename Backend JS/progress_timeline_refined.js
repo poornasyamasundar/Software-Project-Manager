@@ -209,7 +209,7 @@ function avgTasksHelper(list, counter, tasksDone, type, sprints, scrums)
 		}
 		else
 		{
-			infoArray['scrum_avgTasks' = tasksDone / list.length;
+			infoArray['scrum_avgTasks'] = tasksDone / list.length;
 			//console.log('printing time left for each sprint');
 			timeLeftHelper(sprints, scrums);
 		}

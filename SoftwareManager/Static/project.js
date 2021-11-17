@@ -34,26 +34,37 @@ function setValues(scrum_object,sprint_object)
 
 }
 
-//we need to get objectarray
-function get_timeline(Objectarray)
+function updated_timeline(object)
 {
-	for(object in Objectarray)
+	console.log('updated timeline is clicked')
+	console.log(JSON.parse(object))
+}
+
+//we need to get objectarray
+function get_timeline(Objectarray)// clear,onclick
+{
+	document.getElementsByClassName("myList")[0].innerHTML='';
+	var i;
+	for(i=0;i<Objectarray.length;i++)//for(object in Objectarray)//object link
 	{
+		var object=Objectarray[i];
 		var node = document.createElement("LI");                 // Create a <li> node
+		node.setAttribute('data-object',JSON.stringify(Objectarray[i]));
 		var div	 = document.createElement("div");
 		div.classList.add("timeline-content");
 		var h3 = document.createElement('h3');
-		var text=document.createTextNode(object['date']);
+		var text=document.createTextNode(object['createdTime']);
 
 		h3.classList.add("date")
 		var p = document.createElement('p');
-		var textnode = document.createTextNode(object['note']);
+		var textnode = document.createTextNode(object['name']);
 		h3.appendChild(text);
 		p.appendChild(textnode);                              // Append the text to <li>
 		div.appendChild(h3);
 		div.appendChild(p);
 		node.appendChild(div);
-		document.getElementByClassName("myList").appendChild(node);
+		document.getElementsByClassName("myList")[0].appendChild(node);
+		node.onclick=function(){updated_timeline(this.getAttribute('data-object'));};
 	}
 	
 }
@@ -451,6 +462,7 @@ function sprintsInfo(sprints, scrums)
 				}
 				console.log("All sprints are = ");
 				console.log(list)
+				get_timeline(list);
 				//return list;
 				console.log('printing all tasks done for each scrum')
 				scrumTasksDoneHelper(sprints, scrums, 0);
@@ -2333,6 +2345,7 @@ function setValues()
 
 document.addEventListener('DOMContentLoaded', function() 
 	{
+		getAll();
 		document.querySelector("title").innerHTML = localStorage.getItem("Project");
 		loadOverviewBox();
 		DisplayCommits();
