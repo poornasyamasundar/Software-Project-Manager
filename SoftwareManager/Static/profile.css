@@ -1,7 +1,6 @@
 body
 {
 	background-color: rgb(218, 194, 255);
-	margin: 8px;
 }
 #wait
 {
@@ -105,17 +104,4 @@ body
 	width: 80px;
 	border-radius: 10px;
 	margin-left: 20px;
-}
-#ui {
-	background-color: #333;
-	padding: 30px;
-	margin-top: 50px;
-	border-radius: 10px;
-	opacity: 0.92;
-	font-weight: bold;
-}
-
-#ui label,
-h1 {
-	color: #fff;
 }

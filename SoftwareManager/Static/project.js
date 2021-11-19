@@ -1,50 +1,92 @@
-function print(tasksDone, typeCount)
+
+function setProgressValues(array)
 {
-	console.log(tasksDone, typeCount);
-	console.log(tasksDone/typeCount);
-	return tasksDone/typeCount;
-}
-/*
-object has keys =[time,completed_task,total_task,avg_tasks,productivity,avg_time]
-time		=amount of time completed in the current scrum/ current sprint( input is in percentage )
-completed_task=no.of tasks done in the current scrum/ current sprint
-total_task	=total no.of tasks in the current scrum/ current sprint
-avg_tasks	=average no of tasks completed in a scrum/sprint( a float value will be given )
-productivity=productivity i.e no of tasks completed per every meeting conducted( a float value )
-avg_time	=average amount of time between the end of a scrum(sprint) and start of another scrum(sprint)
+	var lis = document.querySelector("#scrumProgress").querySelectorAll('li');
+	lis[0].querySelector('progress').value = array.scrum_timeLeft;
+	lis[0].querySelector('progress').max = '172800000';
+	lis[0].querySelector('.id').innerHTML += Math.round(100*(array.scrum_timeLeft/172800000)) + '%';
+	lis[1].querySelector('.value').innerHTML = array.productivity + '  tasks per meet';
+	lis[2].querySelector('.value').innerHTML = array.scrum_avgTasks + '  tasks per scrum';
+	lis[3].querySelector('.value').innerHTML = array.scrum_avgCards + '  tasks completed vs Tasks Planned';
+	var distance = array.scrum_time_gap;
+	var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+	var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+	var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+	var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-*/ //			object for scrum, object for sprint
-function setValues(scrum_object,sprint_object)
-{
-	document.getElementById("prog_scrumtime").value=scrum_object['time'];
-	document.getElementById("prog_scrumtask").value=scrum_object['completed_task'];
-	document.getElementById("prog_scrumtask").max=scrum_object['total_task'];
-	document.getElementById("scrumavg_tasks").innerHTML="Average number of tasks : "+scrum_object['avg_tasks'];
-	document.getElementById("scrum_Productivity").innerHTML="Productivity : "+scrum_object['Productivity'];
-	document.getElementById("scrum_tasks").innerHTML="number of tasks completed vs no of tasks planned per scrum :"+scrum_object['completed_tasks']+" / "+scrum_object['total_task'];
-	document.getElementById("scrum_avg_time").innerHTML=""+scrum_object['avg_time'];
+	lis[4].querySelector('.value').innerHTML = days + "d " + hours + "h "+ minutes + "m " + seconds + "s ";
 
-	document.getElementById("prog_sprinttime").value=sprint_object['time'];
-	document.getElementById("prog_sprinttask").value=sprint_object['completed_task'];
-	document.getElementById("prog_sprinttask").max=sprint_object['total_task'];
-	document.getElementById("sprintavg_tasks").innerHTML="Average number of tasks : "+sprint_object['avg_tasks'];
-	document.getElementById("sprint_Productivity").innerHTML="Productivity : "+sprint_object['Productivity'];
-	document.getElementById("sprint_tasks").innerHTML="number of tasks completed vs no of tasks planned per scrum :"+sprint_object['completed_tasks']+" / "+sprint_object['total_task'];
-	document.getElementById("sprint_avg_time").innerHTML=""+sprint_object['avg_time'];
 
+	lis = document.querySelector("#sprintProgress").querySelectorAll('li');
+	lis[0].querySelector('progress').value = array.sprint_timeLeft;
+	lis[0].querySelector('progress').max = '2592000000';
+	lis[0].querySelector('.id').innerHTML += Math.round(100*(array.sprint_timeLeft/2592000000)) + '%';
+	lis[1].querySelector('.value').innerHTML = array.sprint_avgCards + '  tasks completed vs Tasks Planned';
+	var distance = array.sprint_time_gap;
+	var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+	var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+	var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+	var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+	lis[2].querySelector('.value').innerHTML = days + "d " + hours + "h "+ minutes + "m " + seconds + "s ";
 }
 
-function updated_timeline(object)
+function startWait()
 {
+	document.querySelector('#wait').style.display = 'block';
+}
+
+function stopWait()
+{
+	document.querySelector('#wait').style.display = 'none';
+}
+
+function updated_timeline(object, type )
+{
+	object = JSON.parse(object);
 	console.log('updated timeline is clicked')
-	console.log(JSON.parse(object))
+	console.log(object);
+	if( type == 'scrumlist' )
+	{
+		document.querySelector(".containers").querySelector('.title').innerHTML = 'Scrums under '+object.name + "<button id = 'goStart'>Go to Start</button>";
+		document.querySelector("#goStart").onclick = function(event)
+		{
+			event.preventDefault();
+			console.log("clicked getAll()");
+			getAll();
+		}
+		console.log("heading = ", document.querySelector(".containers").querySelector('.title').innerHTML);
+		console.log(object.endTime);
+		getScrums(object.endTime, get_timeline);
+	}
+	else if( type == 'tasks' )
+	{
+		document.querySelector(".containers").querySelector(".title").innerHTML = 'Tasks done under '+ "<button id = 'goStart' >Go to Start</button>";
+		document.querySelector("#goStart").onclick = function(event)
+		{
+			event.preventDefault();
+			console.log("clicked getAll()");
+			getAll();
+		}
+		getTasks(object.columnsURL, get_timeline);
+	}
 }
 
 //we need to get objectarray
-function get_timeline(Objectarray)// clear,onclick
+function get_timeline(Objectarray, type )// clear,onclick
 {
+	if( type == 'sprintlist' )
+	{
+		document.querySelector(".containers").querySelector('.title').innerHTML = 'Time Line of All Sprints'+ "<button id = 'goStart'>Go to Start</button>";
+	}
+	document.querySelector("#goStart").onclick = function(event)
+		{
+			event.preventDefault();
+			console.log("clicked getAll()");
+			getAll();
+		}
 	document.getElementsByClassName("myList")[0].innerHTML='';
-	var i;
+	var i = 0;
 	for(i=0;i<Objectarray.length;i++)//for(object in Objectarray)//object link
 	{
 		var object=Objectarray[i];
@@ -53,36 +95,278 @@ function get_timeline(Objectarray)// clear,onclick
 		var div	 = document.createElement("div");
 		div.classList.add("timeline-content");
 		var h3 = document.createElement('h3');
-		var text=document.createTextNode(object['createdTime']);
+		if( object['createdTime'] != '' )
+		{
+			var date = new Date(object['createdTime']);
+		}
+		else
+		{
+			var date = '';
+		}
+		var text=document.createTextNode(date);
 
 		h3.classList.add("date")
 		var p = document.createElement('p');
 		var textnode = document.createTextNode(object['name']);
 		h3.appendChild(text);
-		p.appendChild(textnode);                              // Append the text to <li>
+		p.innerHTML = object['name'];            // Append the text to <li>
 		div.appendChild(h3);
 		div.appendChild(p);
 		node.appendChild(div);
 		document.getElementsByClassName("myList")[0].appendChild(node);
-		node.onclick=function(){updated_timeline(this.getAttribute('data-object'));};
+		if( type == 'sprintlist')
+		{
+			node.onclick=function(){updated_timeline(this.getAttribute('data-object'),'scrumlist' );};
+		}
+		else if( type == 'scrumlist' )
+		{
+			node.onclick=function(){updated_timeline(this.getAttribute('data-object'), 'tasks' );};
+		}
 	}
-	
+}
+
+// this function needs the end time of the required sprint
+// that info is available in the arrays returned by getAll()
+// this returns all the scrums that come under a specific scrum
+function getScrums(endTime, callback )
+{
+	username = localStorage.getItem('gitUserName');
+	repoName = localStorage.getItem('repoName');
+
+	$.ajax(
+
+		{
+
+			type: 'GET',
+			url: 'https://api.github.com/repos/'+username+'/'+repoName+'/projects',
+			beforeSend: beforeSend, 
+
+			success: function(response)
+			{
+				console.log(response)
+				list = []
+				for(i=0 ; i<response.length ; i++)
+				{
+
+					model = response[i].name.slice(0, 5).toLowerCase();
+					//console.log(model)
+					if(model != 'scrum')
+						continue;
+
+					createdTime = response[i].created_at;
+					console.log("End time = ", endTime);
+					date=new Date(createdTime).getTime();
+					date1 = new Date(endTime).getTime();
+					console.log('date = ', date, '  date1 = ', date1 );
+					if(date < date1 )
+						list.push({name: response[i].name, createdTime: createdTime, endTime: new Date(date+172800000), columnsURL: response[i].columns_url,})
+
+				}
+
+				console.log( 'list in get scrums = ', list)
+				callback(list, 'scrumlist' );
+				//return list;
+			}
+		}
+
+	)
+}
+
+// this is a helper function to getTasks()
+// we will not call this function explicitly
+
+function getTasksHelper(url, callback)
+{
+	console.log('url for getTasks Helper = ', url);
+	$.ajax(
+
+		{
+			type: 'GET',
+			url: url,
+			beforeSend: beforeSend,
+			data:
+			{
+				archived_state: 'archived',
+			},
+			success: function(response)
+			{
+				console.log('getTasks helper', response);
+				list = []
+
+				note = '';
+				for(i=0 ; i<response.length ; i++)
+				{
+					note = '';
+					note = note + 'creator: ' + response[i].creator['login'] + '<br>Completed at: ' + new Date(response[i].updated_at) + '<br>Task: ';
+					for( j = 0 ; j < response[i].note.length ; j++ )
+					{
+						if( response[i].note[j] === '\n' )
+						{
+							note = note + '<br>Description: ';
+						}
+						else
+						{
+							note = note + response[i].note[j];
+						}
+					}
+					list.push({creator: response[i].creator['login'], name: note, createdTime:'', date: response[i].updated_at})
+				}
+
+				console.log(list)
+				callback(list, 'tasks');
+			}
+
+		}
+
+	)
+}
+
+// from the arrays you have, pass columns_url as a parameter to this function
+
+function getTasks(url, callback)
+{
+	console.log('url for getTasks = ', url);
+	$.ajax(
+
+		{
+
+			type: 'GET',
+			url: url,
+			beforeSend: beforeSend,
+
+			success: function(response)
+			{
+				console.log("response from getTasks = ", response);
+				getTasksHelper(response[0].cards_url, callback);
+			}
+		}
+
+	)
+}
+
+// this function saves all scrums and sprints in 2 arrays
+// there will be name, url, columns_url 
+
+function getAll()
+{
+	username = localStorage.getItem('gitUserName');
+	repoName = localStorage.getItem('repoName');
+	$.ajax(
+
+		{
+
+			type: 'GET',
+			url: 'https://api.github.com/repos/'+username+'/'+repoName+'/projects',
+			beforeSend: beforeSend, 
+
+			success: function(response)
+			{
+				//console.log(response)
+				sprints = []
+				scrums = []
+				for(i=0 ; i<response.length ; i++)
+				{
+
+					model = response[i].name.slice(0, 6).toLowerCase();
+					model_ = response[i].name.slice(0, 5).toLowerCase();
+					if(model != 'sprint' && model_ != 'scrum')
+						continue;
+
+					name = response[i].name;
+					url = response[i].url;
+					columns_url = response[i].columns_url;
+					createdTime = response[i].created_at;
+					if(model == 'sprint')
+					{
+						endTime=new Date(createdTime);
+						endTime.setDate(endTime.getDate() + 30);
+						endTime = endTime.toISOString(); 
+						sprints.push({name: name, url: url, columns_url: columns_url,
+							createdTime: createdTime, endTime: endTime
+						})
+
+					}
+					else
+					{	
+						endTime=new Date(createdTime);
+						endTime.setDate(endTime.getDate() + 2);
+						endTime = endTime.toISOString(); 
+						scrums.push({name: name, url: url, columns_url: columns_url,
+							createdTime: createdTime, endTime: endTime
+						}) 
+					}
+
+				}
+				get_timeline(sprints, 'sprintlist' );
+				avgCards(sprints, scrums);
+			}
+		}
+
+	)
+
+}
+
+// order of collection of Info
+// avgCards of sprint, scrum
+// productivity
+// avgTasks for sprint, scrum
+// timeLeft for sprint, scrum
+
+infoArray = []
+
+function timeLeft(sprints, scrums)
+{
+	var time = 0;
+	for(i=1 ; i<sprints.length ; i++)
+	{
+		time = time + new Date(sprints[i].endTime).getTime() - new Date(sprints[i-1].createdTime).getTime();
+	}
+	var date1 = new Date().getTime() - new Date(sprints[sprints.length-1].createdTime).getTime();
+	infoArray['sprint_timeLeft'] = date1;
+	if( sprints.length != 1 )
+	{
+		infoArray['sprint_time_gap'] = time/sprints.length-1;
+	}
+	else
+	{
+		infoArray['sprint_time_gap'] = 0;
+	}
+	time = 0;
+	for(i=1 ; i<scrums.length ; i++)
+	{
+		time = time + new Date(scrums[i].endTime).getTime() - new Date(scrums[i-1].createdTime).getTime();
+	}
+	date1 = new Date().getTime() - new Date(scrums[scrums.length-1].createdTime).getTime()
+
+	infoArray['scrum_timeLeft'] = date1;
+	if( scrums.length != 1 )
+	{
+		infoArray['scrum_time_gap'] = time/scrum.length-1;
+	}
+	else
+	{
+		infoArray['scrum_time_gap'] = 0;
+	}
+	console.log("info Array = ", infoArray);
+	setProgressValues(infoArray);
 }
 
 function avgTasksHelper(list, counter, tasksDone, type, sprints, scrums)
 {
 	if(counter == list.length)
 	{
-		print(tasksDone, list.length)
+		//print(tasksDone, list.length)
 		if(type == 'sprint')
 		{
-			console.log('avgTasksCompleted for scrum');
+			infoArray['sprint_avgTasks'] = tasksDone / list.length;
+			//console.log('avgTasksCompleted for scrum');
 			avgTasksCompleted('scrum', sprints, scrums); 
 		}
 		else
 		{
-			console.log('printing time left for each sprint');
-			timeLeftHelper('sprint', sprints, scrums, 0);
+			infoArray['scrum_avgTasks'] = tasksDone / list.length;
+			//console.log('printing time left for each sprint');
+			timeLeft(sprints, scrums);
 		}
 	}
 	else 
@@ -125,44 +409,19 @@ function avgTasksHelper(list, counter, tasksDone, type, sprints, scrums)
 
 function avgTasksCompleted(type, sprints, scrums)
 {
-	username = 'poornasyamasundar';
-	repoName = 'git_demo';
+	list = [];
+	if(type == 'sprint')
+		for(i=0 ; i<scrums.length ; i++)
+			list.push(scrums[i].columns_url)
+	else
+		for(i=0 ; i<sprints.length ; i++)
+			list.push(sprints[i].columns_url)
 
-	$.ajax(
-
-		{
-
-			type: 'GET',
-			url: 'https://api.github.com/repos/'+username+'/'+repoName+'/projects',
-			beforeSend: beforeSend, 
-
-			success: function(response)
-			{
-				list = []
-				for(i=0 ; i<response.length ; i++)
-				{
-
-					model = response[i].name.slice(0, type.length).toLowerCase();
-					//console.log(model)
-					if(model != type)
-						continue;
-
-					list.push(response[i].columns_url); 
-
-				}
-
-				avgTasksHelper(list, 0, 0, type, sprints, scrums);
-			}
-		}
-
-	)
+	avgTasksHelper(list, 0, 0, 0, sprints, scrums);	
 }
-
-
 
 function productivityHelper2(list, url, counter, tasksDone, meetings)
 {
-
 	$.ajax(
 
 		{
@@ -184,10 +443,12 @@ function productivityHelper2(list, url, counter, tasksDone, meetings)
 
 function productivityHelper(list, counter, tasksDone, meetings, sprints, scrums)
 {
+	console.log("Entered productivity helper counter = ", counter);
 	if(counter == list.length)
 	{
-		print(tasksDone, meetings)
-		console.log('avgTasksCompleted for sprint');
+		//print(tasksDone, meetings)
+		//console.log('avgTasksCompleted for sprint');
+		infoArray['productivity'] = tasksDone / meetings;
 		avgTasksCompleted('sprint', sprints, scrums);
 	}
 	else 
@@ -202,7 +463,7 @@ function productivityHelper(list, counter, tasksDone, meetings, sprints, scrums)
 
 				success: function(response)
 				{
-					//console.log(response)
+					console.log(response)
 					$.ajax(
 
 						{
@@ -222,7 +483,11 @@ function productivityHelper(list, counter, tasksDone, meetings, sprints, scrums)
 						}
 
 					)
-				}
+				},
+				error: function()
+				{
+					console.log("Errror");
+				},
 			}
 
 		)
@@ -231,63 +496,51 @@ function productivityHelper(list, counter, tasksDone, meetings, sprints, scrums)
 
 function productivity(sprints, scrums)
 {
-	username = 'poornasyamasundar';
-	repoName = 'git_demo';
+	console.log("entered productivity");
+	list = [];
+	for(i=0 ; i<scrums.length ; i++)
+		list.push(scrums[i].columns_url)
 
-	$.ajax(
+	console.log("list = " , list);
+	productivityHelper(list, 0, 0, 0, sprints, scrums);			
 
-		{
-
-			type: 'GET',
-			url: 'https://api.github.com/repos/'+username+'/'+repoName+'/projects',
-			beforeSend: beforeSend, 
-
-			success: function(response)
-			{
-				list = []
-				for(i=0 ; i<response.length ; i++)
-				{
-
-					model = response[i].name.slice(0, 5).toLowerCase();
-					//console.log(model)
-					if(model != 'scrum')
-						continue;
-
-					list.push(response[i].columns_url); 
-
-				}
-
-				productivityHelper(list, 0, 0, 0, sprints, scrums);
-			}
-		}
-
-	)
 }
 
-function avgCardsHelper(list, counter, avg, type, sprints, scrums)
+
+function avgCardsHelper(avg, type, sprints, scrums, idx)
 {
-	if(counter == list.length)
+	console.log("Entered avg cards helper");
+	if(type == 'sprint' && idx == sprints.length)
 	{
-		print(avg, list.length)
-		if(type == 'sprint')
-		{
-			console.log('avgCards for scrums');
-			avgCards('scrum', sprints, scrums);
-		}
-		else if(type == 'scrum')
-		{
-			console.log("productivity");
-			productivity(sprints, scrums);
-		}
+		//print(avg, sprints.length)
+		infoArray['sprint_avgCards'] = avg / sprints.length;
+		avgCardsHelper(0, 'scrum', sprints, scrums, 0);
+
+	}
+	else if(type == 'scrum' && idx == scrums.length)
+	{
+		//print(avg, scrums.length)
+		infoArray['scrum_avgCards'] = avg / scrums.length;
+		productivity(sprints, scrums);
 	}
 	else 
 	{
+
+		if(type == 'scrum')
+		{
+			url = scrums[idx].columns_url;
+		}
+		else
+		{
+			url = sprints[idx].columns_url;
+		}
+
 		$.ajax(
 
 			{
 
 				type: 'GET',
-				url: list[counter],
+				url: url,
 				beforeSend: beforeSend, 
 
 				success: function(response)
@@ -315,7 +568,7 @@ function avgCardsHelper(list, counter, avg, type, sprints, scrums)
 								total = response.length;
 								if(done==0)
 									total++;
-								avgCardsHelper(list, counter+1, avg+(done/total), type, sprints, scrums)
+								avgCardsHelper(avg+(done/total), type, sprints, scrums, idx+1);
 							}
 						}
 
@@ -327,711 +580,12 @@ function avgCardsHelper(list, counter, avg, type, sprints, scrums)
 	}
 }
 
-function avgCards(type, sprint, scrums)
+function avgCards(sprints, scrums)
 {
-	username = 'poornasyamasundar';
-	repoName = 'git_demo';
-
-	$.ajax(
-
-		{
-
-			type: 'GET',
-			url: 'https://api.github.com/repos/'+username+'/'+repoName+'/projects',
-			beforeSend: beforeSend, 
-
-			success: function(response)
-			{
-				//console.log(response.length)
-				list = []
-				for(i=0 ; i<response.length ; i++)
-				{
-
-					model = response[i].name.slice(0, type.length).toLowerCase();
-					//console.log(model)
-					if(model != type)
-						continue;
-
-					list.push(response[i].columns_url); 
-
-				}
-				avgCardsHelper(list, 0, 0, type, sprints, scrums);
-			}
-		}
-
-	)
-}
-
-function timeLeftHelper(type, sprints, scrums, idx)
-{
-	if(type == 'sprint')
-	{
-		if(idx == sprints.length)
-		{
-			console.log('printing time left for each scrum');
-			timeLeftHelper('scrum', sprints, scrums, 0);
-		}
-		else
-		{
-			timeLeft(sprints[idx].url, "", 'sprint');
-			timeLeftHelper('sprint', sprints, scrums, idx+1); 
-		}
-	}
-	else
-	{
-		if(idx == scrums.length)
-		{
-			return;
-		}
-		else
-		{
-			timeLeft(scrums[idx].url, "", 'scrum');
-			timeLeftHelper('scrum', sprints, scrums, idx+1); 
-		}
-	}
-}
-
-function timeLeft(url, callback, type)
-{
-	username = 'poornasyamasundar';
-	repoName = 'git_demo';
-
-	$.ajax(
-
-		{
-
-			type: 'GET',
-			url: url,
-			beforeSend: beforeSend, 
-
-			success: function(response)
-			{
-				createdTime = response.created_at;
-				console.log(response.name)
-
-				if(type == 'sprint')
-				{
-					endTime=new Date(createdTime);
-					endTime.setDate(endTime.getDate()+ 30);
-				}
-				else if(type == 'scrum')
-				{
-					endTime=new Date(createdTime);
-					endTime.setDate(endTime.getDate()+ 2);
-				}
-				endTime = endTime.toISOString();
-				console.log(createdTime, endTime)
-			}
-		}
-	)
-}
-
-
-function sprintsInfo(sprints, scrums)
-{
-	username = 'poornasyamasundar';
-	repoName = 'git_demo';
-
-	$.ajax(
-
-		{
-
-			type: 'GET',
-			url: 'https://api.github.com/repos/'+username+'/'+repoName+'/projects',
-			beforeSend: beforeSend, 
-
-			success: function(response)
-			{
-				//console.log(response)
-				list = []
-				for(i=0 ; i<response.length ; i++)
-				{
-
-					model = response[i].name.slice(0, 6).toLowerCase();
-					//console.log(model)
-					if(model != 'sprint')
-						continue;
-
-					createdTime = response[i].created_at;
-					endTime=new Date(createdTime);
-					endTime.setDate(endTime.getDate()+ 30);
-					endTime = endTime.toISOString();
-
-					list.push({name: response[i].name, createdTime: createdTime, endTime: endTime})
-
-				}
-				console.log("All sprints are = ");
-				console.log(list)
-				get_timeline(list);
-				//return list;
-				console.log('printing all tasks done for each scrum')
-				scrumTasksDoneHelper(sprints, scrums, 0);
-			}
-		}
-
-	)
-}
-
-
-
-function scrumTasksDone(sprints, scrums, url, idx)
-{
-
-
-	$.ajax(
-
-		{
-			type: 'GET',
-			url: url,
-			beforeSend: beforeSend,
-			data: {
-				archived_state: 'archived'
-			},
-
-			success: function(response)
-			{
-				//console.log(response);
-				list = []
-
-				for(i=0 ; i<response.length ; i++)
-				{
-					list.push({creater: response[i].creator['login'], name: response[i].note, created_at: response[i].created_at, closed_at: response[i].updated_at})
-				}
-
-				console.log(list)
-				scrumTasksDoneHelper(sprints, scrums, idx+1);
-			}
-
-		}
-
-	)
-}
-
-function scrumTasksDoneHelper(sprints, scrums, idx)
-{
-
-	if(idx == scrums.length)
-	{
-		console.log('avgCards for sprint');
-		avgCards('sprint', sprints, scrums);
-
-		return;
-	}
-	else 
-	{
-		console.log(scrums[idx].name);
-		url = scrums[idx].columns_url; 
-
-		$.ajax(
-
-			{
-				type: 'GET',
-				url: url,
-				beforeSend: beforeSend,
-
-				success: function(response)
-				{
-					// getting the cards and picking the cards_url for tasks.
-					//console.log(response);
-
-					//console.log(list)
-					scrumTasksDone(sprints, scrums, response[0].cards_url, idx);
-				}
-
-			}
-
-		)
-	}
+	console.log("Entered Average Cardes");
+	avgCardsHelper(0, 'sprint', sprints, scrums, 0);
 
 }
-
-
-function getScrums(endTime, callback, sprints, idx, scrums)
-{
-	username = 'poornasyamasundar';
-	repoName = 'git_demo';
-
-	$.ajax(
-
-		{
-
-			type: 'GET',
-			url: 'https://api.github.com/repos/'+username+'/'+repoName+'/projects',
-			beforeSend: beforeSend, 
-
-			success: function(response)
-			{
-				//console.log(response)
-				list = []
-				for(i=0 ; i<response.length ; i++)
-				{
-
-					model = response[i].name.slice(0, 5).toLowerCase();
-					//console.log(model)
-					if(model != 'scrum')
-						continue;
-
-					createdTime = response[i].created_at;
-					scrum_endTime=new Date(createdTime);
-					scrum_endTime.setDate(scrum_endTime.getDate()+ 2);
-					scrum_endTime = scrum_endTime.toISOString();
-
-					//endTime = endTime.toISOString()
-					//console.log(createdTime, endTime) 
-					if(createdTime <= endTime)
-						list.push({name: response[i].name, createdTime: createdTime, endTime: scrum_endTime})
-
-				}
-				console.log("Scrums under this sprint");
-				console.log(list)
-				callback(sprints, idx, scrums);
-			}
-		}
-
-	)
-}
-
-function specificScrums(sprints, idx, scrums)
-{
-	if(idx == sprints.length)
-	{
-		console.log("Sprints completed");
-		sprintsInfo(sprints, scrums)
-		return;
-	}
-
-	url = sprints[idx].url;
-
-	username = 'poornasyamasundar';
-	repoName = 'git_demo';
-
-	$.ajax(
-
-		{
-
-			type: 'GET',
-			url: url,
-			beforeSend: beforeSend, 
-
-			success: function(response)
-			{
-				//console.log(response)
-
-				createdTime = response.created_at;
-				endTime=new Date(createdTime);
-				endTime.setDate(endTime.getDate()+ 30);
-
-				console.log("current sprint = ", sprints[idx].name);
-				getScrums(endTime.toISOString(), specificScrums, sprints, idx+1, scrums)
-			}
-		}
-
-	)
-}
-
-// collecting all scrums, sprints
-// collecting scrums under each sprint
-// getting sprints info
-// under each scrum, getting all the tasks done
-// printing avgCards for sprint
-// printing avgCards for scrum
-// productivity
-// avgTasksCompleted for sprint
-// avgTasksCompleted for scrum
-// timeLeft for each sprint
-// timeLeft for each scrum 
-
-function getAll()
-{
-	username = 'poornasyamasundar';
-	repoName = 'git_demo';
-	$.ajax(
-		{
-			type: 'GET',
-			url: 'https://api.github.com/repos/'+username+'/'+repoName+'/projects',
-			beforeSend: beforeSend,
-			success: function(response)
-			{
-				//console.log(response)
-				sprints = []
-				scrums = []
-				for(i=0 ; i<response.length ; i++)
-				{
-					model = response[i].name.slice(0, 6).toLowerCase();
-					model_ = response[i].name.slice(0, 5).toLowerCase();
-					if(model != 'sprint' && model_ != 'scrum')
-						continue;
-					name = response[i].name;
-					url = response[i].url;
-					columns_url = response[i].columns_url;
-					if(model == 'sprint')
-						sprints.push({name: name, url: url, columns_url: columns_url})
-					else scrums.push({name: name, url: url, columns_url: columns_url}) 
-				}
-				console.log("Sprints[] = ", sprints);
-				console.log("Scrums[] = ", scrums);
-				specificScrums(sprints, 0, scrums);
-			}
-		}
-	)
-}
-//import {printf} from './sample.js';
-//import {getAllProjects, getAllColumns,getAllCards, editCard, deleteCard, createProject, createColumn, createCard} from './gitHubApi.js'; 
-//import {createScrum, createSprint, DisplayScrumTasks, DisplayScrumMeets, DisplaySprintTasks, editScrumMeet, deleteScrumMeet, saveScrumMeet, cancelScrumMeet, deleteScrumTask, saveScrumTask, cancelScrumTask} from './ScrumSprint.js'; 
-/*function meetingFunction(table_name, type_, id, createdBy, meetingLink, createdOn, meetingDate, meetingTime, purpose)
-{
-	$.ajax(
-		{
-			type: "POST",
-			url: "meetingFunctionPy",
-			data: {
-				table_name: table_name,
-				type_: type_,
-				id: id,
-				createdBy: createdBy,
-				meetingLink: meetingLink,
-				createdOn: createdOn,
-				meetingDate: meetingDate, 
-				meetingTime: meetingTime,
-				purpose: purpose,
-			},
-			success: function(data){
-				console.log(data);
-				reloadScrumMeetings();
-				reloadNoticeMeets()
-				document.querySelector('#createmeet').reset();
-			}
-		}
-	)
-}
-function taskFunction(table_name, type_, id, createdBy, taskHeading, taskDetails, createdOn, completed, deadline)
-{
-	$.ajax(
-		{
-			type: "POST",
-			url: "taskFunctionPy",
-			data: {
-				table_name: table_name,
-				type_: type_,
-				id: id, createdBy: createdBy, taskHeading: taskHeading, taskDetails: taskDetails,
-				createdOn: createdOn,
-				completed: completed,
-				deadline: deadline
-			},
-			success: function(data){
-				reloadNoticeTasks();
-				reloadScrumTasks();
-				reloadSprintTasks();
-				document.querySelector('#createTask').querySelector('#taskname').value = '';
-				document.querySelector('#createTask').querySelector('#taskDescription').value = '';
-				document.querySelector('#sprintbox').querySelector('#createTask').querySelector('#taskname').value = '';
-				document.querySelector('#sprintbox').querySelector('#createTask').querySelector('#taskDescription').value = '';
-			}
-		}
-	)
-}
-function backlogFunction(table_name, mode, id, createdBy, dateposted, foldername, par, taskDetails, taskHeading, type )
-{
-	$.ajax(
-		{
-			type: 'POST',
-			url: 'backlogFunctionPy',
-			data:{
-				table_name: table_name,
-				mode: mode,
-				id: id, 
-				createdBy: createdBy,
-				dateposted: dateposted,
-				foldername: foldername,
-				par: par,
-				taskDetails: taskDetails,
-				taskHeading: taskHeading,
-				type: type,
-			},
-			success: function(data){
-				reloadBacklogs(par);
-				document.querySelector('.createBacklog').reset();
-				document.querySelector('.createfolder').reset();
-			}
-		}
-	)
-}
-
-function handleScrumTasksAndMeets()
-{
-	scrumboxTasks = document.querySelector('#pretasks').querySelectorAll('li');
-	for( i = 0 ; i < scrumboxTasks.length ; i++ )
-	{
-		scrumboxTasks[i].querySelector('form').style.display = 'none';
-	}
-	for( i = 0 ; i < scrumboxTasks.length ; i++ )
-	{
-		scrumboxTasks[i].querySelector('div').querySelector('#edit').onclick = (e) =>
-		{
-			var j = 0;
-			for( j = 0 ; j < scrumboxTasks.length ; j++ )
-			{
-				if( scrumboxTasks[j].querySelector('div').querySelector('#edit') == e.target )
-				{
-					scrumboxTasks[j].querySelector('form').style.display = 'block';
-					scrumboxTasks[j].querySelector('div').style.display = 'none';
-				}
-			}
-		}
-		scrumboxTasks[i].querySelector('div').querySelector('#delete').onclick = (e) =>
-		{
-			var j = 0;
-			for( j = 0 ; j < scrumboxTasks.length ; j++ )
-			{
-				if( scrumboxTasks[j].querySelector('div').querySelector('#delete') == e.target )
-				{
-					e.preventDefault();
-					taskFunction(localStorage.getItem('Username')+localStorage.getItem('Project')+localStorage.getItem('currentScrum')+'tasks', 3, scrumboxTasks[j].id, localStorage.getItem('Username'), '', '','', 0, 0);
-				}
-			}
-		}
-		scrumboxTasks[i].querySelector('form').querySelector('#save').onclick = (e) =>
-		{
-			e.preventDefault();
-			var j = 0;
-			for( j = 0 ; j < scrumboxTasks.length ; j++ )
-			{
-				if( scrumboxTasks[j].querySelector('form').querySelector('#save') == e.target )
-				{
-					var b;
-					if( scrumboxTasks[j].querySelector('#taskcompleted').checked == true )
-					{
-						b = 1;
-					}
-					else
-					{
-						b = 0;
-					}
-					taskFunction(localStorage.getItem('Username')+localStorage.getItem('Project')+localStorage.getItem('currentScrum')+'tasks', 2, scrumboxTasks[j].id, localStorage.getItem('Username'), scrumboxTasks[j].querySelector('#taskname').value, scrumboxTasks[j].querySelector('#taskDescription').value,'', b, 0);
-				}
-			}
-		}
-		scrumboxTasks[i].querySelector('form').querySelector('#cancel').onclick = (e) =>
-		{
-			e.preventDefault();
-			var j = 0;
-			for( j = 0 ; j < scrumboxTasks.length ; j++ )
-			{
-				if( scrumboxTasks[j].querySelector('form').querySelector('#cancel') == e.target )
-				{
-					scrumboxTasks[j].querySelector('form').reset();
-					scrumboxTasks[j].querySelector('form').style.display = 'none';
-					scrumboxTasks[j].querySelector('div').style.display = 'block';
-				}
-			}
-		}
-
-	}
-
-	scrumboxmeets = document.querySelector('#premeets').querySelectorAll('li');
-	for( i = 0 ; i < scrumboxmeets.length ; i++ )
-	{
-		scrumboxmeets[i].querySelector('form').style.display = 'none';
-	}
-	for( i = 0 ; i < scrumboxmeets.length ; i++ )
-	{
-		scrumboxmeets[i].querySelector('div').querySelector('#edit').onclick = (e) =>
-		{
-			var j = 0;
-			for( j = 0 ; j < scrumboxmeets.length ; j++ )
-			{
-				if( scrumboxmeets[j].querySelector('div').querySelector('#edit') == e.target )
-				{
-					scrumboxmeets[j].querySelector('form').style.display = 'block';
-					scrumboxmeets[j].querySelector('div').style.display = 'none';
-				}
-			}
-		}
-		scrumboxmeets[i].querySelector('div').querySelector('#delete').onclick = (e) =>
-		{
-			var j = 0;
-			for( j = 0 ; j < scrumboxmeets.length ; j++ )
-			{
-				if( scrumboxmeets[j].querySelector('div').querySelector('#delete') == e.target )
-				{
-					e.preventDefault();
-					meetingFunction(localStorage.getItem('Username')+localStorage.getItem('Project')+localStorage.getItem('currentScrum')+'meets', 3, scrumboxmeets[j].id, '','', '', '', '','');
-				}
-			}
-		}
-		scrumboxmeets[i].querySelector('form').querySelector('#save').onclick = (e) =>
-		{
-			e.preventDefault();
-			var j = 0;
-			for( j = 0 ; j < scrumboxmeets.length ; j++ )
-			{
-				if( scrumboxmeets[j].querySelector('form').querySelector('#save') == e.target )
-				{
-					date = scrumboxmeets[j].querySelector('#meetingdate').value;
-					date = date.substring(0, 4)+date.substring(5, 7)+date.substring(8, 10);
-					meetingFunction(localStorage.getItem('Username')+localStorage.getItem('Project')+localStorage.getItem('currentScrum')+'meets', 2, scrumboxmeets[j].id, localStorage.getItem('Username'), scrumboxmeets[j].querySelector('#meetinglink').value, '', date, scrumboxmeets[j].querySelector('#meetingtime').value, scrumboxmeets[j].querySelector('#meetpurpose').value );
-				}
-			}
-		}
-		scrumboxmeets[i].querySelector('form').querySelector('#cancel').onclick = (e) =>
-		{
-			e.preventDefault();
-			var j = 0;
-			for( j = 0 ; j < scrumboxmeets.length ; j++ )
-			{
-				if( scrumboxmeets[j].querySelector('form').querySelector('#cancel') == e.target )
-				{
-					scrumboxmeets[j].querySelector('form').reset();
-					scrumboxmeets[j].querySelector('form').style.display = 'none';
-					scrumboxmeets[j].querySelector('div').style.display = 'block';
-				}
-			}
-		}
-	}
-}
-function handleSprintTasks()
-{
-	sprintboxTasks = document.querySelector('#sprintTasks').querySelectorAll('li');
-	for( i = 0 ; i < sprintboxTasks.length ; i++ )
-	{
-		sprintboxTasks[i].querySelector('form').style.display = 'none';
-	}
-	for( i = 0 ; i < sprintboxTasks.length ; i++ )
-	{
-		sprintboxTasks[i].querySelector('div').querySelector('#edit').onclick = (e) =>
-		{
-			var j = 0;
-			for( j = 0 ; j < sprintboxTasks.length ; j++ )
-			{
-				if( sprintboxTasks[j].querySelector('div').querySelector('#edit') == e.target )
-				{
-					sprintboxTasks[j].querySelector('form').style.display = 'block';
-					sprintboxTasks[j].querySelector('div').style.display = 'none';
-				}
-			}
-		}
-		sprintboxTasks[i].querySelector('div').querySelector('#delete').onclick = (e) =>
-		{
-			var j = 0;
-			for( j = 0 ; j < sprintboxTasks.length ; j++ )
-			{
-				if( sprintboxTasks[j].querySelector('div').querySelector('#delete') == e.target )
-				{
-					e.preventDefault();
-					taskFunction(localStorage.getItem('Username')+localStorage.getItem('Project')+localStorage.getItem('currentScrum')+'sprint', 3, sprintboxTasks[j].id, localStorage.getItem('Username'), '', '','', 0, 0);
-				}
-			}
-		}
-		sprintboxTasks[i].querySelector('form').querySelector('#save').onclick = (e) =>
-		{
-			e.preventDefault();
-			var j = 0;
-			for( j = 0 ; j < sprintboxTasks.length ; j++ )
-			{
-				if( sprintboxTasks[j].querySelector('form').querySelector('#save') == e.target )
-				{
-					var b;
-					if( sprintboxTasks[j].querySelector('#taskcompleted').checked == true )
-					{
-						b = 1;
-					}
-					else
-					{
-						b = 0;
-					}
-					taskFunction(localStorage.getItem('Username')+localStorage.getItem('Project')+localStorage.getItem('currentScrum')+'sprint', 2, sprintboxTasks[j].id, localStorage.getItem('Username'), sprintboxTasks[j].querySelector('#taskname').value, sprintboxTasks[j].querySelector('#taskDescription').value,'', b, 0);
-				}
-			}
-		}
-		sprintboxTasks[i].querySelector('form').querySelector('#cancel').onclick = (e) =>
-		{
-			e.preventDefault();
-			var j = 0;
-			for( j = 0 ; j < sprintboxTasks.length ; j++ )
-			{
-				if( sprintboxTasks[j].querySelector('form').querySelector('#cancel') == e.target )
-				{
-					sprintboxTasks[j].querySelector('form').reset();
-					sprintboxTasks[j].querySelector('form').style.display = 'none';
-					sprintboxTasks[j].querySelector('div').style.display = 'block';
-				}
-			}
-		}
-	}
-}
-function handleBacklogTasks()
-{
-	tasks = document.querySelector('#backlogsbox').querySelector('ul').querySelectorAll('li');
-	for( i = 0 ; i < tasks.length ; i++ )
-	{
-		if( tasks[i].querySelector('form') != null )
-		{
-			tasks[i].querySelector('form').style.display = 'none';
-		}
-	}
-	for( i = 0 ; i < tasks.length ; i++ )
-	{
-		if( tasks[i].querySelector('div') != null )
-		{
-			tasks[i].querySelector('div').querySelector('#delete').onclick = (e) =>
-			{
-				var j = 0;
-				for( j = 0 ; j < tasks.length ; j++ )
-				{
-					if( tasks[j].querySelector('div') != null )
-					{
-						if( tasks[j].querySelector('div').querySelector('#delete') == e.target )
-						{
-							e.preventDefault();
-							backlogFunction('backlog', 1, tasks[j].id, '', 0, '', tasks[j].value, '', '', 3);
-						}
-					}
-				}
-			}
-			tasks[i].querySelector('form').querySelector('#save').onclick = (e) =>
-			{
-				e.preventDefault();
-				var j = 0;
-				for( j = 0 ; j < tasks.length ; j++ )
-				{
-					if( tasks[j].querySelector('div') != null )
-					{
-						if( tasks[j].querySelector('form').querySelector('#save') == e.target )
-						{
-							backlogFunction('backlog', 1, tasks[j].id, localStorage.getItem('Username'), '',tasks[j].id, tasks[j].querySelector('#taskDescription'), tasks[j].querySelector('#taskname'), 2); 
-						}
-					}
-				}
-			}
-			tasks[i].querySelector('form').querySelector('#cancel').onclick = (e) =>
-			{
-				e.preventDefault();
-				var j = 0;
-				for( j = 0 ; j < tasks.length ; j++ )
-				{
-					if( tasks[j].querySelector('div') != null )
-					{
-						if( tasks[j].querySelector('form').querySelector('#cancel') == e.target )
-						{
-							tasks[j].querySelector('form').reset();
-							tasks[j].querySelector('form').style.display = 'none';
-							tasks[j].querySelector('div').style.display = 'block';
-						}
-					}
-				}
-			}
-		}
-		else
-		{
-			tasks[i].querySelector('p').onclick = (e) =>
-			{
-				e.preventDefault();
-				reloadBacklogs(document.querySelector('#backlogsbox').querySelector('p').innerHTML.substring(6) + '/' + e.target.innerHTML);
-			}
-		}
-	}
-}
-*/
 function handleMeetsNoticeViewing()
 {
 	var meets = document.querySelector('#upcomingmeets').querySelector('ul').querySelectorAll('li');
@@ -1100,266 +654,6 @@ function handleNoticeViewing()
 		});
 	}
 }
-
-/*
-function DisplayingMeetings(Objectarray)
-{
-	var str="";
-	for( i = 0 ; i < Objectarray.length ; i++)
-	{
-		str+="<li><div><button class = 'mhead'>";
-		date = Objectarray[i].meetingDate.toString();
-		str+="Meeting on "+Objectarray[i].meetingTime+' '+date.substring(0, 4)+'-'+ date.substring(4, 6) + '-'+date.substring(6, 8)+"</button>";
-		str+="<div><h5>";
-		str+="Created on: "+Objectarray[i].createdOn;
-		str+="</h5><h5>Created by: "+Objectarray[i].createdBy;
-		str+="</h5>Link: <a href = ";
-		str+=Objectarray[i].meetingLink+">";
-		str+=Objectarray[i].meetingLink;
-		str+="</a><br>";
-		str+="Description: "+Objectarray[i].purpose;
-		str+="</div></div></li>";
-	}
-	console.log(str);
-	return str;
-}
-
-function DisplayingTasks(Objectarray)
-{
-	console.log(Objectarray);
-	var str="";
-	for( var i = 0 ; i <  Objectarray.length ; i++ )
-	{
-		str+="<li><div><button class = 'thead'>";
-		str+=" "+Objectarray[i].taskHeading;
-		str+="</button><div><h5>";
-		str+="Created on "+Objectarray[i].createdOn+" ";
-		str+="</h5><h5>Created By "+Objectarray[i].createdBy+" ";
-		str+="</h5>";
-		str+=Objectarray[i].taskDetails;
-		str+="</div></div></li>";
-	}
-	console.log(str);
-	return str;
-}
-function DisplayingTasksEdit(Objectarray)
-{
-	var str="";
-	var i=1;
-	for( j = 0 ; j < Objectarray.length ; j++ )
-	{
-		str+="<li id = '"+Objectarray[j].id+"'><div><h5>";
-		str+=Objectarray[j].taskHeading+"</h5><h6>Status: ";
-		if(Objectarray[j].completed=='1')
-			str+="Done";
-		else
-			str+="Pending";
-		str+="</h6><h6>Created by: "+Objectarray[j].createdBy+"</h6><h6>Created on: "+Objectarray[j].createdOn+"</h6>";
-		str+="<p>Description:"+Objectarray[j].taskDetails+"</p>";
-		str+="<button id = 'delete'>Delete Task</button><button id = 'edit'>Edit Task</button></div>";
-		str+="<form class = 'edit' style ='display : none'><h4>Edit Tasks</h4><label for = 'taskname'>";
-		str+="TaskTitle</label><input type = 'text' id = 'taskname' name = 'taskname' placeholder = 'Task Name' value = '"+Objectarray[j].taskHeading+"'>";
-		str+="<label for = 'taskcompleted'>Task Completed or Not</label>";
-		str+="<input type = 'checkbox' id = 'taskcompleted' ";
-		if( Objectarray[j].completed == '1' )
-		{
-			str+="checked";
-		}
-		str+="><label for = 'taskDescription'>Description</label>";
-		str+="<textarea type = 'text' id = 'taskDescription' name = 'taskDescription' placeholder = 'Describe the Task'>"+Objectarray[j].taskDetails+"</textarea>";
-		str+="<button id = 'save' type= 'button'>Save</button><button id = 'cancel' type = 'button'>Cancel</button>"
-		str+="</form></li>";
-		i++;
-	}
-	console.log(str);
-	return str;
-}
-function DisplayingMeetingsEdit(Objectarray)
-{
-	var str="";
-	for(i = 0 ; i < Objectarray.length ; i++ )
-	{
-		str+="<li id = "+Objectarray[i].id+"><div><h5>";
-		date = Objectarray[i].meetingDate.toString();
-		str+="Meeting on "+Objectarray[i].meetingTime+' '+date.substring(0, 4)+'-'+ date.substring(4, 6) + '-'+date.substring(6, 8)+"</h5>";
-		str+="<h5>Created on: "+Objectarray[i].createdOn;
-		str+="</h5><h5>Created by: "+Objectarray[i].createdBy;
-		str+="</h5>Link: <a href = ";
-		str+=Objectarray[i].meetingLink+">";
-		str+=Objectarray[i].meetingLink;
-		str+="</a><br>";
-		str+="Description: "+Objectarray[i].purpose;
-		str+="<br><button id = 'delete'>Delete Meet</button><button id = 'edit'>Edit Meet</button></div>";
-		str+="<form class = 'edit'>";
-		str+=	"<h4>Edit Meeting</h4>";
-		str+=	"<label for = 'meetingtopic'>Time</label>";
-		str+=	"<input type = 'text' id = 'meetingtime' name = 'meetingtime' placeholder = 'Meeting Time' value = '"+Objectarray[i].meetingTime+"'>";
-		str+=	"<label for = 'meetingdate'>Date</label>";
-		str+= 	"<input type = 'text' id = 'meetingdate' name = 'meetingdate' placeholder = 'Meeting Date' value = '"+date.substring(0, 4)+'-'+ date.substring(4, 6) + '-'+date.substring(6, 8)+"'>";
-		str+= 	"<label for = 'meetinglink'>Link</label>";
-		str+= 	"<input type = 'text' id = 'meetinglink' name = 'meetinglink' placeholde = 'Link for the Meeting' value = '"+Objectarray[i].meetingLink+"'>";
-		str+=	"<label for = 'meetpurpose'>Purpose</label>"
-		str+= 	"<textarea type = 'text' id = 'meetpurpose' name = 'meetpurpose' placeholder = 'Describe the Purpose'>"+Objectarray[i].purpose+"</textarea>";
-		str+=	"<button id = 'save' type= 'button'>Save</button><button id = 'cancel' type = 'button'>Cancel</button>"
-		str+="</form></li>";
-	}
-	return str;
-}
-
-function Display_ProductBacklogs( Objectarray )
-{
-	var str = '';
-	for( i = 0 ; i < Objectarray.length ; i++ )
-	{
-		if( Objectarray[i].type == '0' )
-		{
-			str += "<li id = "+Objectarray[i].id+ " value = "+Objectarray[i].parent+">";
-			str += "<p class = 'folder'>"+Objectarray[i].foldername+"</p>";
-			str += "</li>";
-		}
-		else
-		{
-			str+="<li id = '"+Objectarray[i].id+"' value = "+Objectarray[i].parent+"><div><h5>";
-			str+=Objectarray[i].taskHeading+"</h5>";
-			str+="<h6>Created by: "+Objectarray[i].createdBy+"</h6>";
-			str+="<p>Description:"+Objectarray[i].taskDetails+"</p>";
-			str+="<button id = 'delete'>Delete Task</button><button id = 'edit'>Edit Task</button></div>";
-			str+="<form class = 'edit' style ='display : none'><h4>Edit Tasks</h4><label for = 'taskname'>";
-			str+="TaskTitle</label><input type = 'text' id = 'taskname' name = 'taskname' placeholder = 'Task Name' value = '"+Objectarray[i].taskHeading+"'>";
-			str+="<label for = 'taskDescription'>Description</label>";
-			str+="<textarea type = 'text' id = 'taskDescription' name = 'taskDescription' placeholder = 'Describe the Task'>"+Objectarray[i].taskDetails+"</textarea>";
-			str+="<button id = 'save' type= 'button'>Save</button><button id = 'cancel' type = 'button'>Cancel</button>"
-			str+="</form></li>";
-		}
-	}
-	return str;
-}
-
-function to_getTasks(n, table_name, number, type_)
-{
-	var result;
-	$.ajax(
-		{
-			type: "POST",
-			url: "to_getTasksPy",
-			data: {
-				table_name: table_name,
-				number: number,
-				type_: type_,
-			},
-			success: function(data){
-				result = JSON.parse(data);
-				console.log(result);
-				if( n == 0 )
-				{
-					document.querySelector('#duetasks').querySelector('ul').innerHTML = DisplayingTasks(result);
-					handleTasksNoticeViewing();
-				}
-				else if( n == 1 )
-				{
-					document.querySelector('#pretasks').innerHTML = DisplayingTasksEdit(result);
-					handleScrumTasksAndMeets();
-				}
-				else if( n == 2 )
-				{
-					document.querySelector('#sprintTasks').innerHTML = DisplayingTasksEdit(result);
-					handleSprintTasks();
-				}
-			}
-		}
-	)
-}
-
-function to_getMeets(n, table_name, number)
-{
-	var result;
-	$.ajax(
-		{
-			type: "POST",
-			url: "to_getMeetsPy",
-			data: {
-				table_name: table_name,
-				number: number,
-			},
-			success: function(data){
-				result = JSON.parse(data);
-				console.log(result);
-				if( n == 0 )
-				{
-					document.querySelector('#upcomingmeets').querySelector('ul').innerHTML = DisplayingMeetings(result);
-					handleMeetsNoticeViewing();
-				}
-				else if( n == 1 )
-				{
-					document.querySelector('#premeets').innerHTML = DisplayingMeetingsEdit(result);
-					handleScrumTasksAndMeets();
-				}
-			}
-		}
-	)
-}
-
-function to_getBacklogs(table_name, foldername)
-{
-	$.ajax(
-		{
-			type: 'POST',
-			url: 'to_getBacklogsPy',
-			data:
-			{
-				foldername: foldername,
-				table_name: table_name,
-			},
-			success: function(data)
-			{
-				result = JSON.parse(data);
-				console.log(result);
-				console.log(Display_ProductBacklogs( result ));
-				document.querySelector('#backlogsbox').querySelector('ul').innerHTML = Display_ProductBacklogs( result );
-				handleBacklogTasks()
-			}
-		}
-	)
-}
-
-function reloadBacklogs(foldername)
-{
-	document.querySelector('#backlogsbox').querySelector('p').innerHTML = 'Path :'+foldername;
-	document.querySelector('#backlogsbox').querySelector('ul').innerHTML = '';
-	to_getBacklogs('backlog', foldername);
-	document.querySelector('.createBacklog').parent = foldername;
-}
-
-function reloadNoticeTasks()
-{
-	document.querySelector('#duetasks').querySelector('ul').innerHTML = '';
-	to_getTasks(0,localStorage.getItem('Username')+localStorage.getItem('Project')+localStorage.getItem('currentScrum')+'tasks', 5, 1);
-}
-
-function reloadNoticeMeets()
-{
-	document.querySelector('#upcomingmeets').querySelector('ul').innerHTML = '';
-	to_getMeets(0, localStorage.getItem('Username')+localStorage.getItem('Project')+localStorage.getItem('currentScrum')+'meets', 5);
-}
-
-function reloadScrumTasks()
-{
-	document.querySelector('#pretasks').innerHTML = '';
-	to_getTasks(1,localStorage.getItem('Username')+localStorage.getItem('Project')+localStorage.getItem('currentScrum')+'tasks', -1, 0);
-}
-
-function reloadScrumMeetings()
-{
-	document.querySelector('#premeets').innerHTML = '';
-	to_getMeets(1, localStorage.getItem('Username')+localStorage.getItem('Project')+localStorage.getItem('currentScrum')+'meets', 5);
-}
-
-function reloadSprintTasks()
-{
-	document.querySelector('#sprintTasks').innerHTML = '';
-	to_getTasks(2,localStorage.getItem('Username')+localStorage.getItem('Project')+localStorage.getItem('currentScrum')+'sprint', -1, 0);
-}*/
-
 function modifyProjects(scrum, sprint, project)
 {
 	$.ajax(
@@ -1408,9 +702,9 @@ function getAllProjects( callback )
 			url: 'https://api.github.com/repos/'+username+'/'+repoName+'/projects',
 			beforeSend: beforeSend,
 			data:
-				{
-					state: 'all',
-				},
+			{
+				state: 'all',
+			},
 			success: function(response)
 			{
 				list = [];
@@ -1509,10 +803,10 @@ function editCard( url , note, archived, callback )
 			url: url,
 			beforeSend: beforeSend,
 			data: JSON.stringify(
-			{
-				note: note,
-				archived: archived,
-			}),
+				{
+					note: note,
+					archived: archived,
+				}),
 			success: function(response)
 			{
 				console.log("Edited");
@@ -1520,7 +814,7 @@ function editCard( url , note, archived, callback )
 				callback(response);
 			}
 		}
-		)
+	)
 }
 
 function deleteCard( url, callback )
@@ -1647,6 +941,7 @@ function deleteScrumTask(event)
 	var c = event.target.parentElement.parentElement;
 	handleModal('Delete Task', "This cannot be undone, Are you sure you want to delete the task?" , function()
 		{
+			startWait();
 			deleteCard( c.getAttribute('data-cardurl'), function(obj){ console.log("Deleted Task"); DisplayScrumTasks(); DisplaySprintTasks(); } );
 		});
 }
@@ -1663,6 +958,7 @@ function saveScrumTask(event)
 	{
 		b = false;
 	}
+	startWait();
 	editCard( c.parentElement.getAttribute('data-cardurl'), c.querySelector('#taskname').value+'\n'+c.querySelector('#taskDescription').value,b, function(obj){DisplayScrumTasks();DisplaySprintTasks();});
 }
 
@@ -1734,6 +1030,7 @@ function DisplayScrumTasks()
 				str += 	"</li>";
 			}
 			document.querySelector('#pretasks').innerHTML = str;
+			stopWait();
 		});
 }
 
@@ -1797,6 +1094,7 @@ function DisplaySprintTasks()
 				str += 	"</li>";
 			}
 			document.querySelector('#sprintTasks').innerHTML = str;
+			stopWait();
 		});
 }
 
@@ -1848,6 +1146,7 @@ function DisplayNotices()
 				str += 	"</li>";
 			}
 			document.querySelector('#noticelist').innerHTML = str;
+			stopWait();
 		});
 }
 
@@ -1863,6 +1162,7 @@ function deleteNotice(event)
 	var c = event.target.parentElement.parentElement;
 	handleModal('Delete Notice', "This cannot be undone, Are you sure you want to delete the Notice?" , function()
 		{
+			startWait();
 			deleteCard( c.getAttribute('data-cardurl'), function(obj){ console.log("Deleted Notice"); DisplayNotices();DisplayNoticeNotices(); } );
 		});
 }
@@ -1870,6 +1170,7 @@ function deleteNotice(event)
 function saveNotice(event)
 {
 	var c = event.target.parentElement;
+	startWait();
 	editCard( c.parentElement.getAttribute('data-cardurl'), c.querySelector('#taskname').value+'\n'+c.querySelector('#taskDescription').value,false, function(obj){DisplayNotices();DisplayNoticeNotices();});
 }
 
@@ -1946,6 +1247,7 @@ function DisplayScrumMeets()
 				str += 	"</li>";
 			}
 			document.querySelector('#premeets').innerHTML = str;
+			stopWait();
 		});
 }
 
@@ -1961,6 +1263,7 @@ function deleteScrumMeet(event)
 	var c = event.target.parentElement.parentElement;
 	handleModal('Delete Meeting', "This cannot be undone, Are you sure you want to delete the Meeting?" , function()
 		{
+			startWait();
 			deleteCard( c.getAttribute('data-cardurl'), function(obj){ console.log("Deleted Meeting"); DisplayScrumMeets(); DisplayNoticeMeets();} );
 		});
 }
@@ -1974,6 +1277,7 @@ function saveScrumMeet(event)
 	meetTime = c.querySelector('#meetingtime').value;
 	meetDescription = c.querySelector('#meetDescription').value;
 	con = meetLink+"\n"+meetDate+"\n"+meetTime+"\n"+meetDescription;
+	startWait();
 	editCard( c.parentElement.getAttribute('data-cardurl'), con, false, function(obj){DisplayScrumMeets();DisplayNoticeMeets();});
 }
 
@@ -2064,6 +1368,7 @@ function DisplayNoticeNotices()
 
 			}
 			document.querySelector("#board").querySelector("#notices").querySelector("ul").innerHTML = str;
+			stopWait();
 		});
 }
 
@@ -2184,6 +1489,7 @@ function handleContributors()
 		}
 		else
 		{
+			startWait();
 			$.ajax(
 				{
 					type: "POST",
@@ -2197,6 +1503,7 @@ function handleContributors()
 						console.log(data);
 						if(data != 'y')
 						{
+							stopWait();
 							alert("No user with the given username");
 						}
 						else
@@ -2236,7 +1543,9 @@ function handleContributors()
 												},
 												success: function(data)
 												{
+													stopWait();
 													alert("Successfully Added");
+													document.querySelector('#contributorsbox').querySelector('form').reset();
 													handleContributors();
 												}
 											}
@@ -2283,6 +1592,269 @@ function handleModal( heading, content, callback )
 	}
 }
 
+function loadFolder( foldername )
+{
+	startWait();
+	if( foldername != document.querySelector("#backlogsbox").querySelector("#path").getAttribute('data-foldername') )
+	{
+		var p = document.querySelector("#backlogsbox").querySelector("#path").getAttribute('data-pathname');
+		p = JSON.parse(p);
+		p.push(foldername);
+		document.querySelector("#backlogsbox").querySelector("#path").setAttribute('data-pathname', JSON.stringify(p));
+	}
+	var p = document.querySelector("#backlogsbox").querySelector("#path").getAttribute('data-pathname');
+	p = JSON.parse(p);
+	var str = '';
+	for( var i = 0 ; i < p.length ; i++ )
+	{
+		str = str + p[i] + '/';
+	}
+	document.querySelector("#backlogsbox").querySelector("#path").innerHTML = str;
+	document.querySelector("#backlogsbox").querySelector("#path").setAttribute('data-foldername', foldername);
+
+	document.querySelector("#folderback").onclick = function(event){
+		if( document.querySelector('#backlogsbox').querySelector("#path").getAttribute('data-foldername') == 'root' )
+		{
+			return;
+		}
+		event.preventDefault();
+		var p = document.querySelector("#backlogsbox").querySelector("#path").getAttribute('data-pathname');
+		p = JSON.parse(p);
+		p.pop();
+		var prev = p.pop();
+		document.querySelector("#backlogsbox").querySelector("#path").setAttribute('data-pathname', JSON.stringify(p));
+		loadFolder(prev);
+	};
+	var str = '';
+	getAllCards( JSON.parse(localStorage.getItem('FileInfo')).cardsURL, function(cards)
+		{
+			var fileInfo = JSON.parse(cards[0].note);
+			var folderContents;
+			for( var i = 0 ; i < fileInfo.length ;i++ )
+			{
+				if( fileInfo[i].name == foldername )
+				{
+					folderContents = fileInfo[i];
+				}
+			}
+			document.querySelector("#backlogsbox").querySelector("#path").setAttribute('data-columnURL',folderContents.columnURL);
+			for( var i = 0 ; i < folderContents.folders.length ; i++ )
+			{
+				str += "<li onclick = \"loadFolder('"+folderContents.folders[i]+"')\" >";
+				str += "<p class = 'folder'>"+folderContents.folders[i]+"</p>";
+				str += "</li>";
+			}
+			getAllCards( folderContents.cardsURL, function(list)
+				{
+					for( let j = 0 ; j < list.length ; j++ )
+					{
+						let taskname = '';
+						let taskDescription = '';
+						let k = 0;
+						for( let i = 0 ; i <  list[j].note.length ; i++ )
+						{
+							if(list[j].note[i] == '\n')
+							{
+								k = 1;
+							}
+							else if( k == 0 )
+							{
+								taskname += list[j].note[i];
+							}
+							else if( k == 1 )
+							{
+								taskDescription += list[j].note[i];
+							}
+						}
+						str +=	"<li data-cardurl = '"+list[j].url+"'>";
+						str +=		"<div>";
+						str +=			"<h5>" +taskname+"</h5>";
+						str +=			"<h5>Description:\n"+taskDescription+"</h5>";
+						str +=			"<h6>Created by: "+list[j].creator+"</h6>";
+						var date = new Date(list[j].time);
+						str +=			"<h6>Last Modified: "+date+"</h6>";
+						str +=			"<button id = 'delete' onclick = \"deleteProductTask(event)\">Delete Task</button>";
+						str += 			"<button id = 'edit' onclick = \"editProductTask(event)\">Edit Task</button>";
+						if( localStorage.getItem('currentScrum') != 0 )
+						{
+							str += 			"<button id = 'addToScrum' onclick = \"addToScrum(event)\">Add to Current Scrum</button>";
+						}
+						if(localStorage.getItem('currentSprint') != 0 )
+						{
+							str += 			"<button id = 'addToSprint' onclick = \"addToSprint(event)\">Add to Current Sprint</button>";
+						}
+						str += 		"</div>";
+						str +=		"<form class = 'edit' style ='display : none'>";
+						str +=			"<h4>Edit Tasks</h4>";
+						str += 			"<label for = 'taskname'>TaskTitle</label>";
+						str +=			"<input type = 'text' id = 'taskname' name = 'taskname' placeholder = 'Task Name' value = '"+taskname+"'>";
+						str +=			"<label for = 'taskDescription'>Description</label>";
+						str +=			"<textarea type = 'text' id = 'taskDescription' name = 'taskDescription' placeholder = 'Describe the Task'>"+taskDescription+"</textarea>";
+						str +=			"<button id = 'save' type= 'button' onclick = \"saveProductTask(event)\">Save</button>";
+						str +=			"<button id = 'cancel' type = 'button' onclick = \"cancelProductTask(event)\">Cancel</button>"
+						str +=		"</form>";
+						str += 	"</li>";
+						console.log(str);
+					}
+					document.querySelector("#backlogsbox").querySelector("ul").innerHTML = str;
+					stopWait();
+				});
+
+		});
+}
+
+function deleteProductTask(event)
+{
+	var p = document.querySelector("#backlogsbox").querySelector("#path").getAttribute('data-foldername');
+	var c = event.target.parentElement.parentElement;
+	handleModal('Delete Task', "This cannot be undone, Are you sure you want to delete the task?" , function()
+		{
+			deleteCard( c.getAttribute('data-cardurl'), function(obj){ console.log("Deleted Task"); loadFolder(p); } );
+		});
+}
+
+function editProductTask(event)
+{
+	var c = event.target.parentElement.parentElement; 
+	c.querySelector("div").style.display = 'none'; 
+	c.querySelector('form').style.display = 'block';
+}
+
+function addToScrum(event)
+{
+	var c = event.target.parentElement.parentElement.querySelector("form");
+	startWait();
+	createCard( JSON.parse(localStorage.getItem("CurrentScrumTasksDetails")).columnURL,c.querySelector('#taskname').value+'\n'+c.querySelector('#taskDescription').value,  function(cardObj){
+		alert("Task successfully Added to scrum");
+		DisplayScrumTasks();
+		DisplayNoticeTasks();
+	});
+}
+
+function addToSprint(event)
+{
+	var c = event.target.parentElement.parentElement.querySelector("form");
+	startWait();
+	createCard( JSON.parse(localStorage.getItem("CurrentSprintTasksDetails")).columnURL,c.querySelector('#taskname').value+'\n'+c.querySelector('#taskDescription').value,  function(cardObj){
+		alert("Task successfully Added to Sprint");
+		DisplaySprintTasks();
+	});
+}
+
+function saveProductTask(event)
+{
+	var p = document.querySelector("#backlogsbox").querySelector("#path").getAttribute('data-foldername');
+	var c = event.target.parentElement;
+	var b;
+	editCard( c.parentElement.getAttribute('data-cardurl'), c.querySelector('#taskname').value+'\n'+c.querySelector('#taskDescription').value,false, function(obj){loadFolder(p)});
+}
+
+function cancelProductTask(event)
+{
+	var c = event.target.parentElement.parentElement; 
+	c.querySelector("div").style.display = 'block'; 
+	c.querySelector('form').style.display = 'none';
+}
+
+function InitializeProductBacklogs()
+{
+	loadFolder( 'root' )
+	document.querySelector("#backlogsbox").querySelector('#createTask').querySelector('button').onclick = (event) =>
+	{
+		event.preventDefault();
+		var taskname = document.querySelector("#backlogsbox").querySelector('#createTask').querySelector('#taskname').value;
+		var taskDescription = document.querySelector("#backlogsbox").querySelector('#createTask').querySelector('#taskDescription').value;
+		if( taskname == '' )
+		{
+			alert("Task name is empty");
+		}
+		else
+		{
+			if( taskDescription == '' )
+			{
+				alert("Task Description is empty");
+			}
+			else
+			{
+				startWait();
+				var con = taskname+"\n"+taskDescription;
+				createCard(document.querySelector("#backlogsbox").querySelector("#path").getAttribute('data-columnURL') , con, function(cardObj){
+					var p = document.querySelector("#backlogsbox").querySelector("#path").getAttribute('data-foldername');
+					loadFolder(p);
+					var b = document.querySelector("#createProductTaskButton");
+					console.log(b);
+					b.classList.toggle('createactive');
+					var content = b.nextElementSibling;
+					content.reset();
+					if( content.style.maxHeight )
+					{
+						content.style.maxHeight = null;
+						content.style.padding = '0px';
+					}
+					else
+					{
+						content.style.maxHeight = content.scrollHeight + 'px';
+						content.style.padding = '5px';
+					}
+					stopWait();
+				});
+			}
+		}
+	}
+	document.querySelector("#backlogsbox").querySelector('.createfolder').querySelector('button').onclick = (event) =>
+	{
+		event.preventDefault();
+		var taskname = document.querySelector("#backlogsbox").querySelector('.createfolder').querySelector('#taskname').value;
+		if( taskname == '' )
+		{
+			alert("Enter FolderName");
+		}
+		else
+		{
+			startWait();
+			createColumn(JSON.parse(localStorage.getItem("ProductBacklogs")).projectURL, taskname, function(cardObj){
+				getAllCards( JSON.parse(localStorage.getItem('FileInfo')).cardsURL, function(cards)
+					{
+						var fileInfo = JSON.parse(cards[0].note);
+						var folderContents;
+						for( var i = 0 ; i < fileInfo.length ;i++ )
+						{
+							if( fileInfo[i].name == document.querySelector("#backlogsbox").querySelector("#path").getAttribute('data-foldername'))
+							{
+								fileInfo[i].folders.push(taskname);
+								obj3 = {
+									name: taskname,
+									cardsURL: cardObj.cardsURL,
+									columnURL: cardObj.columnURL, 
+									folders: [],
+								};
+								fileInfo.push(obj3);
+								editCard( cards[0].url, JSON.stringify(fileInfo), false, function(response){
+									var p = document.querySelector("#backlogsbox").querySelector("#path").getAttribute('data-foldername');
+									loadFolder(p);
+								});
+							}
+						}
+						var b = document.querySelector("#createProductfolderButton");
+						b.classList.toggle('createactive');
+						var content = b.nextElementSibling;
+						content.reset();
+						if( content.style.maxHeight )
+						{
+							content.style.maxHeight = null;
+							content.style.padding = '0px';
+						}
+						else
+						{
+							content.style.maxHeight = content.scrollHeight + 'px';
+							content.style.padding = '5px';
+						}
+						stopWait();
+					});
+			});
+		}
+	}
+}
 function setValues()
 {
 	getAllProjects(function(list1)
@@ -2345,12 +1917,14 @@ function setValues()
 
 document.addEventListener('DOMContentLoaded', function() 
 	{
-		getAll();
 		document.querySelector("title").innerHTML = localStorage.getItem("Project");
 		loadOverviewBox();
 		DisplayCommits();
 		DisplayNotices();
 		DisplayNoticeNotices();
+		InitializeProductBacklogs();
+		getAll();
+		
 		handleContributors();
 		document.querySelector("#gobackbutton").onclick = function(){
 			window.location = "http://127.0.0.1:8000/";
@@ -2406,7 +1980,7 @@ document.addEventListener('DOMContentLoaded', function()
 		}
 		else
 		{
-			//DisplaySprintTasks();
+			DisplaySprintTasks();
 			document.querySelector('#sprintbox').querySelector('#sprint').style.display = 'block';	
 			document.querySelector('#sprintbox').querySelector('#createsprint').style.display = 'none';
 			var x = setInterval(function() {
@@ -2462,6 +2036,7 @@ document.addEventListener('DOMContentLoaded', function()
 				}
 				else
 				{
+					startWait();
 					var con = taskname+"\n"+taskDescription;
 					createCard( JSON.parse(localStorage.getItem("CurrentScrumTasksDetails")).columnURL, con, function(cardObj){
 						console.log("before display scrum tasks");
@@ -2480,7 +2055,8 @@ document.addEventListener('DOMContentLoaded', function()
 							content.style.maxHeight = content.scrollHeight + 'px';
 							content.style.padding = '5px';
 						}
-						DisplayScrumTasks();} );
+						DisplayScrumTasks();
+					} );
 				}
 			}
 		}
@@ -2510,6 +2086,7 @@ document.addEventListener('DOMContentLoaded', function()
 			}
 			else
 			{
+				startWait();
 				var con = meetLink+"\n"+meetDate+"\n"+meetTime+"\n"+meetDescription;
 				console.log(con);
 				createCard( JSON.parse(localStorage.getItem("CurrentScrumMeetsDetails")).columnURL, con, function(cardObj){
@@ -2548,6 +2125,7 @@ document.addEventListener('DOMContentLoaded', function()
 				}
 				else
 				{
+					startWait();
 					var con = taskname+"\n"+taskDescription;
 					createCard( JSON.parse(localStorage.getItem("CurrentSprintTasksDetails")).columnURL, con, function(cardObj){
 						var b = document.querySelector("#createSprintTaskButton");
@@ -2565,7 +2143,6 @@ document.addEventListener('DOMContentLoaded', function()
 							content.style.maxHeight = content.scrollHeight + 'px';
 							content.style.padding = '5px';
 						}
-						DisplayScrumTasks();
 						DisplaySprintTasks();} );
 				}
 			}
@@ -2587,6 +2164,7 @@ document.addEventListener('DOMContentLoaded', function()
 				}
 				else
 				{
+					startWait();
 					var con = taskname+"\n"+taskDescription;
 					createCard( JSON.parse(localStorage.getItem("NoticeDetails")).columnURL, con, function(cardObj){
 						var b = document.querySelector("#createNoticeButton");
@@ -2604,37 +2182,23 @@ document.addEventListener('DOMContentLoaded', function()
 							content.style.maxHeight = content.scrollHeight + 'px';
 							content.style.padding = '5px';
 						}
+						stopWait();
+						DisplayNotices();
+						DisplayNoticeNotices();
 					});
-					DisplayNotices();
-					DisplayNoticeNotices();
 				}
 			}
 		}
-		/*
-		document.querySelector('#sprintbox').querySelector('#createTask').querySelector('button').onclick = (e) =>
-		{
-			e.preventDefault();
-			taskFunction(localStorage.getItem('Username')+localStorage.getItem('Project')+localStorage.getItem('currentScrum')+'sprint', 1, 1, localStorage.getItem('Username'), document.querySelector('#sprintbox').querySelector('#createTask').querySelector('#taskname').value, document.querySelector('#sprintbox').querySelector('#createTask').querySelector('#taskDescription').value,'', 0, 0);
-		}*/
-
-		/*document.querySelector('#createmeet').querySelector('button').onclick = (e) =>
-		{
-			e.preventDefault();
-			date = document.querySelector('#createmeet').querySelector('#meetingDate').value;
-			date = date.substring(0, 4)+date.substring(5, 7)+date.substring(8, 10);
-			meetingFunction(localStorage.getItem('Username')+localStorage.getItem('Project')+localStorage.getItem('currentScrum')+'meets', 1, 1, localStorage.getItem('Username'), document.querySelector('#createmeet').querySelector('#meetinglink').value, '', date, document.querySelector('#createmeet').querySelector('#meetingtime').value, document.querySelector('#createmeet').querySelector('#meetDescription').value );
-		}*/
-
 		var options = document.querySelector('#options').querySelectorAll('button');
 		var display = document.querySelector('#display').children;
 
-		for(let i = 0 ; i < 6 ; i++ )
+		for(let i = 0 ; i < 8 ; i++ )
 		{
 			display[i].style.display = 'none';
 		}
 		display[0].style.display = 'block';
 
-		for( let i = 0 ; i < 6 ; i++ )
+		for( let i = 0 ; i < 8 ; i++ )
 		{
 			options[i].onclick = (e) =>
 			{
@@ -2651,10 +2215,5 @@ document.addEventListener('DOMContentLoaded', function()
 				}
 			}
 		}
-		//reloadNoticeTasks();
-		//reloadNoticeMeets();
-		//reloadScrumTasks();
-		//reloadScrumMeetings()
-		//reloadSprintTasks();
 		document.querySelector('#projectname').innerHTML = localStorage.getItem('Project');
 	});

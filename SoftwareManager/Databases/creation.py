@@ -17,13 +17,11 @@ def insertDetails(token, user_name,phone, gitUserName, mail):
 
     return True
 
-def updateDetails(old_userName, name_, user_name,phone, address_, mail):
-
-    if isUser(user_name):
-        return False
+def updateDetails(token, user_name, gitUsername, mail):
 
     cursor = connection.cursor()
-    query = "UPDATE UserDetails SET name = %s, userName = %s, phoneNo = %s, address = %s, email = %s WHERE userName = %s"
-    cursor.execute(query, (name_, user_name, phone, address_, mail, old_userName))
+    query = f"UPDATE UserDetails SET name = '{token}', gitUserName = '{gitUsername}', email = '{mail}' WHERE username = '{user_name}'"
+    print(query)
+    cursor.execute(query)
 
     return True

@@ -72,6 +72,25 @@ function createColumn( projectURL, name, callback )
 			}
 		})
 }
+function createCard( columnURL, content, callback )
+{
+	$.ajax(
+		{
+			type:'POST',
+			url: columnURL + '/cards',
+			beforeSend: beforeSend,
+			data: JSON.stringify({
+				note: content,
+			}),
+			success: function(response)
+			{
+				console.log("Created a card");
+				console.log(response)
+				obj = {note: response.note, url: response.url, time: response.updated_at, creator: response.creator['login']};
+				callback(obj);
+			}
+		})
+}
 document.addEventListener('DOMContentLoaded', function() 
 	{
 		document.querySelector('#gobackbutton').onclick = () =>
@@ -147,10 +166,21 @@ document.addEventListener('DOMContentLoaded', function()
 												});
 											}
 											else
-											{
-												window.location = "http://127.0.0.1:8000/";
-												alert("New Project Created");
-											}
+		{
+			createProject('ProductBacklogs', function(projectObj1) {
+				localStorage.setItem('ProductBacklogs', JSON.stringify(projectObj1));
+				createColumn( projectObj1.projectURL, 'FileInfo', function(columnObj) {
+					createColumn( projectObj1.projectURL, 'root', function(rootObj){
+						l = [{name: 'root', cardsURL: rootObj.cardsURL, columnURL: rootObj.columnURL, folders: []}];
+						createCard( columnObj.columnURL, JSON.stringify(l), function(obj){
+							localStorage.setItem('FileInfo', JSON.stringify(obj));
+							alert("New Project Created");
+							window.location = "http://127.0.0.1:8000/";
+						});
+					});
+				});
+			}, repo_link);
+		}
 										});
 									}, repo_link);
 								}
