@@ -195,6 +195,7 @@ function setValues()
 			{
 				localStorage.setItem('currentScrum', 0);
 				localStorage.setItem('CurrentScrumMeetsDetails', '');
+				localStorage.setItem('scrumExpired', 1);
 			}
 			else
 			{
@@ -210,10 +211,17 @@ function setValues()
 									if(list2[j].name == 'Tasks')
 									{
 										console.log("tasks found");
-										localStorage.setItem('CurrentScrumTasksDetails', JSON.stringify(list2[j]));
 										date = new Date(list2[j].time);
+										localStorage.setItem('CurrentScrumTasksDetails', JSON.stringify(list2[j]));
 										localStorage.setItem('scrumstart', date.getTime());
-
+										if( (date.getTime()+172800000) > new Date().getTime() )
+										{
+											localStorage.setItem('scrumExpired', 0);
+										}
+										else
+										{
+											localStorage.setItem('scrumExpired', 1);
+										}
 									}
 									if(list2[j].name == 'Meetings')
 									{
@@ -237,7 +245,7 @@ function setValues()
 				localStorage.setItem('currentSprint', sprints.length);
 				for( var i = 0 ; i < projectlist.length ; i++ )
 				{
-					if( projectlist[i].name == 'Sprint-'+scrums.length )
+					if( projectlist[i].name == 'Sprint-'+sprints.length )
 					{
 						getAllColumns(projectlist[i].columnsURL, function(list2)
 							{
@@ -256,118 +264,6 @@ function setValues()
 			}
 		});
 }
-
-/*for( var j = 0 ; j < projectlist.length ; j++ )
-								{
-									if( projectlist[j].name == 'ProductBacklogs')
-									{
-										getAllColumns(projectlist[j].columnURL, function(list3)
-											{
-												for( var k = 0 ; k < list3.length ; k++ )
-												{
-													if( list3[k].name == 'FileInfo' )
-													{
-														getAllCards
-								sprints = [];
-								scrums = [];
-								for( var j = 0 ; j < projectlist.length ; j++ )
-								{
-									sprint = projectlist[j].name.slice(0, 6).toLowerCase();
-									scrum = projectlist[j].name.slice(0, 5).toLowerCase();
-									if( sprint == 'sprint')
-									{
-										sprints.push(projectlist[j]);
-									}
-									if( scrum == 'scrum' )
-									{
-										scrums.push(projectlist[j];
-									}
-									if( sprints.length != 0 and scrums.length != 0 )
-									{
-									}
-									else if( sprints.leng
-					});
-				}
-			}
-	});
-}
-else if(selection == 1 )
-{
-	b = false;
-	if( parseInt(localStorage.getItem('currentScrum')) != 0 )
-	{
-		getAllProjects(function(list1)
-			{
-				for( var i = 0 ; i < list1.length ; i++ )
-				{
-					if(list1[i].name == 'Scrum-'+parseInt(localStorage.getItem('currentScrum')).toString())
-					{
-						getAllColumns(list1[i].columnsURL, function(list2)
-							{
-								for( var j = 0 ; j < list2.length ; j++ )
-								{
-									if(list2[j].name == 'Tasks')
-									{
-										console.log("tasks found");
-										localStorage.setItem('CurrentScrumTasksDetails', JSON.stringify(list2[j]));
-										date = new Date(list2[j].time);
-										localStorage.setItem('scrumstart', date.getTime());
-
-									}
-									if(list2[j].name == 'Meetings')
-									{
-										console.log("meets found");
-										localStorage.setItem('CurrentScrumMeetsDetails', JSON.stringify(list2[j]));
-									}
-								}
-								b = true;
-								console.log("after currentScrumMeets details");
-								setValues(2);
-							});
-					}
-				}
-			});
-	}
-	else
-	{
-		setValues(2);
-	}
-}
-else if( selection == 2 )
-{
-	if( parseInt(localStorage.getItem('currentSprint')) != 0 )
-	{
-		getAllProjects(function(list1)
-			{
-				for( var i = 0 ; i < list1.length ; i++ )
-				{
-					if(list1[i].name == 'Sprint-'+parseInt(localStorage.getItem('currentSprint')).toString())
-					{
-						getAllColumns(list1[i].columnsURL, function(list2)
-							{
-								for( var j = 0 ; j < list2.length ; j++ )
-								{
-									if(list2[j].name == 'Tasks')
-									{
-										localStorage.setItem('CurrentSprintTasksDetails', JSON.stringify(list2[j]));
-										date = new Date(list2[j].time);
-										localStorage.setItem('sprintstart', date.getTime());
-										window.location = "/Project";
-										console.log("Hello");
-									}
-								}
-							});
-					}
-				}
-			});
-	}
-	else
-	{
-		console.log("Hello");
-		window.location = "/Project";
-	}
-}
-}*/
 
 function insertProjects(result)
 {
@@ -409,6 +305,7 @@ function insertProjects(result)
 						setValues();
 						var interval = setInterval(function()
 							{
+								console.log(localStorage.getItem('NoticeDetails'), localStorage.getItem('FileInfo') , localStorage.getItem('CurrentScrumMeetsDetails') , localStorage.getItem('CurrentSprintTasksDetails'));
 								if( localStorage.getItem('NoticeDetails') != null && localStorage.getItem('FileInfo') != null && localStorage.getItem('CurrentScrumMeetsDetails') != null && localStorage.getItem('CurrentSprintTasksDetails') != null )
 								{
 									stopWait();

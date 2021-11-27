@@ -6,191 +6,178 @@ function beforeSend(xhr)
 var dataArray =[];
 function setProgressValues(array)
 {
-	var lis = document.querySelector("#spiralProgress").querySelectorAll('li');
-	var csp = parseInt(localStorage.getItem('currentSpiral'));
-	var cst = parseInt(localStorage.getItem('currentSpiralStage'));
-	var distance, days, hours, minutes, seconds;
-
-	distance = new Date().getTime() - new Date(array[csp-1].list[cst-1]).getTime();
-
-	days = Math.floor(distance / (1000 * 60 * 60 * 24));
-	hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-	minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-	seconds = Math.floor((distance % (1000 * 60)) / 1000);
-	lis[0].querySelector('.value').innerHTML = days + "d " + hours + "h "+ minutes + "m " + seconds + "s ";
-
-	distance = new Date().getTime() - new Date(array[csp-1].list[0]).getTime();
-
-	days = Math.floor(distance / (1000 * 60 * 60 * 24));
-	hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-	minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-	seconds = Math.floor((distance % (1000 * 60)) / 1000);
-	lis[1].querySelector('.value').innerHTML = days + "d " + hours + "h "+ minutes + "m " + seconds + "s ";
-
-	distance = 0;
-	dist = [[], [], [], []];
-	distSprint = [];
-	for( var i = 0 ; i < array.length ; i++ )
+	if( array.length != 0 )
 	{
-		if( array[i].list[1] == 0 )
-		{
-			dist[0].push(new Date().getTime() - new Date(array[i].list[0]).getTime());
-		}
-		else
-		{
-			dist[0].push(new Date(array[i].list[1]).getTime() - new Date(array[i].list[0]).getTime());
-		}
+		var lis = document.querySelector("#spiralProgress").querySelectorAll('li');
+		var csp = parseInt(localStorage.getItem('currentSpiral'));
+		var cst = parseInt(localStorage.getItem('currentSpiralStage'));
+		var distance, days, hours, minutes, seconds;
 
-		if( array[i].list[2] == 0 && array[i].list[1] != 0 )
-		{
-			dist[1].push(new Date().getTime() - new Date(array[i].list[1]).getTime());
-		}
-		else if( array[i].list[1] != 0 )
-		{
-			dist[1].push(new Date(array[i].list[2]).getTime() - new Date(array[i].list[1]).getTime());
-		}
-		
-		if( array[i].list[3] == 0 && array[i].list[2] != 0 )
-		{
-			dist[2].push(new Date().getTime() - new Date(array[i].list[2]).getTime());
-		}
-		else if( array[i].list[2] != 0 )
-		{
-			dist[2].push(new Date(array[i].list[3]).getTime() - new Date(array[i].list[2]).getTime());
-		}
+		distance = new Date().getTime() - new Date(array[csp-1].list[cst-1]).getTime();
 
-		if( i+1 < array.length && array[i].list[3] != 0 )
-		{
-			dist[3].push(new Date(array[i+1].list[0]).getTime() - new Date(array[i].list[3].getTime()));
-		}
-		else if( array[i].list[3] != 0 )
-		{
-			dist[3].push(new Date().getTime() - new Date(array[i].list[3]).getTime());
-		}
+		days = Math.floor(distance / (1000 * 60 * 60 * 24));
+		hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+		minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+		seconds = Math.floor((distance % (1000 * 60)) / 1000);
+		lis[0].querySelector('.value').innerHTML = days + "d " + hours + "h "+ minutes + "m " + seconds + "s ";
 
-		if( i+1 < array.length )
-		{
-			distSprint.push(new Date(array[i+1].list[0]).getTime() - new Date(array[i].list[0].getTime()));
-		}
-		else
-		{
-			distSprint.push(new Date().getTime() - new Date(array[i].list[0]).getTime());
-		}
-	}
-	console.log("dist = ", dist);
-	console.log("distSprint = ", distSprint);
+		distance = new Date().getTime() - new Date(array[csp-1].list[0]).getTime();
 
-	distance = 0;
-	count = 0;
-	for( var i = 0 ; i < 4 ; i++ )
-	{
-		for( var j = 0  ; j < dist[i].length ; j++ )
-		{
-			count++;
-			distance = distance + dist[i][j];
-		}
-	}
-	distance = Math.round(distance/count);
-	days = Math.floor(distance / (1000 * 60 * 60 * 24));
-	hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-	minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-	seconds = Math.floor((distance % (1000 * 60)) / 1000);
-	lis[2].querySelector('.value').innerHTML = days + "d " + hours + "h "+ minutes + "m " + seconds + "s ";
+		days = Math.floor(distance / (1000 * 60 * 60 * 24));
+		hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+		minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+		seconds = Math.floor((distance % (1000 * 60)) / 1000);
+		lis[1].querySelector('.value').innerHTML = days + "d " + hours + "h "+ minutes + "m " + seconds + "s ";
 
-	distance = 0;
-	count = 0;
-	for( var i = 0 ; i < distSprint.length ; i++ )
-	{
+		distance = 0;
+		dist = [[], [], [], []];
+		distSprint = [];
+		for( var i = 0 ; i < array.length ; i++ )
+		{
+			if( array[i].list[1] == 0 )
+			{
+				dist[0].push(new Date().getTime() - new Date(array[i].list[0]).getTime());
+			}
+			else
+			{
+				dist[0].push(new Date(array[i].list[1]).getTime() - new Date(array[i].list[0]).getTime());
+			}
+
+			if( array[i].list[2] == 0 && array[i].list[1] != 0 )
+			{
+				dist[1].push(new Date().getTime() - new Date(array[i].list[1]).getTime());
+			}
+			else if( array[i].list[1] != 0 )
+			{
+				dist[1].push(new Date(array[i].list[2]).getTime() - new Date(array[i].list[1]).getTime());
+			}
+
+			if( array[i].list[3] == 0 && array[i].list[2] != 0 )
+			{
+				dist[2].push(new Date().getTime() - new Date(array[i].list[2]).getTime());
+			}
+			else if( array[i].list[2] != 0 )
+			{
+				dist[2].push(new Date(array[i].list[3]).getTime() - new Date(array[i].list[2]).getTime());
+			}
+
+			if( i+1 < array.length && array[i].list[3] != 0 )
+			{
+				dist[3].push(new Date(array[i+1].list[0]).getTime() - new Date(array[i].list[3].getTime()));
+			}
+			else if( array[i].list[3] != 0 )
+			{
+				dist[3].push(new Date().getTime() - new Date(array[i].list[3]).getTime());
+			}
+
+			if( i+1 < array.length )
+			{
+				distSprint.push(new Date(array[i+1].list[0]).getTime() - new Date(array[i].list[0].getTime()));
+			}
+			else
+			{
+				distSprint.push(new Date().getTime() - new Date(array[i].list[0]).getTime());
+			}
+		}
+		console.log("dist = ", dist);
+		console.log("distSprint = ", distSprint);
+
+		distance = 0;
+		count = 0;
+		for( var i = 0 ; i < 4 ; i++ )
+		{
+			for( var j = 0  ; j < dist[i].length ; j++ )
+			{
+				count++;
+				distance = distance + dist[i][j];
+			}
+		}
+		distance = Math.round(distance/count);
+		days = Math.floor(distance / (1000 * 60 * 60 * 24));
+		hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+		minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+		seconds = Math.floor((distance % (1000 * 60)) / 1000);
+		lis[2].querySelector('.value').innerHTML = days + "d " + hours + "h "+ minutes + "m " + seconds + "s ";
+
+		distance = 0;
+		count = 0;
+		for( var i = 0 ; i < distSprint.length ; i++ )
+		{
 			count++;
 			distance = distance + distSprint[i];
-	}
-	distance = Math.round(distance/count);
-	days = Math.floor(distance / (1000 * 60 * 60 * 24));
-	hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-	minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-	seconds = Math.floor((distance % (1000 * 60)) / 1000);
-	lis[3].querySelector('.value').innerHTML = days + "d " + hours + "h "+ minutes + "m " + seconds + "s ";
+		}
+		distance = Math.round(distance/count);
+		days = Math.floor(distance / (1000 * 60 * 60 * 24));
+		hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+		minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+		seconds = Math.floor((distance % (1000 * 60)) / 1000);
+		lis[3].querySelector('.value').innerHTML = days + "d " + hours + "h "+ minutes + "m " + seconds + "s ";
 
-	distance = 0;
-	count = 0;
-	for( var i = 0 ; i < dist[0].length ; i++ )
-	{
+		distance = 0;
+		count = 0;
+		for( var i = 0 ; i < dist[0].length ; i++ )
+		{
 			count++;
 			distance = distance + dist[0][i];
-	}
-	distance = Math.round(distance/count);
-	days = Math.floor(distance / (1000 * 60 * 60 * 24));
-	hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-	minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-	seconds = Math.floor((distance % (1000 * 60)) / 1000);
-	lis[4].querySelector('.value').innerHTML = days + "d " + hours + "h "+ minutes + "m " + seconds + "s ";
+		}
+		distance = Math.round(distance/count);
+		days = Math.floor(distance / (1000 * 60 * 60 * 24));
+		hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+		minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+		seconds = Math.floor((distance % (1000 * 60)) / 1000);
+		lis[4].querySelector('.value').innerHTML = days + "d " + hours + "h "+ minutes + "m " + seconds + "s ";
 
-	distance = 0;
-	count = 0;
-	for( var i = 0 ; i < dist[1].length ; i++ )
-	{
+		distance = 0;
+		count = 0;
+		for( var i = 0 ; i < dist[1].length ; i++ )
+		{
 			count++;
 			distance = distance + dist[1][i];
-	}
-	if( count != 0 )
-	{
-		distance = Math.round(distance/count);
-	}
-	days = Math.floor(distance / (1000 * 60 * 60 * 24));
-	hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-	minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-	seconds = Math.floor((distance % (1000 * 60)) / 1000);
-	lis[5].querySelector('.value').innerHTML = days + "d " + hours + "h "+ minutes + "m " + seconds + "s ";
+		}
+		if( count != 0 )
+		{
+			distance = Math.round(distance/count);
+		}
+		days = Math.floor(distance / (1000 * 60 * 60 * 24));
+		hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+		minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+		seconds = Math.floor((distance % (1000 * 60)) / 1000);
+		lis[5].querySelector('.value').innerHTML = days + "d " + hours + "h "+ minutes + "m " + seconds + "s ";
 
-	distance = 0;
-	count = 0;
-	for( var i = 0 ; i < dist[2].length ; i++ )
-	{
+		distance = 0;
+		count = 0;
+		for( var i = 0 ; i < dist[2].length ; i++ )
+		{
 			count++;
 			distance = distance + dist[2][i];
-	}
-	if( count != 0 )
-	{
-		distance = Math.round(distance/count);
-	}
-	days = Math.floor(distance / (1000 * 60 * 60 * 24));
-	hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-	minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-	seconds = Math.floor((distance % (1000 * 60)) / 1000);
-	lis[6].querySelector('.value').innerHTML = days + "d " + hours + "h "+ minutes + "m " + seconds + "s ";
+		}
+		if( count != 0 )
+		{
+			distance = Math.round(distance/count);
+		}
+		days = Math.floor(distance / (1000 * 60 * 60 * 24));
+		hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+		minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+		seconds = Math.floor((distance % (1000 * 60)) / 1000);
+		lis[6].querySelector('.value').innerHTML = days + "d " + hours + "h "+ minutes + "m " + seconds + "s ";
 
-	distance = 0;
-	count = 0;
-	for( var i = 0 ; i < dist[3].length ; i++ )
-	{
+		distance = 0;
+		count = 0;
+		for( var i = 0 ; i < dist[3].length ; i++ )
+		{
 			count++;
 			distance = distance + dist[3][i];
+		}
+		if(count != 0 )
+		{
+			distance = Math.round(distance/count);
+		}
+		days = Math.floor(distance / (1000 * 60 * 60 * 24));
+		hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+		minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+		seconds = Math.floor((distance % (1000 * 60)) / 1000);
+		lis[7].querySelector('.value').innerHTML = days + "d " + hours + "h "+ minutes + "m " + seconds + "s ";
 	}
-	if(count != 0 )
-	{
-		distance = Math.round(distance/count);
-	}
-	days = Math.floor(distance / (1000 * 60 * 60 * 24));
-	hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-	minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-	seconds = Math.floor((distance % (1000 * 60)) / 1000);
-	lis[7].querySelector('.value').innerHTML = days + "d " + hours + "h "+ minutes + "m " + seconds + "s ";
-
-
-	/*
-	var lis = document.querySelector("#spiralProgress").querySelectorAll('li');
-	var date;
-	lis[1].querySelector('.value').innerHTML = 
-	lis[1].querySelector('.value').innerHTML = array.productivity + '  tasks per meet';
-	lis[2].querySelector('.value').innerHTML = array.scrum_avgTasks + '  tasks per scrum';
-	lis[3].querySelector('.value').innerHTML = array.scrum_avgCards + '  tasks completed vs Tasks Planned';
-	var distance = array.scrum_time_gap;
-	var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-	var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-	var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-	var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-	lis[4].querySelector('.value').innerHTML = days + "d " + hours + "h "+ minutes + "m " + seconds + "s ";*/
 }
 function getAllInformation()
 {
@@ -890,14 +877,50 @@ function DisplayCommits()
 	});
 }
 
-function DisplayChart( level, sk )
+function DisplayChart1( level, sk )
+{
+	username = localStorage.getItem('gitUserName');
+	repoName = localStorage.getItem('repoName');
+
+	$.ajax(
+
+		{
+			type: 'GET',
+			url: 'https://api.github.com/repos/'+username+'/'+repoName+'/projects',
+			beforeSend: beforeSend,
+			cache: false,
+
+			success: function(response)
+			{
+				for(i=0 ; i<response.length ; i++)
+				{
+					arr = response[i].name.split('-');
+					model = arr[0].toLowerCase();
+					no = parseInt(arr[1]);
+					console.log(model);
+					console.log(no);
+					list = [];
+					if(model == 'spiral')
+					{
+						list.push(response[i].body);
+					}  
+				}
+				console.log("details = ", list);
+				DisplayChart1(level, sk, list);
+			},
+		}
+
+	)
+}
+
+function DisplayChart( level, sk)
 {
 	var number = (level-1)*4 + sk;
 	var radius = 200/level;
 	var str = '';
 	for( var i = 0 ; i < level ; i++ )
 	{
-		str += "<div class = 'circle' id = 'level"+(i+1)+"' data-level = '"+(i+1)+"'><div></div><div></div><div></div><div></div><span class = 'tooltiptext'>Circle-"+(i+1)+"</span></div>";
+		str += "<div class = 'circle' id = 'level"+(i+1)+"' data-level = '"+(i+1)+"'><div></div><div></div><div></div><div></div><span class = 'tooltiptext'>Circle"+(i+1)+"</span></div>";
 	}
 	str += "<div class = 'stages' id = 'identify'><span>Identify</span><br>the Requirements for the feature you are working on</div>"
 	str += "<div class = 'stages' id = 'design'><span>Design</span><br>the solution for the problem</div>"
@@ -916,7 +939,6 @@ function DisplayChart( level, sk )
 		circles[i].style.borderStyle = 'solid';
 		circles[i].style.borderWidth = '2px';
 		circles[i].style.position = 'absolute';
-		//circles[i].style.overflow = 'hidden';
 		circles[i].style.zIndex = level-i;
 		for( var j = 0 ; j < 4 ; j++ )
 		{
@@ -928,10 +950,10 @@ function DisplayChart( level, sk )
 			if( j == 0 )
 			{
 				circles[i].querySelectorAll('div')[0].style.borderTopLeftRadius = parseInt(circles[i].style.width)/2+ 'px';
-				circles[i].querySelectorAll('div')[0].onclick = function(event)
-				{
-					loadStage( event.target.parentElement.getAttribute('data-level'), 4);
-				};
+					circles[i].querySelectorAll('div')[0].onclick = function(event)
+					{
+						loadStage( event.target.parentElement.getAttribute('data-level'), 4);
+					};
 			}
 			else if( j == 1 )
 			{
@@ -1159,7 +1181,7 @@ function setValues()
 	)
 }
 
-function createProject( name, callback )
+function createProject( name, notes, callback )
 {
 	username = localStorage.getItem('gitUserName');
 	repoName = localStorage.getItem('repoName');
@@ -1173,6 +1195,7 @@ function createProject( name, callback )
 			data:
 			JSON.stringify({
 				name: name,
+				body: notes,
 			}),
 			success: function(response)
 			{
@@ -1199,7 +1222,7 @@ function createNewSpiral()
 		{
 			var csp = parseInt(localStorage.getItem('currentSpiral'));
 			var cst = parseInt(localStorage.getItem('currentSpiralStage'));
-			createProject('Spiral-'+(csp+1), function(obj) {
+			createProject('Spiral-'+(csp+1), name, function(obj) {
 				createColumn( obj.projectURL , 'Details', function(column)
 					{
 						createCard( column.columnURL, name,  function(list){
@@ -1251,6 +1274,10 @@ function nextStage(spir, stage)
 
 function loadStage( spir, stage )
 {
+	if( stage > parseInt(localStorage.getItem('currentSpiralStage')) && spir == parseInt(localStorage.getItem('currentSpiral')) )
+	{
+		return;
+	}
 	startWait();
 	console.log("entered loadstage");
 	var csp = parseInt(localStorage.getItem('currentSpiral'));
@@ -1260,19 +1287,19 @@ function loadStage( spir, stage )
 		str = '';
 		str += "<div class= 'title'> Task for this Circle:<br>"+spiralCards[0].cards[0].note+"</div>";
 		str += "<br><div class = 'title'>Current Stage: "+spiralCards[stage].name;
-		if( cst == 1 )
+		if( stage == 1 )
 		{
 			str += "  Identify";
 		}
-		else if( cst == 2 )
+		else if( stage == 2 )
 		{
 			str += "  Design";
 		}
-		else if( cst == 3 )
+		else if( stage == 3 )
 		{
 			str += "  Construct";
 		}
-		else if( cst == 4 )
+		else if( stage == 4 )
 		{
 			str += "  Evaluate";
 		}

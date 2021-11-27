@@ -1,6 +1,6 @@
 body
 {
-	background-color: rgb(218, 194, 255);
+	/*background-color: rgb(218, 194, 255);*/
 }
 #wait
 {
@@ -56,7 +56,7 @@ body
 	width: 50px;
 	height: 50px;
 	background: white;
-	box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+	/*box-shadow: 0 6px 20px rgba(0,0,0,0.2);*/
 	border-radius: 100%;
 }
 .fab-icon-holder > img
@@ -114,7 +114,7 @@ body
 	font-size: 16px;
 	background: #666666;
 	color: #ffffff;
-	box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+	/*box-shadow: 0 6px 20px rgba(0,0,0,0.2);*/
 	margin-right: 10px;
 }
 #homeMenu
@@ -164,16 +164,13 @@ body
 	height: 70vh;
 	margin: auto;
 	margin-top: 20px;
-	box-shadow: 0px 0px 10px blue;
+	/*box-shadow: 0px 0px 10px blue;*/
 	border-radius: 10px;
 }
 #projectlist, #comments
 {
 	margin-top: 40px;
 	width: 100%;
-	padding: 20px;
-	box-sizing: border-box;
-	box-shadow: 0px 0px 10px blue;
 }
 #helpbutton,#signinbutton, #profilebutton
 {
@@ -207,11 +204,12 @@ body
 	width: inherit;
 	box-sizing: border-box;
 	padding:10px;
-	border-style: solid;
-	border-width: 2px;
+	/*border-style: solid;
+	border-width: 2px;*/
 	box-shadow: 0px 0px 10px blue;
-	background-color: rgb(192, 114, 247);
-	border-radius: 10px;
+	text-align: center;
+	/*background-color: rgb(192, 114, 247);*/
+	/*border-radius: 10px;*/
 }
 .mySlides 
 {
@@ -362,13 +360,13 @@ body
 {
 	font-size: 30px;
 	width: inherit;
-	background-color: rgb(192, 114, 247);
+	/*background-color: rgb(192, 114, 247);*/
 	box-sizing: border-box;
 	padding:10px;
 	border-style: solid;
-	border-width: 2px;
+	/*border-width: 2px;*/
 	box-shadow: 0px 0px 10px blue;
-	border-radius: 10px;
+	/*border-radius: 10px;*/
 }
 #newProject
 {

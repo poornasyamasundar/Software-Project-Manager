@@ -21,7 +21,14 @@ function setProgressValues(array)
 	lis[0].querySelector('progress').value = array.sprint_timeLeft;
 	lis[0].querySelector('progress').max = '2592000000';
 	lis[0].querySelector('.id').innerHTML += Math.round(100*(array.sprint_timeLeft/2592000000)) + '%';
-	lis[1].querySelector('.value').innerHTML = array.sprint_avgCards + '  tasks completed vs Tasks Planned';
+	if( array.sprint_avgCards != NaN )
+	{
+		lis[1].querySelector('.value').innerHTML = array.sprint_avgCards + '  tasks completed vs Tasks Planned';
+	}
+	else
+	{
+		lis[1].querySelector('.value').innerHTML = ' 0 tasks completed vs Tasks Planned';
+	}
 	var distance = array.sprint_time_gap;
 	var days = Math.floor(distance / (1000 * 60 * 60 * 24));
 	var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -97,7 +104,8 @@ function get_timeline(Objectarray, type )// clear,onclick
 		var h3 = document.createElement('h3');
 		if( object['createdTime'] != '' )
 		{
-			var date = new Date(object['createdTime']);
+			var d = new Date(object['createdTime']);
+			var date = d.getDate() + '-' + (d.getMonth()+1) + '-' + d.getFullYear();
 		}
 		else
 		{
@@ -122,6 +130,10 @@ function get_timeline(Objectarray, type )// clear,onclick
 		{
 			node.onclick=function(){updated_timeline(this.getAttribute('data-object'), 'tasks' );};
 		}
+	}
+	if(  Objectarray.length == 0 )
+	{
+		document.getElementsByClassName("myList")[0].innerHTML = "Timeline is Empty";
 	}
 }
 
@@ -321,9 +333,16 @@ function timeLeft(sprints, scrums)
 	{
 		time = time + new Date(sprints[i].endTime).getTime() - new Date(sprints[i-1].createdTime).getTime();
 	}
-	var date1 = new Date().getTime() - new Date(sprints[sprints.length-1].createdTime).getTime();
+	if( sprints.length == 0 )
+	{
+		date1 = 0;
+	}
+	else
+	{
+		var date1 = new Date().getTime() - new Date(sprints[sprints.length-1].createdTime).getTime();
+	}
 	infoArray['sprint_timeLeft'] = date1;
-	if( sprints.length != 1 )
+	if( sprints.length > 1 )
 	{
 		infoArray['sprint_time_gap'] = time/sprints.length-1;
 	}
@@ -336,12 +355,19 @@ function timeLeft(sprints, scrums)
 	{
 		time = time + new Date(scrums[i].endTime).getTime() - new Date(scrums[i-1].createdTime).getTime();
 	}
-	date1 = new Date().getTime() - new Date(scrums[scrums.length-1].createdTime).getTime()
+	if( scrums.length != 0 )
+	{
+		date1 = new Date().getTime() - new Date(scrums[scrums.length-1].createdTime).getTime()
+	}
+	else
+	{
+		date1 = 0;
+	}
 
 	infoArray['scrum_timeLeft'] = date1;
-	if( scrums.length != 1 )
+	if( scrums.length > 1 )
 	{
-		infoArray['scrum_time_gap'] = time/scrum.length-1;
+		infoArray['scrum_time_gap'] = time/scrums.length-1;
 	}
 	else
 	{
@@ -358,13 +384,28 @@ function avgTasksHelper(list, counter, tasksDone, type, sprints, scrums)
 		//print(tasksDone, list.length)
 		if(type == 'sprint')
 		{
-			infoArray['sprint_avgTasks'] = tasksDone / list.length;
+			if( list.length != 0 )
+			{
+				infoArray['sprint_avgTasks'] = tasksDone / list.length;
+			}
+			else
+			{
+				infoArray['sprint_avgTasks'] = 0;
+			}
+
 			//console.log('avgTasksCompleted for scrum');
 			avgTasksCompleted('scrum', sprints, scrums); 
 		}
 		else
 		{
-			infoArray['scrum_avgTasks'] = tasksDone / list.length;
+			if( list.length != 0 )
+			{
+				infoArray['scrum_avgTasks'] = tasksDone / list.length;
+			}
+			else
+			{
+				infoArray['scrum_avgTasks'] = 0;
+			}
 			//console.log('printing time left for each sprint');
 			timeLeft(sprints, scrums);
 		}
@@ -448,7 +489,14 @@ function productivityHelper(list, counter, tasksDone, meetings, sprints, scrums)
 	{
 		//print(tasksDone, meetings)
 		//console.log('avgTasksCompleted for sprint');
-		infoArray['productivity'] = tasksDone / meetings;
+		if( meetings != 0 )
+		{
+			infoArray['productivity'] = tasksDone / meetings;
+		}
+		else
+		{
+			infoArray['productivity'] = 0;
+		}
 		avgTasksCompleted('sprint', sprints, scrums);
 	}
 	else 
@@ -513,14 +561,28 @@ function avgCardsHelper(avg, type, sprints, scrums, idx)
 	if(type == 'sprint' && idx == sprints.length)
 	{
 		//print(avg, sprints.length)
-		infoArray['sprint_avgCards'] = avg / sprints.length;
+		if( sprints.length != 0 )
+		{
+			infoArray['sprint_avgCards'] = avg / sprints.length;
+		}
+		else
+		{
+			infoArray['sprint_avgCards'] = 0;
+		}
 		avgCardsHelper(0, 'scrum', sprints, scrums, 0);
 
 	}
 	else if(type == 'scrum' && idx == scrums.length)
 	{
 		//print(avg, scrums.length)
-		infoArray['scrum_avgCards'] = avg / scrums.length;
+		if( scrums.length != 0 )
+		{
+			infoArray['scrum_avgCards'] = avg / scrums.length;
+		}
+		else
+		{
+			infoArray['scrum_avgCards'] = 0;
+		}
 		productivity(sprints, scrums);
 	}
 	else 
@@ -1930,7 +1992,7 @@ document.addEventListener('DOMContentLoaded', function()
 			window.location = "http://127.0.0.1:8000/";
 		}
 
-		if( localStorage.getItem('currentScrum') == 0 )
+		if( localStorage.getItem('scrumExpired') == '1' )
 		{
 			console.log('No scrum Created');
 			alert('A 2 day scrum is necessary to follow an agile model, start a scrum');
@@ -1940,6 +2002,7 @@ document.addEventListener('DOMContentLoaded', function()
 			{
 				console.log("clicked");
 				scrumNumber = parseInt(localStorage.getItem('currentScrum'))+1;
+				localStorage.setItem('scrumExpired', 0);
 				createScrum( 'Scrum-'+scrumNumber );
 			}
 		}
@@ -1955,7 +2018,7 @@ document.addEventListener('DOMContentLoaded', function()
 
 				var now = new Date().getTime();
 
-				var distance = parseInt(localStorage.getItem('scrumstart')) + 172800000 - now;
+				var distance = parseInt(localStorage.getItem('scrumstart')) - now;
 
 				var days = Math.floor(distance / (1000 * 60 * 60 * 24));
 				var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -1987,7 +2050,7 @@ document.addEventListener('DOMContentLoaded', function()
 
 				var now = new Date().getTime();
 
-				var distance = parseInt(localStorage.getItem('sprintstart')) + 2592000000- now;
+				var distance = parseInt(localStorage.getItem('sprintstart')) - now;
 
 				var days = Math.floor(distance / (1000 * 60 * 60 * 24));
 				var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
