@@ -17,6 +17,9 @@ document.addEventListener('DOMContentLoaded', function()
 		{
 			window.location = '/register';
 		}
+		document.querySelector('#helpbutton').onclick = function(){
+			window.location = '/Help';
+		}
 
 		const form = document.querySelector("#signup");
 

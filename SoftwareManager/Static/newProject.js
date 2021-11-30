@@ -108,6 +108,9 @@ document.addEventListener('DOMContentLoaded', function()
 		{
 			window.history.back()
 		}
+		document.querySelector('#helpbutton').onclick = function(){
+			window.location = '/Help';
+		}
 
 		const form = document.querySelector('#new_project');
 

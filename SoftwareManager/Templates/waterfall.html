@@ -31,7 +31,10 @@
 			<p>
 				This is an attempt to explain how things work in the Software Project Manager.
 				The main page where you will be landed, upon entering the website looks like:
-				<img id = 'logopng' src = "{% static 'imageresource/1.png' %}" align= 'left'></img>
+			</p>
+				<img  src = "{% static 'imageresource/1.png' %}" style='height: 50%;width: 50%;'></img>
+				
+			<p>
 				Click the <strong>sign in</strong> in  button and you will be taken to a page where you can login if you already have an account, else you can find the <strong>Register</strong> button which helps you create a new account.
 				While registering for the first time on the website, you will be asked to enter your Github access token which is the key for the working of the website. It is recommended to generate a new key with a limited validity and each time it expires, go click on the <strong>My Profile</strong> button and change the github access token that you have provided earlier and click on the update button.
 				After logging in, you can view all the projects that you are a part of. You can see a button to create a new project. 
@@ -42,7 +45,11 @@
 				Read these to understand how you can use our web application to track your spiral based project.
 
 				This is how the overview page of a spiral project looks like.
-				<img id = 'logopng' src = "{% static 'imageresource/2.png' %}" align= 'left'></img>
+			</p>
+			<br>
+				<img src = "{% static 'imageresource/2.png' %}" style='height:50% ;width:50% ;'></img>
+				<br>
+			<p>
 				You can add contributors to your project by going to the Contributors page. The new contributor must have an account on our website. 
 
 				By adding a contributor to this project, this project is automatically being added to their list of projects as well. 
@@ -62,25 +69,34 @@
 				This list has all the meetings, where you can see each meeting’s time and date. Upon expanding each meeting, you can find the link for the meeting and the description of it (if any). 
 
 				On the right side, you can find the “Latest Commits'' section where you can see the latest 10 commits made for the github repository of this project. On expanding, you can find the link to that particular commit. 
-
-				Spiral:
-
+			</p>
+				<h2>Spiral:</h2>
+<p>
 				Here we show the work flow of your spiral model project with different cycles. You can create as many spirals as you want. Each time you can create a new spiral and mention some of the features that you want to implement in your project. Each spiral goes through the 4 default stages. You can also add separate goals and tasks for a particular stage of the current spiral.
-				<img id = 'logopng' src = "{% static 'imageresource/3.png' %}" align= 'left'></img>
+			</p>
+				<img src = "{% static 'imageresource/3.png' %}"  style='height: 50%;width: 50%;'></img>
+			<p>
 				The above screenshot shows the spirals for your project and the task/features you wanted to accomplish from this cycle.
-				<img id = 'logopng' src = "{% static 'imageresource/4.png' %}" align= 'left'></img>
+			</p>
+				<img  src = "{% static 'imageresource/4.png' %}"  style='height:50% ;width:50% ;'></img>
+			<p>
 				The above screenshot shows the current stage of the current spiral you are in and the goals and tasks for this stage of the spiral.
 
 				After completing the goals and tasks for this stage, click on the “Proceed to next Stage” to go to the next stage. After completing the 4 stages, click on the same button to create a new spiral. While creating a new spiral you will be asked to enter the features for the current spiral. 
-				<img id = 'logopng' src = "{% static 'imageresource/5.png' %}" align= 'left'></img>
+			</p>
+
+				<img  src = "{% static 'imageresource/5.png' %}"  style='height: 50%;width:50% ;'></img>
+			<p>
 				Enter the details and click on the “Create” button to create a new spiral.
 
 				You can always click on any previous part of the spiral to check the details of it like the Tasks for that spiral, tasks and goals for that particular stage. 
 
-				Agile: 
+				<h2>Agile: </h2>
 
 				The overview of an Agile project looks like this.
-				<img id = 'logopng' src = "{% static 'imageresource/6.png' %}" align= 'left'></img>
+			</p>
+				<img  src = "{% static 'imageresource/6.png' %}"  style='height: 50%;width: 50%;'></img>
+			<p>
 				In the Agile life cycle model, you have to plan a sprint for every 30 days and a scrum for every 2 days. 
 
 				First, create a sprint and add all the tasks that you want to accomplish during this sprint. You can always add new tasks, edit or delete existing tasks for the current sprint. There is a timer at the beginning of this page which indicates the time left for the completion of this sprint. 
@@ -89,39 +105,48 @@
 
 				During each sprint, create a new scrum for every 2 days. You can add smaller tasks for each scrum and you can add meetings for each scrum. Upon completion of each task, go to “edit task” and mark the task as done and save the changes so that we can track your progress. These tasks must be short and achievable. There is a timer indicating the time left for this current scrum. You can delete or edit tasks, meetings present in each scrum. All the meetings and tasks for the current scrum are shown on the right side. Tasks for the current sprint are not shown here. 
 				You can add notices also (similar to the spiral).
-				<img id = 'logopng' src = "{% static 'imageresource/7.png' %}" align= 'left'></img>
-				Product Backlogs:
+			</p>
+				<img  src = "{% static 'imageresource/7.png' %}"  style='height: 50%;width:50% ;'></img>
+				<p>
+				<h2>Product Backlogs:</h2>
 
 				You can plan your entire project using this Product Backlog. You can create Folders, subfolders and in each folder, you can add tasks. 
 
 				The main directory is by default “root”. Under this directory, you can create folders and tasks. 
-				<img id = 'logopng' src = "{% static 'imageresource/7.png' %}" align= 'left'></img>
-								
+			</p>
+				<img  src = "{% static 'imageresource/7.png' %}"  style='height:50% ;width: 50%;'></img>
+				<p>				
 				The image above shows that there are 2 folders under the root directory and a task. Below it you have the options to create tasks and folders under the root directory.
-				<img id = 'logopng' src = "{% static 'imageresource/11.png' %}" align= 'left'></img>
+			</p>
+				<img  src = "{% static 'imageresource/11.png' %}"  style='height: 50%;width: 50%;'></img>
+				<p>
 				For every task, you have an option to add this task to the current scrum and also to the current sprint. 
 				Click on the folder name to enter into the folder. There you can again create tasks and subfolders. 
-				<img id = 'logopng' src = "{% static 'imageresource/8.png' %}" align= 'left'></img>
+			</p>
+				<img  src = "{% static 'imageresource/8.png' %}"  style='height:50% ;width:50% ;'></img>
 				<h2>PROGRESS:</h2>
-				<img id = 'logopng' src = "{% static 'imageresource/9.png' %}" align= 'left'></img>
+				<img  src = "{% static 'imageresource/9.png' %}"  style='height:50% ;width: 50%;'></img>
+				<p>
 				We use some kind of metrics to track the progress made for each scrum and sprint.
 
 				Productivity for scrum is calculated as the number of tasks done per meeting. So, after completing a task, mark the task as completed. The number of meetings created is considered in calculating the Productivity metric. So, for each meeting, it is recommended that you create a new meeting.
-				<img id = 'logopng' src = "{% static 'imageresource/7.png' %}" align= 'left'></img>
-				
+			</p>
+				<img  src = "{% static 'imageresource/7.png' %}"  style='height: 50%;width: 50%;'></img>
+			<p>
 				in calculating the Productivity metric. So, for each meeting, it is recommended that you create a new meeting.
 				Average number of tasks completed per scrum is the (total number of tasks done across all scrums)/(total number of scrums).
 
 				Average number of tasks completed vs Planned per scrum(sprint) is the (summation of ( total tasks done/ total tasks planned ) across all scrums(sprints)) / (total number of scrums(sprints)).
-				<h3>Timeline:</h3>
+			</p>
+				<h2>Timeline:</h2>
+			<p>
 				Here you can see all the planned sprints of this project. 
 				Click on a sprint to see all the scrums under this sprint. 
 				Click on a scrum to see all the tasks done under this scrums.
 
 				Tasks done under a scrum is shown like in the below image:
-				<img id = 'logopng' src = "{% static 'imageresource/last.png' %}" align= 'left'></img>
-
 			</p>
+				<img  src = "{% static 'imageresource/last.png' %}"  style='height: 50%;width: 50%;'></img>
 		</div>
 	</body>
 </html>

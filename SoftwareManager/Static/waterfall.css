@@ -5,7 +5,14 @@ body
 .hello{
 	margin-top: 10ex;
 }
+p{
+	font-size: 25px;
+}
 
+img{
+	margin: auto;
+	display: block;
+}
 #homeMenu
 {
 	padding: 5px;

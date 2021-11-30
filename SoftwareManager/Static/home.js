@@ -426,6 +426,9 @@ document.addEventListener('DOMContentLoaded', function()
 				window.location = '/login';
 			}
 		}
+		document.querySelector('#helpbutton').onclick = function(){
+			window.location = '/Help';
+		}
 		loadComments();
 
 		document.querySelector('#newProject').onclick = () =>

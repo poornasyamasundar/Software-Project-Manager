@@ -44,6 +44,9 @@ document.addEventListener('DOMContentLoaded', function()
 		{
 			window.location = "http://127.0.0.1:8000/";
 		}
+		document.querySelector('#helpbutton').onclick = function(){
+			window.location = '/Help';
+		}
 		document.querySelector('#changePassword').style.display = 'none';
 		document.querySelector('#change').onclick = function(event)
 		{

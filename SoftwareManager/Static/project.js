@@ -20,11 +20,7 @@ function setProgressValues(array)
 	lis = document.querySelector("#sprintProgress").querySelectorAll('li');
 	lis[0].querySelector('progress').value = array.sprint_timeLeft;
 	lis[0].querySelector('progress').max = '2592000000';
-<<<<<<< HEAD
 	lis[0].querySelector('.id').innerHTML = 'Amount of Time spent on current Sprint : ' + Math.round(100*(array.sprint_timeLeft/2592000000)) + '%';
-=======
-	lis[0].querySelector('.id').innerHTML += Math.round(100*(array.sprint_timeLeft/2592000000)) + '%';
->>>>>>> 76d04039683f1804a3e65ba5f5b803dbd48b0f1c
 	if( array.sprint_avgCards != NaN )
 	{
 		lis[1].querySelector('.value').innerHTML = array.sprint_avgCards + '  tasks completed vs Tasks Planned';
@@ -1995,6 +1991,9 @@ document.addEventListener('DOMContentLoaded', function()
 		document.querySelector("#gobackbutton").onclick = function(){
 			window.location = "http://127.0.0.1:8000/";
 		}
+		document.querySelector('#helpbutton').onclick = function(){
+			window.location = '/Help';
+		}
 
 		if( localStorage.getItem('scrumExpired') == '1' )
 		{
@@ -2054,11 +2053,7 @@ document.addEventListener('DOMContentLoaded', function()
 
 				var now = new Date().getTime();
 
-<<<<<<< HEAD
 				var distance = parseInt(localStorage.getItem('sprintstart')) + 2592000000 - now;
-=======
-				var distance = parseInt(localStorage.getItem('sprintstart')) - now;
->>>>>>> 76d04039683f1804a3e65ba5f5b803dbd48b0f1c
 
 				var days = Math.floor(distance / (1000 * 60 * 60 * 24));
 				var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));

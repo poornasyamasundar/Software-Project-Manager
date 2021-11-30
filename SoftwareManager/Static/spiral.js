@@ -1424,6 +1424,9 @@ document.addEventListener('DOMContentLoaded', function()
 		document.querySelector("#gobackbutton").onclick = function(){
 			window.location = "http://127.0.0.1:8000/";
 		}
+		document.querySelector('#helpbutton').onclick = function(){
+			window.location = '/Help';
+		}
 		document.querySelector('#createNotice').querySelector('button').onclick = (event) =>
 		{
 			event.preventDefault();
