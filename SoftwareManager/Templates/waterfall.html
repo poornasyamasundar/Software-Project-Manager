@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<link rel = 'stylesheet' href = "waterfall.css">
+		{% load static %}
+		<link rel = 'stylesheet' href = "{% static 'waterfall.css' %}">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 		<script src = "{% static 'waterfall.js' %}"></script>
 		<title>
@@ -9,176 +10,117 @@
 		</title>
 	</head>
 	<body>
-		<div id = 'modal'>
-			<div>
-				<h1>Delete Task</h1>
-				<p>Are you sure you want to delete the task</p>
-				<button id = 'yes'>Yes</button>
-				<button id = 'no'>No</button>
+		<div>
+			<div id = 'homeMenu'>
+				<div id = 'logo'>
+					<img id = 'logopng' src = "{% static 'logo.png' %}" align= 'left'></img>
+					Software Project Manager
+				</div>
+				<div id = 'projectname'>
+					Project Name
+				</div>
+				
+				<div id = 'goback'>
+					<button id ='gobackbutton'>
+						GoBack
+					</button>
+				</div>
 			</div>
 		</div>
-		<div id = 'homeMenu'>
-			<div id = 'logo'>
-				<img id = 'logopng' src = "{% static 'logo.png' %}" align= 'left'></img>
-				Software Project Manager
-			</div>
-			<div id = 'projectname'>
-				Project Name
-			</div>
-			<div id = 'help'>
-				<button id = 'helpbutton'>
-					Help
-				</button>
-			</div>
-			<div id = 'goback'>
-				<button id ='gobackbutton'>
-					GoBack
-				</button>
-			</div>
-			<div id = 'profile'>
-				<button id ='profilebutton'>
-					My Profile
-				</button>
-			</div>
-		</div>
-		<div id = 'projectBox'>
-			<div id = 'options'>
-				<button id = 'overview'>
-					Overview
-				</button>
-				<button id = 'currentscrum'>
-					Current Scrum
-				</button>
-				<button id = 'currentsprint'>
-					Current Sprint
-				</button>
-				<button id = 'progress'>
-					Progress
-				</button>
-				<button id = 'Contributors'>
-					Contributors 
-				</button>
-				<button id = 'Product_backlogs'>
-					Product Backlogs
-				</button>
-				<button id = 'notices'>
-					Notices
-				</button>
-			</div>
-			<div id = 'display'>
-				<div id = 'overviewbox'>
-					<ul>
-						<li>
-						</li>
-						<li>
-						</li>
-						<li>
-						</li>
-						<li>
-						</li>
-						<li>
-						</li>
-						<li>
-						</li>
-						<li>
-						</li>
-					</ul>
-				</div>
-	    <div id = 'progressbox'>
-		    Progress analysis is part of release 2
-	    </div>
-	     <div id = 'contributorsbox'>
-		     <h4 class = 'title'>List of Contributors</h4>
-		     <ul>
-			     <li>
-				     Poorna
-			     </li>
-		     </ul>
-		     Multi Contributors will be included for next release
-		     
-	     </div>
-		 <div id = 'noticesbox'>
-			<div>
-				<ul id = 'preNotices'>
-				</ul>
-				<button class = 'create'>Create a New Notice</button>
-				<form id = 'createNotice'>
-					<h4>Create New Notice</h4>
-					<label for = 'taskname'>Notice Title</label>
-					<input type='text' id = 'noticename' name = 'noticename' placeholder='New Notice name'>
-					<label for = 'noticeDescription'>Description</label>
-					<textarea type='text' id = 'noticeDescription' name='noticeDescription' placeholder='Describe the Notice'></textarea>
-					<button type='submit'>Create</button>
-				</form>
-			</div>
-			<div class = 'title'>All Notices</div>
-	    </div>
-	</div>
-			<div id = 'board'>
-				<div id = 'notices'>
-					<div id = 'noticeshead'>
-						Notices
-					</div>
-					<ul>
-						<li>
-							<div>
-								<h5>Notice by: posted on</h5>
-								<p>Information about the notice</p>
-							</div>
-						</li>
-						<li>
-							<div>
-								<h5>Notice by: posted on</h5>
-								<p>Information about the notice</p>
-							</div>
-						</li>
-						<li>
-							<div>
-								<h5>Notice by: posted on</h5>
-								<p>Information about the notice</p>
-							</div>
-						</li>
-					</ul>
-				</div>
-				<div id = 'upcomingmeets'>
-					<div id = 'upcomingmeetshead'>
-						Upcoming Meetings
-					</div>
-					<ul>
-					</ul>
-				</div>
-				<div id = 'duetasks'>
-					<div id = 'duetaskshead'>
-						Tasks to be done
-					</div>
-					<ul>
-					</ul>
-				</div>
-				<div id='latestcommits'>
-					<div id = 'commits'>
-						Latest Commits
-					</div>
-					<ul>
-						<li>
-							<div>
-								<h3>Commit by : Name</h3>
-								<p>Commit message</p>
-							</div>
-						</li>
-						<li>
-							<div>
-								<h3>Commit by : Name</h3>
-								<p>Commit message</p>
-							</div>
-						</li><li>
-							<div>
-								<h3>Commit by : Name</h3>
-								<p>Commit message</p>
-							</div>
-						</li>
-					</ul>
-				</div>
-			</div>
+		<div>
+			<p>
+				This is an attempt to explain how things work in the Software Project Manager.
+				The main page where you will be landed, upon entering the website looks like:
+				<img id = 'logopng' src = "{% static 'imageresource/.png' %}" align= 'left'></img>
+				Click the <strong>sign in</strong> in  button and you will be taken to a page where you can login if you already have an account, else you can find the <strong>Register</strong> button which helps you create a new account.
+				While registering for the first time on the website, you will be asked to enter your Github access token which is the key for the working of the website. It is recommended to generate a new key with a limited validity and each time it expires, go click on the <strong>My Profile</strong> button and change the github access token that you have provided earlier and click on the update button.
+				After logging in, you can view all the projects that you are a part of. You can see a button to create a new project. 
+				<img id = 'logopng' src = "{% static 'imageresource/.png' %}" align= 'left'></img>
+				Creating a new project in this website doesn’t create a repository in the github. This website requires you to have a github account and you will have to create a new repo for this new project and while entering the details of this new project in our website, we ask you to enter the repo name corresponding to this project correctly. 
+
+				You can make a project using 2 different life-cycle models: spiral, agile.
+
+				Read these to understand how you can use our web application to track your spiral based project.
+
+				This is how the overview page of a spiral project looks like.
+				<img id = 'logopng' src = "{% static 'imageresource/.png' %}" align= 'left'></img>
+				You can add contributors to your project by going to the Contributors page. The new contributor must have an account on our website. 
+
+				By adding a contributor to this project, this project is automatically being added to their list of projects as well. 
+
+				All the contributors of this project can see this in their homepage as well. Any contributor can add notices, create meetings. All the contributors can track the progress of this project.
+
+				Navigate to the “Notices” page where you can create Notices which are helpful for announcements. The list of all the notices can be seen on the right side of the screen in all the pages of this project. This list is scrollable. 
+				You can view other information of a notice like the creator, last modified time in the Notices page. Here, you can edit the notice or you can also delete a notice.
+
+				The notices and the meetings are displayed based on their creation time (new at the top).
+
+				For each project, you can have multiple scrums, and you can plan to have multiple meetings for each scrum. 
+
+				By navigating to the “Meetings” page, you can add meetings where for each meeting you have to provide the date and time for the meeting and also the link for this meeting. All the list of meetings can be viewed on the right side of the screen across all the pages corresponding to this project. 
+
+				By going to the “Meetings'' page, you can edit a meeting where you can change the timings or you can change the link for the meeting. You can also delete the meeting. All the meetings are shown on the right side of the screen where they are sorted based on their creation time. 
+				This list has all the meetings, where you can see each meeting’s time and date. Upon expanding each meeting, you can find the link for the meeting and the description of it (if any). 
+
+				On the right side, you can find the “Latest Commits'' section where you can see the latest 10 commits made for the github repository of this project. On expanding, you can find the link to that particular commit. 
+
+				Spiral:
+
+				Here we show the work flow of your spiral model project with different cycles. You can create as many spirals as you want. Each time you can create a new spiral and mention some of the features that you want to implement in your project. Each spiral goes through the 4 default stages. You can also add separate goals and tasks for a particular stage of the current spiral.
+				<img id = 'logopng' src = "{% static 'imageresource/.png' %}" align= 'left'></img>
+				The above screenshot shows the spirals for your project and the task/features you wanted to accomplish from this cycle.
+				<img id = 'logopng' src = "{% static 'imageresource/.png' %}" align= 'left'></img>
+				The above screenshot shows the current stage of the current spiral you are in and the goals and tasks for this stage of the spiral.
+
+				After completing the goals and tasks for this stage, click on the “Proceed to next Stage” to go to the next stage. After completing the 4 stages, click on the same button to create a new spiral. While creating a new spiral you will be asked to enter the features for the current spiral. 
+				<img id = 'logopng' src = "{% static 'imageresource/.png' %}" align= 'left'></img>
+				Enter the details and click on the “Create” button to create a new spiral.
+
+				You can always click on any previous part of the spiral to check the details of it like the Tasks for that spiral, tasks and goals for that particular stage. 
+
+				Agile: 
+
+				The overview of an Agile project looks like this.
+				<img id = 'logopng' src = "{% static 'imageresource/.png' %}" align= 'left'></img>
+				In the Agile life cycle model, you have to plan a sprint for every 30 days and a scrum for every 2 days. 
+
+				First, create a sprint and add all the tasks that you want to accomplish during this sprint. You can always add new tasks, edit or delete existing tasks for the current sprint. There is a timer at the beginning of this page which indicates the time left for the completion of this sprint. 
+
+				Upon completion of this sprint only, you can create another sprint.
+
+				During each sprint, create a new scrum for every 2 days. You can add smaller tasks for each scrum and you can add meetings for each scrum. Upon completion of each task, go to “edit task” and mark the task as done and save the changes so that we can track your progress. These tasks must be short and achievable. There is a timer indicating the time left for this current scrum. You can delete or edit tasks, meetings present in each scrum. All the meetings and tasks for the current scrum are shown on the right side. Tasks for the current sprint are not shown here. 
+				You can add notices also (similar to the spiral).
+				<img id = 'logopng' src = "{% static 'imageresource/.png' %}" align= 'left'></img>
+				Product Backlogs:
+
+				You can plan your entire project using this Product Backlog. You can create Folders, subfolders and in each folder, you can add tasks. 
+
+				The main directory is by default “root”. Under this directory, you can create folders and tasks. 
+				<img id = 'logopng' src = "{% static 'imageresource/.png' %}" align= 'left'></img>
+								
+				The image above shows that there are 2 folders under the root directory and a task. Below it you have the options to create tasks and folders under the root directory.
+				<img id = 'logopng' src = "{% static 'imageresource/.png' %}" align= 'left'></img>
+				For every task, you have an option to add this task to the current scrum and also to the current sprint. 
+				Click on the folder name to enter into the folder. There you can again create tasks and subfolders. 
+				<img id = 'logopng' src = "{% static 'imageresource/.png' %}" align= 'left'></img>
+				<h2>PROGRESS:</h2>
+				<img id = 'logopng' src = "{% static 'imageresource/.png' %}" align= 'left'></img>
+				We use some kind of metrics to track the progress made for each scrum and sprint.
+
+				Productivity for scrum is calculated as the number of tasks done per meeting. So, after completing a task, mark the task as completed. The number of meetings created is considered in calculating the Productivity metric. So, for each meeting, it is recommended that you create a new meeting.
+
+				Average number of tasks completed per scrum is the (total number of tasks done across all scrums)/(total number of scrums).
+
+				Average number of tasks completed vs Planned per scrum(sprint) is the (summation of ( total tasks done/ total tasks planned ) across all scrums(sprints)) / (total number of scrums(sprints)).
+				<h3>Timeline:</h3>
+				Here you can see all the planned sprints of this project. 
+				Click on a sprint to see all the scrums under this sprint. 
+				Click on a scrum to see all the tasks done under this scrums.
+
+				Tasks done under a scrum is shown like in the below image:
+				<img id = 'logopng' src = "{% static 'imageresource/.png' %}" align= 'left'></img>
+
+			</p>
 		</div>
 	</body>
 </html>
