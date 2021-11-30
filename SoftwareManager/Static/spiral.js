@@ -452,7 +452,7 @@ function DisplayNoticeMeets()
 				var string = date.getFullYear().toString()+(date.getMonth()+1).toString()+date.getDate().toString();
 				string = parseInt(string);
 				date = parseInt(meetDate);
-				if( date > string )
+				if( date >= string )
 				{
 					meetDate = meetDate.substring(6, 8)+"/"+meetDate.substring(4, 6)+"/"+meetDate.substring(0, 4);
 					str += "<li><div><button class = 'mhead'>";
@@ -1304,55 +1304,51 @@ function loadStage( spir, stage )
 			str += "  Evaluate";
 		}
 		str += "<button id = 'nextStage' onclick = \"nextStage()\">Proceed to next Stage</button></div><div><ul id = 'pretasks'>";
-		if( spiralCards[stage].cards[0].archived == true )
+		var goal = '';
+		for( var i = 0 ; i < spiralCards[stage].cards[0].note.length ; i++ )
 		{
-			var date = new Date(spiralCards[stage].cards[0].updated_at);
-			str += "<li data-cardurl = '"+spiralCards[stage].cards[0].url+"'><div><h5>Goals</h5><div><h6>"+spiralCards[stage].cards[0].note+"<br>Created by: "+spiralCards[stage].cards[0].creator['login']+"<br>last Modified: "+date+"</h6>";
-			if( spir < csp || stage < cst )
+			if( spiralCards[stage].cards[0].note[i] == '\n' )
 			{
-				str += "</div></div></li>";
+				goal = goal + '<br>';
 			}
 			else
 			{
-				str += "<button id = 'edit' onclick = \"editSpiral('0')\" >Edit</button></div>";
-				str += "<form><textarea>"+spiralCards[stage].cards[0].note+"</textarea><br><button id = 'save' onclick = \"saveSpiral(event)\">Save</button><button id = 'cancel' onclick = \"cancelSpiral(event)\">Cancel</button></form></div></li>";
+				goal = goal + spiralCards[stage].cards[0].note[i];
 			}
-			date = new Date(spiralCards[stage].cards[1].updated_at);
-			str += "<li data-cardurl = '"+spiralCards[stage].cards[1].url+"'><div><h5>Tasks</h5><div><h6>"+spiralCards[stage].cards[1].note+"<br>Created by: "+spiralCards[stage].cards[1].creator['login']+"<br>last Modified: "+date+"</h6>";
-			if( spir < csp || stage < cst )
-			{
-				str += "</div></div></li>";
-			}
-			else
-			{
-				str += "<button id = 'edit' onclick = \"editSpiral('1')\" >Edit</button></div>";
-				str += "<form><textarea>"+spiralCards[stage].cards[1].note+"</textarea><br><button id = 'save' onclick = \"saveSpiral(event)\">Save</button><button id = 'cancel' onclick = \"cancelSpiral(event)\">Cancel</button></form></div></li>";
-			}
+		}
+		var date = new Date(spiralCards[stage].cards[0].updated_at);
+		str += "<li data-cardurl = '"+spiralCards[stage].cards[0].url+"'><div><h5>Goals</h5><div><h6>"+goal+"<br>Created by: "+spiralCards[stage].cards[0].creator['login']+"<br>last Modified: "+date+"</h6>";
+		if( spir < csp || stage < cst )
+		{
+			str += "</div></div></li>";
 		}
 		else
 		{
-			var date = new Date(spiralCards[stage].cards[1].updated_at);
-			str += "<li data-cardurl = '"+spiralCards[stage].cards[1].url+"'><div><h5>Goals</h5><div><h6>"+spiralCards[stage].cards[1].note+"<br>Created by: "+spiralCards[stage].cards[1].creator['login']+"<br>last Modified: "+date+"</h6>";
-			if( spir < csp || stage < cst )
+			str += "<button id = 'edit' onclick = \"editSpiral('0')\" >Edit</button></div>";
+			str += "<form><textarea>"+spiralCards[stage].cards[0].note+"</textarea><br><button id = 'save' onclick = \"saveSpiral(event)\">Save</button><button id = 'cancel' onclick = \"cancelSpiral(event)\">Cancel</button></form></div></li>";
+		}
+		goal = '';
+		for( var i = 0 ; i < spiralCards[stage].cards[1].length ; i++ )
+		{
+			if( spiralCards[stage].cards[1][i] == '\n' )
 			{
-				str += "</div></div></li>";
+				goal = goal + '<br>';
 			}
 			else
 			{
-				str += "<button id = 'edit' onclick = \"editSpiral('0')\" >Edit</button></div>";
-				str += "<form><textarea>"+spiralCards[stage].cards[1].note+"</textarea><br><button id = 'save' onclick = \"saveSpiral(event)\">Save</button><button id = 'cancel' onclick = \"cancelSpiral(event)\">Cancel</button></form></div></li>";
+				goal = goal + spiralCards[stage].cards[1][i];
 			}
-			date = new Date(spiralCards[stage].cards[0].updated_at);
-			str += "<li data-cardurl = '"+spiralCards[stage].cards[0].url+"'><div><h5>Tasks</h5><div><h6>"+spiralCards[stage].cards[0].note+"<br>Created by: "+spiralCards[stage].cards[0].creator['login']+"<br>last Modified: "+date+"</h6>";
-			if( spir < csp || stage < cst )
-			{
-				str += "</div></div></li>";
-			}
-			else
-			{
-				str += "<button id = 'edit' onclick = \"editSpiral('1')\" >Edit</button></div>";
-				str += "<form><textarea>"+spiralCards[stage].cards[0].note+"</textarea><br><button id = 'save' onclick = \"saveSpiral(event)\">Save</button><button id = 'cancel' onclick = \"cancelSpiral(event)\">Cancel</button></form></div></li>";
-			}
+		}
+		date = new Date(spiralCards[stage].cards[1].updated_at);
+		str += "<li data-cardurl = '"+spiralCards[stage].cards[1].url+"'><div><h5>Tasks</h5><div><h6>"+goal+"<br>Created by: "+spiralCards[stage].cards[1].creator['login']+"<br>last Modified: "+date+"</h6>";
+		if( spir < csp || stage < cst )
+		{
+			str += "</div></div></li>";
+		}
+		else
+		{
+			str += "<button id = 'edit' onclick = \"editSpiral('1')\" >Edit</button></div>";
+			str += "<form><textarea>"+spiralCards[stage].cards[1].note+"</textarea><br><button id = 'save' onclick = \"saveSpiral(event)\">Save</button><button id = 'cancel' onclick = \"cancelSpiral(event)\">Cancel</button></form></div></li>";
 		}
 		document.querySelector("#tasks").innerHTML = str;
 		if( document.querySelector("#pretasks").querySelectorAll('li')[1].querySelector("div").querySelector("form") != null )
@@ -1544,8 +1540,10 @@ document.addEventListener('DOMContentLoaded', function()
 		for(let i = 0 ; i < 6 ; i++ )
 		{
 			display[i].style.display = 'none';
+			options[i].style.backgroundColor = '#dbefdc';
 		}
 		display[0].style.display = 'block';
+		options[0].style.backgroundColor = '#3d8b40';
 
 		for( let i = 0 ; i < 6 ; i++ )
 		{
@@ -1554,12 +1552,14 @@ document.addEventListener('DOMContentLoaded', function()
 				for( let j = 0 ; j < display.length ; j++ )
 				{
 					display[j].style.display = 'none';
+					options[j].style.backgroundColor = '#dbefdc';
 				}
 				for( let j = 0 ; j < display.length ; j++ )
 				{
 					if( e.target == options[j] )
 					{
 						display[j].style.display = 'block';
+						options[j].style.backgroundColor = '#3d8b40';
 					}
 				}
 			}

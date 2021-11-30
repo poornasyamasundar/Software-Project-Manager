@@ -1,3 +1,12 @@
+function startWait()
+{
+	document.querySelector('#wait').style.display = 'block';
+}
+
+function stopWait()
+{
+	document.querySelector('#wait').style.display = 'none';
+}
 function beforeSend(xhr)
 {
 	xhr.setRequestHeader("Authorization", "token "+localStorage.getItem('token'));
@@ -17,6 +26,7 @@ function getFolderList( repoName, path, callBack )
 			},
 			error: function()
 			{
+				stopWait();
 				alert("Incorrect Repo name");
 			}
 		}
@@ -44,6 +54,7 @@ function createProject( name, callback , repoName)
 			},
 			error: function()
 			{
+				stopWait();
 				console.log("Couldn't create project");
 			}
 		})
@@ -133,6 +144,7 @@ document.addEventListener('DOMContentLoaded', function()
 			else
 			{
 				getFolderList( repo_link, '', function() {
+					startWait();
 
 					const d = new Date();
 					var x = d.getDate()+"-"+ (d.getMonth()+1) +"-"+d.getFullYear();
@@ -161,26 +173,28 @@ document.addEventListener('DOMContentLoaded', function()
 											{
 												createColumn( projectObj.projectURL, 'Meetings', function(tasksobj1) {
 													localStorage.setItem('MeetingsDetails', JSON.stringify(tasksobj1));
+													stopWait();
 													alert("New Project Created");
 													window.location = "http://127.0.0.1:8000/";
 												});
 											}
 											else
-		{
-			createProject('ProductBacklogs', function(projectObj1) {
-				localStorage.setItem('ProductBacklogs', JSON.stringify(projectObj1));
-				createColumn( projectObj1.projectURL, 'FileInfo', function(columnObj) {
-					createColumn( projectObj1.projectURL, 'root', function(rootObj){
-						l = [{name: 'root', cardsURL: rootObj.cardsURL, columnURL: rootObj.columnURL, folders: []}];
-						createCard( columnObj.columnURL, JSON.stringify(l), function(obj){
-							localStorage.setItem('FileInfo', JSON.stringify(obj));
-							alert("New Project Created");
-							window.location = "http://127.0.0.1:8000/";
-						});
-					});
-				});
-			}, repo_link);
-		}
+											{
+												createProject('ProductBacklogs', function(projectObj1) {
+													localStorage.setItem('ProductBacklogs', JSON.stringify(projectObj1));
+													createColumn( projectObj1.projectURL, 'FileInfo', function(columnObj) {
+														createColumn( projectObj1.projectURL, 'root', function(rootObj){
+															l = [{name: 'root', cardsURL: rootObj.cardsURL, columnURL: rootObj.columnURL, folders: []}];
+															createCard( columnObj.columnURL, JSON.stringify(l), function(obj){
+																localStorage.setItem('FileInfo', JSON.stringify(obj));
+																stopWait();
+																alert("New Project Created");
+																window.location = "http://127.0.0.1:8000/";
+															});
+														});
+													});
+												}, repo_link);
+											}
 										});
 									}, repo_link);
 								}

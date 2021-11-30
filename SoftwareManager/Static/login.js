@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function()
 						console.log(data);
 						if(data != '')
 						{
-							alert('successfull Sign Ined');
+							alert('Sign In Successful');
 							data = JSON.parse(data);
 							console.log(data);
 							localStorage.setItem('Username', email);

@@ -1,6 +1,6 @@
 body
 {
-	background-color: rgb(218, 194, 255);
+	font-family: Verdana,sans-serif;
 }
 #homeMenu
 {
@@ -181,7 +181,7 @@ body
 }
 #projectBox > div
 {
-	box-shadow: 0px 0px 10px blue;
+	/*box-shadow: 0px 0px 10px blue;*/
 	padding: 5px;
 	box-sizing: border-box;
 }
@@ -195,7 +195,7 @@ body
 }
 #options > button
 {
-	background-color: rgb(192, 114, 247);
+	/*background-color: rgb(192, 114, 247);*/
 	height: 40px;
 	width: 190px;
 	color: black;
@@ -203,7 +203,7 @@ body
 	font-weight: bold;
 	border-width: 0px;
 	margin-top: 2px;
-	box-shadow: 0px 0px 5px blue;
+	/*box-shadow: 0px 0px 5px blue;*/
 }
 #options > button:hover
 {
@@ -217,7 +217,7 @@ body
 	background-color: white;
 	height: 150px;
 	width: 280px;
-	background-color: rgb(232, 186, 255);
+	/*background-color: rgb(232, 186, 255);*/
 	border-style: solid;
 	border-width: 2px;
 	box-shadow: 0px 0px 3px blue;
@@ -230,7 +230,7 @@ body
 	padding: 5px;
 	box-sizing: border-box;
 	font-weight: bold;
-	background-color: rgb(162, 0, 255);
+	background-color: #1abc9c;
 }
 #duetasks ul,#progressbox ul,  #upcomingmeets ul, #notices ul, #pretasks, #preNotices, #sprintTasks, #noticelist, #premeets, #overviewbox ul, #backlogsbox ul, #contributorsbox ul, #latestcommits ul
 {
@@ -267,7 +267,7 @@ body
 }
 .thead, .mhead, .create, .nhead, #createsprint, #createscrum
 {
-	background-color: rgb(232, 130, 255);
+	background-color: #b7dfb8;
 	cursor: pointer;
 	padding: 5px;
 	width: 100%;
@@ -287,7 +287,7 @@ body
 }
 .tactive, .thead:hover, .nhead:hover, .mactive, .mhead:hover, .create:hover, #createsprint, #createscrum
 {
-	background-color: rgb(208, 0, 255);
+	background-color: #3d8b40;
 }
 .thead:after, .nhead:after, .mhead:after, .create:after, #createsprint, #createscrum
 {
@@ -352,7 +352,7 @@ body
 {
 	margin:auto;
 	margin-left: 50px;
-	background-color: rgb(192, 114, 247);
+	background-color: #b7dfb8;
 	font-size: 15px;
 	padding: 4px;
 	border-radius: 5px;
@@ -364,8 +364,7 @@ body
 }
 #pretasks li div button:hover, #preNotices li div button:hover, #sprintTasks li div button:hover, #noticelist li div button:hover, #premeets li div button:hover, #backlogsbox ul li div button:hover
 {
-	background-color: rgb(144, 0, 247);
-	color: white;
+	background-color: #3d8b40;
 }
 #latestcommits ul li h3, #latestcommits ul li p
 {
@@ -375,7 +374,7 @@ body
 .title
 {
 	font-size: 25px;
-	background-color: rgb(192, 114, 247);
+	background-color: #1abc9c;
 	padding:3px;
 	border-radius: 3px;
 	margin-top: 5px;
@@ -424,7 +423,7 @@ body
 #createTask button, #createmeet button, #createNotice button, .edit button
 {
 	margin-left: 10px;
-	background-color: rgb(192, 114, 247);
+	background-color: #b7dfb8;
 	font-size: 15px;
 	padding: 4px;
 	border-radius: 5px;
@@ -441,8 +440,7 @@ body
 	color: black;
 	font-weight:bold;
 	padding: 4px;
-	background-color: rgb(192, 114, 247);
-	box-shadow: 0px 0px 2px blue;
+	background-color: #b7dfb8;
 	border-radius: 5px;
 }
 #createTask #taskDescription, #createmeet #meetDescription, #createNotice #noticeDescription
@@ -452,8 +450,7 @@ body
 }
 #createTask button:hover, #createmeet button:hover, #createNotice button:hover, .edit button:hover, #nextStage:hover
 {
-	background-color: rgb(144, 0, 247);
-	color: white;
+	background-color: #3d8b40;
 }
 .id
 {
@@ -486,13 +483,13 @@ body
 {
 	margin-top: 2px;
 }
-#overviewbox ul li, .col ul h4, #progressbox ul li, #backlogsbox > h4, #backlogsbox > p, #backlogsbox ul li > p
+#overviewbox ul li, #progressbox ul li, #backlogsbox > h4, #backlogsbox > p, #backlogsbox ul li > p
 {
 	border-radius: 10px;
-	background-color: rgb(192, 114, 247);
+	background-color: #b7dfb8;
 	padding:5px;
-	margin-top: 5px;
-	box-shadow: 0px 0px 5px blue;
+	margin-bottom: 2px;
+	color: black;
 }
 #contributorsbox ul
 {
@@ -503,7 +500,7 @@ body
 	padding: 5px;
 	margin-top: 5px;
 	border-radius: 10px;
-	background-color: rgb(232, 130, 255);
+	background-color: #3d8b40;
 	font-size: 20px;
 }
 #contributorsbox ul li button

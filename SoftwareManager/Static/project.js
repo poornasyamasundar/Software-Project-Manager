@@ -4,7 +4,7 @@ function setProgressValues(array)
 	var lis = document.querySelector("#scrumProgress").querySelectorAll('li');
 	lis[0].querySelector('progress').value = array.scrum_timeLeft;
 	lis[0].querySelector('progress').max = '172800000';
-	lis[0].querySelector('.id').innerHTML += Math.round(100*(array.scrum_timeLeft/172800000)) + '%';
+	lis[0].querySelector('.id').innerHTML = 'Amount of Time spent on current Scrum : '+ Math.round(100*(array.scrum_timeLeft/172800000)) + '%';
 	lis[1].querySelector('.value').innerHTML = array.productivity + '  tasks per meet';
 	lis[2].querySelector('.value').innerHTML = array.scrum_avgTasks + '  tasks per scrum';
 	lis[3].querySelector('.value').innerHTML = array.scrum_avgCards + '  tasks completed vs Tasks Planned';
@@ -20,7 +20,11 @@ function setProgressValues(array)
 	lis = document.querySelector("#sprintProgress").querySelectorAll('li');
 	lis[0].querySelector('progress').value = array.sprint_timeLeft;
 	lis[0].querySelector('progress').max = '2592000000';
+<<<<<<< HEAD
+	lis[0].querySelector('.id').innerHTML = 'Amount of Time spent on current Sprint : ' + Math.round(100*(array.sprint_timeLeft/2592000000)) + '%';
+=======
 	lis[0].querySelector('.id').innerHTML += Math.round(100*(array.sprint_timeLeft/2592000000)) + '%';
+>>>>>>> 76d04039683f1804a3e65ba5f5b803dbd48b0f1c
 	if( array.sprint_avgCards != NaN )
 	{
 		lis[1].querySelector('.value').innerHTML = array.sprint_avgCards + '  tasks completed vs Tasks Planned';
@@ -1499,7 +1503,7 @@ function DisplayNoticeMeets()
 				var string = date.getFullYear().toString()+(date.getMonth()+1).toString()+date.getDate().toString();
 				string = parseInt(string);
 				date = parseInt(meetDate);
-				if( date > string )
+				if( date >= string )
 				{
 					meetDate = meetDate.substring(6, 8)+"/"+meetDate.substring(4, 6)+"/"+meetDate.substring(0, 4);
 					str += "<li><div><button class = 'mhead'>";
@@ -2050,7 +2054,11 @@ document.addEventListener('DOMContentLoaded', function()
 
 				var now = new Date().getTime();
 
+<<<<<<< HEAD
+				var distance = parseInt(localStorage.getItem('sprintstart')) + 2592000000 - now;
+=======
 				var distance = parseInt(localStorage.getItem('sprintstart')) - now;
+>>>>>>> 76d04039683f1804a3e65ba5f5b803dbd48b0f1c
 
 				var days = Math.floor(distance / (1000 * 60 * 60 * 24));
 				var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -2258,8 +2266,10 @@ document.addEventListener('DOMContentLoaded', function()
 		for(let i = 0 ; i < 8 ; i++ )
 		{
 			display[i].style.display = 'none';
+			options[i].style.backgroundColor = '#dbefdc';
 		}
 		display[0].style.display = 'block';
+		options[0].style.backgroundColor = '#3d8b40';
 
 		for( let i = 0 ; i < 8 ; i++ )
 		{
@@ -2268,12 +2278,14 @@ document.addEventListener('DOMContentLoaded', function()
 				for( let j = 0 ; j < display.length ; j++ )
 				{
 					display[j].style.display = 'none';
+					options[j].style.backgroundColor = '#dbefdc';
 				}
 				for( let j = 0 ; j < display.length ; j++ )
 				{
 					if( e.target == options[j] )
 					{
 						display[j].style.display = 'block';
+						options[j].style.backgroundColor = '#3d8b40';
 					}
 				}
 			}

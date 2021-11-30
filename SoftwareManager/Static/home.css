@@ -171,6 +171,10 @@ body
 {
 	margin-top: 40px;
 	width: 100%;
+<<<<<<< HEAD
+	background-color: #E7E9EB;
+=======
+>>>>>>> 76d04039683f1804a3e65ba5f5b803dbd48b0f1c
 }
 #helpbutton,#signinbutton, #profilebutton
 {
@@ -206,7 +210,10 @@ body
 	padding:10px;
 	/*border-style: solid;
 	border-width: 2px;*/
+<<<<<<< HEAD
+=======
 	box-shadow: 0px 0px 10px blue;
+>>>>>>> 76d04039683f1804a3e65ba5f5b803dbd48b0f1c
 	text-align: center;
 	/*background-color: rgb(192, 114, 247);*/
 	/*border-radius: 10px;*/
@@ -222,7 +229,7 @@ body
 	height: 60vh;
 	width: inherit;
 	position: relative;
-	box-shadow: 0 20px 20px 0 rgba(0, 0, 0, 0.2);
+	box-shadow: 0px 0px 10px blue;
 }
 #modelContainer img
 {
@@ -370,19 +377,21 @@ body
 }
 #newProject
 {
-	background-color: rgb(192, 114, 247);
 	height: 40px;
-	color: black;
-	font-size: 18px;
-	font-weight: bold;
-	border-width: 0px;
-	box-shadow: 0px 0px 5px blue;
 	float: right;
+	margin-top: -2px;	
+	border: 2px solid black;
+	background-color: white;
+	color: black;
+	font-size: 16px;
+	cursor: pointer;
+	border-color: #2196F3;
+	color: dodgerblue;
+	box-shadow: 0px 0px 5px blue;
 }
 #newProject:hover
 {
-	background-color: rgb(144, 0, 247);
+	background: #2196F3;
 	color: white;
-	cursor: pointer;
 }
 
