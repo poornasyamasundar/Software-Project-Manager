@@ -1,6 +1,7 @@
 body
 {
-	background-color: rgb(218, 194, 255);
+	/*background-color: #dbefdc;*/
+	font-family: Verdana,sans-serif;
 }
 #homeMenu
 {
@@ -30,6 +31,37 @@ body
 	opacity: 0.9;
 	height: 100%;
 	display: none;
+}
+#wait
+{
+	z-index: 100;
+	width: 100%;
+	background-color: #474e5d;
+	position: fixed;
+	opacity: 0.9;
+	height: 100%;
+	display: none;
+}
+#loader 
+{
+	border: 8px solid #f3f3f3;
+	border-radius: 50%;
+	border-top: 8px solid #3498db;
+	margin:auto;
+	width: 60px;
+	height: 60px;
+	-webkit-animation: spin 2s linear infinite; /* Safari */
+	animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+	0% { -webkit-transform: rotate(0deg); }
+	100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+	0% { transform: rotate(0deg); }
+	100% { transform: rotate(360deg); }
 }
 #modal button 
 {
@@ -69,6 +101,18 @@ body
 	margin-top: 100px;
 	height: 200px;
 	padding: 20px;
+}
+#wait h1
+{
+	color: white;
+	left: 50%;
+	text-align: center;
+}
+#wait > div
+{
+	padding: 20px;
+	opacity: 1;
+	margin: auto;
 }
 #projectname
 {
@@ -138,13 +182,14 @@ body
 }
 #projectBox > div
 {
-	box-shadow: 0px 0px 10px blue;
+	/*box-shadow: 0px 0px 10px blue;*/
 	padding: 5px;
 	box-sizing: border-box;
 }
 #options
 {
-	height: 263px;
+	height: 353px;
+	/*background-color: white;*/
 }
 #board
 {
@@ -152,7 +197,7 @@ body
 }
 #options > button
 {
-	background-color: rgb(192, 114, 247);
+	/*background-color: rgb(192, 114, 247);*/
 	height: 40px;
 	width: 190px;
 	color: black;
@@ -160,12 +205,12 @@ body
 	font-weight: bold;
 	border-width: 0px;
 	margin-top: 2px;
-	box-shadow: 0px 0px 5px blue;
+	/*box-shadow: 0px 0px 5px blue;*/
 }
 #options > button:hover
 {
-	background-color: rgb(144, 0, 247);
-	color: white;
+	background-color: #ccc;
+	color: black;
 	cursor: pointer;
 }
 #notices, #upcomingmeets, #duetasks, #latestcommits
@@ -174,7 +219,7 @@ body
 	background-color: white;
 	height: 150px;
 	width: 280px;
-	background-color: rgb(232, 186, 255);
+	/*background-color: rgb(232, 186, 255);*/
 	border-style: solid;
 	border-width: 2px;
 	box-shadow: 0px 0px 3px blue;
@@ -184,12 +229,13 @@ body
 	width: inherit;
 	height: 30px;
 	font-size: 20px;
+	text-align: center;
 	padding: 5px;
 	box-sizing: border-box;
-	font-weight: bold;
-	background-color: rgb(162, 0, 255);
+	color: black;
+	background-color:#1abc9c; 
 }
-#duetasks ul, #upcomingmeets ul, #notices ul, #pretasks, #preNotices, #sprintTasks, #noticelist, #premeets, #overviewbox ul, #progressbox ul, #backlogsbox ul, #contributorsbox ul, #latestcommits ul
+#duetasks ul, #upcomingmeets ul, #notices ul, #pretasks, #preNotices, #sprintTasks, #noticelist, #premeets, #overviewbox ul, #col ul, #progressbox ul, #backlogsbox ul, #contributorsbox ul, #latestcommits ul
 {
 	list-style-type: none;
 	padding: 0px;
@@ -198,112 +244,6 @@ body
 	overflow-x: hidden;
 	max-height: 120px;
 }
-.containers {
-	min-height: 100vh;
-	width: 90%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	padding: 100px 0;
-	background-color: #111;
-  }
-  .timeline {
-	width: 80%;
-	height: auto;
-	max-width: 800px;
-	margin: 0 auto;
-	position: relative;
-  }
-  
-  .timeline ul {
-	list-style: none;
-  }
-  .timeline ul li {
-	padding: 5px;
-	max-width: 200px;
-	background-color: #1e1f22;
-	color: gray;
-	border-radius: 10px;
-	margin-bottom: 20px;
-	margin-top: 5px;
-  }
-  .timeline ul li:last-child {
-	margin-bottom: 0;
-  }
-  .timeline-content h1 {
-	font-weight: 500;
-	font-size: 25px;
-	line-height: 30px;
-	margin-bottom: 10px;
-  }
-  .timeline-content p {
-	font-size: 16px;
-	line-height: 30px;
-	font-weight: 300;
-  }
-  .timeline-content .date {
-	font-size: 12px;
-	font-weight: 300;
-	margin-bottom: 10px;
-	letter-spacing: 2px;
-  }
-  @media only screen and (min-width: 768px) {
-	.timeline:before {
-	  content: "";
-	  position: absolute;
-	  top: 0;
-	  left: 50%;
-	  transform: translateX(-50%);
-	  width: 2px;
-	  height: 100%;
-	  background-color: gray;
-	}
-	.timeline ul li {
-	  width: 45%;
-	  position: relative;
-	  margin-bottom: 50px;
-	}
-	.timeline ul li:nth-child(odd) {
-	  float: left;
-	  clear: right;
-	  transform: translateX(15px); 
-	  border-radius: 20px 0px 20px 20px;
-	  margin-left: 95px;
-	}
-	.timeline ul li:nth-child(even) {
-	  float: right;
-	  clear: left;
-	  transform: translateX(-15px);
-	  border-radius: 0px 20px 20px 20px;
-	  margin-right: 95px;
-	}
-	.timeline ul li::before {
-	  content: "";
-	  position: absolute;
-	  height: 20px;
-	  width: 20px;
-	  border-radius: 50%;
-	  background-color: gray;
-	  top: 0px;
-	}
-	.timeline ul li:nth-child(odd)::before {
-	  transform: translate(50%, -50%);
-	  right: -25px;
-	}
-	.timeline ul li:nth-child(even)::before {
-	  transform: translate(-50%, -50%);
-	  left: -25px;
-	}
-	.timeline-content .date {
-	  position: absolute;
-	  color: white;
-	  top: -20px;
-	}
-	.timeline ul li:hover::before {
-	  background-color: aqua;
-	}
-  }
-  
 #duetasks ul::-webkit-scrollbar, #upcomingmeets ul::-webkit-scrollbar, #notices ul::-webkit-scrollbar, #latestcommits ul::-webkit-scrollbar
 {
 	display: none;
@@ -330,7 +270,7 @@ body
 }
 .thead, .mhead, .create, .nhead, #createsprint, #createscrum
 {
-	background-color: rgb(232, 130, 255);
+	background-color: #b7dfb8;
 	cursor: pointer;
 	padding: 5px;
 	width: 100%;
@@ -350,7 +290,7 @@ body
 }
 .tactive, .thead:hover, .nhead:hover, .mactive, .mhead:hover, .create:hover, #createsprint, #createscrum
 {
-	background-color: rgb(208, 0, 255);
+	background-color: #3d8b40;
 }
 .thead:after, .nhead:after, .mhead:after, .create:after, #createsprint, #createscrum
 {
@@ -411,11 +351,11 @@ body
 {
 	padding: 5px;
 }
-#pretasks li div button, #preNotices li div button, #sprintTasks li div button, #noticelist li div button, #premeets li div button, #backlogsbox ul li div button
+#pretasks li div button,#goStart,  #preNotices li div button, #sprintTasks li div button, #noticelist li div button, #premeets li div button, #backlogsbox ul li div button, #folderback
 {
 	margin:auto;
 	margin-left: 50px;
-	background-color: rgb(192, 114, 247);
+	background-color: #b7dfb8;
 	font-size: 15px;
 	padding: 4px;
 	border-radius: 5px;
@@ -425,10 +365,14 @@ body
 	margin-top: 2px;
 	box-shadow: 0px 0px 5px blue;
 }
-#pretasks li div button:hover, #preNotices li div button:hover, #sprintTasks li div button:hover, #noticelist li div button:hover, #premeets li div button:hover, #backlogsbox ul li div button:hover
+#gostart
 {
-	background-color: rgb(144, 0, 247);
-	color: white;
+	float:right;
+	margin-right: 10px;
+}
+#pretasks li div button:hover, #goStart:hover, #preNotices li div button:hover, #sprintTasks li div button:hover, #noticelist li div button:hover, #premeets li div button:hover, #backlogsbox ul li div button:hover, #folderback:hover
+{
+	background-color: #3d8b40;
 }
 #latestcommits ul li h3, #latestcommits ul li p
 {
@@ -438,8 +382,10 @@ body
 .title
 {
 	font-size: 25px;
-	background-color: rgb(192, 114, 247);
+	background-color: #1abc9c;
 	padding:3px;
+	text-align: center;
+	margin-bottom: 3px;
 	border-radius: 3px;
 	margin-top: 5px;
 	box-shadow: 0px 0px 5px blue;
@@ -462,10 +408,14 @@ body
 }
 #createTask h4, #createmeet h4, #createNotice h4, .edit h4
 {
-	text-align: left;
+	text-align: center;
 	padding: 4px;
 	margin: 0px;
 	font-size: 20px;
+}
+#folderback
+{
+	float: right;
 }
 #createTask label, #createmeet label, #createNotice label, .edit label
 {
@@ -487,7 +437,7 @@ body
 #createTask button, #createmeet button, #createNotice button, .edit button
 {
 	margin-left: 10px;
-	background-color: rgb(192, 114, 247);
+	background-color: #b7dfb8;
 	font-size: 15px;
 	padding: 4px;
 	border-radius: 5px;
@@ -504,8 +454,7 @@ body
 }
 #createTask button:hover, #createmeet button:hover, #createNotice button:hover, .edit button:hover
 {
-	background-color: rgb(144, 0, 247);
-	color: white;
+	background-color: #3d8b40;
 }
 .id
 {
@@ -520,7 +469,7 @@ body
 	font-family: sans-serif;
 	display: inline;
 }
-#overviewbox ul, #progressbox ul
+#overviewbox ul, #progressbox ul, #col ul
 {
 	max-height: 1000px;
 	padding: 5px;
@@ -529,18 +478,23 @@ body
 {
 	max-height: 1000px;
 	padding: 5px;
+	background-color: #dbefdc;
 }
 #backlogsbox ul li
 {
-	margin-top: 2px;
+	margin-top: 4px;
 }
-#overviewbox ul li, #progressbox ul li, #backlogsbox > h4, #backlogsbox > p, #backlogsbox ul li > p
+#overviewbox ul li, .col ul li, #progressbox ul li ,#backlogsbox > p, #backlogsbox ul li > p
 {
+	background-color: #b7dfb8;
+	padding: 5px;
+	margin-bottom: 2px;
+	color: black;
 	border-radius: 10px;
-	background-color: rgb(192, 114, 247);
-	padding:5px;
-	margin-top: 5px;
-	box-shadow: 0px 0px 5px blue;
+}
+#backlogsbox > p
+{
+	margin-top: 5px;	
 }
 #contributorsbox ul
 {
@@ -551,7 +505,7 @@ body
 	padding: 5px;
 	margin-top: 5px;
 	border-radius: 10px;
-	background-color: rgb(232, 130, 255);
+	background-color: #3d8b40;
 	font-size: 20px;
 }
 #contributorsbox ul li button
@@ -576,3 +530,104 @@ body
 	box-shadow: 0px 0px 5px blue;
 	color: white;
 }
+.containers {
+	background-color:#dbefdc;
+  }
+  .timeline {
+	width: 80%;
+	height: 800px;
+	background-color:#dbefdc;
+	max-width: 800px;
+	margin: 0 auto;
+	position: relative;
+  }
+  
+  .timeline ul {
+	list-style: none;
+  }
+  .timeline ul li {
+	padding: 5px;
+	max-width: 200px;
+	background-color: lightyellow;
+	color: black;
+	border-radius: 10px;
+	margin-bottom: 20px;
+	margin-top: 5px;
+  }
+  .timeline ul li:last-child {
+	margin-bottom: 0;
+  }
+  .timeline-content h1 {
+	font-weight: bold;
+	font-size: 25px;
+	line-height: 30px;
+	margin-bottom: 10px;
+  }
+  .timeline-content p {
+	font-size: 16px;
+	line-height: 30px;
+	font-weight: bold;
+  }
+  .timeline-content .date {
+	font-size: 12px;
+	font-weight: bold;
+	margin-bottom: 20px;
+	letter-spacing: 2px;
+  }
+  @media only screen and (min-width: 768px) {
+	.timeline:before {
+	  content: "";
+	  position: absolute;
+	  top: 0;
+	  left: 50%;
+	  transform: translateX(-50%);
+	  width: 3px;
+	  height: 100%;
+	  background-color: white;
+	}
+	.timeline ul li {
+	  width: 45%;
+	  position: relative;
+	  margin-bottom: 50px;
+	}
+	.timeline ul li:nth-child(odd) {
+	  float: left;
+	  clear: right;
+	  transform: translateX(15px); 
+	  border-radius: 20px 0px 20px 20px;
+	  margin-left: 55px;
+	}
+	.timeline ul li:nth-child(even) {
+	  float: right;
+	  clear: left;
+	  transform: translateX(-15px);
+	  border-radius: 0px 20px 20px 20px;
+	  margin-right: 95px;
+	}
+	.timeline ul li::before {
+	  content: "";
+	  position: absolute;
+	  height: 20px;
+	  width: 20px;
+	  border-radius: 50%;
+	  background-color: gray;
+	  top: 0px;
+	}
+	.timeline ul li:nth-child(odd)::before {
+	  transform: translate(50%, -50%);
+	  right: -25px;
+	}
+	.timeline ul li:nth-child(even)::before {
+	  transform: translate(-50%, -50%);
+	  left: -25px;
+	}
+	.timeline-content .date {
+	  position: absolute;
+	  color: black;
+	  top: -10px;
+	  left: 10px;
+	}
+	.timeline ul li:hover::before {
+	  background-color: aqua;
+	}
+  }

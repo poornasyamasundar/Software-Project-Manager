@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.db import connection
 from Databases.sample import getSampleData
-from Databases.create import isUser, isTrueCredentialscorrect, insertUserIntoTable
+from Databases.create import isUser, isTrueCredentialscorrect, insertUserIntoTable, updateUser
 from Databases.creation import getDetails, insertDetails, updateDetails
 from Databases.meetings_table import createTable, specificMeetings, allMeetings, deleteMeetings, modifyMeeting, insertMeeting, getLatestMeetings
 from Databases.tasks_table import create_taskTable, specificTasks, allTasks, deleteTask, modifyTask, insertTask, getTasks
@@ -266,12 +266,28 @@ def noticeFunctionPy(request):
 #sample function to process a ajax GET request
 def testGET(request):
     if request.method == 'GET':
-        #get the values as specified in the javascript
-        value = 'sample return value from the server'
+        value = 0
         return HttpResponse(value)
 
+@csrf_exempt
 def testPOST(request):
     if request.method == 'POST':
-        value = request.POST['userinput']
         print(request.POST)
-        return HttpResponse(value)
+        choice = request.POST['choice']
+        username = request.POST['username']
+        if choice == '1':
+            return HttpResponse(json.dumps(getDetails(username)))
+        elif choice == '2':
+            token = request.POST['token']
+            git = request.POST['gitusername']
+            mail = request.POST['mail']
+            print('update = ', updateDetails(token, username, git, mail))
+            return HttpResponse('y')
+        else:
+            newpassword = request.POST['newPassword']
+            oldpassword = request.POST['oldPassword']
+            if( isTrueCredentialscorrect(username, oldpassword) ):
+                updateUser(username, newpassword)
+                return HttpResponse('z')
+            else:
+                return HttpResponse('y')

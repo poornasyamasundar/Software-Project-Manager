@@ -1,19 +1,28 @@
+function startWait()
+{
+	document.querySelector('#wait').style.display = 'block';
+}
+
+function stopWait()
+{
+	document.querySelector('#wait').style.display = 'none';
+}
 document.addEventListener('DOMContentLoaded', function() 
 	{
 		document.querySelector('#gobackbutton').onclick = () =>
 		{
-			window.history.back()
+			window.location = "http://127.0.0.1:8000/";
 		}
 		document.querySelector('.reghere').onclick = () =>
 		{
 			window.location = '/register';
 		}
 
-
 		const form = document.querySelector("#signup");
 
 		form.querySelector('#save').onclick = (event) =>
 		{
+			startWait();
 			event.preventDefault();
 
 			var email = form.querySelector('#username').value;
@@ -31,16 +40,18 @@ document.addEventListener('DOMContentLoaded', function()
 						console.log(data);
 						if(data != '')
 						{
-							alert('successfull Sign Ined');
+							alert('Sign In Successful');
 							data = JSON.parse(data);
 							console.log(data);
 							localStorage.setItem('Username', email);
 							localStorage.setItem('gitUserName', data[4]);
 							localStorage.setItem('token', data[1]);
+							stopWait();
 							window.location = "http://127.0.0.1:8000/";
 						}
 						else
 						{
+							stopWait();
 							alert("Login Credentials wrong! Please try again");
 							window.location = '';
 						}

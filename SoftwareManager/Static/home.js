@@ -6,6 +6,15 @@ function plusSlides(n) {
 function currentSlide(n) {
 	showSlides(slideIndex = n);
 }
+function startWait()
+{
+	document.querySelector('#wait').style.display = 'block';
+}
+
+function stopWait()
+{
+	document.querySelector('#wait').style.display = 'none';
+}
 
 function showSlides(n) 
 {
@@ -104,114 +113,156 @@ function setSpiral()
 									}
 								}
 								console.log("Hello");
+								stopWait();
 								window.location = "/Spiral";
 							});
 					}
 				}
 			});
 }
-function setValues(selection)
+function getAllCards( url , callback )
 {
-	console.log("selection = " , selection);
-	if( selection == 0 )
-	{
-		getAllProjects(function(list1)
+	$.ajax(
+		{
+			type: 'GET',
+			url: url,
+			cache: false,
+			beforeSend: beforeSend,
+			data:{
+				archived_state: 'all',
+			},
+			success: function(response)
 			{
-				for( var i = 0 ; i < list1.length ; i++ )
+				var list = [];
+				for( let i = 0 ; i < response.length ; i++ )
 				{
-					if( list1[i].name == 'Notices' )
+					list.push({note: response[i].note, url: response[i].url, time: response[i].updated_at, creator: response[i].creator['login'], archived: response[i].archived});
+				}
+				callback(list);
+			}
+		}
+	)
+}
+
+function setValues()
+{
+	getAllProjects(function(projectlist)
+		{
+			scrums = [];
+			sprints = [];
+			for( var i = 0 ; i < projectlist.length ; i++ )
+			{
+				sprint = projectlist[i].name.slice(0, 6).toLowerCase();
+				scrum = projectlist[i].name.slice(0, 5).toLowerCase();
+				console.log(projectlist[i].name);
+				if( sprint == 'sprint')
+				{
+					sprints.push(projectlist[i]);
+				}
+				if( scrum == 'scrum' )
+				{
+					scrums.push(projectlist[i]);
+				}
+				if( projectlist[i].name == 'Notices' )
+				{
+					getAllColumns(projectlist[i].columnsURL, function(list2)
+						{
+							for( var j = 0 ; j < list2.length ; j++ )
+							{
+								if(list2[j].name == 'Notices')
+								{
+									localStorage.setItem('NoticeDetails', JSON.stringify(list2[j]));
+								}
+							}
+						});
+				}
+				else if( projectlist[i].name == 'ProductBacklogs' )
+				{
+					localStorage.setItem('ProductBacklogs', JSON.stringify(projectlist[i]));
+						getAllColumns(projectlist[i].columnsURL, function(list)
+							{
+								for( var j = 0 ; j < list.length ; j++ )
+								{
+									if(list[j].name == 'FileInfo')
+									{
+												localStorage.setItem('FileInfo', JSON.stringify(list[j]));
+									}
+								}
+							});
+				}
+			}
+			if( scrums.length == 0 )
+			{
+				localStorage.setItem('currentScrum', 0);
+				localStorage.setItem('CurrentScrumMeetsDetails', '');
+				localStorage.setItem('scrumExpired', 1);
+			}
+			else
+			{
+				localStorage.setItem('currentScrum', scrums.length);
+				for( var i = 0 ; i < projectlist.length ; i++ )
+				{
+					if( projectlist[i].name == 'Scrum-'+scrums.length )
 					{
-						getAllColumns(list1[i].columnsURL, function(list2)
+						getAllColumns(projectlist[i].columnsURL, function(list2)
 							{
 								for( var j = 0 ; j < list2.length ; j++ )
 								{
-									if(list2[j].name == 'Notices')
+									if(list2[j].name == 'Tasks')
 									{
-										localStorage.setItem('NoticeDetails', JSON.stringify(list2[j]));
-										setValues(1);
+										console.log("tasks found");
+										date = new Date(list2[j].time);
+										localStorage.setItem('CurrentScrumTasksDetails', JSON.stringify(list2[j]));
+										localStorage.setItem('scrumstart', date.getTime());
+										if( (date.getTime()+172800000) > new Date().getTime() )
+										{
+											localStorage.setItem('scrumExpired', 0);
+										}
+										else
+										{
+											localStorage.setItem('scrumExpired', 1);
+										}
+									}
+									if(list2[j].name == 'Meetings')
+									{
+										console.log("meets found");
+										localStorage.setItem('CurrentScrumMeetsDetails', JSON.stringify(list2[j]));
+									}
+								}
+								b = true;
+								console.log("after currentScrumMeets details");
+							});
+					}
+				}
+			}
+			if( sprints.length == 0 )
+			{
+				localStorage.setItem('currentSprint', 0);
+				localStorage.setItem('CurrentSprintTasksDetails', '');
+			}
+			else
+			{
+				localStorage.setItem('currentSprint', sprints.length);
+				for( var i = 0 ; i < projectlist.length ; i++ )
+				{
+					if( projectlist[i].name == 'Sprint-'+sprints.length )
+					{
+						getAllColumns(projectlist[i].columnsURL, function(list2)
+							{
+								for( var j = 0 ; j < list2.length ; j++ )
+								{
+									if(list2[j].name == 'Tasks')
+									{
+										localStorage.setItem('CurrentSprintTasksDetails', JSON.stringify(list2[j]));
+										date = new Date(list2[j].time);
+										localStorage.setItem('sprintstart', date.getTime());
 									}
 								}
 							});
 					}
 				}
-			});
-	}
-	else if(selection == 1 )
-	{
-		b = false;
-		if( parseInt(localStorage.getItem('currentScrum')) != 0 )
-		{
-			getAllProjects(function(list1)
-				{
-					for( var i = 0 ; i < list1.length ; i++ )
-					{
-						if(list1[i].name == 'Scrum-'+parseInt(localStorage.getItem('currentScrum')).toString())
-						{
-							getAllColumns(list1[i].columnsURL, function(list2)
-								{
-									for( var j = 0 ; j < list2.length ; j++ )
-									{
-										if(list2[j].name == 'Tasks')
-										{
-											console.log("tasks found");
-											localStorage.setItem('CurrentScrumTasksDetails', JSON.stringify(list2[j]));
-											date = new Date(list2[j].time);
-											localStorage.setItem('scrumstart', date.getTime());
-
-										}
-										if(list2[j].name == 'Meetings')
-										{
-											console.log("meets found");
-											localStorage.setItem('CurrentScrumMeetsDetails', JSON.stringify(list2[j]));
-										}
-									}
-									b = true;
-									console.log("after currentScrumMeets details");
-									setValues(2);
-								});
-						}
-					}
-				});
-		}
-		else
-		{
-			setValues(2);
-		}
-	}
-	else if( selection == 2 )
-	{
-		if( parseInt(localStorage.getItem('currentSprint')) != 0 )
-		{
-			getAllProjects(function(list1)
-				{
-					for( var i = 0 ; i < list1.length ; i++ )
-					{
-						if(list1[i].name == 'Sprint-'+parseInt(localStorage.getItem('currentSprint')).toString())
-						{
-							getAllColumns(list1[i].columnsURL, function(list2)
-								{
-									for( var j = 0 ; j < list2.length ; j++ )
-									{
-										if(list2[j].name == 'Tasks')
-										{
-											localStorage.setItem('CurrentSprintTasksDetails', JSON.stringify(list2[j]));
-											date = new Date(list2[j].time);
-											localStorage.setItem('sprintstart', date.getTime());
-											window.location = "/Project";
-											console.log("Hello");
-										}
-									}
-								});
-						}
-					}
-				});
-		}
-		else
-		{
-			console.log("Hello");
-			window.location = "/Project";
-		}
-	}
+			}
+		});
 }
 
 function insertProjects(result)
@@ -227,11 +278,13 @@ function insertProjects(result)
 	}
 	console.log(str);
 	document.querySelector('#projectlist').querySelector('ul').innerHTML = str;
+	stopWait();
 	projectlist = document.querySelector('#projectlist').querySelector('ul').querySelectorAll('li')
 	for( var i = 0 ; i < projectlist.length ; i++ )
 	{
 		projectlist[i].querySelector('.viewbutton').querySelector('button').onclick = (e) =>
 		{
+			startWait();
 			console.log("Clicked");
 			localStorage.setItem('Project', e.target.getAttribute('data-projectName'));
 			for( i = 0 ; i < result.length ; i++ )
@@ -249,7 +302,17 @@ function insertProjects(result)
 						localStorage.setItem('repoName', result[i].repolink);
 						localStorage.setItem('contributors', JSON.stringify(obj.contributors));
 						localStorage.setItem('model', result[i].model);
-						setValues(0);
+						setValues();
+						var interval = setInterval(function()
+							{
+								console.log(localStorage.getItem('NoticeDetails'), localStorage.getItem('FileInfo') , localStorage.getItem('CurrentScrumMeetsDetails') , localStorage.getItem('CurrentSprintTasksDetails'));
+								if( localStorage.getItem('NoticeDetails') != null && localStorage.getItem('FileInfo') != null && localStorage.getItem('CurrentScrumMeetsDetails') != null && localStorage.getItem('CurrentSprintTasksDetails') != null )
+								{
+									stopWait();
+									window.location = "/Project";
+									clearInterval(interval);
+								}
+							}, 1000);
 					}
 					else if( result[i].model == 'Spiral Model' )
 					{
@@ -269,6 +332,7 @@ function insertProjects(result)
 
 function getProjects()
 {
+	startWait();
 	$.ajax(
 		{
 			type: "POST",
@@ -332,6 +396,11 @@ document.addEventListener('DOMContentLoaded', function()
 		localStorage.removeItem('contributors');
 		localStorage.removeItem('model');
 		localStorage.removeItem('MeetingsDetails');
+		localStorage.removeItem('ProductBacklogs');
+		localStorage.removeItem('FileInfo');
+		localStorage.removeItem('currentSpiralURL');
+		localStorage.removeItem('currentSpiralStage');
+		localStorage.removeItem('currentSpiral');
 
 		if( localStorage.getItem('Username') != null )
 		{
@@ -351,6 +420,7 @@ document.addEventListener('DOMContentLoaded', function()
 		else
 		{
 			document.querySelector('#profilebutton').style.display = 'none';
+			document.querySelector('#projectlist').style.display = 'none';
 			document.querySelector('#signinbutton').onclick = () =>
 			{
 				window.location = '/login';
@@ -365,7 +435,14 @@ document.addEventListener('DOMContentLoaded', function()
 
 		document.querySelector('.fab-options').querySelector('li').onclick = () =>
 		{
-			window.location = '/Feedback';
+			if( localStorage.getItem('Username') != null )
+			{
+				window.location = '/Feedback';
+			}
+			else
+			{
+				alert("Sign in to post feedback");
+			}
 		}
 
 		showSlides(slideIndex);

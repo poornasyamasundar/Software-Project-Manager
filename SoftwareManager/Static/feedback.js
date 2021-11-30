@@ -1,3 +1,12 @@
+function startWait()
+{
+	document.querySelector('#wait').style.display = 'block';
+}
+
+function stopWait()
+{
+	document.querySelector('#wait').style.display = 'none';
+}
 document.addEventListener('DOMContentLoaded', function() 
 	{
 		document.querySelector('#gobackbutton').onclick = () =>
@@ -8,6 +17,7 @@ document.addEventListener('DOMContentLoaded', function()
 		const form = document.querySelector('.container').querySelector('form');
 		form.querySelector('#save').onclick = (event) =>
 		{
+			startWait();
 			event.preventDefault();
 			rating = 0;
 			comments = form.querySelector('#comments').value;
@@ -35,6 +45,16 @@ document.addEventListener('DOMContentLoaded', function()
 			{
 				rating = 1;
 			}
+			else
+			{
+				alert("Give a Rating");
+				window.location = '';
+			}
+			if( feedback == '' )
+			{
+				alert("Feedback is empty");
+				window.location = '';
+			}
 			console.log(rating);
 
 			$.ajax(
@@ -49,6 +69,7 @@ document.addEventListener('DOMContentLoaded', function()
 						rating: rating,
 					},
 					success: function(data){
+						stopWait();
 						alert('Comment successfully added');
 					}
 				}

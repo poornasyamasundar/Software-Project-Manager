@@ -18,6 +18,12 @@
 				<button id = 'no'>No</button>
 			</div>
 		</div>
+		<div id = 'wait'>
+			<div>
+				<h1>Please Wait</h1>
+				<div id = 'loader'></div>
+			</div>
+		</div>
 		<div id = 'homeMenu'>
 			<div id = 'logo'>
 				<img id = 'logopng' src = "{% static 'logo.png' %}" align= 'left'></img>
@@ -48,13 +54,19 @@
 				<button id = 'currentsprint'>
 					Current Sprint
 				</button>
-				<button id = 'progress'>
+				<button id = 'productBacklogs'>
+					Product Backlog
+				</button>
+				<button>
 					Progress
+				</button>
+				<button>
+					Timeline
 				</button>
 				<button id = 'Contributors'>
 					Contributors 
 				</button>
-				<button id = 'notices'>
+				<button>
 					Notices
 				</button>
 			</div>
@@ -125,8 +137,8 @@
 				<div id = 'sprintbox'>
 					<button id = 'createsprint'>Click here to create a new sprint</button>
 					<div id = 'sprint'>
-					<h2>Time for the current sprint to complete:</h2>
-					<h3></h3>
+						<h2>Time for the current sprint to complete:</h2>
+						<h3></h3>
 						<div class = 'title'>Tasks for this Sprint</div>
 						<div>
 							<ul id = 'sprintTasks'>
@@ -144,108 +156,103 @@
 					</div>
 				</div> 
 				<div id = 'backlogsbox'>
+					<h4 class = 'title' >Product Backlogs<button id= 'folderback' >Go back</button></h4>
+					<p id = 'path' data-pathname = '[]' data-columnURL = '' data-foldername = '' data-previousfolder = '' >Path :root/</p>
+					<ul>
+						<li>
+							<p class = 'folder'>FolderName</p>
+						</li>
+						<li>
+							<div>
+								<h5>Task1</h5>
+								<h6>Status created by created on</h6>
+								<p>Description:</p>
+								<button id = 'delete'>Delete Task</button>
+								<button id = 'edit'>Edit Task</button>
+							</div>
+							<form class = 'edit'>
+								<h4>Create New Task</h4>
+								<label for = 'taskname'>Task Title</label>
+								<input type='text' id = 'taskname' name = 'taskname' placeholder='New Task name'>
+								<label for = 'taskDescription'>Description</label>
+								<textarea type='text' id = 'taskDescription' name='taskDescription' placeholder='Describe the task'></textarea>
+								<button type='submit'>Save</button>
+								<button>Cancel</button>
+							</form>
+						</li>
+					</ul>
+					<button class = 'create' id = 'createProductTaskButton' >Create a New Task</button>
+					<form id = 'createTask' class = 'createBacklog'>
+						<h4>Create New Task</h4>
+						<label for = 'taskname'>Task Title</label>
+						<input type='text' id = 'taskname' name = 'taskname' placeholder='New Task name'>
+						<label for = 'taskDescription'>Description</label>
+						<textarea type='text' id = 'taskDescription' name='taskDescription' placeholder='Describe the task'></textarea>
+						<button type='submit'>Create</button>
+					</form>
+					<button class = 'create' id = 'createProductfolderButton' >Create a New Folder</button>
+					<form id = 'createTask' class = 'createfolder'>
+						<h4>Create New Folder</h4>
+						<label for = 'taskname'>FolderName</label>
+						<input type='text' id = 'taskname' name = 'taskname' placeholder='New Folder name'>
+						<button type='submit'>Create</button>
+					</form>
+				</div>
+				<div id = 'progressbox' class="container mt-5">
+					<div class="row">
+						<div class="col"><!-- for scrum -->
+							<ul id = 'scrumProgress' >
+							<h4 class = 'title' >Current Scrum</h4>
+							<li>
+							<p class = 'id'>Amount of Time spent on current Scrum : </p>
+							<p class = 'value'><progress id="prog_scrumtime" value="40" max="100"></progress></p>
+							</li>
+							<li>
+							<p class = 'id'>Productivity (Number of Tasks completed per meeting): </p>
+							<p class = 'value'></p>
+							</li>
+							<li>
+							<p class = 'id'>Average Number of Tasks Completed per Scrum: </p>
+							<p class = 'value'></p>
+							</li>
+							<li>
+							<p class = 'id'>Average Number of Tasks Completed vs Planned per Scrum: </p>
+							<p class = 'value'></p>
+							</li>
+							<li>
+							<p class = 'id'>Average Time spent between successive Scrums: </p>
+							<p class = 'value'></p>
+							</li>
+							</ul>
+						</div>
+							<br>
+							<br>
+						<div class="col">
+							<ul id = 'sprintProgress'>
+							<h4 class = 'title'>Current Sprint</h4>
+							<li>
+							<p class = 'id'>Amount of Time spent on current Sprint : </p>
+							<p class = 'value'><progress id="prog_scrumtime" value="40" max="100"></progress></p>
+							</li>
+							<li>
+							<p class = 'id'>Average Number of Tasks Completed vs Planned per Sprint: </p>
+							<p class = 'value'></p>
+							</li>
+							<li>
+							<p class = 'id'>Average Time spent between successive Sprints: </p>
+							<p class = 'value'></p>
+							</li>
+						</div>
+					</div>	
+				</div>
+				<div class="containers">
+					<div class = 'title'><button id = 'goStart'>Go to Start</button></div>
+					<div class="timeline">
+						<ul class="myList">
 
-	    <h4>Product Backlogs</h4>
-	    <p>Path :root/</p>
-	    <ul>
-	    <li>
-	    <p class = 'folder'>FolderName</p>
-	    </li>
-	    <li>
-			<div>
-			<h5>Task1</h5>
-			<h6>Status created by created on</h6>
-			<p>Description:</p>
-			<button id = 'delete'>Delete Task</button>
-			<button id = 'edit'>Edit Task</button>
-			</div>
-			<form class = 'edit'>
-				<h4>Create New Task</h4>
-				<label for = 'taskname'>Task Title</label>
-				<input type='text' id = 'taskname' name = 'taskname' placeholder='New Task name'>
-				<label for = 'taskDescription'>Description</label>
-				<textarea type='text' id = 'taskDescription' name='taskDescription' placeholder='Describe the task'></textarea>
-				<button type='submit'>Save</button>
-				<button>Cancel</button>
-			</form>
-	    </li>
-	    </ul>
-	    <button class = 'create'>Create a New Task</button>
-	    <form id = 'createTask' class = 'createBacklog'>
-	    <h4>Create New Task</h4>
-	    <label for = 'taskname'>Task Title</label>
-	    <input type='text' id = 'taskname' name = 'taskname' placeholder='New Task name'>
-	    <label for = 'taskDescription'>Description</label>
-	    <textarea type='text' id = 'taskDescription' name='taskDescription' placeholder='Describe the task'></textarea>
-	    <button type='submit'>Create</button>
-	    </form>
-	    <button class = 'create'>Create a New Folder</button>
-	    <form id = 'createTask' class = 'createfolder'>
-	    <h4>Create New Folder</h4>
-	    <label for = 'taskname'>FolderName</label>
-	    <input type='text' id = 'taskname' name = 'taskname' placeholder='New Folder name'>
-	    <button type='submit'>Create</button>
-	    </form>
-		<div class="container mt-5">
-			<div class="row">
-				<div class="col"><!-- for scrum -->
-					<h4>Current Scrum</h4>
-					amount of time
-					<progress id="prog_scrumtime" value="40" max="100"></progress>
-					<br>
-					number of tasks
-					<progress id="prog_scrumtask" value="40" max="100"></progress>
-					<ul>
-						<li>
-							Poorna completed 5 tasks
-						</li>
-					</ul>
-					<p id="scrumavg_tasks">Average number of tasks : </p>
-					<p id="scrum_Productivity">Productivity : </p>
-					<p id="scrum_tasks">number of tasks completed vs no of tasks planned per scrum :</p>
-					<p id="scrum_avg_time">Average time : </p>
+						</ul>
+					</div>
 				</div>
-				<div class="col"><!-- for sprint -->
-					<h4>Current Sprint</h4>
-					amount of time
-					<progress id="prog_sprinttime" value="40" max="100"></progress>
-					<br>
-					number of tasks
-					<progress id="prog_sprinttask" value="40" max="100"></progress>
-					<ul>
-						<li>
-							Poorna completed 5 tasks
-						</li>
-					</ul>
-					<p id="sprintavg_tasks">Average number of tasks : </p>
-					<p id="sprint_Productivity">Productivity : </p>
-					<p id="sprint_tasks">number of tasks completed vs no of tasks planned per sprint :</p>
-					<p id="scrum_avg_time">Average time : </p>
-				</div>
-				<!-- <script>
-					setvalues();
-					</script> -->
-			</div>	
-		</div>
-		<button class="time" onclick="get_timeline">get timeline </button>
-		<div class="containers">
-			<div class="timeline">
-				<ul class="myList">
-					
-				</ul>
-			</div>
-		</div>
-		
-	    </div>
-				<div id = 'progressbox'>
-		    <!-- Progress analysis is part of release 2 -->
-			
-			
-			
-		</div>
-	    <div id = 'timelinebox'>
-			
-	    </div>
 				<div id = 'contributorsbox'>
 					<h4 class = 'title'>List of Contributors</h4>
 					<ul>

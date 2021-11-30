@@ -1,6 +1,49 @@
 body
 {
-	background-color: rgb(218, 194, 255);
+	/*background-color: rgb(218, 194, 255);*/
+}
+#wait
+{
+	z-index: 100;
+	width: 100%;
+	background-color: #474e5d;
+	position: fixed;
+	opacity: 0.9;
+	height: 100%;
+	display: none;
+}
+#loader 
+{
+	border: 8px solid #f3f3f3;
+	border-radius: 50%;
+	border-top: 8px solid #3498db;
+	margin:auto;
+	width: 60px;
+	height: 60px;
+	-webkit-animation: spin 2s linear infinite; /* Safari */
+	animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+	0% { -webkit-transform: rotate(0deg); }
+	100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+	0% { transform: rotate(0deg); }
+	100% { transform: rotate(360deg); }
+}
+#wait h1
+{
+	color: white;
+	left: 50%;
+	text-align: center;
+}
+#wait > div
+{
+	padding: 20px;
+	opacity: 1;
+	margin: auto;
 }
 .fab-container {
 	position: fixed;
@@ -13,7 +56,7 @@ body
 	width: 50px;
 	height: 50px;
 	background: white;
-	box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+	/*box-shadow: 0 6px 20px rgba(0,0,0,0.2);*/
 	border-radius: 100%;
 }
 .fab-icon-holder > img
@@ -71,7 +114,7 @@ body
 	font-size: 16px;
 	background: #666666;
 	color: #ffffff;
-	box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+	/*box-shadow: 0 6px 20px rgba(0,0,0,0.2);*/
 	margin-right: 10px;
 }
 #homeMenu
@@ -121,16 +164,17 @@ body
 	height: 70vh;
 	margin: auto;
 	margin-top: 20px;
-	box-shadow: 0px 0px 10px blue;
+	/*box-shadow: 0px 0px 10px blue;*/
 	border-radius: 10px;
 }
 #projectlist, #comments
 {
 	margin-top: 40px;
 	width: 100%;
-	padding: 20px;
-	box-sizing: border-box;
-	box-shadow: 0px 0px 10px blue;
+<<<<<<< HEAD
+	background-color: #E7E9EB;
+=======
+>>>>>>> 76d04039683f1804a3e65ba5f5b803dbd48b0f1c
 }
 #helpbutton,#signinbutton, #profilebutton
 {
@@ -164,11 +208,15 @@ body
 	width: inherit;
 	box-sizing: border-box;
 	padding:10px;
-	border-style: solid;
-	border-width: 2px;
+	/*border-style: solid;
+	border-width: 2px;*/
+<<<<<<< HEAD
+=======
 	box-shadow: 0px 0px 10px blue;
-	background-color: rgb(192, 114, 247);
-	border-radius: 10px;
+>>>>>>> 76d04039683f1804a3e65ba5f5b803dbd48b0f1c
+	text-align: center;
+	/*background-color: rgb(192, 114, 247);*/
+	/*border-radius: 10px;*/
 }
 .mySlides 
 {
@@ -181,7 +229,7 @@ body
 	height: 60vh;
 	width: inherit;
 	position: relative;
-	box-shadow: 0 20px 20px 0 rgba(0, 0, 0, 0.2);
+	box-shadow: 0px 0px 10px blue;
 }
 #modelContainer img
 {
@@ -319,29 +367,31 @@ body
 {
 	font-size: 30px;
 	width: inherit;
-	background-color: rgb(192, 114, 247);
+	/*background-color: rgb(192, 114, 247);*/
 	box-sizing: border-box;
 	padding:10px;
 	border-style: solid;
-	border-width: 2px;
+	/*border-width: 2px;*/
 	box-shadow: 0px 0px 10px blue;
-	border-radius: 10px;
+	/*border-radius: 10px;*/
 }
 #newProject
 {
-	background-color: rgb(192, 114, 247);
 	height: 40px;
-	color: black;
-	font-size: 18px;
-	font-weight: bold;
-	border-width: 0px;
-	box-shadow: 0px 0px 5px blue;
 	float: right;
+	margin-top: -2px;	
+	border: 2px solid black;
+	background-color: white;
+	color: black;
+	font-size: 16px;
+	cursor: pointer;
+	border-color: #2196F3;
+	color: dodgerblue;
+	box-shadow: 0px 0px 5px blue;
 }
 #newProject:hover
 {
-	background-color: rgb(144, 0, 247);
+	background: #2196F3;
 	color: white;
-	cursor: pointer;
 }
 

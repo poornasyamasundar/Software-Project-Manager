@@ -29,3 +29,8 @@ def insertUserIntoTable(user_name, user_password):
     cursor.execute(query,(user_name,user_password,))
 
     return True
+def updateUser(username, password):
+    cursor = connection.cursor()
+    query = 'UPDATE Users SET pass = %s WHERE username = %s'
+    cursor.execute(query, (password, username))
+    return True

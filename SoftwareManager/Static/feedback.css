@@ -4,6 +4,49 @@ body
 	min-height: 1000px;
 	margin: 8px;
 }
+#wait
+{
+	z-index: 100;
+	width: 100%;
+	background-color: #474e5d;
+	position: fixed;
+	opacity: 0.9;
+	height: 100%;
+	display: none;
+}
+#loader 
+{
+	border: 8px solid #f3f3f3;
+	border-radius: 50%;
+	border-top: 8px solid #3498db;
+	margin:auto;
+	width: 60px;
+	height: 60px;
+	-webkit-animation: spin 2s linear infinite; /* Safari */
+	animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+	0% { -webkit-transform: rotate(0deg); }
+	100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+	0% { transform: rotate(0deg); }
+	100% { transform: rotate(360deg); }
+}
+#wait h1
+{
+	color: white;
+	left: 50%;
+	text-align: center;
+}
+#wait > div
+{
+	padding: 20px;
+	opacity: 1;
+	margin: auto;
+}
 #homeMenu
 {
 	width: 100%;

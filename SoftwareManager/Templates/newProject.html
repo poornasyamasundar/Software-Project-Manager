@@ -11,6 +11,12 @@
 		</title>
 	</head>
 	<body>
+		<div id = 'wait'>
+			<div>
+				<h1>Please Wait</h1>
+				<div id = 'loader'></div>
+			</div>
+		</div>
 		<div id = 'homeMenu'>
 			<div id = 'logo'>
 				<img id = 'logopng' src = "{% static 'logo.png' %}" align= 'left'></img>
@@ -50,7 +56,6 @@
 						<select class="form-control" name="type">
 						  <option>-Select-</option>
 						  <option>Agile Model</option>
-						  <option>Waterfall Model</option>
 						  <option>Spiral Model</option>
 						</select>
 					  </div>
@@ -62,7 +67,7 @@
 					<input type="text" name="repo" class="form-control" id = 'des' placeholder="Description for the project">
 					<br>
 					<br>
-					<input id = 'save' type="submit" name="submit" value="Create" class="btn btn-primary btn-lg">
+					<input id = 'save' type="button" name="submit" value="Create" class="btn btn-primary btn-lg">
 				  </form>
 				</div>
 			  </div>

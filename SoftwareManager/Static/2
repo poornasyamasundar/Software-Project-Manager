@@ -1,6 +1,6 @@
 body
 {
-	font-family: Verdana,sans-serif;
+	background-color: rgb(218, 194, 255);
 }
 #homeMenu
 {
@@ -23,71 +23,40 @@ body
 }
 #modal
 {
-	z-index: 100;
+	z-index: 1;
 	width: 100%;
 	background-color: #474e5d;
 	position: fixed;
 	opacity: 0.9;
 	height: 100%;
 	display: none;
-}
-#wait
-{
-	z-index: 100;
-	width: 100%;
-	background-color: #474e5d;
-	position: fixed;
-	opacity: 0.9;
-	height: 100%;
-	display: none;
-}
-#loader 
-{
-	border: 8px solid #f3f3f3;
-	border-radius: 50%;
-	border-top: 8px solid #3498db;
-	margin:auto;
-	width: 60px;
-	height: 60px;
-	-webkit-animation: spin 2s linear infinite; /* Safari */
-	animation: spin 2s linear infinite;
-}
-
-@-webkit-keyframes spin {
-	0% { -webkit-transform: rotate(0deg); }
-	100% { -webkit-transform: rotate(360deg); }
-}
-
-@keyframes spin {
-	0% { transform: rotate(0deg); }
-	100% { transform: rotate(360deg); }
 }
 #modal button 
 {
-	background-color: #04AA6D;
-	color: white;
-	padding: 14px 20px;
-	margin: 8px 0;
-	border: none;
-	cursor: pointer;
-	opacity: 0.9;
-	float: left;
-	width: 50%;
+  background-color: #04AA6D;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  opacity: 0.9;
+  float: left;
+  width: 50%;
 }
 #modal button:hover 
 {
-	opacity:1;
+  opacity:1;
 }
 #modal #yes
 {
-	background-color: #f44336;
-	color: black;
+  background-color: #f44336;
+  color: black;
 }
 #modal #no
 {
-	background-color: #ccc;
+  background-color: #ccc;
 }
-#modal h1, #modal p, #wait h1
+#modal h1, #modal p
 {
 	text-align: center;
 }
@@ -100,18 +69,6 @@ body
 	margin-top: 100px;
 	height: 200px;
 	padding: 20px;
-}
-#wait h1
-{
-	color: white;
-	left: 50%;
-	text-align: center;
-}
-#wait > div
-{
-	padding: 20px;
-	opacity: 1;
-	margin: auto;
 }
 #projectname
 {
@@ -177,11 +134,11 @@ body
 	width: 100%;
 	grid-template-columns: 200px auto 300px;
 	grid-gap: 10px;
-
+	
 }
 #projectBox > div
 {
-	/*box-shadow: 0px 0px 10px blue;*/
+	box-shadow: 0px 0px 10px blue;
 	padding: 5px;
 	box-sizing: border-box;
 }
@@ -191,11 +148,10 @@ body
 }
 #board
 {
-	height: 500px;
 }
 #options > button
 {
-	/*background-color: rgb(192, 114, 247);*/
+	background-color: rgb(192, 114, 247);
 	height: 40px;
 	width: 190px;
 	color: black;
@@ -203,7 +159,7 @@ body
 	font-weight: bold;
 	border-width: 0px;
 	margin-top: 2px;
-	/*box-shadow: 0px 0px 5px blue;*/
+	box-shadow: 0px 0px 5px blue;
 }
 #options > button:hover
 {
@@ -217,7 +173,7 @@ body
 	background-color: white;
 	height: 150px;
 	width: 280px;
-	/*background-color: rgb(232, 186, 255);*/
+	background-color: rgb(232, 186, 255);
 	border-style: solid;
 	border-width: 2px;
 	box-shadow: 0px 0px 3px blue;
@@ -230,9 +186,9 @@ body
 	padding: 5px;
 	box-sizing: border-box;
 	font-weight: bold;
-	background-color: #1abc9c;
+	background-color: rgb(162, 0, 255);
 }
-#duetasks ul,#progressbox ul,  #upcomingmeets ul, #notices ul, #pretasks, #preNotices, #sprintTasks, #noticelist, #premeets, #overviewbox ul, #backlogsbox ul, #contributorsbox ul, #latestcommits ul
+#duetasks ul, #upcomingmeets ul, #notices ul, #pretasks, #preNotices, #sprintTasks, #noticelist, #premeets, #overviewbox ul, #backlogsbox ul, #contributorsbox ul, #latestcommits ul
 {
 	list-style-type: none;
 	padding: 0px;
@@ -267,7 +223,7 @@ body
 }
 .thead, .mhead, .create, .nhead, #createsprint, #createscrum
 {
-	background-color: #b7dfb8;
+	background-color: rgb(232, 130, 255);
 	cursor: pointer;
 	padding: 5px;
 	width: 100%;
@@ -287,7 +243,7 @@ body
 }
 .tactive, .thead:hover, .nhead:hover, .mactive, .mhead:hover, .create:hover, #createsprint, #createscrum
 {
-	background-color: #3d8b40;
+	background-color: rgb(208, 0, 255);
 }
 .thead:after, .nhead:after, .mhead:after, .create:after, #createsprint, #createscrum
 {
@@ -348,11 +304,15 @@ body
 {
 	padding: 5px;
 }
+#pretasks li
+{
+	padding: 10px;
+}
 #pretasks li div button, #preNotices li div button, #sprintTasks li div button, #noticelist li div button, #premeets li div button, #backlogsbox ul li div button
 {
 	margin:auto;
 	margin-left: 50px;
-	background-color: #b7dfb8;
+	background-color: rgb(192, 114, 247);
 	font-size: 15px;
 	padding: 4px;
 	border-radius: 5px;
@@ -364,7 +324,8 @@ body
 }
 #pretasks li div button:hover, #preNotices li div button:hover, #sprintTasks li div button:hover, #noticelist li div button:hover, #premeets li div button:hover, #backlogsbox ul li div button:hover
 {
-	background-color: #3d8b40;
+	background-color: rgb(144, 0, 247);
+	color: white;
 }
 #latestcommits ul li h3, #latestcommits ul li p
 {
@@ -374,11 +335,41 @@ body
 .title
 {
 	font-size: 25px;
-	background-color: #1abc9c;
+	background-color: rgb(192, 114, 247);
 	padding:3px;
 	border-radius: 3px;
 	margin-top: 5px;
 	box-shadow: 0px 0px 5px blue;
+}
+#chart
+{
+	width: 800px;
+	margin:auto;
+	height: 400px;
+	box-shadow: 0px 0px 5px blue;
+}
+#tasks
+{
+	height: 600px;
+}
+#pretasks li div h5
+{
+	border-radius: 10px;
+	background-color: lightgreen;
+	text-align: center;
+	padding: 5px;
+	font-size: 20px;
+}
+#pretasks li div
+{
+	min-height: 200px;
+}
+#pretasks li div h6
+{
+	border-radius: 10px;
+	background-color: lightpink;
+	padding: 5px;
+	max-height: 200px;
 }
 #createTask, #createmeet, #createNotice, .edit
 {
@@ -387,9 +378,30 @@ body
 	margin-top: 5px;
 	border-radius: 3px;
 	background-color: lightyellow;
-	overflow: hidden;
 	max-height: 0;
+	overflow: hidden;
 	transition: max-height 0.2s ease-out;
+}
+.tooltiptext {
+	visibility: hidden;
+	width: 120px;
+	background-color: grey;
+	color: #fff;
+	text-align: center;
+	border-radius: 6px;
+	padding: 5px 0;
+	position: absolute;
+	z-index: 1;
+	bottom: 100%;
+	left: 50%;
+	margin-left: -60px;
+}
+
+.circle:hover .tooltiptext {
+	visibility: visible;
+}
+.circle > div:hover{
+	outline-width: 10px;
 }
 .edit
 {
@@ -423,7 +435,7 @@ body
 #createTask button, #createmeet button, #createNotice button, .edit button
 {
 	margin-left: 10px;
-	background-color: #b7dfb8;
+	background-color: rgb(192, 114, 247);
 	font-size: 15px;
 	padding: 4px;
 	border-radius: 5px;
@@ -433,24 +445,15 @@ body
 	margin-top: 5px;
 	box-shadow: 0px 0px 5px blue;
 }
-#nextStage
-{
-	float:right;
-	font-size: 15px;
-	color: black;
-	font-weight:bold;
-	padding: 4px;
-	background-color: #b7dfb8;
-	border-radius: 5px;
-}
 #createTask #taskDescription, #createmeet #meetDescription, #createNotice #noticeDescription
 {
 	width: 400px;
 	height: 100px;
 }
-#createTask button:hover, #createmeet button:hover, #createNotice button:hover, .edit button:hover, #nextStage:hover
+#createTask button:hover, #createmeet button:hover, #createNotice button:hover, .edit button:hover
 {
-	background-color: #3d8b40;
+	background-color: rgb(144, 0, 247);
+	color: white;
 }
 .id
 {
@@ -465,7 +468,7 @@ body
 	font-family: sans-serif;
 	display: inline;
 }
-#overviewbox ul, #progressbox ul
+#overviewbox ul
 {
 	max-height: 1000px;
 	padding: 5px;
@@ -475,21 +478,17 @@ body
 	max-height: 1000px;
 	padding: 5px;
 }
-#createfolder
-{
-	padding = 5px;
-}
 #backlogsbox ul li
 {
 	margin-top: 2px;
 }
-#overviewbox ul li, #progressbox ul li, #backlogsbox > h4, #backlogsbox > p, #backlogsbox ul li > p
+#overviewbox ul li, #backlogsbox > h4, #backlogsbox > p, #backlogsbox ul li > p
 {
 	border-radius: 10px;
-	background-color: #b7dfb8;
+	background-color: rgb(192, 114, 247);
 	padding:5px;
-	margin-bottom: 2px;
-	color: black;
+	margin-top: 5px;
+	box-shadow: 0px 0px 5px blue;
 }
 #contributorsbox ul
 {
@@ -500,7 +499,7 @@ body
 	padding: 5px;
 	margin-top: 5px;
 	border-radius: 10px;
-	background-color: #3d8b40;
+	background-color: rgb(232, 130, 255);
 	font-size: 20px;
 }
 #contributorsbox ul li button
@@ -524,100 +523,4 @@ body
 	cursor: pointer;
 	box-shadow: 0px 0px 5px blue;
 	color: white;
-}
-#pretasks li
-{
-	padding: 10px;
-}
-#chart
-{
-	width: 800px;
-	margin:auto;
-	padding: 10px;
-	height: 400px;
-	box-shadow: 0px 0px 5px blue;
-}
-#tasks
-{
-	height: 600px;
-}
-#pretasks li div h5
-{
-	border-radius: 10px;
-	background-color: lightgreen;
-	text-align: center;
-	padding: 5px;
-	font-size: 20px;
-}
-#pretasks button
-{
-	min-width: 70px;
-}
-#pretasks textarea
-{
-	min-width: 400px;
-	min-height: 100px;
-}
-#pretasks li div h6
-{
-	border-radius: 10px;
-	background-color: lightpink;
-	padding: 5px;
-	max-height: 200px;
-}
-.tooltiptext {
-	visibility: hidden;
-	width: 120px;
-	background-color: grey;
-	color: #fff;
-	text-align: center;
-	border-radius: 6px;
-	padding: 5px 0;
-	position: absolute;
-	z-index: 1;
-	bottom: 100%;
-	left: 50%;
-	margin-left: -60px;
-}
-
-.circle:hover .tooltiptext {
-	visibility: visible;
-}
-.circle > div:hover{
-	outline-width: 10px;
-}
-.stages
-{
-	width: 200px;
-	height: 100px;
-	position: absolute;
-	box-shadow: 0px 0px 5px blue;
-	padding: 5px;
-	text-align: center;
-	font-size: 20px;
-}
-.stages span
-{
-	font-size: 25px;
-	font-weight: bold;
-}
-#identify
-{
-	margin-left: 590px;
-	background-color: lightgreen;
-}
-#construct
-{
-	margin-top: 290px;
-	background-color: pink;
-}
-#design
-{
-	margin-left: 590px;
-	margin-top: 290px;
-	background-color: orange;
-}
-#evaluate
-{
-	background-color: yellow;
 }

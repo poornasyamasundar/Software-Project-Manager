@@ -79,9 +79,9 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'database',
         'USER': 'admin',
-        'PASSWORD': 'i6VAnPVV',
-        'HOST': 'mysql-57775-0.cloudclusters.net',
-        'PORT': '15533',
+        'PASSWORD': '2C0bk9D5',
+        'HOST': 'mysql-59516-0.cloudclusters.net',
+        'PORT': '19863',
     }
 }
 

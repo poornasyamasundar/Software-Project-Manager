@@ -18,6 +18,12 @@
 				<button id = 'no'>No</button>
 			</div>
 		</div>
+		<div id = 'wait'>
+			<div>
+				<h1>Please Wait</h1>
+				<div id = 'loader'></div>
+			</div>
+		</div>
 		<div id = 'homeMenu'>
 			<div id = 'logo'>
 				<img id = 'logopng' src = "{% static 'logo.png' %}" align= 'left'></img>
@@ -51,7 +57,7 @@
 				<button id = 'Contributors'>
 					Contributors 
 				</button>
-				<button id = 'notices'>
+				<button >
 					Notices
 				</button>
 				<button id = 'meetings'>
@@ -80,14 +86,66 @@
 					</ul>
 				</div>
 				<div id = 'spiralbox'>
+					<div class = 'title toggle'>Spiral Diagram</div>
+					<br>
 					<div id = 'chart'>
 					</div>
+					<form id = 'createTask' style = 'display:block' class = 'createfolder'>
+						<h4>Create New Spiral</h4>
+						<label for = 'taskname'>Feature for this Circle</label>
+						<input id = 'detail' type = 'text' >
+						<button type='submit'>Create</button>
+					</form>
 					<div id = 'tasks'>
+						<div class = 'title'>Task for this circle </div>
+						<br>
+						<div class = 'title'>Current Stage: <button id = 'nextStage'>Proceed to next Stage</button></div>
+						<div>
+							<ul id = 'pretasks'>
+						</div>
 
 					</div>
 				</div>
-				<div id = 'progressbox'>
-					Progress analysis is part of release 2
+				<div id = 'progressbox' class="container mt-5">
+					<div class="row">
+						<div class="col"><!-- for scrum -->
+							<ul id = 'spiralProgress' >
+								<h4 class = 'title' >Progress</h4>
+								<li>
+									<p class = 'id'>Amount of Time spent on current Stage : </p>
+									<p class = 'value'></p>
+								</li>
+								<li>
+									<p class = 'id'>Amount of Time spent on current Cycle: </p>
+									<p class = 'value'></p>
+								</li>
+								<li>
+									<p class = 'id'>Average Time spent on each Stage: </p>
+									<p class = 'value'></p>
+								</li>
+								<li>
+									<p class = 'id'>Average Time spent on each Spiral: </p>
+									<p class = 'value'></p>
+								</li>
+								<li>
+									<p class = 'id'>Average Time spent on Stage-1 (Identify): </p>
+									<p class = 'value'></p>
+								</li>
+								<li>
+									<p class = 'id'>Average Time spent on Stage-2 (Design): </p>
+									<p class = 'value'></p>
+								</li>
+								<li>
+									<p class = 'id'>Average Time spent on Stage-3 (Construct): </p>
+									<p class = 'value'></p>
+								</li>
+								<li>
+									<p class = 'id'>Average Time spent on Stage-4 (Evaluate): </p>
+									<p class = 'value'></p>
+								</li>
+							</ul>
+						</div>
+					</div>	
 				</div>
 				<div id = 'contributorsbox'>
 					<h4 class = 'title'>List of Contributors</h4>

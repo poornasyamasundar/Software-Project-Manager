@@ -1,3 +1,12 @@
+function startWait()
+{
+	document.querySelector('#wait').style.display = 'block';
+}
+
+function stopWait()
+{
+	document.querySelector('#wait').style.display = 'none';
+}
 function verifyGithubUsername( username, callback )
 {
 	$.ajax(
@@ -11,6 +20,7 @@ function verifyGithubUsername( username, callback )
 			},
 			error: function()
 			{
+				stopWait();
 				alert('Incorrect Github Username');
 				window.location = '';
 			}
@@ -21,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function()
 	{
 		document.querySelector('#gobackbutton').onclick = () =>
 		{
-			window.history.back()
+			window.location = '/login';
 		}
 
 		const form = document.querySelector("#register");
@@ -70,6 +80,7 @@ document.addEventListener('DOMContentLoaded', function()
 			}
 			else
 			{
+				startWait();
 				verifyGithubUsername(git, function()
 					{
 						if(password == retypepassword)
@@ -87,10 +98,12 @@ document.addEventListener('DOMContentLoaded', function()
 									},
 									success: function(data){
 										if(data === 'S'){
+											stopWait();
 											alert('Successfully registered');
 											window.location = "http://127.0.0.1:8000/";
 										}
 										else{
+											stopWait();
 											alert("Error: couldn't register");
 											window.location = '';
 										}
@@ -99,6 +112,7 @@ document.addEventListener('DOMContentLoaded', function()
 							)
 						}
 						else{
+							stopWait();
 							alert("Password do not match! Please try again");
 							window.location = '';
 						}
