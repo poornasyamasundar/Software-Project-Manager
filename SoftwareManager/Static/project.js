@@ -1,4 +1,7 @@
 
+
+//this function is helper function for 
+//which sets values for progress bar
 function setProgressValues(array)
 {
 	var lis = document.querySelector("#scrumProgress").querySelectorAll('li');
@@ -13,7 +16,8 @@ function setProgressValues(array)
 	var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
 	var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
 	var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
+	
+	//different querys
 	lis[4].querySelector('.value').innerHTML = days + "d " + hours + "h "+ minutes + "m " + seconds + "s ";
 
 
@@ -21,6 +25,7 @@ function setProgressValues(array)
 	lis[0].querySelector('progress').value = array.sprint_timeLeft;
 	lis[0].querySelector('progress').max = '2592000000';
 	lis[0].querySelector('.id').innerHTML = 'Amount of Time spent on current Sprint : ' + Math.round(100*(array.sprint_timeLeft/2592000000)) + '%';
+	//sanity check for seeing if it is empty or not
 	if( array.sprint_avgCards != NaN )
 	{
 		lis[1].querySelector('.value').innerHTML = array.sprint_avgCards + '  tasks completed vs Tasks Planned';
@@ -29,6 +34,7 @@ function setProgressValues(array)
 	{
 		lis[1].querySelector('.value').innerHTML = ' 0 tasks completed vs Tasks Planned';
 	}
+	//seting values in standard measures
 	var distance = array.sprint_time_gap;
 	var days = Math.floor(distance / (1000 * 60 * 60 * 24));
 	var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -38,23 +44,29 @@ function setProgressValues(array)
 	lis[2].querySelector('.value').innerHTML = days + "d " + hours + "h "+ minutes + "m " + seconds + "s ";
 }
 
+//function for wait page starting
 function startWait()
 {
 	document.querySelector('#wait').style.display = 'block';
 }
 
+//function for wait page ending
 function stopWait()
 {
 	document.querySelector('#wait').style.display = 'none';
 }
 
+//for changing the timeline in agile project
 function updated_timeline(object, type )
 {
 	object = JSON.parse(object);
+	//checking if we enterd the said function
 	console.log('updated timeline is clicked')
+	//seeing the values that we got
 	console.log(object);
 	if( type == 'scrumlist' )
 	{
+		//working for scrums
 		document.querySelector(".containers").querySelector('.title').innerHTML = 'Scrums under '+object.name + "<button id = 'goStart'>Go to Start</button>";
 		document.querySelector("#goStart").onclick = function(event)
 		{
@@ -68,6 +80,7 @@ function updated_timeline(object, type )
 	}
 	else if( type == 'tasks' )
 	{
+		//workings for tasks
 		document.querySelector(".containers").querySelector(".title").innerHTML = 'Tasks done under '+ "<button id = 'goStart' >Go to Start</button>";
 		document.querySelector("#goStart").onclick = function(event)
 		{
@@ -82,7 +95,7 @@ function updated_timeline(object, type )
 //we need to get objectarray
 function get_timeline(Objectarray, type )// clear,onclick
 {
-	if( type == 'sprintlist' )
+	if( type == 'sprintlist' )//different sprints 
 	{
 		document.querySelector(".containers").querySelector('.title').innerHTML = 'Time Line of All Sprints'+ "<button id = 'goStart'>Go to Start</button>";
 	}
@@ -94,10 +107,11 @@ function get_timeline(Objectarray, type )// clear,onclick
 		}
 	document.getElementsByClassName("myList")[0].innerHTML='';
 	var i = 0;
-	for(i=0;i<Objectarray.length;i++)//for(object in Objectarray)//object link
+	for(i=0;i<Objectarray.length;i++)//object link
 	{
 		var object=Objectarray[i];
 		var node = document.createElement("LI");                 // Create a <li> node
+		//setting for ith element in timeline
 		node.setAttribute('data-object',JSON.stringify(Objectarray[i]));
 		var div	 = document.createElement("div");
 		div.classList.add("timeline-content");
