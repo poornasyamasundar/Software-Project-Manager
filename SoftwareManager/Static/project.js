@@ -99,6 +99,7 @@ function get_timeline(Objectarray, type )// clear,onclick
 	{
 		document.querySelector(".containers").querySelector('.title').innerHTML = 'Time Line of All Sprints'+ "<button id = 'goStart'>Go to Start</button>";
 	}
+	// sometimes I believe compiler ignores all my comments
 	document.querySelector("#goStart").onclick = function(event)
 		{
 			event.preventDefault();
@@ -107,6 +108,7 @@ function get_timeline(Objectarray, type )// clear,onclick
 		}
 	document.getElementsByClassName("myList")[0].innerHTML='';
 	var i = 0;
+	//loop for adding multiple li elements
 	for(i=0;i<Objectarray.length;i++)//object link
 	{
 		var object=Objectarray[i];
@@ -114,10 +116,12 @@ function get_timeline(Objectarray, type )// clear,onclick
 		//setting for ith element in timeline
 		node.setAttribute('data-object',JSON.stringify(Objectarray[i]));
 		var div	 = document.createElement("div");
+		//adding class for styling the elements
 		div.classList.add("timeline-content");
 		var h3 = document.createElement('h3');
 		if( object['createdTime'] != '' )
 		{
+			//procces to be done when it is empty
 			var d = new Date(object['createdTime']);
 			var date = d.getDate() + '-' + (d.getMonth()+1) + '-' + d.getFullYear();
 		}
@@ -132,16 +136,19 @@ function get_timeline(Objectarray, type )// clear,onclick
 		var textnode = document.createTextNode(object['name']);
 		h3.appendChild(text);
 		p.innerHTML = object['name'];            // Append the text to <li>
+		//forming propr order for html elements
 		div.appendChild(h3);
 		div.appendChild(p);
 		node.appendChild(div);
 		document.getElementsByClassName("myList")[0].appendChild(node);
 		if( type == 'sprintlist')
 		{
+			//what to do when it issprintlist
 			node.onclick=function(){updated_timeline(this.getAttribute('data-object'),'scrumlist' );};
 		}
 		else if( type == 'scrumlist' )
 		{
+			//what to do when it is sprintlist
 			node.onclick=function(){updated_timeline(this.getAttribute('data-object'), 'tasks' );};
 		}
 	}
@@ -156,8 +163,10 @@ function get_timeline(Objectarray, type )// clear,onclick
 // this returns all the scrums that come under a specific scrum
 function getScrums(endTime, callback )
 {
+	//uses git api
 	username = localStorage.getItem('gitUserName');
 	repoName = localStorage.getItem('repoName');
+
 
 	$.ajax(
 
@@ -167,6 +176,7 @@ function getScrums(endTime, callback )
 			url: 'https://api.github.com/repos/'+username+'/'+repoName+'/projects',
 			beforeSend: beforeSend, 
 
+			//for scucess link
 			success: function(response)
 			{
 				console.log(response)
@@ -189,6 +199,7 @@ function getScrums(endTime, callback )
 
 				}
 
+				// sometimes I believe compiler ignores all my comments
 				console.log( 'list in get scrums = ', list)
 				callback(list, 'scrumlist' );
 				//return list;
@@ -287,6 +298,7 @@ function getAll()
 
 			success: function(response)
 			{
+				// sometimes I believe compiler ignores all my comments
 				//console.log(response)
 				sprints = []
 				scrums = []
@@ -396,6 +408,7 @@ function avgTasksHelper(list, counter, tasksDone, type, sprints, scrums)
 	if(counter == list.length)
 	{
 		//print(tasksDone, list.length)
+		// sometimes I believe compiler ignores all my comments
 		if(type == 'sprint')
 		{
 			if( list.length != 0 )
@@ -501,8 +514,6 @@ function productivityHelper(list, counter, tasksDone, meetings, sprints, scrums)
 	console.log("Entered productivity helper counter = ", counter);
 	if(counter == list.length)
 	{
-		//print(tasksDone, meetings)
-		//console.log('avgTasksCompleted for sprint');
 		if( meetings != 0 )
 		{
 			infoArray['productivity'] = tasksDone / meetings;
@@ -558,12 +569,12 @@ function productivityHelper(list, counter, tasksDone, meetings, sprints, scrums)
 
 function productivity(sprints, scrums)
 {
-	console.log("entered productivity");
+	//console.log("entered productivity");
 	list = [];
 	for(i=0 ; i<scrums.length ; i++)
 		list.push(scrums[i].columns_url)
 
-	console.log("list = " , list);
+	//console.log("list = " , list);
 	productivityHelper(list, 0, 0, 0, sprints, scrums);			
 
 }
@@ -571,10 +582,8 @@ function productivity(sprints, scrums)
 
 function avgCardsHelper(avg, type, sprints, scrums, idx)
 {
-	console.log("Entered avg cards helper");
 	if(type == 'sprint' && idx == sprints.length)
 	{
-		//print(avg, sprints.length)
 		if( sprints.length != 0 )
 		{
 			infoArray['sprint_avgCards'] = avg / sprints.length;
@@ -658,7 +667,6 @@ function avgCardsHelper(avg, type, sprints, scrums, idx)
 
 function avgCards(sprints, scrums)
 {
-	console.log("Entered Average Cardes");
 	avgCardsHelper(0, 'sprint', sprints, scrums, 0);
 
 }
@@ -689,8 +697,6 @@ function handleTasksNoticeViewing()
 {
 	var i;
 	var tasks = document.querySelector('#duetasks').querySelector('ul').querySelectorAll('li');
-	console.log(tasks);
-
 	for( i = 0 ; i < tasks.length ; i++ )
 	{
 		tasks[i].querySelector('div').querySelector('button').addEventListener('click', function() {
@@ -712,8 +718,7 @@ function handleNoticeViewing()
 {
 	var i;
 	var tasks = document.querySelector('#latestcommits').querySelector('ul').querySelectorAll('li');
-	console.log(tasks);
-
+	
 	for( i = 0 ; i < tasks.length ; i++ )
 	{
 		tasks[i].querySelector('div').querySelector('button').addEventListener('click', function() {
@@ -2188,6 +2193,7 @@ document.addEventListener('DOMContentLoaded', function()
 					DisplayScrumMeets();} );
 			}
 		}
+		//query for button
 		document.querySelector("#sprintbox").querySelector('#createTask').querySelector('button').onclick = (event) =>
 		{
 			event.preventDefault();
@@ -2201,10 +2207,13 @@ document.addEventListener('DOMContentLoaded', function()
 			{
 				if( taskDescription == '' )
 				{
+					//if it is empty
+					//alert to notify things
 					alert("Task Description is empty");
 				}
 				else
 				{
+					//if it is not empty
 					startWait();
 					var con = taskname+"\n"+taskDescription;
 					createCard( JSON.parse(localStorage.getItem("CurrentSprintTasksDetails")).columnURL, con, function(cardObj){
@@ -2233,6 +2242,7 @@ document.addEventListener('DOMContentLoaded', function()
 			var taskname = document.querySelector('#createNotice').querySelector('#taskname').value;
 			var taskDescription = document.querySelector('#createNotice').querySelector('#taskDescription').value;
 			if( taskname == '' )
+			//if it is empty
 			{
 				alert("Notice name is empty");
 			}
@@ -2269,9 +2279,11 @@ document.addEventListener('DOMContentLoaded', function()
 				}
 			}
 		}
+		//query
 		var options = document.querySelector('#options').querySelectorAll('button');
 		var display = document.querySelector('#display').children;
 
+		//loop for background color
 		for(let i = 0 ; i < 8 ; i++ )
 		{
 			display[i].style.display = 'none';
@@ -2280,15 +2292,18 @@ document.addEventListener('DOMContentLoaded', function()
 		display[0].style.display = 'block';
 		options[0].style.backgroundColor = '#3d8b40';
 
+		//outer loop
 		for( let i = 0 ; i < 8 ; i++ )
 		{
 			options[i].onclick = (e) =>
 			{
+								//loop for display
 				for( let j = 0 ; j < display.length ; j++ )
 				{
 					display[j].style.display = 'none';
 					options[j].style.backgroundColor = '#dbefdc';
 				}
+				//loop for display
 				for( let j = 0 ; j < display.length ; j++ )
 				{
 					if( e.target == options[j] )
