@@ -4,6 +4,9 @@ function beforeSend(xhr)
 	xhr.setRequestHeader("Authorization", "token "+'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');
 }
 
+
+// this is a helper function to hte below function
+
 function spiralColumnsHelper(spiralCards, columns, idx)
 	{
 		if(idx == columns.length)
@@ -38,6 +41,8 @@ function spiralColumnsHelper(spiralCards, columns, idx)
 		}
 	}
 
+	//gets the list of all the details for a particular spiral project
+
 	function getSpiralColumns(url)
 	{
 		$.ajax(
@@ -61,6 +66,9 @@ function spiralColumnsHelper(spiralCards, columns, idx)
 
 		)
 	}
+
+	// this function gets all the details of all the spiral projects
+	// this function calls the above function once for every spiral project
 
 	function spiral(number)
 	{

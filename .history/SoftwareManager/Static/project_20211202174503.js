@@ -1,9 +1,5 @@
 
-
-
-//this function is helper function for 
-//which sets values for progress bar
-
+// to set progress values
 function setProgressValues(array)
 {
 	var lis = document.querySelector("#scrumProgress").querySelectorAll('li');
@@ -18,8 +14,7 @@ function setProgressValues(array)
 	var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
 	var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
 	var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-	
-	//different querys
+
 	lis[4].querySelector('.value').innerHTML = days + "d " + hours + "h "+ minutes + "m " + seconds + "s ";
 
 
@@ -27,7 +22,6 @@ function setProgressValues(array)
 	lis[0].querySelector('progress').value = array.sprint_timeLeft;
 	lis[0].querySelector('progress').max = '2592000000';
 	lis[0].querySelector('.id').innerHTML = 'Amount of Time spent on current Sprint : ' + Math.round(100*(array.sprint_timeLeft/2592000000)) + '%';
-	//sanity check for seeing if it is empty or not
 	if( array.sprint_avgCards != NaN )
 	{
 		lis[1].querySelector('.value').innerHTML = array.sprint_avgCards + '  tasks completed vs Tasks Planned';
@@ -36,7 +30,6 @@ function setProgressValues(array)
 	{
 		lis[1].querySelector('.value').innerHTML = ' 0 tasks completed vs Tasks Planned';
 	}
-	//seting values in standard measures
 	var distance = array.sprint_time_gap;
 	var days = Math.floor(distance / (1000 * 60 * 60 * 24));
 	var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -46,31 +39,23 @@ function setProgressValues(array)
 	lis[2].querySelector('.value').innerHTML = days + "d " + hours + "h "+ minutes + "m " + seconds + "s ";
 }
 
-//function for wait page starting
 function startWait()
 {
 	document.querySelector('#wait').style.display = 'block';
 }
 
-//function for wait page ending
 function stopWait()
 {
 	document.querySelector('#wait').style.display = 'none';
 }
 
-
-//for changing the timeline in agile project
-
 function updated_timeline(object, type )
 {
 	object = JSON.parse(object);
-	//checking if we enterd the said function
 	console.log('updated timeline is clicked')
-	//seeing the values that we got
 	console.log(object);
 	if( type == 'scrumlist' )
 	{
-		//working for scrums
 		document.querySelector(".containers").querySelector('.title').innerHTML = 'Scrums under '+object.name + "<button id = 'goStart'>Go to Start</button>";
 		document.querySelector("#goStart").onclick = function(event)
 		{
@@ -84,7 +69,6 @@ function updated_timeline(object, type )
 	}
 	else if( type == 'tasks' )
 	{
-		//workings for tasks
 		document.querySelector(".containers").querySelector(".title").innerHTML = 'Tasks done under '+ "<button id = 'goStart' >Go to Start</button>";
 		document.querySelector("#goStart").onclick = function(event)
 		{
@@ -99,11 +83,10 @@ function updated_timeline(object, type )
 //we need to get objectarray
 function get_timeline(Objectarray, type )// clear,onclick
 {
-	if( type == 'sprintlist' )//different sprints 
+	if( type == 'sprintlist' )
 	{
 		document.querySelector(".containers").querySelector('.title').innerHTML = 'Time Line of All Sprints'+ "<button id = 'goStart'>Go to Start</button>";
 	}
-	// sometimes I believe compiler ignores all my comments
 	document.querySelector("#goStart").onclick = function(event)
 		{
 			event.preventDefault();
@@ -112,20 +95,16 @@ function get_timeline(Objectarray, type )// clear,onclick
 		}
 	document.getElementsByClassName("myList")[0].innerHTML='';
 	var i = 0;
-	//loop for adding multiple li elements
-	for(i=0;i<Objectarray.length;i++)//object link
+	for(i=0;i<Objectarray.length;i++)//for(object in Objectarray)//object link
 	{
 		var object=Objectarray[i];
 		var node = document.createElement("LI");                 // Create a <li> node
-		//setting for ith element in timeline
 		node.setAttribute('data-object',JSON.stringify(Objectarray[i]));
 		var div	 = document.createElement("div");
-		//adding class for styling the elements
 		div.classList.add("timeline-content");
 		var h3 = document.createElement('h3');
 		if( object['createdTime'] != '' )
 		{
-			//procces to be done when it is empty
 			var d = new Date(object['createdTime']);
 			var date = d.getDate() + '-' + (d.getMonth()+1) + '-' + d.getFullYear();
 		}
@@ -140,19 +119,16 @@ function get_timeline(Objectarray, type )// clear,onclick
 		var textnode = document.createTextNode(object['name']);
 		h3.appendChild(text);
 		p.innerHTML = object['name'];            // Append the text to <li>
-		//forming propr order for html elements
 		div.appendChild(h3);
 		div.appendChild(p);
 		node.appendChild(div);
 		document.getElementsByClassName("myList")[0].appendChild(node);
 		if( type == 'sprintlist')
 		{
-			//what to do when it issprintlist
 			node.onclick=function(){updated_timeline(this.getAttribute('data-object'),'scrumlist' );};
 		}
 		else if( type == 'scrumlist' )
 		{
-			//what to do when it is sprintlist
 			node.onclick=function(){updated_timeline(this.getAttribute('data-object'), 'tasks' );};
 		}
 	}
@@ -167,10 +143,8 @@ function get_timeline(Objectarray, type )// clear,onclick
 // this returns all the scrums that come under a specific scrum
 function getScrums(endTime, callback )
 {
-	//uses git api
 	username = localStorage.getItem('gitUserName');
 	repoName = localStorage.getItem('repoName');
-
 
 	$.ajax(
 
@@ -180,7 +154,6 @@ function getScrums(endTime, callback )
 			url: 'https://api.github.com/repos/'+username+'/'+repoName+'/projects',
 			beforeSend: beforeSend, 
 
-			//for scucess link
 			success: function(response)
 			{
 				console.log(response)
@@ -203,7 +176,6 @@ function getScrums(endTime, callback )
 
 				}
 
-				// sometimes I believe compiler ignores all my comments
 				console.log( 'list in get scrums = ', list)
 				callback(list, 'scrumlist' );
 				//return list;
@@ -302,7 +274,6 @@ function getAll()
 
 			success: function(response)
 			{
-				// sometimes I believe compiler ignores all my comments
 				//console.log(response)
 				sprints = []
 				scrums = []
@@ -356,7 +327,6 @@ function getAll()
 
 infoArray = []
 
-// time left in the current sprints and scrums
 function timeLeft(sprints, scrums)
 {
 	var time = 0;
@@ -413,7 +383,6 @@ function avgTasksHelper(list, counter, tasksDone, type, sprints, scrums)
 	if(counter == list.length)
 	{
 		//print(tasksDone, list.length)
-		// sometimes I believe compiler ignores all my comments
 		if(type == 'sprint')
 		{
 			if( list.length != 0 )
@@ -519,6 +488,8 @@ function productivityHelper(list, counter, tasksDone, meetings, sprints, scrums)
 	console.log("Entered productivity helper counter = ", counter);
 	if(counter == list.length)
 	{
+		//print(tasksDone, meetings)
+		//console.log('avgTasksCompleted for sprint');
 		if( meetings != 0 )
 		{
 			infoArray['productivity'] = tasksDone / meetings;
@@ -574,12 +545,12 @@ function productivityHelper(list, counter, tasksDone, meetings, sprints, scrums)
 
 function productivity(sprints, scrums)
 {
-	//console.log("entered productivity");
+	console.log("entered productivity");
 	list = [];
 	for(i=0 ; i<scrums.length ; i++)
 		list.push(scrums[i].columns_url)
 
-	//console.log("list = " , list);
+	console.log("list = " , list);
 	productivityHelper(list, 0, 0, 0, sprints, scrums);			
 
 }
@@ -587,8 +558,10 @@ function productivity(sprints, scrums)
 
 function avgCardsHelper(avg, type, sprints, scrums, idx)
 {
+	console.log("Entered avg cards helper");
 	if(type == 'sprint' && idx == sprints.length)
 	{
+		//print(avg, sprints.length)
 		if( sprints.length != 0 )
 		{
 			infoArray['sprint_avgCards'] = avg / sprints.length;
@@ -672,6 +645,7 @@ function avgCardsHelper(avg, type, sprints, scrums, idx)
 
 function avgCards(sprints, scrums)
 {
+	console.log("Entered Average Cardes");
 	avgCardsHelper(0, 'sprint', sprints, scrums, 0);
 
 }
@@ -702,6 +676,8 @@ function handleTasksNoticeViewing()
 {
 	var i;
 	var tasks = document.querySelector('#duetasks').querySelector('ul').querySelectorAll('li');
+	console.log(tasks);
+
 	for( i = 0 ; i < tasks.length ; i++ )
 	{
 		tasks[i].querySelector('div').querySelector('button').addEventListener('click', function() {
@@ -723,7 +699,8 @@ function handleNoticeViewing()
 {
 	var i;
 	var tasks = document.querySelector('#latestcommits').querySelector('ul').querySelectorAll('li');
-	
+	console.log(tasks);
+
 	for( i = 0 ; i < tasks.length ; i++ )
 	{
 		tasks[i].querySelector('div').querySelector('button').addEventListener('click', function() {
@@ -2198,7 +2175,6 @@ document.addEventListener('DOMContentLoaded', function()
 					DisplayScrumMeets();} );
 			}
 		}
-		//query for button
 		document.querySelector("#sprintbox").querySelector('#createTask').querySelector('button').onclick = (event) =>
 		{
 			event.preventDefault();
@@ -2212,13 +2188,10 @@ document.addEventListener('DOMContentLoaded', function()
 			{
 				if( taskDescription == '' )
 				{
-					//if it is empty
-					//alert to notify things
 					alert("Task Description is empty");
 				}
 				else
 				{
-					//if it is not empty
 					startWait();
 					var con = taskname+"\n"+taskDescription;
 					createCard( JSON.parse(localStorage.getItem("CurrentSprintTasksDetails")).columnURL, con, function(cardObj){
@@ -2247,7 +2220,6 @@ document.addEventListener('DOMContentLoaded', function()
 			var taskname = document.querySelector('#createNotice').querySelector('#taskname').value;
 			var taskDescription = document.querySelector('#createNotice').querySelector('#taskDescription').value;
 			if( taskname == '' )
-			//if it is empty
 			{
 				alert("Notice name is empty");
 			}
@@ -2284,11 +2256,9 @@ document.addEventListener('DOMContentLoaded', function()
 				}
 			}
 		}
-		//query
 		var options = document.querySelector('#options').querySelectorAll('button');
 		var display = document.querySelector('#display').children;
 
-		//loop for background color
 		for(let i = 0 ; i < 8 ; i++ )
 		{
 			display[i].style.display = 'none';
@@ -2297,18 +2267,15 @@ document.addEventListener('DOMContentLoaded', function()
 		display[0].style.display = 'block';
 		options[0].style.backgroundColor = '#3d8b40';
 
-		//outer loop
 		for( let i = 0 ; i < 8 ; i++ )
 		{
 			options[i].onclick = (e) =>
 			{
-								//loop for display
 				for( let j = 0 ; j < display.length ; j++ )
 				{
 					display[j].style.display = 'none';
 					options[j].style.backgroundColor = '#dbefdc';
 				}
-				//loop for display
 				for( let j = 0 ; j < display.length ; j++ )
 				{
 					if( e.target == options[j] )

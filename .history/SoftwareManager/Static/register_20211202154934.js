@@ -7,9 +7,6 @@ function stopWait()
 {
 	document.querySelector('#wait').style.display = 'none';
 }
-
-//to check if the github username is valid or not 
-
 function verifyGithubUsername( username, callback )
 {
 	$.ajax(
@@ -32,7 +29,6 @@ function verifyGithubUsername( username, callback )
 }
 document.addEventListener('DOMContentLoaded', function() 
 	{
-
 		document.querySelector('#gobackbutton').onclick = () =>
 		{
 			window.location = '/login';
@@ -41,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function()
 			window.location = '/Help';
 		}
 
-		const form = document.querySelector("#register"); // collecting data from registration form
+		const form = document.querySelector("#register");
 
 		form.querySelector('#save').onclick = (event) =>
 		{
@@ -53,9 +49,6 @@ document.addEventListener('DOMContentLoaded', function()
 			var token = form.querySelector('#github_token').value;
 			var password = form.querySelector('#password').value;
 			var retypepassword = form.querySelector('#retype-password').value;
-			
-			//alerts if some of the fields are not valid or empty
-
 			if( name == '' )
 			{
 				alert("user name is empty");
@@ -91,7 +84,6 @@ document.addEventListener('DOMContentLoaded', function()
 			else
 			{
 				startWait();
-				// verifying Github username
 				verifyGithubUsername(git, function()
 					{
 						if(password == retypepassword)

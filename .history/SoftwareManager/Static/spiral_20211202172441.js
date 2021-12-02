@@ -1535,7 +1535,6 @@ document.addEventListener('DOMContentLoaded', function()
 		}
 
 		// to create a new meeting
-
 		document.querySelector('#createmeet').querySelector('button').onclick = (event) =>
 		{
 			event.preventDefault();
@@ -1544,7 +1543,6 @@ document.addEventListener('DOMContentLoaded', function()
 			var meetDate = meetDate.substring(0, 4)+meetDate.substring(5, 7)+meetDate.substring(8, 10);
 			var meetTime = document.querySelector('#createmeet').querySelector('#meetingtime').value;
 			var meetDescription = document.querySelector('#createmeet').querySelector('#meetDescription').value;
-			// alert if some of the details are not entered properly
 			if( meetLink == '' )
 			{
 				alert("Meeting link is empty");
@@ -1585,7 +1583,6 @@ document.addEventListener('DOMContentLoaded', function()
 					DisplayScrumMeets();stopWait()} );
 			}
 		}
-
 		var create = document.querySelectorAll('.create');
 		for( let i = 0 ; i < create.length ; i++ )
 		{
@@ -1608,7 +1605,7 @@ document.addEventListener('DOMContentLoaded', function()
 		var options = document.querySelector('#options').querySelectorAll('button');
 		var display = document.querySelector('#display').children;
 
-		for(let i = 0 ; i < 6 ; i++ )	
+		for(let i = 0 ; i < 6 ; i++ )
 		{
 			display[i].style.display = 'none';
 			options[i].style.backgroundColor = '#dbefdc';
@@ -1639,4 +1636,4 @@ document.addEventListener('DOMContentLoaded', function()
 		console.log("Hello");
 	});
 
-	// eof
+	// ......

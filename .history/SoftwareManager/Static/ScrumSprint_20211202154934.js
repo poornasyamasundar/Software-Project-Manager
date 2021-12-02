@@ -1,6 +1,4 @@
 import {getAllProjects, getAllColumns,getAllCards, editCard, deleteCard, createProject, createColumn, createCard} from './gitHubApi.js'; 
-//function to create a new scrum in the current sprint
-
 export function createScrum( name )
 {
 	console.log("Entered createScrum with name = ", name);
@@ -20,7 +18,6 @@ export function createScrum( name )
 	});
 }
 
-//function to create a new sprint in the agile project
 export function createSprint( name )
 {
 	createProject( name, function(projectObj) {
@@ -35,7 +32,6 @@ export function createSprint( name )
 	});
 }
 
-//to edit a task in the scrum
 export function editScrumTask(event)
 {
 	var c = event.target.parentElement.parentElement; 
@@ -43,7 +39,6 @@ export function editScrumTask(event)
 	c.querySelector('form').style.display = 'block';
 }
 
-// to delete a task in the scrum
 export function deleteScrumTask(event)
 {
 	var c = event.target.parentElement.parentElement;
@@ -53,7 +48,6 @@ export function deleteScrumTask(event)
 		});
 }
 
-// saving a scrum task after changes are made or when a new task is created
 export function saveScrumTask(event)
 {
 	var c = event.target.parentElement;
@@ -69,15 +63,12 @@ export function saveScrumTask(event)
 	editCard( c.parentElement.getAttribute('data-cardurl'), c.querySelector('#taskname').value+'\n'+c.querySelector('#taskDescription').value,b, function(obj){DisplayScrumTasks();});
 }
 
-// to cancel a task without saving
 export function cancelScrumTask(event)
 {
 	var c = event.target.parentElement.parentElement; 
 	c.querySelector("div").style.display = 'block'; 
 	c.querySelector('form').style.display = 'none';
 } 
-
-// function which displays all the scrum tasks created by the user
 
 export function DisplayScrumTasks()
 {
@@ -141,8 +132,6 @@ export function DisplayScrumTasks()
 			document.querySelector('#pretasks').innerHTML = str;
 		});
 }
-
-//function to display all the meeting scheduled for the current scrum
 
 export function DisplayScrumMeets()
 {
@@ -212,7 +201,6 @@ export function DisplayScrumMeets()
 			document.querySelector('#premeets').innerHTML = str;
 		});
 }
-// function to display all the meetings in the current sprint
 
 export function DisplaySprintTasks()
 {
@@ -277,15 +265,12 @@ export function DisplaySprintTasks()
 		});
 }
 
-// function to edit the details of a meeting for the current scrum
 export function editScrumMeet(event)
 {
 	var c = event.target.parentElement.parentElement; 
 	c.querySelector("div").style.display = 'none'; 
 	c.querySelector('form').style.display = 'block';
 }
-
-//function to delete a meeting scheduled for the current scrum
 
 export function deleteScrumMeet(event)
 {
@@ -295,8 +280,6 @@ export function deleteScrumMeet(event)
 			deleteCard( c.getAttribute('data-cardurl'), function(obj){ console.log("Deleted Meeting"); DisplayScrumMeets(); } );
 		});
 }
-
-// to save the newly created scrum meet
 
 export function saveScrumMeet(event)
 {
@@ -310,7 +293,6 @@ export function saveScrumMeet(event)
 	editCard( c.parentElement.getAttribute('data-cardurl'), con, false, function(obj){DisplayScrumMeets();});
 }
 
-// to cancel a scrum meet without saving
 export function cancelScrumMeet(event)
 {
 	var c = event.target.parentElement.parentElement; 

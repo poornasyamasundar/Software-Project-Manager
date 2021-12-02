@@ -277,15 +277,12 @@ export function DisplaySprintTasks()
 		});
 }
 
-// function to edit the details of a meeting for the current scrum
 export function editScrumMeet(event)
 {
 	var c = event.target.parentElement.parentElement; 
 	c.querySelector("div").style.display = 'none'; 
 	c.querySelector('form').style.display = 'block';
 }
-
-//function to delete a meeting scheduled for the current scrum
 
 export function deleteScrumMeet(event)
 {
@@ -295,8 +292,6 @@ export function deleteScrumMeet(event)
 			deleteCard( c.getAttribute('data-cardurl'), function(obj){ console.log("Deleted Meeting"); DisplayScrumMeets(); } );
 		});
 }
-
-// to save the newly created scrum meet
 
 export function saveScrumMeet(event)
 {
@@ -310,7 +305,6 @@ export function saveScrumMeet(event)
 	editCard( c.parentElement.getAttribute('data-cardurl'), con, false, function(obj){DisplayScrumMeets();});
 }
 
-// to cancel a scrum meet without saving
 export function cancelScrumMeet(event)
 {
 	var c = event.target.parentElement.parentElement; 

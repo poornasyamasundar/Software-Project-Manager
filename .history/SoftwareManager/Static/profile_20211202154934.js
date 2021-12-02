@@ -6,8 +6,7 @@ function startWait()
 function stopWait()
 {
 	document.querySelector('#wait').style.display = 'none';
-} 
-// function to load profile page
+}
 function loadPage()
 {
 	startWait();
@@ -16,7 +15,6 @@ function loadPage()
 	var git_id = form.querySelector('#githubid');
 	var token = form.querySelector('#token');
 	document.querySelector('#username').innerHTML = localStorage.getItem('Username');
-
 	$.ajax(
 		{
 			type: "POST",
@@ -50,7 +48,6 @@ document.addEventListener('DOMContentLoaded', function()
 			window.location = '/Help';
 		}
 		document.querySelector('#changePassword').style.display = 'none';
-		// to change password of the user
 		document.querySelector('#change').onclick = function(event)
 		{
 			event.preventDefault();
@@ -66,8 +63,6 @@ document.addEventListener('DOMContentLoaded', function()
 
 
 		const form = document.querySelector("#profile");
-
-		// updating details of the profile
 
 		form.querySelector('#update').onclick = (event) =>
 		{
@@ -106,8 +101,6 @@ document.addEventListener('DOMContentLoaded', function()
 				}
 			)
 		}
-
-		// checking the validity and updating password
 		document.querySelector('#updatePassword').onclick = (event)=>
 		{
 			event.preventDefault();

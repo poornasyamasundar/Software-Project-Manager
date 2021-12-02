@@ -12,7 +12,7 @@ function beforeSend(xhr)
 	xhr.setRequestHeader("Authorization", "token "+localStorage.getItem('token'));
 }
 
-// to check whether the repoName exists in the user's github
+// 
 
 function getFolderList( repoName, path, callBack )
 {
@@ -66,8 +66,6 @@ function createProject( name, callback , repoName)
 		})
 }
 
-// this takes the url to the project and creates columns withe the given name under this project
-
 function createColumn( projectURL, name, callback )
 {
 	$.ajax(
@@ -91,9 +89,6 @@ function createColumn( projectURL, name, callback )
 			}
 		})
 }
-
-// creates a new card, given the url to the column and the text that must be added under it
-
 function createCard( columnURL, content, callback )
 {
 	$.ajax(
@@ -106,7 +101,7 @@ function createCard( columnURL, content, callback )
 			}),
 			success: function(response)
 			{
-				//console.log("Created a card");
+				console.log("Created a card");
 				console.log(response)
 				obj = {note: response.note, url: response.url, time: response.updated_at, creator: response.creator['login']};
 				callback(obj);
@@ -125,7 +120,6 @@ document.addEventListener('DOMContentLoaded', function()
 
 		const form = document.querySelector('#new_project');
 
-		// to save the changes
 		form.querySelector('#save').onclick = (event) =>
 		{
 			event.preventDefault();
@@ -140,8 +134,6 @@ document.addEventListener('DOMContentLoaded', function()
 				des: description,
 			};
 			description = JSON.stringify(obj);
-
-			// checks the required fields and then proceeds further
 			if(name == '' )
 			{
 				alert("Name is empty");
@@ -160,15 +152,12 @@ document.addEventListener('DOMContentLoaded', function()
 			}
 			else
 			{
-				// if everything is correct, we create the project under the user's account
-
 				getFolderList( repo_link, '', function() {
 					startWait();
 
 					const d = new Date();
 					var x = d.getDate()+"-"+ (d.getMonth()+1) +"-"+d.getFullYear();
 
-					// adds it to the database 
 					$.ajax(
 						{
 							type: "POST",
