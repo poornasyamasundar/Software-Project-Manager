@@ -1,7 +1,11 @@
+// to get the authentication
 function beforeSend(xhr)
 {
 	xhr.setRequestHeader("Authorization", "token "+localStorage.getItem('token'));
 }
+
+// this gets all hte projects present in the current user's repo
+
 export function getAllProjects( callback )
 {
 	var username = localStorage.getItem('Username');
@@ -30,6 +34,8 @@ export function getAllProjects( callback )
 	)
 }
 
+// given a url to the project, this gets alll the columns present under it.
+
 export function getAllColumns( url, callback )
 {
 	$.ajax(
@@ -51,6 +57,8 @@ export function getAllColumns( url, callback )
 		}
 	)
 }
+
+// given the url to the column, this gets all the cards present in the given column
 
 export function getAllCards( url , callback )
 {
@@ -78,6 +86,9 @@ export function getAllCards( url , callback )
 	)
 }
 
+// given the url to a card, this fucntion edits the content of it
+// it also archives the card.
+
 export function editCard( url , note, archived, callback )
 {
 	console.log("entered editcard");
@@ -94,12 +105,16 @@ export function editCard( url , note, archived, callback )
 			success: function(response)
 			{
 				console.log("Edited");
-				console.log(response);
+				//console.log(response);
 				callback(response);
 			}
 		}
 		)
 }
+
+// deletes a card if it is present in the github projects
+// url to that card is passed to it and the callback func that must be invoked after successfully
+// deleting a card is also given.
 
 export function deleteCard( url, callback )
 {
@@ -114,6 +129,8 @@ export function deleteCard( url, callback )
 			}
 		})
 }
+
+// creates a new project in the user's repo
 
 export function createProject( name, callback )
 {
@@ -140,6 +157,9 @@ export function createProject( name, callback )
 		})
 }
 
+// creates columns after creating a new project in the git repo
+// the project url is passed to it and the name of the new column is also passsed to the func.
+
 export function createColumn( projectURL, name, callback )
 {
 	$.ajax(
@@ -159,6 +179,9 @@ export function createColumn( projectURL, name, callback )
 			}
 		})
 }
+
+// creates a new card given the url to that column and the content that must be written is also
+// passed to it.
 
 export function createCard( columnURL, content, callback )
 {
