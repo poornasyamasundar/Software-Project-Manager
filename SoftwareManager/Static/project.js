@@ -1989,7 +1989,7 @@ document.addEventListener('DOMContentLoaded', function()
 		
 		handleContributors();
 		document.querySelector("#gobackbutton").onclick = function(){
-			window.location = "http://127.0.0.1:8000/";
+			window.location = "/";
 		}
 		document.querySelector('#helpbutton').onclick = function(){
 			window.location = '/Help';
@@ -2021,7 +2021,7 @@ document.addEventListener('DOMContentLoaded', function()
 
 				var now = new Date().getTime();
 
-				var distance = parseInt(localStorage.getItem('scrumstart')) - now;
+				var distance = parseInt(localStorage.getItem('scrumstart')) + 172800000 - now;
 
 				var days = Math.floor(distance / (1000 * 60 * 60 * 24));
 				var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
