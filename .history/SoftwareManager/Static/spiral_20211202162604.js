@@ -606,8 +606,7 @@ function cancelScrumMeet(event)
 	c.querySelector('form').style.display = 'none';
 }
 
-// deals with the multiple contributors of the same project
-// lets us add this project to the projects list of other users.
+// deals with the contributors
 
 function handleContributors()
 {
@@ -710,11 +709,8 @@ function handleContributors()
 			)
 		}
 	}
+
 }
-
-
-// displays notices by getting all the required information from the saved cards and converts them into the string format
-
 function DisplayNotices()
 {
 	getAllCards( JSON.parse(localStorage.getItem("NoticeDetails")).cardsURL, function(list)
@@ -914,8 +910,6 @@ function DisplayCommits()
 	});
 }
 
-// displays the chart by usign the ajax get 
-
 function DisplayChart1( level, sk )
 {
 	username = localStorage.getItem('gitUserName');
@@ -951,9 +945,6 @@ function DisplayChart1( level, sk )
 
 	)
 }
-
-// the above function gets the info
-// this converts the info into a specific format and adds it to the html
 
 function DisplayChart( level, sk)
 {
@@ -1044,9 +1035,6 @@ function DisplayChart( level, sk)
 		}
 	}
 }
-
-// helper function to the below function
-
 function spiralColumnsHelper(spiralCards, columns, idx, callback)
 {
 	if(idx == columns.length)
@@ -1082,8 +1070,6 @@ function spiralColumnsHelper(spiralCards, columns, idx, callback)
 		)
 	}
 }
-
-// helper function to the below function
 
 function getSpiralColumns(url, callback)
 {
@@ -1228,8 +1214,6 @@ function setValues()
 	)
 }
 
-// to create a new Spiral Project 
-
 function createProject( name, notes, callback )
 {
 	username = localStorage.getItem('gitUserName');
@@ -1294,8 +1278,6 @@ function createNewSpiral()
 	}
 }
 
-//function to proceed to next stage in the spiral from the current stage
-
 function nextStage(spir, stage)
 {
 	var csp = parseInt(localStorage.getItem('currentSpiral'));
@@ -1323,8 +1305,6 @@ function nextStage(spir, stage)
 		});
 }
 
-// to load the current stage in the spiral
-
 function loadStage( spir, stage )
 {
 	if( stage > parseInt(localStorage.getItem('currentSpiralStage')) && spir == parseInt(localStorage.getItem('currentSpiral')) )
@@ -1340,7 +1320,6 @@ function loadStage( spir, stage )
 		str = '';
 		str += "<div class= 'title'> Task for this Circle:<br>"+spiralCards[0].cards[0].note+"</div>";
 		str += "<br><div class = 'title'>Current Stage: "+spiralCards[stage].name;
-		// identifying the current stage
 		if( stage == 1 )
 		{
 			str += "  Identify";
@@ -1382,7 +1361,6 @@ function loadStage( spir, stage )
 			str += "<form><textarea>"+spiralCards[stage].cards[0].note+"</textarea><br><button id = 'save' onclick = \"saveSpiral(event)\">Save</button><button id = 'cancel' onclick = \"cancelSpiral(event)\">Cancel</button></form></div></li>";
 		}
 		goal = '';
-		//iterating over all the spiral cards
 		for( var i = 0 ; i < spiralCards[stage].cards[1].length ; i++ )
 		{
 			if( spiralCards[stage].cards[1][i] == '\n' )
@@ -1416,7 +1394,6 @@ function loadStage( spir, stage )
 	});
 }
 
-// to cancel the spiral without saving
 function cancelSpiral(event)
 {
 	event.preventDefault();
@@ -1425,7 +1402,6 @@ function cancelSpiral(event)
 	c.querySelector('form').style.display = 'none';
 }
 
-// to save the spiral created
 function saveSpiral(event)
 {
 	startWait();
@@ -1449,7 +1425,6 @@ function stopWait()
 	document.querySelector('#wait').style.display = 'none';
 }
 
-// to edit the spiral 
 function editSpiral(choice)
 {
 	if( choice == '1' )
@@ -1479,22 +1454,17 @@ document.addEventListener('DOMContentLoaded', function()
 		DisplayNoticeMeets();
 		getAllInformation();
 
-
-		//goback and help buttons
-
 		document.querySelector("#gobackbutton").onclick = function(){
 			window.location = "/";
 		}
 		document.querySelector('#helpbutton').onclick = function(){
 			window.location = '/Help';
 		}
-		// to create a new notice
 		document.querySelector('#createNotice').querySelector('button').onclick = (event) =>
 		{
 			event.preventDefault();
 			var taskname = document.querySelector('#createNotice').querySelector('#taskname').value;
 			var taskDescription = document.querySelector('#createNotice').querySelector('#taskDescription').value;
-			// checking if notice name and description are not empty
 			if( taskname == '' )
 			{
 				alert("Notice name is empty");
@@ -1505,7 +1475,7 @@ document.addEventListener('DOMContentLoaded', function()
 				{
 					alert("Notice Description is empty");
 				}
-				else	//if details are valid, a new notice is created
+				else
 				{
 					var con = taskname+"\n"+taskDescription;
 					startWait();
@@ -1533,9 +1503,6 @@ document.addEventListener('DOMContentLoaded', function()
 				}
 			}
 		}
-
-		// to create a new meeting
-
 		document.querySelector('#createmeet').querySelector('button').onclick = (event) =>
 		{
 			event.preventDefault();
@@ -1544,7 +1511,6 @@ document.addEventListener('DOMContentLoaded', function()
 			var meetDate = meetDate.substring(0, 4)+meetDate.substring(5, 7)+meetDate.substring(8, 10);
 			var meetTime = document.querySelector('#createmeet').querySelector('#meetingtime').value;
 			var meetDescription = document.querySelector('#createmeet').querySelector('#meetDescription').value;
-			// alert if some of the details are not entered properly
 			if( meetLink == '' )
 			{
 				alert("Meeting link is empty");
@@ -1585,7 +1551,6 @@ document.addEventListener('DOMContentLoaded', function()
 					DisplayScrumMeets();stopWait()} );
 			}
 		}
-
 		var create = document.querySelectorAll('.create');
 		for( let i = 0 ; i < create.length ; i++ )
 		{
@@ -1608,7 +1573,7 @@ document.addEventListener('DOMContentLoaded', function()
 		var options = document.querySelector('#options').querySelectorAll('button');
 		var display = document.querySelector('#display').children;
 
-		for(let i = 0 ; i < 6 ; i++ )	
+		for(let i = 0 ; i < 6 ; i++ )
 		{
 			display[i].style.display = 'none';
 			options[i].style.backgroundColor = '#dbefdc';
@@ -1638,5 +1603,3 @@ document.addEventListener('DOMContentLoaded', function()
 		document.querySelector('#projectname').innerHTML = localStorage.getItem('Project');
 		console.log("Hello");
 	});
-
-	// eof

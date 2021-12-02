@@ -125,7 +125,6 @@ document.addEventListener('DOMContentLoaded', function()
 
 		const form = document.querySelector('#new_project');
 
-		// to save the changes
 		form.querySelector('#save').onclick = (event) =>
 		{
 			event.preventDefault();
@@ -140,8 +139,6 @@ document.addEventListener('DOMContentLoaded', function()
 				des: description,
 			};
 			description = JSON.stringify(obj);
-
-			// checks the required fields and then proceeds further
 			if(name == '' )
 			{
 				alert("Name is empty");
@@ -160,15 +157,12 @@ document.addEventListener('DOMContentLoaded', function()
 			}
 			else
 			{
-				// if everything is correct, we create the project under the user's account
-
 				getFolderList( repo_link, '', function() {
 					startWait();
 
 					const d = new Date();
 					var x = d.getDate()+"-"+ (d.getMonth()+1) +"-"+d.getFullYear();
 
-					// adds it to the database 
 					$.ajax(
 						{
 							type: "POST",

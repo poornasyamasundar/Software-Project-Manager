@@ -160,15 +160,12 @@ document.addEventListener('DOMContentLoaded', function()
 			}
 			else
 			{
-				// if everything is correct, we create the project under the user's account
-
 				getFolderList( repo_link, '', function() {
 					startWait();
 
 					const d = new Date();
 					var x = d.getDate()+"-"+ (d.getMonth()+1) +"-"+d.getFullYear();
 
-					// adds it to the database 
 					$.ajax(
 						{
 							type: "POST",

@@ -26,7 +26,7 @@ def index_(request):
     return render(request, 'index.html')
 
 @csrf_exempt
-def to_getTasksPy(request): # to get tasks 
+def to_getTasksPy(request):
     if request.method == 'POST':
         table_name = request.POST['table_name']
         number = request.POST['number']
@@ -35,7 +35,7 @@ def to_getTasksPy(request): # to get tasks
         return HttpResponse(json.dumps(result))
 
 @csrf_exempt
-def to_getBacklogsPy(request): #to get backlogs
+def to_getBacklogsPy(request):
     if request.method == 'POST':
         table_name = request.POST['table_name']
         foldername = request.POST['foldername']

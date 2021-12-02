@@ -49,7 +49,6 @@ function stopWait()
 	document.querySelector('#wait').style.display = 'none';
 }
 
-
 function updated_timeline(object, type )
 {
 	object = JSON.parse(object);
@@ -328,7 +327,6 @@ function getAll()
 
 infoArray = []
 
-// time left in the current sprints and scrums
 function timeLeft(sprints, scrums)
 {
 	var time = 0;

@@ -107,7 +107,7 @@ document.addEventListener('DOMContentLoaded', function()
 			)
 		}
 
-		// checking the validity and updating password
+		// checking the validity and updating password 
 		document.querySelector('#updatePassword').onclick = (event)=>
 		{
 			event.preventDefault();

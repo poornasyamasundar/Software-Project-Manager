@@ -9,7 +9,6 @@ function stopWait()
 }
 document.addEventListener('DOMContentLoaded', function() 
 	{
-		// goback and help button
 		document.querySelector('#gobackbutton').onclick = () =>
 		{
 			window.location = "/";
@@ -23,8 +22,6 @@ document.addEventListener('DOMContentLoaded', function()
 		}
 
 		const form = document.querySelector("#signup");
-
-		// login details validation
 
 		form.querySelector('#save').onclick = (event) =>
 		{
@@ -43,12 +40,12 @@ document.addEventListener('DOMContentLoaded', function()
 						password: password,
 					},
 					success: function(data){
-						// console.log(data);
+						console.log(data);
 						if(data != '')
 						{
 							alert('Sign In Successful');
 							data = JSON.parse(data);
-							// console.log(data);
+							console.log(data);
 							localStorage.setItem('Username', email);
 							localStorage.setItem('gitUserName', data[4]);
 							localStorage.setItem('token', data[1]);

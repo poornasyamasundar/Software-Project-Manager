@@ -53,9 +53,6 @@ document.addEventListener('DOMContentLoaded', function()
 			var token = form.querySelector('#github_token').value;
 			var password = form.querySelector('#password').value;
 			var retypepassword = form.querySelector('#retype-password').value;
-			
-			//alerts if some of the fields are not valid or empty
-
 			if( name == '' )
 			{
 				alert("user name is empty");
@@ -91,7 +88,6 @@ document.addEventListener('DOMContentLoaded', function()
 			else
 			{
 				startWait();
-				// verifying Github username
 				verifyGithubUsername(git, function()
 					{
 						if(password == retypepassword)

@@ -1,5 +1,4 @@
 
-// to set progress values
 function setProgressValues(array)
 {
 	var lis = document.querySelector("#scrumProgress").querySelectorAll('li');
@@ -48,7 +47,6 @@ function stopWait()
 {
 	document.querySelector('#wait').style.display = 'none';
 }
-
 
 function updated_timeline(object, type )
 {
@@ -328,7 +326,6 @@ function getAll()
 
 infoArray = []
 
-// time left in the current sprints and scrums
 function timeLeft(sprints, scrums)
 {
 	var time = 0;

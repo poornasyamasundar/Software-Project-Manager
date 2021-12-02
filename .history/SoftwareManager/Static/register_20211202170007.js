@@ -91,7 +91,6 @@ document.addEventListener('DOMContentLoaded', function()
 			else
 			{
 				startWait();
-				// verifying Github username
 				verifyGithubUsername(git, function()
 					{
 						if(password == retypepassword)
