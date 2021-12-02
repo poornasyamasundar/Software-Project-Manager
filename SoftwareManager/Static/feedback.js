@@ -1,3 +1,5 @@
+// startWait and stopWait are used to display the "Please Wait" msg when the page loads
+
 function startWait()
 {
 	document.querySelector('#wait').style.display = 'block';
@@ -7,6 +9,7 @@ function stopWait()
 {
 	document.querySelector('#wait').style.display = 'none';
 }
+
 document.addEventListener('DOMContentLoaded', function() 
 	{
 		document.querySelector('#gobackbutton').onclick = () =>
@@ -15,6 +18,8 @@ document.addEventListener('DOMContentLoaded', function()
 		}
 		
 		const form = document.querySelector('.container').querySelector('form');
+
+		// this inserts the comments when the user click on save btn
 		form.querySelector('#save').onclick = (event) =>
 		{
 			startWait();
@@ -25,6 +30,7 @@ document.addEventListener('DOMContentLoaded', function()
 			const d = new Date();
 			var x = d.getDate()+"-"+ (d.getMonth()+1) +"-"+d.getFullYear();
 
+			// get the rating
 			if( form.querySelector('#star5').checked == true )
 			{
 				rating = 5;
@@ -50,13 +56,14 @@ document.addEventListener('DOMContentLoaded', function()
 				alert("Give a Rating");
 				window.location = '';
 			}
+			// check if the commnet is valid
 			if( feedback == '' )
 			{
 				alert("Feedback is empty");
 				window.location = '';
 			}
-			console.log(rating);
-
+			//console.log(rating);
+			// insert the comment into the database
 			$.ajax(
 				{
 					type: "POST",

@@ -6,16 +6,21 @@ function plusSlides(n) {
 function currentSlide(n) {
 	showSlides(slideIndex = n);
 }
+
+
+// this function is used to display the "please wait" message
 function startWait()
 {
 	document.querySelector('#wait').style.display = 'block';
 }
 
+// this is to stop the above display
 function stopWait()
 {
 	document.querySelector('#wait').style.display = 'none';
 }
 
+// this function is used to show the images present in the home page of our website
 function showSlides(n) 
 {
 	var i;
@@ -40,6 +45,10 @@ function showSlides(n)
 	slides[slideIndex-1].style.display = "block";  
 	dots[slideIndex-1].className += " active";
 }
+
+// this function is used to get the list of all the projects that a particular is a part of
+// this takes a function which is used after the ajax code gets all the required info
+
 function getAllProjects( callback )
 {
 	username = localStorage.getItem('gitUserName');
@@ -65,10 +74,17 @@ function getAllProjects( callback )
 		}
 	)
 }
+
+// this function is to get authentication to use all the api calls
 function beforeSend(xhr)
 {
 	xhr.setRequestHeader("Authorization", "token "+localStorage.getItem('token'));
 }
+
+
+// this function is to get the details from the user's github (those present in the projects tab of any repo)
+// this function takes link to the webpage and the function that deals with the acquired info
+// callback takes this info and sets it on the webpage.
 
 function getAllColumns( url, callback )
 {
@@ -90,6 +106,8 @@ function getAllColumns( url, callback )
 		}
 	)
 }
+
+// this sets the page that we can see when we enter any spiral project
 
 function setSpiral()
 {
@@ -120,6 +138,10 @@ function setSpiral()
 				}
 			});
 }
+
+// this function gets all the cards that we made in the projects tab of the user's git repo
+// these cards have the info regarding the tasks and meetings 
+
 function getAllCards( url , callback )
 {
 	$.ajax(
@@ -143,6 +165,8 @@ function getAllCards( url , callback )
 		}
 	)
 }
+
+// this function sets all the values for the agile project.
 
 function setValues()
 {
@@ -265,6 +289,9 @@ function setValues()
 		});
 }
 
+// this is the callback function that is sent to the getAllProjects written above
+// there we give all the info collected and pass it to this fucntion
+
 function insertProjects(result)
 {
 	console.log(result);
@@ -330,6 +357,8 @@ function insertProjects(result)
 	}
 }
 
+// this gets the projects that belong to a particular user.
+
 function getProjects()
 {
 	startWait();
@@ -344,12 +373,15 @@ function getProjects()
 			success: function(data)
 			{
 				result = JSON.parse(data);
-				console.log(result);
+				//console.log(result);
 				insertProjects(result);
 			}
 		}
 	)
 }
+
+
+// this function gets all the comments for the website which is loaded on the home page.
 
 function loadComments()
 {
@@ -378,6 +410,9 @@ function loadComments()
 		}
 	)
 }
+
+// the main function which runs when the home-page is loaded  
+// it gets all the info from the local storage.
 
 document.addEventListener('DOMContentLoaded', function() 
 	{
